@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import {
@@ -31,32 +32,19 @@ interface SidebarProps {
   location: string
 }
 
-// Pathways Within Logo Component
+// Pathways Within Logo Component - Using actual logo image
 function PathwaysLogo() {
   return (
-    <div className="flex items-center gap-4">
-      {/* Logo mark - stylized path/journey icon */}
-      <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg shadow-green/20">
-        <svg 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          className="w-7 h-7 text-white"
-          stroke="currentColor" 
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          {/* Stylized path/journey icon */}
-          <path d="M12 3v18" />
-          <path d="M5 8c2-2 5-2 7 0s5 2 7 0" />
-          <path d="M5 16c2-2 5-2 7 0s5 2 7 0" />
-        </svg>
-      </div>
-      {/* Wordmark */}
-      <div className="flex flex-col">
-        <span className="font-serif text-xl leading-tight tracking-tight text-white">Pathways</span>
-        <span className="text-[11px] uppercase tracking-[0.2em] text-green-400 font-medium">Within</span>
-      </div>
+    <div className="flex items-center justify-center w-full">
+      {/* Logo image with white filter */}
+      <Image 
+        src="/logo.png" 
+        alt="Pathways Within - Wisdom and Wellness Collaborative"
+        width={160}
+        height={160}
+        className="brightness-0 invert opacity-95"
+        priority
+      />
     </div>
   )
 }
@@ -67,7 +55,7 @@ export function Sidebar({ staffName, location }: SidebarProps) {
   return (
     <aside className="fixed inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-navy-900 via-navy to-navy-950 text-white hidden lg:flex lg:flex-col">
       {/* Logo */}
-      <div className="flex h-24 items-center px-6 border-b border-white/10">
+      <div className="flex items-center justify-center px-6 py-6 border-b border-white/10">
         <PathwaysLogo />
       </div>
 

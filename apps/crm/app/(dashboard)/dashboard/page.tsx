@@ -161,8 +161,8 @@ function StatCard({
             </p>
           )}
         </div>
-        <div className={`p-2 rounded-lg ${alert ? 'bg-amber-100' : 'bg-linen-100'}`}>
-          <Icon className={`w-5 h-5 ${alert ? 'text-amber-600' : 'text-navy-400'}`} />
+        <div className={`p-2 rounded-lg ${alert ? 'bg-breezy-100' : 'bg-linen-100'}`}>
+          <Icon className={`w-5 h-5 ${alert ? 'text-navy-600' : 'text-navy-400'}`} />
         </div>
       </div>
     </div>
@@ -230,8 +230,8 @@ function AlertItem({
   description: string
 }) {
   const styles = {
-    warning: { bg: 'bg-amber-50', icon: AlertCircle, iconColor: 'text-amber-500' },
-    info: { bg: 'bg-breezy-100', icon: Clock, iconColor: 'text-breezy-500' },
+    warning: { bg: 'bg-breezy-100', icon: AlertCircle, iconColor: 'text-navy-600' },
+    info: { bg: 'bg-linen-100', icon: Clock, iconColor: 'text-navy-500' },
     success: { bg: 'bg-green-50', icon: CheckCircle2, iconColor: 'text-green' },
   }
 

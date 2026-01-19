@@ -57,7 +57,7 @@
   }
 
   .badge-pending {
-    @apply bg-amber-100 text-amber-700;
+    @apply bg-breezy-100 text-navy-700;
   }
 
   .badge-cancelled {

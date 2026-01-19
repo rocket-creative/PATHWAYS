@@ -71,8 +71,8 @@ export default function PaymentsPage() {
 
         <div className="card p-5">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-amber-100">
-              <Banknote className="w-5 h-5 text-amber-600" />
+            <div className="p-2 rounded-lg bg-linen-200">
+              <Banknote className="w-5 h-5 text-navy-600" />
             </div>
             <div>
               <p className="text-sm text-navy-400">Cash collected</p>
@@ -95,16 +95,16 @@ export default function PaymentsPage() {
       </div>
 
       {/* Cash Reconciliation Alert */}
-      <div className="card p-5 bg-amber-50 border-amber-200">
+      <div className="card p-5 bg-breezy-100 border-breezy-200">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Banknote className="w-6 h-6 text-amber-600" />
+            <Banknote className="w-6 h-6 text-navy-600" />
             <div>
               <p className="font-medium text-navy">End of day cash reconciliation</p>
               <p className="text-sm text-navy-500">Cash collected today: ${cashTotal} — Please verify and submit</p>
             </div>
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white text-sm font-medium rounded-lg hover:bg-amber-700 transition-colors">
+          <button className="flex items-center gap-2 px-4 py-2 bg-navy text-white text-sm font-medium rounded-lg hover:bg-navy-800 transition-colors">
             <CheckCircle2 className="w-4 h-4" />
             Reconcile now
           </button>
@@ -161,9 +161,9 @@ export default function PaymentsPage() {
                 </td>
                 <td className="px-6 py-4">
                   <span className={`badge ${
-                    tx.type === 'card' ? 'bg-blue-100 text-blue-700' :
-                    tx.type === 'cash' ? 'bg-amber-100 text-amber-700' :
-                    'bg-purple-100 text-purple-700'
+                    tx.type === 'card' ? 'bg-breezy-100 text-navy-700' :
+                    tx.type === 'cash' ? 'bg-linen-200 text-navy-700' :
+                    'bg-green-100 text-green-700'
                   }`}>
                     {tx.type.charAt(0).toUpperCase() + tx.type.slice(1)}
                   </span>

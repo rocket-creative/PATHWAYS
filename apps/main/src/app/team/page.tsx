@@ -53,7 +53,7 @@ export default function TeamPage() {
         subheadline="Licensed professionals committed to your care"
         body="Our team brings decades of combined experience in mental health and integrative wellness. Every member is dedicated to supporting your journey to well being."
         site="main"
-        imageStyle="warm"
+        imageClass="img-placeholder-warm"
       />
 
       {/* Clinicians */}

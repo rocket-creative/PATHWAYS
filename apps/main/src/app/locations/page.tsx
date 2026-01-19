@@ -32,7 +32,7 @@ export default function LocationsPage() {
         subheadline="Convenient access to therapy and wellness"
         body="Each of our locations offers both therapy and wellness services. Telehealth is also available for therapy clients in New York, New Jersey, North Carolina, and Florida."
         site="main"
-        imageStyle="geometric"
+        imageClass="img-placeholder-geometric"
       />
 
       {/* Telehealth Banner */}

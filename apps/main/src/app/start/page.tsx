@@ -30,7 +30,7 @@ export default function StartPage() {
         subheadline="Your path to wellness starts here"
         body="Whether you know exactly what you need or are just beginning to explore, we are here to guide you. Our personalized intake process helps match you with the right services."
         site="main"
-        imageStyle="organic"
+        imageClass="img-placeholder-organic"
       />
 
       {/* Service Finder Quiz */}

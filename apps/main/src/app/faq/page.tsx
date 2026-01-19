@@ -108,7 +108,7 @@ export default function FAQPage() {
         subheadline="Answers to help you get started"
         body="Find answers to common questions about our services, insurance, scheduling, and more. If you do not find what you are looking for, please contact us."
         site="main"
-        imageStyle="cool"
+        imageClass="img-placeholder-cool"
       />
 
       {/* FAQ Categories */}

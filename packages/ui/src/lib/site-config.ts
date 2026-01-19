@@ -5,22 +5,27 @@ export type SiteName = 'main' | 'wisdom' | 'wellness'
 /**
  * Site URLs - These are the 3 separate domains required for NY state compliance
  * Despite being on different URLs, the site should look and function as ONE website
+ * 
+ * Production URLs (Vercel):
+ * - Wisdom: https://wisdom-eight-topaz.vercel.app
+ * - Wellness: https://pathways-wellness.vercel.app (update when deployed)
+ * - CRM: https://crm-sooty-one.vercel.app
  */
 export const SITE_CONFIG = {
   main: {
     name: 'Pathways Within',
     tagline: 'Wisdom and Wellness Collaborative',
-    url: process.env.NEXT_PUBLIC_MAIN_URL || 'http://localhost:3000',
+    url: process.env.NEXT_PUBLIC_MAIN_URL || 'https://wisdom-eight-topaz.vercel.app',
   },
   wisdom: {
     name: 'Pathways Within',
     tagline: 'Wisdom and Wellness Collaborative',
-    url: process.env.NEXT_PUBLIC_WISDOM_URL || 'http://localhost:3001',
+    url: process.env.NEXT_PUBLIC_WISDOM_URL || 'https://wisdom-eight-topaz.vercel.app',
   },
   wellness: {
     name: 'Pathways Within',
     tagline: 'Wisdom and Wellness Collaborative',
-    url: process.env.NEXT_PUBLIC_WELLNESS_URL || 'http://localhost:3002',
+    url: process.env.NEXT_PUBLIC_WELLNESS_URL || 'https://pathways-wellness.vercel.app',
   },
 }
 

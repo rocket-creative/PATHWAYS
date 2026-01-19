@@ -22,10 +22,10 @@ export default function DashboardPage() {
     <div className="space-y-8">
       {/* Greeting */}
       <div>
-        <h1 className="text-2xl font-semibold text-stone-900">
+        <h1 className="text-2xl font-semibold text-navy">
           Good {getTimeOfDay()}, {currentStaff.firstName}
         </h1>
-        <p className="text-stone-500 mt-1">
+        <p className="text-navy-400 mt-1">
           {formatDate(today)} · {stats.todayAppointments} appointments today
         </p>
       </div>
@@ -62,15 +62,15 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Today's Schedule - Takes 2 columns */}
         <div className="lg:col-span-2 card">
-          <div className="px-6 py-4 border-b border-stone-100">
+          <div className="px-6 py-4 border-b border-linen-200">
             <div className="flex items-center justify-between">
-              <h2 className="font-semibold text-stone-900">Today's schedule</h2>
-              <button className="text-sm text-sage-600 hover:text-sage-700 font-medium">
+              <h2 className="font-semibold text-navy">Today's schedule</h2>
+              <button className="text-sm text-green hover:text-green-600 font-medium">
                 View all →
               </button>
             </div>
           </div>
-          <div className="divide-y divide-stone-100">
+          <div className="divide-y divide-linen-200">
             {todaysAppointments.map((appointment) => (
               <AppointmentRow key={appointment.id} appointment={appointment} />
             ))}
@@ -81,7 +81,7 @@ export default function DashboardPage() {
         <div className="space-y-6">
           {/* Alerts */}
           <div className="card p-6">
-            <h3 className="font-semibold text-stone-900 mb-4">Needs attention</h3>
+            <h3 className="font-semibold text-navy mb-4">Needs attention</h3>
             <div className="space-y-3">
               <AlertItem
                 type="warning"
@@ -103,21 +103,21 @@ export default function DashboardPage() {
 
           {/* Recent Transactions */}
           <div className="card">
-            <div className="px-6 py-4 border-b border-stone-100">
-              <h3 className="font-semibold text-stone-900">Recent transactions</h3>
+            <div className="px-6 py-4 border-b border-linen-200">
+              <h3 className="font-semibold text-navy">Recent transactions</h3>
             </div>
-            <div className="divide-y divide-stone-100">
+            <div className="divide-y divide-linen-200">
               {recentTransactions.slice(0, 4).map((tx) => (
                 <div key={tx.id} className="px-6 py-3 flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-stone-900">{tx.patient}</p>
-                    <p className="text-xs text-stone-500">{tx.service}</p>
+                    <p className="text-sm font-medium text-navy">{tx.patient}</p>
+                    <p className="text-xs text-navy-400">{tx.service}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium text-stone-900">
+                    <p className="text-sm font-medium text-navy">
                       ${tx.amount}
                     </p>
-                    <p className="text-xs text-stone-500 capitalize">{tx.type}</p>
+                    <p className="text-xs text-navy-400 capitalize">{tx.type}</p>
                   </div>
                 </div>
               ))}
@@ -149,20 +149,20 @@ function StatCard({
     <div className="card p-6">
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm text-stone-500">{label}</p>
-          <p className="text-2xl font-semibold text-stone-900 mt-1">
+          <p className="text-sm text-navy-400">{label}</p>
+          <p className="text-2xl font-semibold text-navy mt-1">
             {value}
-            {subtext && <span className="text-sm font-normal text-stone-500 ml-1">{subtext}</span>}
+            {subtext && <span className="text-sm font-normal text-navy-400 ml-1">{subtext}</span>}
           </p>
           {trend && (
-            <p className="text-xs text-sage-600 mt-1 flex items-center gap-1">
+            <p className="text-xs text-green mt-1 flex items-center gap-1">
               <ArrowUpRight className="w-3 h-3" />
               {trend}
             </p>
           )}
         </div>
-        <div className={`p-2 rounded-lg ${alert ? 'bg-amber-100' : 'bg-stone-100'}`}>
-          <Icon className={`w-5 h-5 ${alert ? 'text-amber-600' : 'text-stone-600'}`} />
+        <div className={`p-2 rounded-lg ${alert ? 'bg-amber-100' : 'bg-linen-100'}`}>
+          <Icon className={`w-5 h-5 ${alert ? 'text-amber-600' : 'text-navy-400'}`} />
         </div>
       </div>
     </div>
@@ -173,7 +173,7 @@ function StatCard({
 function AppointmentRow({ appointment }: { appointment: typeof todaysAppointments[0] }) {
   const statusStyles = {
     confirmed: 'badge-confirmed',
-    checked_in: 'bg-blue-100 text-blue-700',
+    checked_in: 'bg-breezy-100 text-navy',
     pending: 'badge-pending',
     completed: 'badge-completed',
     cancelled: 'badge-cancelled',
@@ -188,20 +188,20 @@ function AppointmentRow({ appointment }: { appointment: typeof todaysAppointment
   }
 
   return (
-    <div className="px-6 py-4 flex items-center gap-4 hover:bg-stone-50 transition-colors">
+    <div className="px-6 py-4 flex items-center gap-4 hover:bg-linen-50 transition-colors">
       {/* Time */}
       <div className="w-16 text-sm">
-        <span className="font-medium text-stone-900">
+        <span className="font-medium text-navy">
           {appointment.time.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}
         </span>
       </div>
 
       {/* Patient & Service */}
       <div className="flex-1 min-w-0">
-        <p className="font-medium text-stone-900">
+        <p className="font-medium text-navy">
           {appointment.patient.firstName} {appointment.patient.lastName}
         </p>
-        <p className="text-sm text-stone-500 truncate">
+        <p className="text-sm text-navy-400 truncate">
           {appointment.service.name} · {appointment.provider}
         </p>
       </div>
@@ -212,7 +212,7 @@ function AppointmentRow({ appointment }: { appointment: typeof todaysAppointment
       </span>
 
       {/* Actions */}
-      <button className="px-3 py-1.5 text-sm font-medium text-sage-600 hover:bg-sage-50 rounded-lg transition-colors">
+      <button className="px-3 py-1.5 text-sm font-medium text-green hover:bg-green-50 rounded-lg transition-colors">
         Check in
       </button>
     </div>
@@ -231,8 +231,8 @@ function AlertItem({
 }) {
   const styles = {
     warning: { bg: 'bg-amber-50', icon: AlertCircle, iconColor: 'text-amber-500' },
-    info: { bg: 'bg-blue-50', icon: Clock, iconColor: 'text-blue-500' },
-    success: { bg: 'bg-sage-50', icon: CheckCircle2, iconColor: 'text-sage-500' },
+    info: { bg: 'bg-breezy-100', icon: Clock, iconColor: 'text-breezy-500' },
+    success: { bg: 'bg-green-50', icon: CheckCircle2, iconColor: 'text-green' },
   }
 
   const { bg, icon: Icon, iconColor } = styles[type]
@@ -241,8 +241,8 @@ function AlertItem({
     <div className={`${bg} rounded-lg p-3 flex items-start gap-3`}>
       <Icon className={`w-5 h-5 ${iconColor} flex-shrink-0 mt-0.5`} />
       <div>
-        <p className="text-sm font-medium text-stone-900">{title}</p>
-        <p className="text-xs text-stone-600 mt-0.5">{description}</p>
+        <p className="text-sm font-medium text-navy">{title}</p>
+        <p className="text-xs text-navy-600 mt-0.5">{description}</p>
       </div>
     </div>
   )

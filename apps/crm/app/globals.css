@@ -3,6 +3,23 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Pathways Brand Colors */
+    --color-white: 253 253 253;
+    --color-linen: 245 244 242;
+    --color-cream: 250 249 247;
+    --color-navy: 1 21 61;
+    --color-navy-light: 20 40 90;
+    --color-green: 114 162 59;
+    --color-green-dark: 90 130 45;
+    --color-breezy: 134 168 225;
+    
+    /* Semantic colors */
+    --color-text: 1 21 61;
+    --color-text-light: 100 105 115;
+    --border: 230 228 225;
+  }
+
   html {
     font-feature-settings: 'cv11', 'ss01';
     -webkit-font-smoothing: antialiased;
@@ -10,24 +27,24 @@
   }
 
   body {
-    @apply bg-stone-50 text-stone-900;
+    @apply bg-cream-100 text-navy;
   }
 
   /* Typography - 2 weights only per design philosophy */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+    @apply font-semibold tracking-tight text-navy;
   }
 
   /* Consistent focus states */
   *:focus-visible {
-    @apply outline-none ring-2 ring-sage-500 ring-offset-2;
+    @apply outline-none ring-2 ring-green-500 ring-offset-2;
   }
 }
 
 @layer components {
   /* Editorial card style */
   .card {
-    @apply bg-white rounded-lg border border-stone-200;
+    @apply bg-white rounded-lg border border-linen-300 shadow-sm;
   }
 
   /* Status badges */
@@ -36,7 +53,7 @@
   }
 
   .badge-confirmed {
-    @apply bg-sage-100 text-sage-700;
+    @apply bg-green-100 text-green-700;
   }
 
   .badge-pending {
@@ -44,10 +61,10 @@
   }
 
   .badge-cancelled {
-    @apply bg-stone-100 text-stone-600;
+    @apply bg-linen-200 text-navy-700;
   }
 
   .badge-completed {
-    @apply bg-stone-800 text-white;
+    @apply bg-navy text-white;
   }
 }

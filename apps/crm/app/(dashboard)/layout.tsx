@@ -10,7 +10,7 @@ export default function DashboardLayout({
   const staffName = `${currentStaff.firstName} ${currentStaff.lastName}`
 
   return (
-    <div className="min-h-screen bg-stone-50">
+    <div className="min-h-screen bg-cream-100">
       <Sidebar staffName={staffName} location={currentStaff.location} />
       <div className="lg:pl-64">
         <Header />

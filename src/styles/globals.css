@@ -1,0 +1,539 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* 
+     * Pathways Within - Client Brand Colors
+     * Applied editorially per design philosophy
+     */
+    
+    /* Client Brand Palette */
+    --color-white: 253 253 253;        /* #FDFDFD */
+    --color-linen: 245 244 242;        /* Slightly warmer, lighter */
+    --color-cream: 250 249 247;        /* Even lighter cream */
+    --color-placeholder: 220 218 215;  /* Darker grey for image placeholders */
+    --color-breezy: 134 168 225;       /* #86A8E1 - light blue */
+    --color-bright: 0 149 230;         /* #0095E6 - bright blue (use sparingly) */
+    --color-navy: 1 21 61;             /* #01153D - HERO color */
+    --color-navy-light: 20 40 90;      /* Lighter navy for hover */
+    --color-green: 114 162 59;         /* #72A23B - accent */
+    --color-green-dark: 90 130 45;     /* Darker green for hover */
+    
+    /* Derived colors */
+    --color-text: 1 21 61;             /* Navy for text */
+    --color-text-light: 100 105 115;   /* Muted text */
+    --color-text-on-dark: 253 253 253; /* White text on navy */
+    
+    /* Semantic tokens */
+    --background: var(--color-white);
+    --background-alt: var(--color-linen);
+    --foreground: var(--color-text);
+    --foreground-muted: var(--color-text-light);
+    
+    /* Hero = Navy (for large backgrounds) */
+    --hero: var(--color-navy);
+    --hero-foreground: var(--color-white);
+    
+    /* Accent = Green (small details only) */
+    --accent: var(--color-green);
+    --accent-foreground: var(--color-white);
+    
+    --border: 230 228 225;
+    --ring: var(--color-navy);
+    
+    --radius: 4px;
+    --radius-lg: 8px;
+  }
+
+  * {
+    border-color: rgb(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background: rgb(210 205 200);  /* Light warm grey */
+    color: rgb(var(--color-text));
+    font-family: var(--font-clarendon), Georgia, serif;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    letter-spacing: -0.01em;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-raleway), system-ui, sans-serif;
+    color: rgb(var(--color-navy));
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+  }
+
+  h3 {
+    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    font-weight: 500;
+  }
+
+  h4 {
+    font-size: 1.125rem;
+    font-weight: 500;
+  }
+
+  p {
+    color: rgb(var(--color-text));
+    max-width: 60ch;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--color-navy));
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: rgb(var(--color-breezy) / 0.3);
+  }
+}
+
+@layer components {
+  /* 
+   * Site wrapper - ALL content constrained to 1440px
+   */
+  .site-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 1440px;
+    background: rgb(var(--color-white));
+  }
+
+  @media (min-width: 1480px) {
+    .site-wrapper {
+      box-shadow: 0 0 80px rgb(0 0 0 / 0.06);
+    }
+  }
+
+  .container-site {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 1440px;
+    padding-left: clamp(1.5rem, 5vw, 4rem);
+    padding-right: clamp(1.5rem, 5vw, 4rem);
+  }
+
+  /* Section spacing */
+  .section {
+    padding-top: clamp(4rem, 10vw, 7rem);
+    padding-bottom: clamp(4rem, 10vw, 7rem);
+  }
+
+  .section-lg {
+    padding-top: clamp(5rem, 12vw, 9rem);
+    padding-bottom: clamp(5rem, 12vw, 9rem);
+  }
+
+  .section-sm {
+    padding-top: clamp(3rem, 6vw, 5rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  /* Section backgrounds - each different */
+  .bg-white { background: rgb(var(--color-white)); }
+  .bg-cream { background: rgb(var(--color-cream)); }
+  .bg-linen { background: rgb(var(--color-linen)); }
+  .bg-navy { background: rgb(var(--color-navy)); }
+  .bg-green { background: rgb(var(--color-green)); }
+
+  /* Image placeholder - DARKER than backgrounds */
+  .img-placeholder {
+    background: rgb(var(--color-placeholder));
+  }
+
+  /* On dark backgrounds */
+  .bg-navy .img-placeholder,
+  .bg-hero-gradient .img-placeholder,
+  .bg-hero-gradient-radial .img-placeholder {
+    background: rgb(255 255 255 / 0.12);
+  }
+
+  /* Navy gradient backgrounds - brighter blue accents */
+  .bg-hero-gradient {
+    background: 
+      radial-gradient(ellipse at 80% 20%, rgb(60 100 180 / 0.5) 0%, transparent 50%),
+      radial-gradient(ellipse at 20% 80%, rgb(45 85 160 / 0.4) 0%, transparent 40%),
+      linear-gradient(160deg, rgb(0 8 25) 0%, rgb(var(--color-navy)) 35%, rgb(25 60 120) 65%, rgb(5 15 40) 100%);
+    color: rgb(var(--color-white));
+  }
+
+  .bg-hero-gradient-radial {
+    background: 
+      radial-gradient(ellipse at 70% 10%, rgb(70 120 200 / 0.45) 0%, transparent 45%),
+      radial-gradient(ellipse at 10% 60%, rgb(50 90 170 / 0.35) 0%, transparent 50%),
+      radial-gradient(ellipse at 90% 90%, rgb(40 80 150 / 0.4) 0%, transparent 40%),
+      linear-gradient(135deg, rgb(var(--color-navy)) 0%, rgb(5 20 50) 50%, rgb(20 50 100) 80%, rgb(0 5 20) 100%);
+    color: rgb(var(--color-white));
+  }
+
+  /* Soft navy gradient for overlapping blocks */
+  .bg-gradient-navy {
+    background: 
+      radial-gradient(ellipse at 100% 0%, rgb(55 95 165 / 0.4) 0%, transparent 50%),
+      linear-gradient(155deg, rgb(var(--color-navy)) 0%, rgb(20 50 100) 40%, rgb(5 25 60) 70%, rgb(0 8 28) 100%);
+  }
+
+  .bg-hero-gradient h1, .bg-hero-gradient h2, .bg-hero-gradient h3, .bg-hero-gradient h4,
+  .bg-hero-gradient-radial h1, .bg-hero-gradient-radial h2, .bg-hero-gradient-radial h3, .bg-hero-gradient-radial h4,
+  .bg-navy h1, .bg-navy h2, .bg-navy h3, .bg-navy h4 {
+    color: rgb(var(--color-white));
+  }
+
+  .bg-hero-gradient .eyebrow,
+  .bg-hero-gradient-radial .eyebrow,
+  .bg-navy .eyebrow {
+    color: rgb(var(--color-green));
+  }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-family: var(--font-raleway), system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgb(var(--color-green));
+  }
+
+  .lead {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: rgb(var(--color-text-light));
+  }
+
+  /* Divider */
+  .divider {
+    width: 48px;
+    height: 2px;
+    background: rgb(var(--color-green));
+  }
+
+  /* ==========================================
+   * PILL BUTTONS WITH ANIMATED ARROWS
+   * ========================================== */
+  
+  .btn-pill {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 0.875rem 0.875rem 1.75rem;
+    font-family: var(--font-raleway), system-ui, sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    border-radius: 9999px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .btn-pill .btn-text {
+    position: relative;
+    z-index: 1;
+  }
+
+  .btn-pill .btn-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-pill .btn-arrow svg {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateX(-2px);
+  }
+
+  /* Hover: arrow moves right + shadow below */
+  .btn-pill:hover .btn-arrow svg {
+    transform: translateX(2px);
+  }
+
+  .btn-pill:hover {
+    box-shadow: 0 6px 20px rgb(0 0 0 / 0.2);
+    transform: translateY(-1px);
+  }
+
+  /* Primary - Navy bg */
+  .btn-pill-primary {
+    background: rgb(var(--color-navy));
+    color: white;
+  }
+
+  .btn-pill-primary .btn-arrow {
+    background: rgb(255 255 255 / 0.2);
+  }
+
+  .btn-pill-primary:hover {
+    background: rgb(var(--color-navy-light));
+  }
+
+  .btn-pill-primary:hover .btn-arrow {
+    background: rgb(255 255 255 / 0.3);
+  }
+
+  /* Secondary - White bg with border */
+  .btn-pill-secondary {
+    background: white;
+    color: rgb(var(--color-navy));
+    border: 1px solid rgb(var(--border));
+  }
+
+  .btn-pill-secondary .btn-arrow {
+    background: rgb(var(--color-navy));
+    color: white;
+  }
+
+  .btn-pill-secondary:hover {
+    border-color: rgb(var(--color-navy));
+    background: rgb(var(--color-cream));
+  }
+
+  /* White (on dark backgrounds) */
+  .btn-pill-white {
+    background: white;
+    color: rgb(var(--color-navy));
+  }
+
+  .btn-pill-white .btn-arrow {
+    background: rgb(var(--color-navy));
+    color: white;
+  }
+
+  .btn-pill-white:hover {
+    background: rgb(var(--color-cream));
+  }
+
+  /* Outline white (on dark backgrounds) */
+  .btn-pill-outline {
+    background: transparent;
+    color: white;
+    border: 1px solid rgb(255 255 255 / 0.4);
+  }
+
+  .btn-pill-outline .btn-arrow {
+    background: rgb(255 255 255 / 0.2);
+  }
+
+  .btn-pill-outline:hover {
+    background: white;
+    color: rgb(var(--color-navy));
+    border-color: white;
+  }
+
+  .btn-pill-outline:hover .btn-arrow {
+    background: rgb(var(--color-navy));
+    color: white;
+  }
+
+  /* Green button */
+  .btn-pill-green {
+    background: rgb(var(--color-green));
+    color: white;
+  }
+
+  .btn-pill-green .btn-arrow {
+    background: rgb(255 255 255 / 0.2);
+  }
+
+  .btn-pill-green:hover {
+    background: rgb(var(--color-green-dark));
+  }
+
+  /* ==========================================
+   * SCROLL ANIMATIONS
+   * ========================================== */
+  
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger children */
+  .animate-stagger > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+
+  .animate-stagger.is-visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
+  .animate-stagger.is-visible > *:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: translateY(0); }
+  .animate-stagger.is-visible > *:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: translateY(0); }
+  .animate-stagger.is-visible > *:nth-child(4) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }
+  .animate-stagger.is-visible > *:nth-child(5) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
+
+  /* Fade in from left/right */
+  .animate-fade-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .animate-fade-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .animate-fade-left.is-visible,
+  .animate-fade-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* ==========================================
+   * SCROLL INDICATOR - Static with glow on hover
+   * ========================================== */
+  
+  .scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .scroll-indicator span {
+    font-family: var(--font-raleway), system-ui, sans-serif;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgb(var(--color-text-light));
+    transition: color 0.3s ease;
+  }
+
+  .scroll-indicator svg {
+    transition: all 0.3s ease;
+  }
+
+  /* Glow effect on hover */
+  .scroll-indicator:hover span {
+    color: rgb(var(--color-navy));
+  }
+
+  .scroll-indicator:hover svg {
+    color: rgb(var(--color-green));
+    filter: drop-shadow(0 0 8px rgb(var(--color-green) / 0.5));
+  }
+
+  /* Old button classes - keep for compatibility */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-family: var(--font-raleway), system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: rgb(var(--color-navy));
+    color: white;
+    border: 1px solid rgb(var(--color-navy));
+  }
+
+  .btn-primary:hover {
+    background: rgb(20 40 80);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: rgb(var(--color-navy));
+    border: 1px solid rgb(var(--color-navy));
+  }
+
+  .btn-secondary:hover {
+    background: rgb(var(--color-navy));
+    color: white;
+  }
+
+  .text-accent {
+    color: rgb(var(--color-green));
+  }
+}
+
+@layer utilities {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-navy {
+    color: rgb(var(--color-navy));
+  }
+
+  .text-muted {
+    color: rgb(var(--color-text-light));
+  }
+}

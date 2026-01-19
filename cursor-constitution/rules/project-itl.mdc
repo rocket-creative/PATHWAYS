@@ -1,0 +1,61 @@
+# project-itl.mdc
+## Ingenious Targeting Laboratory Project Context
+
+### PROJECT PURPOSE
+Content system for genetargeting.com website rebuild. Generate technically authoritative, SEO optimized pages for mouse model services including knockout, knockin, and humanized models.
+
+### TARGET AUDIENCE
+- Academic researchers
+- Lab managers
+- Biotech/pharma procurement teams
+- Principal investigators
+
+### COMPETITIVE CONTEXT
+- Primary competitors: Taconic, JAX, Charles River
+- Differentiation: Custom model expertise, breeding scheme support, researcher partnership approach
+
+### KEY CONSTRAINTS
+- Content must be scientifically accurate and defensible
+- No hyphens in any copy
+- Tone: Authoritative peer, not sales pitch
+- All claims require supporting evidence or citations
+
+### CONTENT TYPES
+
+**Service Pages**
+- Knockout mouse models
+- Knockin mouse models
+- Humanized mouse models
+- Conditional models
+- Point mutation models
+
+**Educational Content**
+- Breeding scheme guides
+- Model selection criteria
+- Research methodology articles
+
+**Lab Signals Newsletter**
+- Reddit sourced researcher pain points transformed into authoritative articles
+- PubMed validated research backing
+- Practical, actionable insights
+
+### WORKFLOW: REDDIT TO ARTICLE
+1. Mine Reddit (r/labrats, r/biology, r/genetics) for researcher frustrations
+2. Identify recurring pain points and questions
+3. Cross reference with PubMed for scientific backing
+4. Draft article addressing the pain point with ITL solutions
+5. Optimize for target keywords
+6. Fact check all scientific claims
+
+### TOOLS IN DEVELOPMENT
+- Breeding Scheme Architect: Interactive tool helping researchers plan complex multi allele breeding schemes
+
+### TECH STACK NOTES
+- Webflow for CMS
+- Integration with existing ITL backend systems
+- SEO optimized page templates per content type
+
+### KEYWORD STRATEGY
+- Primary: Service specific (knockout mouse model, custom mouse model)
+- Secondary: Problem specific (breeding scheme calculator, mouse model selection)
+- Long tail: Researcher questions (how to design knockout strategy)

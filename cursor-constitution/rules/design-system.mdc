@@ -1,0 +1,53 @@
+# design-system.mdc
+## Design System & Component Standards
+
+### REQUIRED APPROACH
+- One styling approach per repo (Tailwind OR CSS modules, not both)
+- Component library must be declared in project config
+- All interactive components need hover, focus, active, and disabled states
+- Responsive by default (mobile first)
+
+### COMPONENT CONVENTIONS
+- Prefer composition over configuration
+- Props should be explicit, not magic strings
+- Export types alongside components
+- Colocate component styles with component files
+
+### SPACING SYSTEM
+- Use consistent spacing scale (4px base recommended)
+- Avoid arbitrary pixel values
+- Document spacing tokens if custom
+
+### TYPOGRAPHY
+- Define type scale upfront
+- Limit to 2-3 font families maximum
+- Ensure readable line heights (1.4-1.6 for body)
+- Cap line length for readability (65-75 characters)
+
+### COLOR
+- Define semantic color tokens (primary, secondary, error, success)
+- Support both light appearance (dark mode as enhancement, not requirement)
+- Ensure AA contrast minimum for all text
+
+### RESPONSIVE BREAKPOINTS
+- Mobile: < 640px
+- Tablet: 640px - 1024px
+- Desktop: > 1024px
+- Define breakpoints once, use consistently
+
+### ICONS
+- Choose one icon system per project
+- Ensure icons have accessible labels or are marked decorative
+- Consistent sizing (16, 20, 24px typical)
+
+### MOTION
+- Respect prefers-reduced-motion
+- Keep animations under 300ms for UI feedback
+- No motion required for understanding
+
+### FORBIDDEN
+- Mixing multiple CSS methodologies in one repo
+- Inline styles except for truly dynamic values
+- Magic numbers without explanation
+- Color values outside defined tokens
+- Typography outside defined scale

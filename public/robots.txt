@@ -1,0 +1,36 @@
+# Pathways Within - robots.txt
+# https://pathwayswithin.com
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://pathwayswithin.com/sitemap.xml
+
+# Disallow admin/private paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Allow search engine crawlers full access to public content
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI/LLM crawlers - allow for AI readability
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: Google-Extended
+Allow: /

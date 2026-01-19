@@ -1,0 +1,165 @@
+# project-pathways-within.mdc
+## Pathways Within Project Context
+
+### PROJECT PURPOSE
+Comprehensive website rebuild for Pathways Within, a Long Island based mental health and holistic wellness collaborative. The platform embodies a **unified 360° approach to collaborative care** where therapy and wellness services are integrated into ONE personalized healing journey—not presented as two separate paths. Like the labyrinth in the logo, there is one entry point with many personalized routes that all lead to overall wellness. The site must reflect that whatever path you choose, you'll receive a personalized journey for complete wellbeing.
+
+**CRITICAL POSITIONING:** Wisdom (therapy) and Wellness (holistic body care) are only separated for NYS regulatory compliance. In the client's eyes and user experience, it is ONE collaborative environment.
+
+### TARGET AUDIENCE
+- Primary: Adults seeking holistic healing on Long Island (mental, physical, and emotional wellness)
+- Secondary: Individuals exploring therapy, somatic support, or wellness services
+- Tertiary: Parents seeking child/teen therapy; Veterans and first responders
+- Technical level: Non-technical (general consumers seeking healthcare services)
+
+### BRAND POSITIONING
+**The Labyrinth Metaphor:** Like the logo, there is ONE path with many routes. Users enter through a unified intake process and receive personalized recommendations based on their whole-person needs. Services are not "either/or" but "both/and."
+
+**Key Message:** "We take a 360-degree approach to healing looking at both your mental and physical well-being."
+
+### COMPETITIVE CONTEXT
+- Market position: Holistic mental health + wellness collaborative (unique 360° approach)
+- Differentiation: Combined therapy + medspa under one brand; "Wisdom and Wellness" philosophy
+- Geographic focus: Long Island, NY (5 locations: Garden City, Port Jefferson, Massapequa, Smithtown, Rockville Centre)
+
+### KEY CONSTRAINTS
+- **Jane EHR Integration**: Jane has NO public API. All integration limited to:
+  - Booking widget embedding (HTML embed codes, direct links to Jane hosted pages)
+  - iCal calendar sync (one way only, Jane → external)
+  - Mailchimp patient list sync
+- **HIPAA Compliance**: Never collect PHI on public website; all clinical data through Jane
+- **NY Legal Requirements**: 
+  - 988 Suicide & Crisis Lifeline visible on EVERY page
+  - Good Faith Estimate notice required
+  - TCPA compliance for SMS (April 2025 rules)
+- **Accessibility**: WCAG 2.1 AA minimum; reduced motion default for mental health audiences
+- **Crisis Resources**: Must display 988, Crisis Text Line (741741), NYC Well (888-NYC-WELL)
+
+### TECH STACK
+- Framework: React + Next.js (App Router) OR Webflow (CMS)
+- Styling: Tailwind CSS
+- Data fetching: Server components
+- Database: PostgreSQL (non-PHI only for leads/contacts)
+- CMS: Webflow or Sanity
+- Auth: Phase 2 (admin dashboard only)
+- Hosting: Vercel
+- EHR: Jane (external, not built—only integrated via widgets/iCal)
+
+### INTEGRATIONS
+| Service | Purpose | Consent Required |
+|---------|---------|------------------|
+| Jane EHR | Booking, calendar, clinical | N/A (external system) |
+| Google Analytics 4 | Website analytics | Yes |
+| Mailchimp | Email marketing | Yes |
+| Cherry Financing | Payment plans | N/A (external link) |
+| SimplePractice | Telehealth platform | N/A (external) |
+| IvyPay | Credit card storage | N/A (HIPAA compliant) |
+
+### CONTENT STRUCTURE
+
+**IMPORTANT: Services are NOT presented as two separate columns or paths. They are unified under the 360° collaborative care model.**
+
+**The 360° Intake & Care Approach (Client Provided):**
+"We take a 360-degree approach to healing looking at both your mental and physical well-being. During your intake, we'll explore what's bringing you in, how long it's been going on, how it's affecting areas like sleep, stress, digestion, energy, pain, and relationships, and what you've already tried.
+
+Based on this conversation, we may suggest somatic or supportive services that could enhance your wellness journey. These recommendations are always optional and offered only when we feel they may truly support you.
+
+From there, we'll create a personalized treatment plan, help you schedule next steps or a follow-up, and coordinate with your care team to ensure thoughtful, ongoing support."
+
+**Therapy Services (Wisdom — for NYS compliance only)**
+- Individual Therapy (CBT spotlight)
+- Child Therapy (Play therapy)
+- Teen Therapy
+- Couples Therapy (Gottman Method spotlight)
+- Family Therapy
+- Trauma Therapy (EMDR, Cognitive Processing)
+- Somatic Therapy
+- EMDR Therapy
+- Hypnotherapy
+- Veterans & First Responders
+- Weight Loss Surgery Support
+- IFS Therapy
+- Light Therapy
+- ~~Med Management~~ **ON HOLD** (pending EIN and hiring)
+
+**Wellness Services (Wellness — for NYS compliance only)**
+- Massage (Swedish, Deep Tissue, Sports, Hot Stone, Pregnancy, Relaxation)
+- Acupuncture
+- Energy Work (Reiki, IET)
+- Pain Management (Trigger point injections, Medical massage)
+- IV Vitamin Infusion (6 blends)
+- Injectables (Botox, Fillers, Kybella)
+- Skincare (Hydrafacials, European Facial, Dermaplaning, etc.)
+- KeraLase Hair Restoration
+- Laser Hair Removal
+- PRP/Vampire Facial
+- Cryotherapy
+- Laser Lipo
+- Teeth Whitening
+- Permanent Makeup
+
+**Site Pages**
+- Home (unified 360° approach)
+- About/Team (with extensive clinician bios + therapy dogs!)
+- Services (integrated, NOT side by side)
+- Service Finder Quiz (allows MULTIPLE selections)
+- Locations (unified — both Wisdom AND Wellness listed under each)
+- FAQ
+- Contact
+- News/Blog
+
+### WORKFLOW NOTES
+- **UNIFIED brand** — NOT two separate paths or columns
+- Wisdom and Wellness only separated for NYS regulatory compliance
+- In user experience, it's ONE collaborative environment
+- Insurance accepted for BOTH therapy AND some wellness services
+- Sliding scale available for self pay
+- Telehealth available in NY, NJ, NC, FL
+- 72 hour cancellation policy, $75 no show fee
+- Photos: Team photoshoot planned (white cyc, cast from team)
+- Service Finder Quiz: Must allow MULTIPLE selections
+
+### COMPLIANCE REQUIREMENTS
+- **HIPAA**: All PHI handled by Jane, never on website
+- **NY Mental Health Regulations**: Office of Mental Health (OMH) for therapy; NYSED for wellness
+- **TCPA (April 2025)**: 
+  - Prior Express Written Consent for marketing SMS
+  - Opt out honored within 10 days
+  - Max 1x/day, 3x/week for automated messages
+- **Good Faith Estimate**: Notice required on booking/pricing pages
+- **ADA/WCAG 2.1 AA**: Accessibility statement required
+
+### DEFINITION OF DONE
+- [ ] Unified 360° approach (NOT two separate paths)
+- [ ] All 5 locations displayed with BOTH Wisdom AND Wellness services
+- [ ] Jane booking widgets embedded on all service pages
+- [ ] 988 Crisis banner visible on every page
+- [ ] Insurance applies to BOTH sides (not just Wisdom)
+- [ ] Full clinician bios with specialties and photos
+- [ ] Therapy dogs featured (Domino and Gypsy Sassafras!)
+- [ ] Service Finder Quiz allows multiple selections
+- [ ] FAQ page complete
+- [ ] Contact form with proper consent checkboxes
+- [ ] Legal pages: Privacy Policy, Terms, Cookie Policy, Accessibility
+- [ ] Telehealth capability noted (SimplePractice)
+- [ ] Mobile responsive (trauma informed: no aggressive urgency)
+- [ ] WCAG 2.1 AA compliance verified
+- [ ] Lighthouse 90+ all metrics
+- [ ] Med Management removed/hidden until further notice
+
+### FORBIDDEN
+- **"Spa" or "Medspa" language** (Client directive — remove ALL instances)
+- Presenting Wisdom and Wellness as separate/side by side paths
+- Insurance listed only under Wisdom (it applies to both)
+- Collecting ANY PHI on the website
+- Building custom booking/calendar system (use Jane only)
+- Building telehealth functionality (use Jane's built in)
+- Building billing/payment processing (Jane handles)
+- Aggressive urgency messaging (trauma informed design)
+- Time pressure tactics
+- Pre checked consent boxes
+- Hyphens in copy (Rocket Creative standard)
+- Meta keywords tag (obsolete)
+- Colored drop shadows
+- Content width exceeding 1440px
+- Med Management content (ON HOLD)

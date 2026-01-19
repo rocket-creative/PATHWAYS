@@ -1,0 +1,1 @@
+self.__NEXT_FONT_MANIFEST="{\"pages\":{},\"app\":{\"/Users/rocketcreative/Desktop/CURSER BUILDS/PATHWAYS-2/apps/wellness/src/app/layout\":[\"static/media/630c17af355fa44e-s.p.woff2\",\"static/media/a088348fd4a5f845-s.p.otf\"]},\"appUsingSizeAdjust\":true,\"pagesUsingSizeAdjust\":false}"

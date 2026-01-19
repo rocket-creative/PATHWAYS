@@ -1,0 +1,25 @@
+# testing-release.mdc
+## Testing, Deployment Safety, and No-Regressions
+
+### REQUIRED
+- Define a minimum verification checklist for every change:
+  - build
+  - lint
+  - tests (if present)
+  - consent gating validation (if tracking present)
+  - accessibility spot check
+  - security headers verification (deployment environment)
+
+### NO-REGRESSION RULE
+- Future updates MUST NOT negatively impact:
+  - existing authenticated users
+  - session continuity (when expected)
+  - previously working flows
+
+### CHANGE SAFETY
+- Prefer incremental changes over large refactors.
+- If a refactor is necessary, isolate it and provide a migration plan.
+
+### FORBIDDEN
+- Breaking changes without a migration path
+- Removing validation or tests to pass CI

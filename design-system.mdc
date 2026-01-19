@@ -1,0 +1,266 @@
+# design-system.mdc
+## Pathways Within Design System & Component Standards
+
+> **IMPORTANT:** This file contains specifications (the *what*).
+> For design judgment and aesthetic principles (the *how* and *why*), 
+> see `cursor-constitution/rules/design-philosophy.mdc`.
+> The philosophy file MUST be read before implementing any design.
+
+### DESIGN SOURCE
+- Brand Guidelines: Pathways_Within_Style_Guide.pdf
+- Logo: Circular labyrinth/maze motif with "Wisdom and Wellness Collaborative" tagline
+- Style: Calming, clean lines, not complicated or overly busy
+
+### INDUSTRY CONTEXT
+**Industry:** Healthcare/Mental Health + Holistic Wellness (NOT "spa" or "medspa")
+**Design Philosophy:** 
+- **UNIFIED 360° approach** — Services are integrated, NOT presented side by side
+- Labyrinth metaphor: One entry, many personalized routes
+- Trauma informed design (no aggressive urgency, no time pressure)
+- Calm, easy navigation (reduce cognitive load)
+- Clear visual hierarchy
+- Progressive disclosure (don't overwhelm)
+- Mobile first responsive
+- Reduced motion as DEFAULT for mental health contexts
+
+**Critical Design Note:** The visual design should reflect the labyrinth logo — whatever path you choose, you receive a personalized journey. Do NOT design two separate columns or "choose your path" layouts. Services flow together as one collaborative care environment.
+
+### COLOR SYSTEM
+
+**Brand Colors (from Style Guide + Client Update)**
+| Name | Hex | Usage |
+|------|-----|-------|
+| White | #FDFDFD | Primary background |
+| Linen | #EBEAEB | Secondary background, cards |
+| Breezy (Light Blue) | #86A8E1 | Light accent, hover states |
+| Bright Days (Dark Blue) | #0095E6 | Primary CTA, links |
+| Navy | #01153D | Primary text, headings, headers |
+| Light Green (Accent) | #72A23B | Growth accent, success states |
+| Dark Green | **TBD from Lindsey** | Secondary green for balance |
+
+**NOTE:** Client confirmed they want light AND dark versions of both blue and green available. Lindsey will provide dark green hex value.
+
+**Semantic Application**
+| Token | Light Mode | Usage |
+|-------|------------|-------|
+| background-primary | #FDFDFD | Page background |
+| background-secondary | #EBEAEB (Linen) | Cards, sections |
+| text-primary | #01153D (Navy) | Headings, body |
+| text-secondary | #86A8E1 (Breezy) | Subtext, captions |
+| border-default | #EBEAEB | Subtle borders |
+| accent-primary | #0095E6 (Bright Days) | CTAs, links |
+| accent-secondary | #72A23B (Green) | Growth, wellness |
+
+**Feedback Colors**
+- Success: #72A23B (Green accent)
+- Warning: #F59E0B (Amber)
+- Error: #EF4444 (Red)
+- Info: #0095E6 (Bright Days)
+
+**Healthcare Color Notes**
+- Blues signal trust and professionalism
+- Green accent symbolizes growth and healing
+- Avoid bright reds/yellows in primary UI (warning associations)
+- White space is essential for calm, therapeutic feel
+
+### TYPOGRAPHY
+
+**Font Families (Updated per Client Request 2026-01-15)**
+| Role | Font | Usage |
+|------|------|-------|
+| Decorative/Accents | Forefarmers | Script/decorative headings, logo treatment |
+| Headings (H1-H4) | Raleway | Sans serif for all headings |
+| Body Text | Clarendon | Serif for all body copy, paragraphs |
+
+**Web Implementation**
+- Headings (H1-H4): Raleway, 400/600/700 weights, Google Fonts (font-sans)
+- Body text: Clarendon, local font (font-serif)
+- Accent (decorative): Forefarmers for special treatments only
+
+**Type Scale** (base: 16px, ratio: 1.250 Major Third)
+| Token | Size | Line Height | Weight | Font |
+|-------|------|-------------|--------|------|
+| h1 | clamp(2rem, 5vw, 3.5rem) | 1.2 | 700 | Raleway |
+| h2 | clamp(1.5rem, 4vw, 2.5rem) | 1.2 | 700 | Raleway |
+| h3 | clamp(1.25rem, 3vw, 1.75rem) | 1.3 | 600 | Raleway |
+| h4 | 1.25rem | 1.4 | 600 | Raleway |
+| body | clamp(1rem, 2vw, 1.125rem) | 1.6 | 400 | Clarendon |
+| small | 0.875rem | 1.5 | 400 | Clarendon |
+
+**Text Rules**
+- Max line length: 65 characters
+- Body line height: 1.6
+- Heading line height: 1.2
+- Link style: Navy (#01153D) with Bright Days (#0095E6) on hover
+
+### SPACING
+
+**Base unit:** 4px
+
+**Scale**
+| Token | Value |
+|-------|-------|
+| xs | 4px (0.25rem) |
+| sm | 8px (0.5rem) |
+| md | 16px (1rem) |
+| lg | 24px (1.5rem) |
+| xl | 32px (2rem) |
+| 2xl | 48px (3rem) |
+| 3xl | 64px (4rem) |
+
+**Responsive Padding**
+| Breakpoint | Padding |
+|------------|---------|
+| Mobile (base) | 16px (1rem) |
+| 640px+ | 24px (1.5rem) |
+| 1024px+ | 32px (2rem) |
+| 1440px+ | 48px (3rem) |
+
+### LAYOUT
+
+**Container**
+- Max width: 1440px (UXUI Design Corp standard)
+- Centers on larger displays
+- Never stretches full width
+
+**Tailwind Config**
+```javascript
+screens: {
+  'sm': '640px',
+  'md': '768px',
+  'lg': '1024px',
+  'xl': '1280px',
+  '2xl': '1440px', // Modified for 1440px max
+},
+extend: {
+  maxWidth: {
+    'site': '1440px',
+  }
+}
+```
+
+**Testing Required**
+- [ ] 1920x1080 display (content centered)
+- [ ] 2560x1440 display (content centered at 1440px)
+- [ ] 3840x2160 4K display (content centered)
+
+### COMPONENTS
+
+**Library:** shadcn/ui (recommended)
+**Naming:** |UXUIDC| prefix for custom components
+
+**Border Radius**
+| Token | Value |
+|-------|-------|
+| none | 0 |
+| sm | 4px |
+| md | 8px (default) |
+| lg | 12px |
+| xl | 16px |
+| full | 9999px |
+
+**Shadows (Neutral Only)**
+```css
+--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+--shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+```
+
+**Button Variants**
+| Variant | Background | Text | Border |
+|---------|------------|------|--------|
+| primary | #0095E6 (Bright Days) | #FDFDFD | none |
+| secondary | #01153D (Navy) | #FDFDFD | none |
+| outline | transparent | #01153D | #01153D |
+| ghost | transparent | #0095E6 | none |
+| accent | #72A23B (Green) | #FDFDFD | none |
+
+**Required Custom Components**
+- |UXUIDC|Navigation (constrained 1440px, mobile hamburger)
+- |UXUIDC|Footer (legal links, 5 locations, social)
+- |UXUIDC|CrisisBanner (988 always visible)
+- |UXUIDC|ServiceCard (therapy and wellness services)
+- |UXUIDC|ClinicianCard (photo, bio, specialties)
+- |UXUIDC|LocationCard (address, parking, map link)
+- |UXUIDC|JaneBookingWidget (embedded Jane buttons)
+- |UXUIDC|FAQAccordion (accessible, animated)
+- |UXUIDC|CookieConsent (GDPR compliant)
+- |UXUIDC|ImagePlaceholder (outlined div during dev)
+
+### ICONS
+- Library: Lucide React
+- Format: SVG
+- Default size: 24px
+- Stroke width: 2px
+- Color: Inherits from text color
+
+### MOTION & ANIMATION
+
+**Library:** GSAP (required)
+
+**Philosophy:** Minimal, calming (mental health context)
+- Respect `prefers-reduced-motion`: YES (required)
+- Default to reduced motion for mental health audiences
+- Never use aggressive or jarring animations
+
+**Timing**
+- Micro interactions: 0.3s
+- Reveals/transitions: 0.6s
+- Page transitions: 1s
+
+**Easing:** power2.out (default)
+
+**Required Animation Components**
+- |UXUIDC|FadeInScroll
+- |UXUIDC|StaggerAnimation
+- |UXUIDC|ParallaxEffect (subtle only)
+
+**Performance Rules**
+- Animate only `transform` and `opacity`
+- Cleanup in useEffect return
+- Use `will-change: transform` sparingly
+
+### DARK MODE
+- Support: Not required (light mode default)
+- Reasoning: Healthcare/mental health sites typically use light, calm palettes
+
+### IMAGERY GUIDANCE (from Style Guide Inspiration)
+- Serene natural imagery: forest paths, water ripples, zen gardens
+- Warm, cozy elements: candles, books, coffee, journals
+- Growth symbolism: trees, leaves, plants
+- Mindfulness visuals: meditation, journaling, peaceful expressions
+- Avoid: Clinical/sterile imagery, harsh lighting, isolated individuals
+
+### ACCESSIBILITY (WCAG 2.1 AA)
+- Semantic HTML required
+- ARIA labels required
+- Keyboard navigation required
+- Color contrast: 4.5:1 minimum
+- Focus indicators visible
+- Skip navigation links
+- Proper heading hierarchy (H1→H2→H3, never skip)
+- Alt text describes emotional context of images
+- Form validation supports non-English character sets
+- 2-3 minute session timeout warnings
+
+### MENTAL HEALTH SPECIFIC
+- 988 Crisis Lifeline visible on EVERY page
+- Include: Call, Text, Chat options
+- Veterans: Press 1
+- Spanish: Presione 2
+- Clickable tel: links on mobile
+- Additional: Crisis Text Line (741741), NYC Well (888-NYC-WELL)
+
+### FORBIDDEN
+- Colored drop shadows (neutral only)
+- Content width exceeding 1440px
+- Aggressive/urgent animations
+- Time pressure UI elements
+- Pre checked consent boxes
+- Inline styles (except dynamic values)
+- Colors outside defined tokens
+- Typography outside defined scale
+- Skipping heading levels
+- Auto playing media
+- Bright reds/yellows in primary UI

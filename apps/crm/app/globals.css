@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-stone-50 text-stone-900;
+  }
+
+  /* Typography - 2 weights only per design philosophy */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  /* Consistent focus states */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-sage-500 ring-offset-2;
+  }
+}
+
+@layer components {
+  /* Editorial card style */
+  .card {
+    @apply bg-white rounded-lg border border-stone-200;
+  }
+
+  /* Status badges */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-confirmed {
+    @apply bg-sage-100 text-sage-700;
+  }
+
+  .badge-pending {
+    @apply bg-amber-100 text-amber-700;
+  }
+
+  .badge-cancelled {
+    @apply bg-stone-100 text-stone-600;
+  }
+
+  .badge-completed {
+    @apply bg-stone-800 text-white;
+  }
+}

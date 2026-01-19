@@ -58,6 +58,13 @@ All UI code MUST follow the Pathways Within design system defined in `/docs/DESI
 
 ## Production URLs
 
-- Wisdom: https://wisdom-eight-topaz.vercel.app
-- CRM: https://crm-sooty-one.vercel.app
-- Wellness: (update when deployed)
+**LIVE:**
+- Wisdom: https://wisdom-eight-topaz.vercel.app ✅
+- CRM: https://crm-sooty-one.vercel.app ✅
+
+**NEEDS DEPLOYMENT:**
+- Main app (apps/main) - contains /about, /team, /locations, /contact, /start, /faq
+- Wellness app (apps/wellness) - get URL after deployment
+
+**Navigation Note:** 
+Nav links to /about, /team, /locations, /contact currently 404 because main app isn't deployed yet.

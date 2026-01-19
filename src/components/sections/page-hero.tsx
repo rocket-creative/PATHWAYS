@@ -96,6 +96,7 @@ export function PageHero({
       }, 5000)
       return () => clearInterval(timer)
     }
+    return undefined
   }, [variant, images.length])
 
   // Render different variants

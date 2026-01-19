@@ -28,15 +28,15 @@ export default function PaymentsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-stone-900">Payments</h1>
-          <p className="text-stone-500 mt-1">Track transactions and reconciliation</p>
+          <h1 className="text-2xl font-semibold text-navy">Payments</h1>
+          <p className="text-navy-400 mt-1">Track transactions and reconciliation</p>
         </div>
         <div className="flex items-center gap-3">
-          <button className="flex items-center gap-2 px-4 py-2 text-sm text-stone-600 bg-white border border-stone-200 rounded-lg hover:bg-stone-50 transition-colors">
+          <button className="flex items-center gap-2 px-4 py-2 text-sm text-navy-500 bg-white border border-linen-200 rounded-lg hover:bg-cream-50 transition-colors">
             <Download className="w-4 h-4" />
             Export
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 bg-sage-600 text-white text-sm font-medium rounded-full hover:bg-sage-700 transition-colors">
+          <button className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-full hover:bg-green-700 transition-colors">
             <DollarSign className="w-4 h-4" />
             Record payment
           </button>
@@ -47,12 +47,12 @@ export default function PaymentsPage() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="card p-5">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-sage-100">
-              <DollarSign className="w-5 h-5 text-sage-600" />
+            <div className="p-2 rounded-lg bg-green-100">
+              <DollarSign className="w-5 h-5 text-green-600" />
             </div>
             <div>
-              <p className="text-sm text-stone-500">Today's revenue</p>
-              <p className="text-xl font-semibold text-stone-900">${totalToday}</p>
+              <p className="text-sm text-navy-400">Today's revenue</p>
+              <p className="text-xl font-semibold text-navy">${totalToday}</p>
             </div>
           </div>
         </div>
@@ -63,8 +63,8 @@ export default function PaymentsPage() {
               <CreditCard className="w-5 h-5 text-blue-600" />
             </div>
             <div>
-              <p className="text-sm text-stone-500">Card payments</p>
-              <p className="text-xl font-semibold text-stone-900">${cardTotal}</p>
+              <p className="text-sm text-navy-400">Card payments</p>
+              <p className="text-xl font-semibold text-navy">${cardTotal}</p>
             </div>
           </div>
         </div>
@@ -75,8 +75,8 @@ export default function PaymentsPage() {
               <Banknote className="w-5 h-5 text-amber-600" />
             </div>
             <div>
-              <p className="text-sm text-stone-500">Cash collected</p>
-              <p className="text-xl font-semibold text-stone-900">${cashTotal}</p>
+              <p className="text-sm text-navy-400">Cash collected</p>
+              <p className="text-xl font-semibold text-navy">${cashTotal}</p>
             </div>
           </div>
         </div>
@@ -87,8 +87,8 @@ export default function PaymentsPage() {
               <TrendingUp className="w-5 h-5 text-purple-600" />
             </div>
             <div>
-              <p className="text-sm text-stone-500">This week</p>
-              <p className="text-xl font-semibold text-stone-900">${stats.weekRevenue.toLocaleString()}</p>
+              <p className="text-sm text-navy-400">This week</p>
+              <p className="text-xl font-semibold text-navy">${stats.weekRevenue.toLocaleString()}</p>
             </div>
           </div>
         </div>
@@ -100,8 +100,8 @@ export default function PaymentsPage() {
           <div className="flex items-center gap-3">
             <Banknote className="w-6 h-6 text-amber-600" />
             <div>
-              <p className="font-medium text-stone-900">End of day cash reconciliation</p>
-              <p className="text-sm text-stone-600">Cash collected today: ${cashTotal} — Please verify and submit</p>
+              <p className="font-medium text-navy">End of day cash reconciliation</p>
+              <p className="text-sm text-navy-500">Cash collected today: ${cashTotal} — Please verify and submit</p>
             </div>
           </div>
           <button className="flex items-center gap-2 px-4 py-2 bg-amber-600 text-white text-sm font-medium rounded-lg hover:bg-amber-700 transition-colors">
@@ -113,9 +113,9 @@ export default function PaymentsPage() {
 
       {/* Transactions Table */}
       <div className="card overflow-hidden">
-        <div className="px-6 py-4 border-b border-stone-100 flex items-center justify-between">
-          <h2 className="font-semibold text-stone-900">Recent transactions</h2>
-          <button className="flex items-center gap-2 text-sm text-stone-500 hover:text-stone-700 transition-colors">
+        <div className="px-6 py-4 border-b border-linen-200 flex items-center justify-between">
+          <h2 className="font-semibold text-navy">Recent transactions</h2>
+          <button className="flex items-center gap-2 text-sm text-navy-400 hover:text-stone-700 transition-colors">
             <Filter className="w-4 h-4" />
             Filter
           </button>
@@ -123,40 +123,40 @@ export default function PaymentsPage() {
 
         <table className="w-full">
           <thead>
-            <tr className="border-b border-stone-200 bg-stone-50">
-              <th className="text-left text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
+            <tr className="border-b border-linen-200 bg-cream-50">
+              <th className="text-left text-xs font-medium text-navy-400 uppercase tracking-wider px-6 py-3">
                 Date
               </th>
-              <th className="text-left text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
+              <th className="text-left text-xs font-medium text-navy-400 uppercase tracking-wider px-6 py-3">
                 Patient
               </th>
-              <th className="text-left text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
+              <th className="text-left text-xs font-medium text-navy-400 uppercase tracking-wider px-6 py-3">
                 Service
               </th>
-              <th className="text-left text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
+              <th className="text-left text-xs font-medium text-navy-400 uppercase tracking-wider px-6 py-3">
                 Type
               </th>
-              <th className="text-right text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
+              <th className="text-right text-xs font-medium text-navy-400 uppercase tracking-wider px-6 py-3">
                 Amount
               </th>
-              <th className="text-left text-xs font-medium text-stone-500 uppercase tracking-wider px-6 py-3">
+              <th className="text-left text-xs font-medium text-navy-400 uppercase tracking-wider px-6 py-3">
                 Status
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-stone-100">
+          <tbody className="divide-y divide-linen-200">
             {allTransactions.map((tx) => (
-              <tr key={tx.id} className="hover:bg-stone-50 transition-colors">
-                <td className="px-6 py-4 text-sm text-stone-500">
+              <tr key={tx.id} className="hover:bg-cream-50 transition-colors">
+                <td className="px-6 py-4 text-sm text-navy-400">
                   {new Date(tx.date).toLocaleDateString('en-US', {
                     month: 'short',
                     day: 'numeric',
                   })}
                 </td>
                 <td className="px-6 py-4">
-                  <p className="text-sm font-medium text-stone-900">{tx.patient}</p>
+                  <p className="text-sm font-medium text-navy">{tx.patient}</p>
                 </td>
-                <td className="px-6 py-4 text-sm text-stone-500">
+                <td className="px-6 py-4 text-sm text-navy-400">
                   {tx.service}
                 </td>
                 <td className="px-6 py-4">
@@ -168,7 +168,7 @@ export default function PaymentsPage() {
                     {tx.type.charAt(0).toUpperCase() + tx.type.slice(1)}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-sm font-medium text-stone-900 text-right">
+                <td className="px-6 py-4 text-sm font-medium text-navy text-right">
                   ${tx.amount}
                 </td>
                 <td className="px-6 py-4">

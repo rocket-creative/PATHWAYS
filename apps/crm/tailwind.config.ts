@@ -8,7 +8,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Pathways brand colors
+        // Pathways brand colors - NO SAGE ALLOWED!
         navy: {
           DEFAULT: '#01153D',
           50: '#E8EBF2',
@@ -19,9 +19,9 @@ const config: Config = {
           500: '#3D5696',
           600: '#354B87',
           700: '#2B3D73',
-          800: '#213060',
-          900: '#142850',
-          950: '#01153D',
+          800: '#182952',
+          900: '#0D1C3D',
+          950: '#010A1F',
         },
         green: {
           DEFAULT: '#72A23B',
@@ -29,10 +29,10 @@ const config: Config = {
           100: '#E4EED8',
           200: '#C9DDB1',
           300: '#AECC8A',
-          400: '#93BB63',
+          400: '#8BBF52',
           500: '#72A23B',
-          600: '#5A822F',
-          700: '#486828',
+          600: '#5E8A30',
+          700: '#4A6E26',
           800: '#3A5422',
           900: '#2E441C',
           950: '#1A2710',
@@ -64,6 +64,10 @@ const config: Config = {
       fontFamily: {
         sans: ['Raleway', 'system-ui', 'sans-serif'],
         serif: ['Clarendon', 'Georgia', 'serif'],
+      },
+      backgroundImage: {
+        // Navy gradients for sidebar
+        'navy-gradient': 'linear-gradient(180deg, #0D1C3D 0%, #01153D 50%, #010A1F 100%)',
       },
     },
   },

@@ -14,8 +14,8 @@ export default function SettingsPage() {
     <div className="space-y-6 max-w-4xl">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-semibold text-stone-900">Settings</h1>
-        <p className="text-stone-500 mt-1">Manage your account and preferences</p>
+        <h1 className="text-2xl font-semibold text-navy">Settings</h1>
+        <p className="text-navy-400 mt-1">Manage your account and preferences</p>
       </div>
 
       {/* Settings Sections */}
@@ -34,7 +34,7 @@ export default function SettingsPage() {
               <input
                 type="text"
                 defaultValue={currentStaff.firstName}
-                className="w-full px-3 py-2 border border-stone-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sage-500"
+                className="w-full px-3 py-2 border border-linen-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
             <div>
@@ -44,7 +44,7 @@ export default function SettingsPage() {
               <input
                 type="text"
                 defaultValue={currentStaff.lastName}
-                className="w-full px-3 py-2 border border-stone-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sage-500"
+                className="w-full px-3 py-2 border border-linen-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
             <div className="col-span-2">
@@ -54,7 +54,7 @@ export default function SettingsPage() {
               <input
                 type="email"
                 defaultValue={currentStaff.email}
-                className="w-full px-3 py-2 border border-stone-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sage-500"
+                className="w-full px-3 py-2 border border-linen-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
               />
             </div>
           </div>
@@ -70,13 +70,13 @@ export default function SettingsPage() {
             {locations.map((location) => (
               <div
                 key={location.id}
-                className="flex items-center justify-between p-4 bg-stone-50 rounded-lg"
+                className="flex items-center justify-between p-4 bg-cream-50 rounded-lg"
               >
                 <div>
-                  <p className="font-medium text-stone-900">{location.name}</p>
-                  <p className="text-sm text-stone-500">{location.address}</p>
+                  <p className="font-medium text-navy">{location.name}</p>
+                  <p className="text-sm text-navy-400">{location.address}</p>
                 </div>
-                <button className="text-sm text-sage-600 hover:text-sage-700 font-medium">
+                <button className="text-sm text-green-600 hover:text-green-700 font-medium">
                   Edit
                 </button>
               </div>
@@ -118,19 +118,19 @@ export default function SettingsPage() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium text-stone-900">Two-factor authentication</p>
-                <p className="text-sm text-stone-500">Add an extra layer of security</p>
+                <p className="font-medium text-navy">Two-factor authentication</p>
+                <p className="text-sm text-navy-400">Add an extra layer of security</p>
               </div>
               <span className="badge badge-confirmed">Enabled</span>
             </div>
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium text-stone-900">Session timeout</p>
-                <p className="text-sm text-stone-500">Auto-logout after inactivity</p>
+                <p className="font-medium text-navy">Session timeout</p>
+                <p className="text-sm text-navy-400">Auto-logout after inactivity</p>
               </div>
-              <span className="text-sm text-stone-600">15 minutes</span>
+              <span className="text-sm text-navy-500">15 minutes</span>
             </div>
-            <button className="text-sm text-sage-600 hover:text-sage-700 font-medium">
+            <button className="text-sm text-green-600 hover:text-green-700 font-medium">
               Change password
             </button>
           </div>
@@ -170,19 +170,19 @@ export default function SettingsPage() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium text-stone-900">Audit logging</p>
-                <p className="text-sm text-stone-500">All PHI access is logged</p>
+                <p className="font-medium text-navy">Audit logging</p>
+                <p className="text-sm text-navy-400">All PHI access is logged</p>
               </div>
               <span className="badge badge-confirmed">Active</span>
             </div>
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium text-stone-900">Data encryption</p>
-                <p className="text-sm text-stone-500">AES-256 encryption at rest</p>
+                <p className="font-medium text-navy">Data encryption</p>
+                <p className="text-sm text-navy-400">AES-256 encryption at rest</p>
               </div>
               <span className="badge badge-confirmed">Enabled</span>
             </div>
-            <button className="text-sm text-sage-600 hover:text-sage-700 font-medium">
+            <button className="text-sm text-green-600 hover:text-green-700 font-medium">
               View audit logs
             </button>
           </div>
@@ -190,8 +190,8 @@ export default function SettingsPage() {
       </div>
 
       {/* Save Button */}
-      <div className="flex justify-end pt-6 border-t border-stone-200">
-        <button className="px-6 py-2.5 bg-sage-600 text-white text-sm font-medium rounded-full hover:bg-sage-700 transition-colors">
+      <div className="flex justify-end pt-6 border-t border-linen-200">
+        <button className="px-6 py-2.5 bg-green-600 text-white text-sm font-medium rounded-full hover:bg-green-700 transition-colors">
           Save changes
         </button>
       </div>
@@ -213,12 +213,12 @@ function SettingsSection({
   return (
     <div className="card p-6">
       <div className="flex items-start gap-4 mb-6">
-        <div className="p-2 rounded-lg bg-stone-100">
-          <Icon className="w-5 h-5 text-stone-600" />
+        <div className="p-2 rounded-lg bg-linen-100">
+          <Icon className="w-5 h-5 text-navy-500" />
         </div>
         <div>
-          <h2 className="font-semibold text-stone-900">{title}</h2>
-          <p className="text-sm text-stone-500">{description}</p>
+          <h2 className="font-semibold text-navy">{title}</h2>
+          <p className="text-sm text-navy-400">{description}</p>
         </div>
       </div>
       {children}
@@ -238,12 +238,12 @@ function ToggleSetting({
   return (
     <div className="flex items-center justify-between">
       <div>
-        <p className="font-medium text-stone-900">{label}</p>
-        <p className="text-sm text-stone-500">{description}</p>
+        <p className="font-medium text-navy">{label}</p>
+        <p className="text-sm text-navy-400">{description}</p>
       </div>
       <button
         className={`relative w-11 h-6 rounded-full transition-colors ${
-          defaultChecked ? 'bg-sage-600' : 'bg-stone-200'
+          defaultChecked ? 'bg-green-600' : 'bg-linen-200'
         }`}
       >
         <span
@@ -266,10 +266,10 @@ function IntegrationRow({
   description: string
 }) {
   return (
-    <div className="flex items-center justify-between p-4 bg-stone-50 rounded-lg">
+    <div className="flex items-center justify-between p-4 bg-cream-50 rounded-lg">
       <div>
-        <p className="font-medium text-stone-900">{name}</p>
-        <p className="text-sm text-stone-500">{description}</p>
+        <p className="font-medium text-navy">{name}</p>
+        <p className="text-sm text-navy-400">{description}</p>
       </div>
       <span className={`badge ${status === 'connected' ? 'badge-confirmed' : 'badge-cancelled'}`}>
         {status === 'connected' ? 'Connected' : 'Disconnected'}

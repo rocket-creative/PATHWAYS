@@ -30,7 +30,6 @@ export default function TherapyServicesPage() {
         body="Our licensed therapists offer a range of evidence-based approaches to help you heal, grow, and thrive."
         site="wisdom"
         layout="trio"
-        imageClass="img-placeholder-split"
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

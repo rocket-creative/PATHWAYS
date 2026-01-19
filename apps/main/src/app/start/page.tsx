@@ -31,7 +31,6 @@ export default function StartPage() {
         body="Whether you know exactly what you need or are just beginning to explore, we are here to guide you. Our personalized intake process helps match you with the right services."
         site="main"
         layout="sideBySide"
-        imageClass="img-placeholder-organic"
       />
 
       {/* Service Finder Quiz */}

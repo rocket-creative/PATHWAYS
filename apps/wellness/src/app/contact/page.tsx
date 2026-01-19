@@ -31,7 +31,6 @@ export default function ContactPage() {
         body="Whether you have questions about our services or are ready to schedule your first appointment, we are here to support you every step of the way."
         site="main"
         layout="single"
-        imageClass="img-placeholder-dark"
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

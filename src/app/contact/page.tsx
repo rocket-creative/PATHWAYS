@@ -57,9 +57,8 @@ export default function ContactPage() {
         subheadline="We are here to help you take the first step"
         body="Fill out the form below and someone from our team will be in touch. Or contact us directly by phone or email."
         variant="fullBleed"
-        images={[
-          { alt: 'Warm and welcoming reception area at Pathways Within', placeholder: true }
-        ]}
+        size="sm"
+        image={{ alt: 'Warm and welcoming reception area at Pathways Within', placeholder: true }}
       />
 
       {/* Contact Form Section */}

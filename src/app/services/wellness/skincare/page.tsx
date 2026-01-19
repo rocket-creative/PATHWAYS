@@ -30,14 +30,9 @@ export default function SkincarePage() {
         headline="Skincare & facials" 
         subheadline="Pamper your skin" 
         body="From European facials to advanced treatments like dermaplaning and oxygen dome therapy, pamper your skin with our professional skincare services."
-        variant="mosaic"
-        images={[
-          { alt: 'Luxurious facial treatment in progress', placeholder: true },
-          { alt: 'Professional skincare products', placeholder: true },
-          { alt: 'Relaxing spa environment', placeholder: true },
-          { alt: 'Glowing skin results', placeholder: true },
-          { alt: 'Esthetician providing treatment', placeholder: true }
-        ]}
+        variant="centered"
+        size="sm"
+        image={{ alt: 'Luxurious facial treatment in progress', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

@@ -29,11 +29,9 @@ export default function CouplesTherapyPage() {
         headline="Couples therapy"
         subheadline="Strengthen your connection"
         body="Strengthen your connection with your partner through improved communication and conflict resolution. We specialize in the Gottman Method to help couples build stronger, healthier relationships."
-        variant="overlapping"
-        images={[
-          { alt: 'Couple in a supportive therapy session', placeholder: true },
-          { alt: 'Partners reconnecting and communicating', placeholder: true }
-        ]}
+        variant="offset"
+        size="sm"
+        image={{ alt: 'Couple in a supportive therapy session', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

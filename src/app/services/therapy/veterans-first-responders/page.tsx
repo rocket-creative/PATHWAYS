@@ -31,9 +31,8 @@ export default function VeteransFirstRespondersPage() {
         subheadline="We understand your service"
         body="Specialized support for those who protect and serve. We understand the unique challenges of military service, law enforcement, firefighting, EMS, and other crisis response work."
         variant="fullBleed"
-        images={[
-          { alt: 'Honoring those who serve - supportive environment for veterans and first responders', placeholder: true }
-        ]}
+        size="sm"
+        image={{ alt: 'Honoring those who serve - supportive environment for veterans and first responders', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

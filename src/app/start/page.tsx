@@ -111,35 +111,35 @@ export default function StartPage() {
 
   return (
     <main ref={containerRef}>
-      {/* Hero - Emotional Hook with mosaic images */}
+      {/* Hero - Emotional Hook with single image */}
       <section className="relative overflow-hidden bg-hero-gradient">
-        <div className="container-site py-16 lg:py-24">
+        <div className="container-site py-12 lg:py-20">
           {/* Logo - Left justified hero feature, links to home */}
-          <div className="mb-8 lg:mb-12">
+          <div className="mb-8 lg:mb-10">
             <Link href="/">
               <Image 
                 src="/pathways-logo.png" 
                 alt="Pathways Within - Home" 
                 width={280}
                 height={280}
-                className="w-[200px] brightness-0 invert transition-opacity hover:opacity-80 lg:w-[280px]"
+                className="w-[200px] brightness-0 invert transition-opacity hover:opacity-80 lg:w-[260px]"
                 priority
               />
             </Link>
           </div>
           
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
             <div className="max-w-xl lg:col-span-6">
               <p 
-                className="animate-on-scroll mb-8 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]"
+                className="animate-on-scroll mb-6 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]"
                 style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}
               >
                 Long Island&apos;s Premier Therapy & Wellness Center
               </p>
-              <h1 className="animate-on-scroll mb-8 text-white" style={{ transitionDelay: '100ms' }}>
+              <h1 className="animate-on-scroll mb-6 text-white" style={{ transitionDelay: '100ms' }}>
                 You Deserve to Feel <span className="text-[rgb(var(--color-green))]">Whole</span> Again
               </h1>
-              <p className="animate-on-scroll mb-8 text-xl text-white/80" style={{ lineHeight: 1.8, transitionDelay: '200ms' }}>
+              <p className="animate-on-scroll mb-6 text-xl text-white/80" style={{ lineHeight: 1.8, transitionDelay: '200ms' }}>
                 Stop struggling alone. Our expert therapists and wellness professionals 
                 are ready to help you break free from anxiety, heal from trauma, and 
                 finally live the life you deserve.
@@ -160,29 +160,15 @@ export default function StartPage() {
                   Call Now: (631) 371-3825
                 </a>
               </div>
-              <p className="animate-on-scroll mt-8 text-sm text-white/50" style={{ transitionDelay: '400ms' }}>
+              <p className="animate-on-scroll mt-6 text-sm text-white/50" style={{ transitionDelay: '400ms' }}>
                 Insurance accepted • Same-week appointments available • No referral needed
               </p>
             </div>
             
-            {/* Mosaic image grid */}
+            {/* Single hero image */}
             <div className="hidden lg:col-span-6 lg:block">
-              <div className="animate-on-scroll grid grid-cols-3 gap-3" style={{ transitionDelay: '200ms' }}>
-                <div className="col-span-2 row-span-2">
-                  <div className="img-placeholder aspect-square rounded-lg opacity-90" />
-                </div>
-                <div>
-                  <div className="img-placeholder aspect-square rounded-lg opacity-80" />
-                </div>
-                <div>
-                  <div className="img-placeholder aspect-square rounded-lg opacity-80" />
-                </div>
-                <div className="col-span-2">
-                  <div className="img-placeholder aspect-[2/1] rounded-lg opacity-85" />
-                </div>
-                <div>
-                  <div className="img-placeholder aspect-square rounded-lg opacity-75" />
-                </div>
+              <div className="animate-on-scroll" style={{ transitionDelay: '200ms' }}>
+                <div className="img-placeholder aspect-[4/3] rounded-lg opacity-90 shadow-2xl" />
               </div>
             </div>
           </div>

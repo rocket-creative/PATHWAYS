@@ -38,12 +38,9 @@ export default function MassagePage() {
         headline="Massage therapy" 
         subheadline="Let your mind and body find peace" 
         body="Expert massage therapy from our certified massage therapist. We offer a range of massage styles designed to reduce stress, improve circulation, and promote overall wellness."
-        variant="carousel"
-        images={[
-          { alt: 'Relaxing massage therapy session', placeholder: true },
-          { alt: 'Hot stone massage treatment', placeholder: true },
-          { alt: 'Professional massage therapist at work', placeholder: true }
-        ]}
+        variant="default"
+        size="sm"
+        image={{ alt: 'Relaxing massage therapy session', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

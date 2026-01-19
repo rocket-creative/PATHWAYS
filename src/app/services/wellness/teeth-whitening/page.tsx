@@ -29,11 +29,9 @@ export default function TeethWhiteningPage() {
         headline="Teeth whitening" 
         subheadline="Brighten your smile" 
         body="Brighten your smile by three to twelve shades in just fifteen minutes. Professional teeth whitening delivers fast, dramatic results."
-        variant="split"
-        images={[
-          { alt: 'Professional teeth whitening treatment', placeholder: true },
-          { alt: 'Bright, confident smile after whitening', placeholder: true }
-        ]}
+        variant="default"
+        size="sm"
+        image={{ alt: 'Professional teeth whitening treatment', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

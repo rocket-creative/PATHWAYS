@@ -31,10 +31,9 @@ export default function LaserHairRemovalPage() {
         headline="Laser hair removal" 
         subheadline="Smooth skin, permanently" 
         body="Achieve smooth skin with permanent hair reduction using advanced laser technology. Say goodbye to shaving, waxing, and ingrown hairs."
-        variant="diagonal"
-        images={[
-          { alt: 'Advanced laser hair removal treatment', placeholder: true }
-        ]}
+        variant="default"
+        size="sm"
+        image={{ alt: 'Advanced laser hair removal treatment', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

@@ -32,9 +32,8 @@ export default function CryotherapyPage() {
         subheadline="The power of cold" 
         body="Reduce inflammation, accelerate recovery, and boost wellness through whole body cold therapy. Cryotherapy harnesses extreme cold to trigger your body's natural healing processes."
         variant="fullBleed"
-        images={[
-          { alt: 'Modern cryotherapy chamber with cool blue lighting', placeholder: true }
-        ]}
+        size="sm"
+        image={{ alt: 'Modern cryotherapy chamber with cool blue lighting', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

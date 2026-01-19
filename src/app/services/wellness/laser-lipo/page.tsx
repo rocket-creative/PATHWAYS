@@ -32,9 +32,8 @@ export default function LaserLipoPage() {
         subheadline="Sculpt without surgery" 
         body="Non-invasive body sculpting to reduce stubborn fat with no downtime. Laser lipo offers a safe, effective alternative to surgical liposuction."
         variant="stacked"
-        images={[
-          { alt: 'Modern laser lipo treatment equipment', placeholder: true }
-        ]}
+        size="sm"
+        image={{ alt: 'Modern laser lipo treatment equipment', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

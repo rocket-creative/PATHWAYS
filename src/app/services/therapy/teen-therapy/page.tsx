@@ -30,9 +30,8 @@ export default function TeenTherapyPage() {
         subheadline="Navigating the teenage years together"
         body="Support for adolescents facing the unique pressures of school, family, social life, and identity development. Our therapists create a safe, judgment-free space for teens to explore their thoughts and feelings."
         variant="stacked"
-        images={[
-          { alt: 'Modern comfortable therapy space for teens', placeholder: true }
-        ]}
+        size="sm"
+        image={{ alt: 'Modern comfortable therapy space for teens', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

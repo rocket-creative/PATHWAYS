@@ -31,11 +31,9 @@ export default function PRPVampireFacialPage() {
         headline="PRP Vampire Facial" 
         subheadline="Your own natural power" 
         body="Harness the power of your own blood to stimulate collagen and rejuvenate your skin. The PRP Vampire Facial offers natural, long-lasting results."
-        variant="overlapping"
-        images={[
-          { alt: 'PRP treatment being prepared', placeholder: true },
-          { alt: 'Glowing skin results after PRP facial', placeholder: true }
-        ]}
+        variant="default"
+        size="sm"
+        image={{ alt: 'PRP treatment being prepared', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

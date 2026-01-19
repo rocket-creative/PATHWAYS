@@ -29,10 +29,9 @@ export default function KeralaseHairRestorationPage() {
         headline="KeraLase hair restoration" 
         subheadline="Revitalize your hair" 
         body="Rejuvenate and revitalize your scalp with advanced laser technology for hair restoration. KeraLase promotes thicker, healthier hair growth."
-        variant="minimal"
-        images={[
-          { alt: 'KeraLase hair restoration treatment', placeholder: true }
-        ]}
+        variant="centered"
+        size="sm"
+        image={{ alt: 'KeraLase hair restoration treatment', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

@@ -33,10 +33,9 @@ export default function EnergyWorkPage() {
         headline="Energy work" 
         subheadline="Heal from within" 
         body="Reiki and Integrative Energy Therapy to promote healing, release stored emotions, and enhance your inner spirit."
-        variant="minimal"
-        images={[
-          { alt: 'Peaceful energy healing session', placeholder: true }
-        ]}
+        variant="centered"
+        size="sm"
+        image={{ alt: 'Peaceful energy healing session', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

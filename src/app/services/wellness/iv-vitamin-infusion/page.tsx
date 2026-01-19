@@ -31,9 +31,8 @@ export default function IVVitaminInfusionPage() {
         subheadline="Nourish from within" 
         body="Deliver essential nutrients directly to your bloodstream for energy, immunity, mental clarity, and recovery."
         variant="stacked"
-        images={[
-          { alt: 'Comfortable IV therapy lounge', placeholder: true }
-        ]}
+        size="sm"
+        image={{ alt: 'Comfortable IV therapy lounge', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

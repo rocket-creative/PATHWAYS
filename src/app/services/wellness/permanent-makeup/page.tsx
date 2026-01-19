@@ -31,12 +31,9 @@ export default function PermanentMakeupPage() {
         headline="Permanent makeup" 
         subheadline="Wake up beautiful" 
         body="Enhance your natural beauty with microblading, lip liner, and other permanent cosmetic services. Save time on your daily routine with long-lasting results."
-        variant="carousel"
-        images={[
-          { alt: 'Beautiful microblading results', placeholder: true },
-          { alt: 'Lip blushing treatment', placeholder: true },
-          { alt: 'Permanent eyeliner application', placeholder: true }
-        ]}
+        variant="offset"
+        size="sm"
+        image={{ alt: 'Beautiful microblading results', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

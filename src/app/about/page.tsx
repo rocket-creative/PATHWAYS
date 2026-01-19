@@ -11,17 +11,15 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main>
-      {/* Hero - Overlapping images showing therapy and wellness */}
+      {/* Hero - Offset image style */}
       <PageHero
         eyebrow="About Us"
         headline="Wisdom and Wellness Collaborative"
         subheadline="One entry. Many personalized routes."
         body="At Pathways Within, we believe true healing happens when we care for the whole person. Our 360 degree approach brings together mental health therapy and holistic wellness services in one collaborative environment."
-        variant="overlapping"
-        images={[
-          { alt: 'Peaceful therapy session in a warm, welcoming space', placeholder: true },
-          { alt: 'Wellness treatment room with calming atmosphere', placeholder: true }
-        ]}
+        variant="offset"
+        size="md"
+        image={{ alt: 'Peaceful therapy and wellness environment', placeholder: true }}
       />
 
       {/* Philosophy Section */}

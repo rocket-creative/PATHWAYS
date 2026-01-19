@@ -120,16 +120,15 @@ export default function FAQPage() {
 
   return (
     <main>
-      {/* Hero - Minimal clean design */}
+      {/* Hero - Centered clean design */}
       <PageHero
         eyebrow="FAQ"
         headline="We love answering questions"
         subheadline="Here are some of the most common things people ask us"
         body="If you are curious about anything else, just reach out. We are always happy to help."
-        variant="minimal"
-        images={[
-          { alt: 'Friendly conversation in a comfortable setting', placeholder: true }
-        ]}
+        variant="centered"
+        size="sm"
+        image={{ alt: 'Friendly conversation in a comfortable setting', placeholder: true }}
       />
 
       {/* FAQ Content */}

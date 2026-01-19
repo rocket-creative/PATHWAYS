@@ -30,11 +30,9 @@ export default function PainManagementPage() {
         headline="Pain management" 
         subheadline="Find relief, restore function" 
         body="Comprehensive pain relief through trigger point injections, medical massage, and consultation. We help you manage chronic and acute pain effectively."
-        variant="split"
-        images={[
-          { alt: 'Pain management consultation', placeholder: true },
-          { alt: 'Therapeutic treatment for pain relief', placeholder: true }
-        ]}
+        variant="default"
+        size="sm"
+        image={{ alt: 'Pain management consultation', placeholder: true }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

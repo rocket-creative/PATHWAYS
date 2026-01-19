@@ -20,6 +20,7 @@ export default function AboutPage() {
         variant="offset"
         size="md"
         image={{ alt: 'Peaceful therapy and wellness environment', placeholder: true }}
+        imageStyle="gradient"
       />
 
       {/* Philosophy Section */}

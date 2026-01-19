@@ -64,6 +64,7 @@ export default function LocationsPage() {
         variant="centered"
         size="md"
         image={{ alt: 'Pathways Within Long Island locations', placeholder: true }}
+        imageStyle="geometric"
       />
 
       {/* Locations Grid */}

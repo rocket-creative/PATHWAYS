@@ -59,6 +59,7 @@ export default function ContactPage() {
         variant="fullBleed"
         size="sm"
         image={{ alt: 'Warm and welcoming reception area at Pathways Within', placeholder: true }}
+        imageStyle="dark"
       />
 
       {/* Contact Form Section */}

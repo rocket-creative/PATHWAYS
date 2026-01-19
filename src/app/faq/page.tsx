@@ -129,6 +129,7 @@ export default function FAQPage() {
         variant="centered"
         size="sm"
         image={{ alt: 'Friendly conversation in a comfortable setting', placeholder: true }}
+        imageStyle="cool"
       />
 
       {/* FAQ Content */}

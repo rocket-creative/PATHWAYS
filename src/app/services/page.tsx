@@ -51,6 +51,7 @@ export default function ServicesPage() {
         variant="default"
         size="md"
         image={{ alt: 'Therapy and wellness services', placeholder: true }}
+        imageStyle="split"
       />
 
       {/* How It Works */}

@@ -168,7 +168,11 @@ export default function StartPage() {
             {/* Single hero image */}
             <div className="hidden lg:col-span-6 lg:block">
               <div className="animate-on-scroll" style={{ transitionDelay: '200ms' }}>
-                <div className="img-placeholder aspect-[4/3] rounded-lg opacity-90 shadow-2xl" />
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg shadow-2xl">
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-[rgb(var(--color-breezy))]/30 to-[rgb(var(--color-green))]/20" />
+                  <div className="absolute -top-10 -right-10 w-60 h-60 rounded-full bg-white/10 blur-2xl" />
+                  <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-[rgb(var(--color-green))]/20 blur-xl" />
+                </div>
               </div>
             </div>
           </div>

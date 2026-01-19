@@ -143,6 +143,7 @@ export default function TeamPage() {
         variant="stacked"
         size="md"
         image={{ alt: 'Pathways Within team members', placeholder: true }}
+        imageStyle="warm"
       />
 
       {/* Leadership */}

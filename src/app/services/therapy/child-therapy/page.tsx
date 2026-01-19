@@ -29,6 +29,13 @@ export default function ChildTherapyPage() {
         headline="Child therapy"
         subheadline="Helping children navigate big feelings"
         body="Specialized support for children navigating big feelings and challenging behaviors. We use play therapy and developmentally appropriate techniques to help your child express themselves and develop healthy coping skills."
+        variant="collage"
+        images={[
+          { alt: 'Colorful play therapy room', placeholder: true },
+          { alt: 'Child engaged in creative expression', placeholder: true },
+          { alt: 'Warm and welcoming therapy space for kids', placeholder: true },
+          { alt: 'Art supplies and therapeutic toys', placeholder: true }
+        ]}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

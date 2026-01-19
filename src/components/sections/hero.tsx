@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { ArrowRight, ArrowDown } from 'lucide-react'
 
 /**
- * Hero Section - Editorial asymmetric layout with animated buttons
+ * Hero Section - Editorial asymmetric layout with multiple overlapping images
  */
 export function HeroSection() {
   const scrollToNext = () => {
@@ -65,13 +65,25 @@ export function HeroSection() {
             </div>
           </div>
           
-          {/* Right image area - spans 7 cols, with overlapping content block */}
+          {/* Right image area - spans 7 cols, with multiple overlapping images */}
           <div className="relative lg:col-span-7 lg:-mr-10">
-            {/* Main image */}
-            <div className="img-placeholder aspect-[4/5] lg:aspect-[3/4]" />
+            {/* Main large image */}
+            <div className="relative ml-auto w-[90%]">
+              <div className="img-placeholder aspect-[4/5] rounded-lg shadow-2xl lg:aspect-[3/4]" />
+            </div>
+            
+            {/* Secondary overlapping image - top left */}
+            <div className="absolute -left-4 top-12 hidden w-[35%] lg:block">
+              <div className="img-placeholder aspect-square rounded-lg border-4 border-white shadow-xl" />
+            </div>
+            
+            {/* Third overlapping image - bottom right */}
+            <div className="absolute -bottom-4 right-0 hidden w-[40%] lg:block">
+              <div className="img-placeholder aspect-[4/3] rounded-lg border-4 border-white shadow-xl" />
+            </div>
             
             {/* Overlapping content block - sits on image */}
-            <div className="absolute -bottom-8 left-0 right-8 bg-gradient-navy p-8 transition-transform duration-300 ease-out hover:-translate-y-2 hover:translate-x-1 lg:-left-16 lg:bottom-24 lg:right-auto lg:w-96 lg:p-12">
+            <div className="absolute -bottom-8 left-0 right-8 bg-gradient-navy p-8 transition-transform duration-300 ease-out hover:-translate-y-2 hover:translate-x-1 lg:-left-16 lg:bottom-32 lg:right-auto lg:w-80 lg:p-10">
               <h3 className="mb-4 text-white" style={{ fontWeight: 400 }}>
                 Therapy & Wellness
               </h3>
@@ -88,6 +100,9 @@ export function HeroSection() {
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
+            
+            {/* Decorative accent */}
+            <div className="absolute -right-8 top-1/4 hidden h-32 w-32 rounded-full bg-[rgb(var(--color-green))]/10 blur-2xl lg:block" />
           </div>
         </div>
         

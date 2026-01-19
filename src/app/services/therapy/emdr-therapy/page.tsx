@@ -29,6 +29,10 @@ export default function EMDRTherapyPage() {
         headline="EMDR therapy"
         subheadline="Heal from trauma, differently"
         body="Eye Movement Desensitization and Reprocessing helps you heal from trauma without extensive talk therapy. Internationally recognized for treating PTSD and other trauma-related conditions."
+        variant="minimal"
+        images={[
+          { alt: 'Calm, focused therapy environment for EMDR', placeholder: true }
+        ]}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

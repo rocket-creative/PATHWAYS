@@ -26,7 +26,16 @@ const relatedServices = [
 export default function CryotherapyPage() {
   return (
     <main>
-      <PageHero eyebrow="Wellness Services" headline="Cryotherapy" subheadline="The power of cold" body="Reduce inflammation, accelerate recovery, and boost wellness through whole body cold therapy. Cryotherapy harnesses extreme cold to trigger your body's natural healing processes." />
+      <PageHero 
+        eyebrow="Wellness Services" 
+        headline="Cryotherapy" 
+        subheadline="The power of cold" 
+        body="Reduce inflammation, accelerate recovery, and boost wellness through whole body cold therapy. Cryotherapy harnesses extreme cold to trigger your body's natural healing processes."
+        variant="fullBleed"
+        images={[
+          { alt: 'Modern cryotherapy chamber with cool blue lighting', placeholder: true }
+        ]}
+      />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">

@@ -30,6 +30,10 @@ export default function IndividualTherapyPage() {
         headline="Individual therapy"
         subheadline='"The shoe that fits one person pinches another; there is no one recipe for living that suits all cases." — Carl Jung'
         body="Individual therapy is classic counseling where you work with a trained professional to explore the roots of your symptoms and gain greater self awareness. The goal is to give you the tools to live a more meaningful life."
+        variant="diagonal"
+        images={[
+          { alt: 'Comfortable therapy session in a warm, private setting', placeholder: true }
+        ]}
       />
 
       {/* About Section */}

@@ -24,7 +24,17 @@ const relatedServices = [
 export default function TeethWhiteningPage() {
   return (
     <main>
-      <PageHero eyebrow="Wellness Services" headline="Teeth whitening" subheadline="Brighten your smile" body="Brighten your smile by three to twelve shades in just fifteen minutes. Professional teeth whitening delivers fast, dramatic results." />
+      <PageHero 
+        eyebrow="Wellness Services" 
+        headline="Teeth whitening" 
+        subheadline="Brighten your smile" 
+        body="Brighten your smile by three to twelve shades in just fifteen minutes. Professional teeth whitening delivers fast, dramatic results."
+        variant="split"
+        images={[
+          { alt: 'Professional teeth whitening treatment', placeholder: true },
+          { alt: 'Bright, confident smile after whitening', placeholder: true }
+        ]}
+      />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">

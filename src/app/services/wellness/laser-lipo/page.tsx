@@ -26,7 +26,16 @@ const relatedServices = [
 export default function LaserLipoPage() {
   return (
     <main>
-      <PageHero eyebrow="Wellness Services" headline="Laser lipo" subheadline="Sculpt without surgery" body="Non-invasive body sculpting to reduce stubborn fat with no downtime. Laser lipo offers a safe, effective alternative to surgical liposuction." />
+      <PageHero 
+        eyebrow="Wellness Services" 
+        headline="Laser lipo" 
+        subheadline="Sculpt without surgery" 
+        body="Non-invasive body sculpting to reduce stubborn fat with no downtime. Laser lipo offers a safe, effective alternative to surgical liposuction."
+        variant="stacked"
+        images={[
+          { alt: 'Modern laser lipo treatment equipment', placeholder: true }
+        ]}
+      />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">

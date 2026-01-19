@@ -28,7 +28,16 @@ const relatedServices = [
 export default function EnergyWorkPage() {
   return (
     <main>
-      <PageHero eyebrow="Wellness Services" headline="Energy work" subheadline="Heal from within" body="Reiki and Integrative Energy Therapy to promote healing, release stored emotions, and enhance your inner spirit." />
+      <PageHero 
+        eyebrow="Wellness Services" 
+        headline="Energy work" 
+        subheadline="Heal from within" 
+        body="Reiki and Integrative Energy Therapy to promote healing, release stored emotions, and enhance your inner spirit."
+        variant="minimal"
+        images={[
+          { alt: 'Peaceful energy healing session', placeholder: true }
+        ]}
+      />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">

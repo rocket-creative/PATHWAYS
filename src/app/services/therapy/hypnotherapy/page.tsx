@@ -29,6 +29,10 @@ export default function HypnotherapyPage() {
         headline="Hypnotherapy"
         subheadline="Access your inner wisdom"
         body="Access your unconscious mind through gentle trance states to release psychological, emotional, and physical experiences. Hypnotherapy offers a unique pathway to healing and transformation."
+        variant="diagonal"
+        images={[
+          { alt: 'Serene hypnotherapy session environment', placeholder: true }
+        ]}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

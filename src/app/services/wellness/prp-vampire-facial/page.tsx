@@ -26,7 +26,17 @@ const relatedServices = [
 export default function PRPVampireFacialPage() {
   return (
     <main>
-      <PageHero eyebrow="Wellness Services" headline="PRP Vampire Facial" subheadline="Your own natural power" body="Harness the power of your own blood to stimulate collagen and rejuvenate your skin. The PRP Vampire Facial offers natural, long-lasting results." />
+      <PageHero 
+        eyebrow="Wellness Services" 
+        headline="PRP Vampire Facial" 
+        subheadline="Your own natural power" 
+        body="Harness the power of your own blood to stimulate collagen and rejuvenate your skin. The PRP Vampire Facial offers natural, long-lasting results."
+        variant="overlapping"
+        images={[
+          { alt: 'PRP treatment being prepared', placeholder: true },
+          { alt: 'Glowing skin results after PRP facial', placeholder: true }
+        ]}
+      />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">

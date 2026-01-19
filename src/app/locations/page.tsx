@@ -55,12 +55,20 @@ const locations = [
 export default function LocationsPage() {
   return (
     <main>
-      {/* Hero */}
+      {/* Hero - Carousel of location photos */}
       <PageHero
         eyebrow="Our Locations"
         headline="Five locations to serve you"
         subheadline="Therapy and wellness services at each location"
         body="We have five locations across the greater Long Island area. Each location offers both therapy and wellness services with dedicated parking for your convenience."
+        variant="carousel"
+        images={[
+          { alt: 'Garden City office exterior and welcoming entrance', placeholder: true },
+          { alt: 'Port Jefferson location with beautiful surroundings', placeholder: true },
+          { alt: 'Massapequa wellness center', placeholder: true },
+          { alt: 'Smithtown office building', placeholder: true },
+          { alt: 'Rockville Centre location', placeholder: true }
+        ]}
       />
 
       {/* Locations Grid */}

@@ -42,12 +42,17 @@ const wellnessServices = [
 export default function ServicesPage() {
   return (
     <main>
-      {/* Hero */}
+      {/* Hero - Split images showing therapy and wellness */}
       <PageHero
         eyebrow="Our Services"
         headline="Complete care for your whole self"
         subheadline="Therapy and wellness services working together for your well being"
         body="At Pathways Within, we offer a full range of mental health therapy and holistic wellness services. Our 360 degree approach means your care team can work together to support every aspect of your health."
+        variant="split"
+        images={[
+          { alt: 'Therapy services - comfortable counseling environment', placeholder: true },
+          { alt: 'Wellness services - spa and treatment room', placeholder: true }
+        ]}
       />
 
       {/* How It Works */}

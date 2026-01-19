@@ -30,6 +30,11 @@ export default function SomaticTherapyPage() {
         headline="Somatic therapy"
         subheadline="Healing through the body"
         body="Address trauma and tension held in the body through mind-body connection techniques. Somatic therapy recognizes that our bodies hold our experiences and offers a path to release and heal."
+        variant="split"
+        images={[
+          { alt: 'Mind-body connection in therapy', placeholder: true },
+          { alt: 'Peaceful movement and body awareness', placeholder: true }
+        ]}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

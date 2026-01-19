@@ -29,6 +29,10 @@ export default function WeightLossSurgerySupportPage() {
         headline="Weight loss surgery support"
         subheadline="Psychological care for your journey"
         body="Pre-operative evaluation and post-operative support for those pursuing bariatric surgery. We help you prepare mentally and emotionally for this significant life change."
+        variant="stacked"
+        images={[
+          { alt: 'Supportive counseling environment for weight loss journey', placeholder: true }
+        ]}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

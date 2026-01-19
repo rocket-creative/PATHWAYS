@@ -111,7 +111,7 @@ export default function StartPage() {
 
   return (
     <main ref={containerRef}>
-      {/* Hero - Emotional Hook */}
+      {/* Hero - Emotional Hook with mosaic images */}
       <section className="relative overflow-hidden bg-hero-gradient">
         <div className="container-site py-16 lg:py-24">
           {/* Logo - Left justified hero feature, links to home */}
@@ -128,40 +128,63 @@ export default function StartPage() {
             </Link>
           </div>
           
-          <div className="max-w-4xl">
-            <p 
-              className="animate-on-scroll mb-8 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]"
-              style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}
-            >
-              Long Island&apos;s Premier Therapy & Wellness Center
-            </p>
-            <h1 className="animate-on-scroll mb-8 text-white" style={{ transitionDelay: '100ms' }}>
-              You Deserve to Feel <span className="text-[rgb(var(--color-green))]">Whole</span> Again
-            </h1>
-            <p className="animate-on-scroll mb-8 max-w-2xl text-xl text-white/80" style={{ lineHeight: 1.8, transitionDelay: '200ms' }}>
-              Stop struggling alone. Our expert therapists and wellness professionals 
-              are ready to help you break free from anxiety, heal from trauma, and 
-              finally live the life you deserve.
-            </p>
-            <div className="animate-on-scroll flex flex-col items-start gap-5 sm:flex-row" style={{ transitionDelay: '300ms' }}>
-              <Link href="/contact" className="btn-pill btn-pill-green">
-                <span className="btn-text">Book Free Consultation</span>
-                <span className="btn-arrow">
-                  <ArrowRight />
-                </span>
-              </Link>
-              <a 
-                href="tel:+16313713825" 
-                className="group inline-flex items-center gap-3 rounded-full border border-white/30 px-7 py-4 text-white transition-all duration-300 hover:border-white/60 hover:bg-white/10"
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="max-w-xl lg:col-span-6">
+              <p 
+                className="animate-on-scroll mb-8 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]"
                 style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}
               >
-                <Phone className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
-                Call Now: (631) 371-3825
-              </a>
+                Long Island&apos;s Premier Therapy & Wellness Center
+              </p>
+              <h1 className="animate-on-scroll mb-8 text-white" style={{ transitionDelay: '100ms' }}>
+                You Deserve to Feel <span className="text-[rgb(var(--color-green))]">Whole</span> Again
+              </h1>
+              <p className="animate-on-scroll mb-8 text-xl text-white/80" style={{ lineHeight: 1.8, transitionDelay: '200ms' }}>
+                Stop struggling alone. Our expert therapists and wellness professionals 
+                are ready to help you break free from anxiety, heal from trauma, and 
+                finally live the life you deserve.
+              </p>
+              <div className="animate-on-scroll flex flex-col items-start gap-5 sm:flex-row" style={{ transitionDelay: '300ms' }}>
+                <Link href="/contact" className="btn-pill btn-pill-green">
+                  <span className="btn-text">Book Free Consultation</span>
+                  <span className="btn-arrow">
+                    <ArrowRight />
+                  </span>
+                </Link>
+                <a 
+                  href="tel:+16313713825" 
+                  className="group inline-flex items-center gap-3 rounded-full border border-white/30 px-7 py-4 text-white transition-all duration-300 hover:border-white/60 hover:bg-white/10"
+                  style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}
+                >
+                  <Phone className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
+                  Call Now: (631) 371-3825
+                </a>
+              </div>
+              <p className="animate-on-scroll mt-8 text-sm text-white/50" style={{ transitionDelay: '400ms' }}>
+                Insurance accepted • Same-week appointments available • No referral needed
+              </p>
             </div>
-            <p className="animate-on-scroll mt-8 text-sm text-white/50" style={{ transitionDelay: '400ms' }}>
-              Insurance accepted • Same-week appointments available • No referral needed
-            </p>
+            
+            {/* Mosaic image grid */}
+            <div className="hidden lg:col-span-6 lg:block">
+              <div className="animate-on-scroll grid grid-cols-3 gap-3" style={{ transitionDelay: '200ms' }}>
+                <div className="col-span-2 row-span-2">
+                  <div className="img-placeholder aspect-square rounded-lg opacity-90" />
+                </div>
+                <div>
+                  <div className="img-placeholder aspect-square rounded-lg opacity-80" />
+                </div>
+                <div>
+                  <div className="img-placeholder aspect-square rounded-lg opacity-80" />
+                </div>
+                <div className="col-span-2">
+                  <div className="img-placeholder aspect-[2/1] rounded-lg opacity-85" />
+                </div>
+                <div>
+                  <div className="img-placeholder aspect-square rounded-lg opacity-75" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         {/* Decorative gradient orbs */}

@@ -134,12 +134,19 @@ const therapyDogs = [
 export default function TeamPage() {
   return (
     <main>
-      {/* Hero */}
+      {/* Hero - Collage of team member photos */}
       <PageHero
         eyebrow="Our Team"
         headline="The people behind your care"
         subheadline="Licensed therapists, certified providers, and compassionate support staff"
         body="Our team brings together decades of combined experience in mental health, holistic wellness, and whole person care. Every member shares our commitment to creating a safe, judgment free space where you can heal and grow."
+        variant="collage"
+        images={[
+          { alt: 'Team member providing compassionate care', placeholder: true },
+          { alt: 'Therapist in session', placeholder: true },
+          { alt: 'Wellness provider at work', placeholder: true },
+          { alt: 'Team collaboration meeting', placeholder: true }
+        ]}
       />
 
       {/* Leadership */}

@@ -25,7 +25,19 @@ const relatedServices = [
 export default function HydrafacialPage() {
   return (
     <main>
-      <PageHero eyebrow="Wellness Services" headline="HydraFacial" subheadline="Immediate, visible results" body="Revolutionary skin rejuvenation that cleanses, exfoliates, extracts, and hydrates with immediate results. The HydraFacial is suitable for all skin types." />
+      <PageHero 
+        eyebrow="Wellness Services" 
+        headline="HydraFacial" 
+        subheadline="Immediate, visible results" 
+        body="Revolutionary skin rejuvenation that cleanses, exfoliates, extracts, and hydrates with immediate results. The HydraFacial is suitable for all skin types."
+        variant="collage"
+        images={[
+          { alt: 'HydraFacial treatment in progress', placeholder: true },
+          { alt: 'Before and after results', placeholder: true },
+          { alt: 'HydraFacial equipment and serums', placeholder: true },
+          { alt: 'Glowing skin after treatment', placeholder: true }
+        ]}
+      />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">

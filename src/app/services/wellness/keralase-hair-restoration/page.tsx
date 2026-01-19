@@ -24,7 +24,16 @@ const relatedServices = [
 export default function KeralaseHairRestorationPage() {
   return (
     <main>
-      <PageHero eyebrow="Wellness Services" headline="KeraLase hair restoration" subheadline="Revitalize your hair" body="Rejuvenate and revitalize your scalp with advanced laser technology for hair restoration. KeraLase promotes thicker, healthier hair growth." />
+      <PageHero 
+        eyebrow="Wellness Services" 
+        headline="KeraLase hair restoration" 
+        subheadline="Revitalize your hair" 
+        body="Rejuvenate and revitalize your scalp with advanced laser technology for hair restoration. KeraLase promotes thicker, healthier hair growth."
+        variant="minimal"
+        images={[
+          { alt: 'KeraLase hair restoration treatment', placeholder: true }
+        ]}
+      />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">

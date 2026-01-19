@@ -25,7 +25,17 @@ const relatedServices = [
 export default function AcupuncturePage() {
   return (
     <main>
-      <PageHero eyebrow="Wellness Services" headline="Acupuncture" subheadline="Ancient wisdom, modern healing" body="Traditional Chinese medicine to relieve pain, reduce stress, and promote overall well-being through balanced energy flow." />
+      <PageHero 
+        eyebrow="Wellness Services" 
+        headline="Acupuncture" 
+        subheadline="Ancient wisdom, modern healing" 
+        body="Traditional Chinese medicine to relieve pain, reduce stress, and promote overall well-being through balanced energy flow."
+        variant="overlapping"
+        images={[
+          { alt: 'Peaceful acupuncture treatment session', placeholder: true },
+          { alt: 'Traditional acupuncture needles and healing environment', placeholder: true }
+        ]}
+      />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">

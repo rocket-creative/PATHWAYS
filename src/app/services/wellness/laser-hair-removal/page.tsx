@@ -26,7 +26,16 @@ const relatedServices = [
 export default function LaserHairRemovalPage() {
   return (
     <main>
-      <PageHero eyebrow="Wellness Services" headline="Laser hair removal" subheadline="Smooth skin, permanently" body="Achieve smooth skin with permanent hair reduction using advanced laser technology. Say goodbye to shaving, waxing, and ingrown hairs." />
+      <PageHero 
+        eyebrow="Wellness Services" 
+        headline="Laser hair removal" 
+        subheadline="Smooth skin, permanently" 
+        body="Achieve smooth skin with permanent hair reduction using advanced laser technology. Say goodbye to shaving, waxing, and ingrown hairs."
+        variant="diagonal"
+        images={[
+          { alt: 'Advanced laser hair removal treatment', placeholder: true }
+        ]}
+      />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">

@@ -30,6 +30,10 @@ export default function TraumaTherapyPage() {
         headline="Trauma therapy"
         subheadline="Healing from difficult experiences"
         body="Heal from past experiences with specialized approaches including Cognitive Processing Therapy and trauma-informed care. Our trained therapists create a safe space for your healing journey."
+        variant="fullBleed"
+        images={[
+          { alt: 'Peaceful healing environment with soft natural light', placeholder: true }
+        ]}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">

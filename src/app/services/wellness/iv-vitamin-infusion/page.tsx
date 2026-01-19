@@ -25,7 +25,16 @@ const relatedServices = [
 export default function IVVitaminInfusionPage() {
   return (
     <main>
-      <PageHero eyebrow="Wellness Services" headline="IV vitamin infusion" subheadline="Nourish from within" body="Deliver essential nutrients directly to your bloodstream for energy, immunity, mental clarity, and recovery." />
+      <PageHero 
+        eyebrow="Wellness Services" 
+        headline="IV vitamin infusion" 
+        subheadline="Nourish from within" 
+        body="Deliver essential nutrients directly to your bloodstream for energy, immunity, mental clarity, and recovery."
+        variant="stacked"
+        images={[
+          { alt: 'Comfortable IV therapy lounge', placeholder: true }
+        ]}
+      />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">

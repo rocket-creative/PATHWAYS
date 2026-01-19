@@ -26,7 +26,18 @@ const relatedServices = [
 export default function PermanentMakeupPage() {
   return (
     <main>
-      <PageHero eyebrow="Wellness Services" headline="Permanent makeup" subheadline="Wake up beautiful" body="Enhance your natural beauty with microblading, lip liner, and other permanent cosmetic services. Save time on your daily routine with long-lasting results." />
+      <PageHero 
+        eyebrow="Wellness Services" 
+        headline="Permanent makeup" 
+        subheadline="Wake up beautiful" 
+        body="Enhance your natural beauty with microblading, lip liner, and other permanent cosmetic services. Save time on your daily routine with long-lasting results."
+        variant="carousel"
+        images={[
+          { alt: 'Beautiful microblading results', placeholder: true },
+          { alt: 'Lip blushing treatment', placeholder: true },
+          { alt: 'Permanent eyeliner application', placeholder: true }
+        ]}
+      />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">

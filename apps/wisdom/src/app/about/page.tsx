@@ -30,6 +30,7 @@ export default function AboutPage() {
         subheadline="Where healing honors the whole person"
         body="Since 2018, Pathways Within has offered integrated therapy and wellness services across Long Island. We believe true healing addresses mind, body, and spirit together."
         site="main"
+        layout="overlapping"
         imageClass="img-placeholder-gradient"
       />
 

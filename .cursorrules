@@ -1,0 +1,63 @@
+# Pathways Within - Cursor Rules
+
+## Design System (MANDATORY)
+
+All UI code MUST follow the Pathways Within design system defined in `/docs/DESIGN-SYSTEM.md`.
+
+### Color Rules
+
+**ALLOWED COLORS ONLY:**
+- `navy-*` - Primary dark color (headings, text, dark backgrounds)
+- `green-*` - Accent color (CTAs, success, active states)
+- `breezy-*` - Light blue (info, pending states)
+- `cream-*` - Light backgrounds
+- `linen-*` - Borders, subtle backgrounds
+- `white` - Card surfaces
+
+**BANNED COLORS (DO NOT USE):**
+- `sage-*` - FORBIDDEN
+- `amber-*` - FORBIDDEN  
+- `yellow-*` - FORBIDDEN
+- `orange-*` - FORBIDDEN
+- `stone-*` - FORBIDDEN (use navy/linen instead)
+
+### Brand Colors (Hex)
+- Navy: #01153D
+- Green: #72A23B
+- Breezy: #86A8E1
+- Cream: #FAF9F7
+- Linen: #F5F4F2
+
+### Typography
+- Headings: Clarendon (serif), semibold, text-navy
+- Body: Raleway (sans), regular, text-navy or text-navy-400
+- Only 2 font weights: 400 (regular) and 600 (semibold)
+
+### Component Patterns
+- Primary buttons: `bg-green text-white rounded-full`
+- Secondary buttons: `bg-navy text-white rounded-lg`
+- Cards: `bg-white rounded-lg border border-linen-300 shadow-sm`
+- Focus states: `ring-green-500`
+- Dark sidebar: `bg-gradient-to-b from-navy-900 via-navy to-navy-950`
+- Active nav: `bg-gradient-to-r from-green-500 to-green-600 shadow-lg shadow-green/20`
+
+### Before Writing UI Code
+1. Check `/docs/DESIGN-SYSTEM.md` for patterns
+2. Use only allowed colors
+3. Follow established component patterns
+4. Verify no banned colors are introduced
+
+## Project Structure
+
+- `/apps/main` - Main marketing site
+- `/apps/wisdom` - Therapy services site
+- `/apps/wellness` - Wellness services site  
+- `/apps/crm` - Internal CRM dashboard
+- `/packages/ui` - Shared UI components
+- `/docs` - Documentation
+
+## Production URLs
+
+- Wisdom: https://wisdom-eight-topaz.vercel.app
+- CRM: https://crm-sooty-one.vercel.app
+- Wellness: (update when deployed)

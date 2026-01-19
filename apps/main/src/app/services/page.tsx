@@ -51,6 +51,7 @@ export default function ServicesPage() {
         subheadline="Therapy and wellness services working together for your well being"
         body="At Pathways Within, we offer a full range of mental health therapy and holistic wellness services. Our 360 degree approach means your care team can work together to support every aspect of your health."
         site="main"
+        imageStyle="split"
       />
 
       {/* How It Works */}

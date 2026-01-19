@@ -34,6 +34,7 @@ export default function WellnessServicesPage() {
         headline="Treatments for body, beauty, and balance"
         body="Our certified wellness practitioners offer a comprehensive range of services to help you look and feel your best."
         site="wellness"
+        imageClass="img-placeholder-split"
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

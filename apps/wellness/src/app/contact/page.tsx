@@ -30,6 +30,7 @@ export default function ContactPage() {
         subheadline="We're here to help"
         body="Whether you have questions about our services or are ready to schedule your first appointment, we are here to support you every step of the way."
         site="main"
+        imageClass="img-placeholder-dark"
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

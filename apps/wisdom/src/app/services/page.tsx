@@ -29,6 +29,7 @@ export default function TherapyServicesPage() {
         headline="Mental health support for every stage of life"
         body="Our licensed therapists offer a range of evidence-based approaches to help you heal, grow, and thrive."
         site="wisdom"
+        imageClass="img-placeholder-split"
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

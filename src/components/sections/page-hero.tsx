@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowDown } from 'lucide-react'
-// Placeholder images used
+import { HERO_IMAGES, getRandomImage } from '@/lib/hero-images'
 
 /**
  * Page Hero - Reusable hero for inner pages with varied layouts and heights
@@ -121,11 +121,13 @@ function ImagePlaceholder({ className, alt, style = 'default' }: { className?: s
 
 // Actual image or placeholder
 function HeroImage({ image, className, imageStyle = 'default' }: { image: HeroImage; className?: string; imageStyle?: string }) {
-  // Use office image if placeholder is true or no src provided
+  // Use a hero image if placeholder is true or no src provided
   if (image.placeholder || !image.src) {
+    // Use a random hero image from the library
+    const fallbackSrc = getRandomImage(HERO_IMAGES.all)
     return (
       <Image
-        src={"/placeholder-grey.svg"}
+        src={fallbackSrc}
         alt={image.alt}
         fill
         className={`object-cover ${className || ''}`}

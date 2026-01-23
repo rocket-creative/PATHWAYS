@@ -5,7 +5,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
-// Placeholder images used
+import { HERO_IMAGES } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'Individual Therapy on Long Island | Pathways Within',
@@ -51,7 +51,7 @@ export default function IndividualTherapyPage() {
         body="Individual therapy is classic counseling where you work with a trained professional to explore the roots of your symptoms and gain greater self awareness. The goal is to give you the tools to live a more meaningful life."
         variant="default"
         size="sm"
-        image={{ alt: 'Comfortable therapy session in a warm, private setting', placeholder: true }}
+        image={{ src: HERO_IMAGES.individualTherapy[0], alt: 'Person in peaceful reflection' }}
       />
 
       {/* About Section */}
@@ -80,7 +80,7 @@ export default function IndividualTherapyPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div className="relative aspect-[3/2] w-full overflow-hidden border-8 border-black">
               <Image
-                src={"/placeholder-grey.svg"}
+                src={HERO_IMAGES.individualTherapy[1]}
                 alt="Therapy session at Pathways Within"
                 fill
                 className="object-cover"

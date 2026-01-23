@@ -59,7 +59,7 @@ export const CTA_IMAGES = [
 ] as const
 
 // ============================================================================
-// ALL HERO IMAGES (includes both old and new)
+// ALL HERO IMAGES
 // ============================================================================
 
 export const ALL_HERO_IMAGES = [
@@ -71,9 +71,6 @@ export const ALL_HERO_IMAGES = [
   ...TEAM_IMAGES,
   ...CTA_IMAGES,
 ] as const
-
-// Legacy array for backwards compatibility
-export const HERO_IMAGES = ALL_HERO_IMAGES
 
 // ============================================================================
 // HELPER FUNCTIONS
@@ -87,24 +84,10 @@ export function getHomepageHeroImage(): string {
 }
 
 /**
- * Get a random hero image
- */
-export function getRandomHeroImage(): string {
-  return ALL_HERO_IMAGES[Math.floor(Math.random() * ALL_HERO_IMAGES.length)] ?? ALL_HERO_IMAGES[0]
-}
-
-/**
  * Get a random image from a category
  */
 export function getRandomImage(images: readonly string[]): string {
   return images[Math.floor(Math.random() * images.length)] ?? images[0]
-}
-
-/**
- * Get a hero image by index (for consistent placement)
- */
-export function getHeroImageByIndex(index: number): string {
-  return ALL_HERO_IMAGES[index % ALL_HERO_IMAGES.length] ?? ALL_HERO_IMAGES[0]
 }
 
 /**
@@ -115,16 +98,9 @@ export function getImageByIndex(images: readonly string[], index: number): strin
 }
 
 /**
- * Get all hero images
- */
-export function getAllHeroImages(): readonly string[] {
-  return ALL_HERO_IMAGES
-}
-
-/**
  * Image categories for easy access
  */
-export const HERO_IMAGE_CATEGORIES = {
+export const HERO_IMAGES = {
   homepage: HOMEPAGE_HERO_IMAGES,
   individualTherapy: INDIVIDUAL_THERAPY_IMAGES,
   couplesTherapy: COUPLES_THERAPY_IMAGES,

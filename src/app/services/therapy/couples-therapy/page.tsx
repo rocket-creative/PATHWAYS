@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
-// Placeholder images used
+import { HERO_IMAGES } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'Couples Therapy on Long Island | Pathways Within',
@@ -33,7 +33,7 @@ export default function CouplesTherapyPage() {
         body="Strengthen your connection with your partner through improved communication and conflict resolution. We specialize in the Gottman Method to help couples build stronger, healthier relationships."
         variant="offset"
         size="sm"
-        image={{ alt: 'Couple in a supportive therapy session', placeholder: true }}
+        image={{ src: HERO_IMAGES.couplesTherapy[0], alt: 'Couple holding hands, showing trust and connection' }}
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
@@ -60,8 +60,8 @@ export default function CouplesTherapyPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div className="relative aspect-[3/2] w-full overflow-hidden border-8 border-black">
               <Image
-                src={"/placeholder-grey.svg"}
-                alt="Couples therapy session at Pathways Within"
+                src={HERO_IMAGES.familyTherapy[0]}
+                alt="Family connection and support"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

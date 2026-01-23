@@ -6,6 +6,7 @@ import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
 import { PLACEHOLDER_IMAGE } from '@/lib/placeholder-image'
+import { HERO_IMAGES } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'About Us | Pathways Within',
@@ -37,7 +38,7 @@ export default function AboutPage() {
         body="At Pathways Within, we believe true healing happens when we care for the whole person. Our 360 degree approach brings together mental health therapy and holistic wellness services in one collaborative environment."
         variant="offset"
         size="md"
-        image={{ alt: 'Peaceful therapy and wellness environment', placeholder: true }}
+        image={{ src: HERO_IMAGES.homepage[1], alt: 'Diverse group representing the Pathways Within community' }}
         imageStyle="gradient"
       />
 
@@ -251,7 +252,7 @@ export default function AboutPage() {
             <div>
               <div className="relative aspect-[3/2] overflow-hidden shadow-md">
                 <Image
-                  src={"/placeholder-grey.svg"}
+                  src={HERO_IMAGES.homepage[0]}
                   alt="Pathways Within community"
                   fill
                   className="object-cover"

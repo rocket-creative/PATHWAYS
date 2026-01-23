@@ -1,49 +1,136 @@
 /**
- * Hero Images - AI-generated diverse people photos for hero sections
- * These are large, impressive photos meant for hero banners
+ * Hero Images - Professional studio photos for hero sections
+ * These are the new 3:4 portrait images with white backgrounds
  */
 
-// All hero images - diverse people, couples, families, groups
-export const HERO_IMAGES = [
-  '/hero-images/freepik__a-diverse-group-of-smiling-adults-east-asian-femal__72299.jpeg',
-  '/hero-images/freepik__a-group-of-smiling-adults-of-various-ethnicities-i__72292.jpeg',
-  '/hero-images/freepik__a-diverse-group-of-three-young-adults-two-women-an__72250.jpeg',
-  '/hero-images/freepik__a-black-couple-in-their-late-30s-holding-hands-and__72251.jpeg',
-  '/hero-images/freepik__a-latina-woman-and-a-white-man-a-straight-couple-w__72281.jpeg',
-  '/hero-images/freepik__a-latino-couple-a-man-and-woman-in-their-30s-with-__72268.jpeg',
-  '/hero-images/freepik__a-mixedrace-couple-one-black-and-one-east-asian-in__72275.jpeg',
-  '/hero-images/freepik__two-east-asian-women-a-lesbian-couple-beaming-with__72286.jpeg',
-  '/hero-images/freepik__a-mixedrace-family-of-four-parents-and-two-childre__72248.jpeg',
-  '/hero-images/freepik__a-latino-family-of-four-parents-and-two-children-o__72266.jpeg',
-  '/hero-images/freepik__a-studio-shot-featuring-a-diverse-family-of-five-p__72245.jpeg',
-  '/hero-images/freepik__a-multigenerational-black-family-of-three-includin__72259.jpeg',
-  '/hero-images/freepik__a-group-of-three-friends-one-hispanic-woman-and-tw__72246.jpeg',
-  '/hero-images/freepik__a-diverse-group-of-three-indian-people-including-a__72272.jpeg',
-  '/hero-images/freepik__four-adults-two-men-and-two-women-of-diverse-desce__72293.jpeg',
-  '/hero-images/freepik__a-mixedgender-group-of-adults-including-a-latina-w__72297.jpeg',
-  '/hero-images/freepik__a-caucasian-family-of-four-parents-and-two-childre__72254.jpeg',
-  '/hero-images/freepik__two-young-adult-latino-men-one-with-a-shaved-head-__72263.jpeg',
-  '/hero-images/freepik__a-mixedage-group-of-3-black-individuals-a-family-p__72258.jpeg',
-  '/hero-images/freepik__a-studio-shot-of-two-latino-women-one-in-her-40s-w__72267.jpeg',
+// ============================================================================
+// HOMEPAGE HERO - Diverse groups, warm and welcoming
+// ============================================================================
+
+export const HOMEPAGE_HERO_IMAGES = [
+  '/hero-images/freepik__professional-studio-photograph-of-4-diverse-smilin__19260.jpeg',
+  '/hero-images/freepik__professional-studio-photograph-of-23-diverse-profe__19266.jpeg',
 ] as const
+
+// ============================================================================
+// THERAPY IMAGES
+// ============================================================================
+
+/** Individual therapy - single person, reflective, peaceful */
+export const INDIVIDUAL_THERAPY_IMAGES = [
+  '/hero-images/freepik__professional-studio-photograph-of-a-woman-with-pea__19264.jpeg',
+  '/hero-images/freepik__professional-studio-portrait-of-one-person-30s40s-__19267.jpeg',
+  '/hero-images/freepik__professional-studio-portrait-of-one-person-woman-o__19262.jpeg',
+  '/hero-images/freepik__professional-studio-portrait-of-a-person-diverse-w__19265.jpeg',
+] as const
+
+/** Couples therapy - two people, connection, trust */
+export const COUPLES_THERAPY_IMAGES = [
+  '/hero-images/freepik__professional-studio-photograph-of-a-couple-any-com__19261.jpeg',
+] as const
+
+/** Family therapy - parent + child/teen */
+export const FAMILY_THERAPY_IMAGES = [
+  '/hero-images/freepik__professional-studio-photograph-of-a-parent-and-tee__19263.jpeg',
+] as const
+
+// ============================================================================
+// WELLNESS IMAGES
+// ============================================================================
+
+export const WELLNESS_IMAGES = [
+  '/hero-images/freepik__professional-studio-photograph-of-subject-descript__19259.jpeg',
+] as const
+
+// ============================================================================
+// ABOUT / TEAM IMAGES
+// ============================================================================
+
+export const TEAM_IMAGES = [
+  '/hero-images/freepik__professional-studio-photograph-of-a-small-group-34__19268.jpeg',
+] as const
+
+// ============================================================================
+// GETTING STARTED / CTA IMAGES
+// ============================================================================
+
+export const CTA_IMAGES = [
+  '/hero-images/freepik__professional-studio-photograph-of-a-person-standin__19269.jpeg',
+] as const
+
+// ============================================================================
+// ALL HERO IMAGES (includes both old and new)
+// ============================================================================
+
+export const ALL_HERO_IMAGES = [
+  ...HOMEPAGE_HERO_IMAGES,
+  ...INDIVIDUAL_THERAPY_IMAGES,
+  ...COUPLES_THERAPY_IMAGES,
+  ...FAMILY_THERAPY_IMAGES,
+  ...WELLNESS_IMAGES,
+  ...TEAM_IMAGES,
+  ...CTA_IMAGES,
+] as const
+
+// Legacy array for backwards compatibility
+export const HERO_IMAGES = ALL_HERO_IMAGES
+
+// ============================================================================
+// HELPER FUNCTIONS
+// ============================================================================
+
+/**
+ * Get the primary homepage hero image
+ */
+export function getHomepageHeroImage(): string {
+  return HOMEPAGE_HERO_IMAGES[0]
+}
 
 /**
  * Get a random hero image
  */
 export function getRandomHeroImage(): string {
-  return HERO_IMAGES[Math.floor(Math.random() * HERO_IMAGES.length)] ?? HERO_IMAGES[0]!
+  return ALL_HERO_IMAGES[Math.floor(Math.random() * ALL_HERO_IMAGES.length)] ?? ALL_HERO_IMAGES[0]
+}
+
+/**
+ * Get a random image from a category
+ */
+export function getRandomImage(images: readonly string[]): string {
+  return images[Math.floor(Math.random() * images.length)] ?? images[0]
 }
 
 /**
  * Get a hero image by index (for consistent placement)
  */
 export function getHeroImageByIndex(index: number): string {
-  return HERO_IMAGES[index % HERO_IMAGES.length] ?? HERO_IMAGES[0]!
+  return ALL_HERO_IMAGES[index % ALL_HERO_IMAGES.length] ?? ALL_HERO_IMAGES[0]
+}
+
+/**
+ * Get an image by index (for consistent placement)
+ */
+export function getImageByIndex(images: readonly string[], index: number): string {
+  return images[index % images.length] ?? images[0]
 }
 
 /**
  * Get all hero images
  */
 export function getAllHeroImages(): readonly string[] {
-  return HERO_IMAGES
+  return ALL_HERO_IMAGES
 }
+
+/**
+ * Image categories for easy access
+ */
+export const HERO_IMAGE_CATEGORIES = {
+  homepage: HOMEPAGE_HERO_IMAGES,
+  individualTherapy: INDIVIDUAL_THERAPY_IMAGES,
+  couplesTherapy: COUPLES_THERAPY_IMAGES,
+  familyTherapy: FAMILY_THERAPY_IMAGES,
+  wellness: WELLNESS_IMAGES,
+  team: TEAM_IMAGES,
+  cta: CTA_IMAGES,
+  all: ALL_HERO_IMAGES,
+} as const

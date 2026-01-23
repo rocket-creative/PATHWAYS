@@ -165,14 +165,16 @@ Professional studio photograph of a person standing confidently, turning slightl
 ✅ Ensure good diversity (age, ethnicity, body type)  
 ✅ Check that clothing colors feel harmonious but not identical  
 ✅ Look for genuine expressions, not forced smiles  
-✅ Choose images with good negative space for text overlay  
+✅ **Verify pure white background (no grey, no gradients)**  
+✅ **Confirm NO text, watermarks, or graphics in image**  
 
 ### DON'T:
 ❌ Use images where everyone wears the exact same color  
 ❌ Pick overly posed or stock-photo-feeling images  
-❌ Choose images with busy or distracting backgrounds  
+❌ **Choose images with ANY background other than pure white**  
 ❌ Use images with harsh lighting or heavy shadows  
 ❌ Select images that feel too corporate or clinical  
+❌ **Use images with ANY text, logos, or watermarks**  
 
 ---
 
@@ -210,11 +212,17 @@ Place in: `/public/hero-images/`
 | **Aspect Ratio** | 3:4 Portrait |
 | **Dimensions** | 1200×1600px minimum |
 | **Total Images** | 10-15 (5 minimum) |
+| **Background** | **PURE WHITE** (no grey, no gradients) |
+| **Text** | **NONE** (no text, no watermarks, no logos) |
 | **Color Theme** | Earth tones: cream, beige, sage, taupe, dusty rose |
-| **Style** | Editorial, warm, authentic, professional |
+| **Style** | Clean, bright, editorial, studio quality |
 | **Vibe** | Welcoming community, NOT matching cult uniforms |
 
-**Key Phrase to Include:** "coordinated but not matching earth tones" or "harmonious but varied neutral clothing"
+**Key Phrases to ALWAYS Include:**
+- "PURE WHITE BACKGROUND"
+- "NO TEXT, NO GRAPHICS, NO WATERMARKS"
+- "Bright even studio lighting"
+- "coordinated but not matching earth tones"
 
 ---
 

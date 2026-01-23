@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ArrowDown } from 'lucide-react'
-// Placeholder images used
+import { getHomepageHeroImage } from '@/lib/hero-images'
 
 /**
  * Hero Section - Editorial asymmetric layout with single tall image
@@ -69,8 +69,8 @@ export function HeroSection() {
             {/* Main hero image - full vertical height */}
             <div className="relative h-full w-full overflow-hidden lg:absolute lg:inset-0">
               <Image
-                src="/placeholder-grey.svg"
-                alt="Pathways Within community"
+                src={getHomepageHeroImage()}
+                alt="Diverse group of people representing the Pathways Within community"
                 fill
                 className="object-cover object-center"
                 sizes="(max-width: 1024px) 100vw, 50vw"

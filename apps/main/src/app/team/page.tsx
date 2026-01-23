@@ -78,7 +78,7 @@ export default function TeamPage() {
                     src={getOfficeImageByIndex(index)}
                     alt={`Photo of ${member.name}`}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
@@ -121,7 +121,7 @@ export default function TeamPage() {
                     src={getOfficeImageByIndex(clinicians.length + index)}
                     alt={`Photo of ${member.name}`}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
@@ -165,7 +165,7 @@ export default function TeamPage() {
                     src={getOfficeImageByIndex(clinicians.length + wellnessProviders.length + index)}
                     alt={`Photo of ${dog.name}`}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="192px"
                   />
                 </div>

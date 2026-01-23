@@ -185,7 +185,7 @@ export default function TeamPage() {
                   src={getHeadshotForPerson(person.name, index)}
                   alt={person.name}
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
@@ -233,7 +233,7 @@ export default function TeamPage() {
                     src={getHeadshotForPerson(person.name, index)}
                     alt={person.name}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
@@ -271,7 +271,7 @@ export default function TeamPage() {
                     src={getHeadshotForPerson(person.name, index)}
                     alt={person.name}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
                 </div>
@@ -306,7 +306,7 @@ export default function TeamPage() {
                     src={getHeadshotForPerson(person.name, index)}
                     alt={person.name}
                     fill
-                    className="object-cover"
+                    className="object-cover object-top"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   />
                 </div>

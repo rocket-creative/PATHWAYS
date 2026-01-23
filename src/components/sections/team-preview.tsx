@@ -30,7 +30,7 @@ export function TeamPreview() {
               <div className="space-y-4">
                 <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                   <Image
-                    src={getHeroImageByIndex(0)}
+                    src={getHeroImageByIndex(12)}
                     alt="Pathways Within community"
                     fill
                     className="object-cover"
@@ -39,7 +39,7 @@ export function TeamPreview() {
                 </div>
                 <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                   <Image
-                    src={getHeroImageByIndex(1)}
+                    src={getHeroImageByIndex(13)}
                     alt="Pathways Within community"
                     fill
                     className="object-cover"
@@ -50,7 +50,7 @@ export function TeamPreview() {
               <div className="mt-12 space-y-4">
                 <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                   <Image
-                    src={getHeroImageByIndex(2)}
+                    src={getHeroImageByIndex(10)}
                     alt="Pathways Within community"
                     fill
                     className="object-cover"
@@ -59,7 +59,7 @@ export function TeamPreview() {
                 </div>
                 <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                   <Image
-                    src={getHeroImageByIndex(3)}
+                    src={getHeroImageByIndex(11)}
                     alt="Pathways Within community"
                     fill
                     className="object-cover"

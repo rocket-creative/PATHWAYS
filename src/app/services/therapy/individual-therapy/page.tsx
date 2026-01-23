@@ -80,7 +80,7 @@ export default function IndividualTherapyPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
               <Image
-                src={getHeroImageByIndex(0)}
+                src={getHeroImageByIndex(6)}
                 alt="Therapy session at Pathways Within"
                 fill
                 className="object-cover"

@@ -55,7 +55,7 @@ export default function MassagePage() {
             </div>
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
               <Image
-                src={getHeroImageByIndex(0)}
+                src={getHeroImageByIndex(16)}
                 alt="Massage therapy at Pathways Within"
                 fill
                 className="object-cover"

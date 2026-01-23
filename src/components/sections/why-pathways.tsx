@@ -33,8 +33,8 @@ export function WhyPathways() {
           >
             <div className="relative aspect-[3/2] w-full overflow-hidden">
               <Image
-                src={getHeroImageByIndex(0)}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(15)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

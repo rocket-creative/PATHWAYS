@@ -171,7 +171,7 @@ export default function StartPage() {
               <div className="animate-on-scroll" style={{ transitionDelay: '200ms' }}>
                 <div className="relative aspect-[4/5] w-full max-w-[440px] overflow-hidden rounded-lg shadow-2xl lg:aspect-[3/4]">
                   <Image
-                    src={getHeroImageByIndex(0)}
+                    src={getHeroImageByIndex(4)}
                     alt="Pathways Within community"
                     fill
                     className="object-cover object-right"

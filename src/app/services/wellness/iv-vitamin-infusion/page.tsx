@@ -43,7 +43,7 @@ export default function IVVitaminInfusionPage() {
             <div><p className="mb-4 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>About</p><h2 className="text-[rgb(var(--color-navy))]">Maximum absorption</h2></div>
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
               <Image
-                src={getHeroImageByIndex(0)}
+                src={getHeroImageByIndex(16)}
                 alt="Pathways Within office"
                 fill
                 className="object-cover"

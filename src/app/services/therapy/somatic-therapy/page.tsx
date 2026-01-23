@@ -61,7 +61,7 @@ export default function SomaticTherapyPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
               <Image
-                src={getHeroImageByIndex(0)}
+                src={getHeroImageByIndex(12)}
                 alt="Somatic therapy at Pathways Within"
                 fill
                 className="object-cover"

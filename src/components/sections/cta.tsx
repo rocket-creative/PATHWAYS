@@ -75,8 +75,8 @@ export function CTASection() {
           >
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
               <Image
-                src={getHeroImageByIndex(0)}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(2)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

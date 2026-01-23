@@ -64,8 +64,8 @@ export function ServicesOverview() {
           <div className="hidden lg:col-span-2 lg:col-start-11 lg:block">
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
               <Image
-                src={getHeroImageByIndex(0)}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(14)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 0vw, 16vw"

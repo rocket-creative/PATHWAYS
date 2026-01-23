@@ -2,8 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Mail, Phone, Clock, MapPin, AlertTriangle, MessageCircle, Check } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { getRandomOfficeImage } from '@/lib/office-images'
 
 const locations = [
   { name: 'Garden City', address: '520 Franklin Ave, Suite L1', city: 'Garden City, NY 11530' },
@@ -400,8 +402,15 @@ export default function ContactPage() {
                 After you reach out, a member of our team will contact you within one business day to discuss your needs and answer any questions. There is no pressure and no obligation. This is simply a conversation to help you decide if Pathways Within is right for you.
               </p>
               
-              {/* Image placeholder */}
-              <div className="img-placeholder aspect-[4/3] rounded-lg" />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                <Image
+                  src={getRandomOfficeImage()}
+                  alt="Pathways Within office"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
             </div>
             <div className="space-y-6">
               <div className="flex gap-4">

@@ -2,8 +2,10 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, ChevronDown, Phone, MessageCircle, AlertTriangle } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { getRandomOfficeImage } from '@/lib/office-images'
 
 const faqCategories = [
   {
@@ -140,7 +142,15 @@ export default function FAQPage() {
             <div className="lg:col-span-1">
               <nav className="sticky top-32">
                 {/* Small decorative image */}
-                <div className="img-placeholder mb-8 aspect-square rounded-lg" />
+                <div className="relative mb-8 aspect-square overflow-hidden rounded-lg">
+                  <Image
+                    src={getRandomOfficeImage()}
+                    alt="Pathways Within"
+                    fill
+                    className="object-cover"
+                    sizes="300px"
+                  />
+                </div>
                 
                 <p 
                   className="mb-4 text-xs uppercase tracking-widest text-[rgb(var(--color-text-light))]"

@@ -1,9 +1,11 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Heart, Users, Sparkles, Shield } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
+import { getOfficeImageByIndex } from '@/lib/office-images'
 
 export const metadata: Metadata = {
   title: 'About Us | Pathways Within',
@@ -247,7 +249,15 @@ export default function AboutPage() {
         <div className="container-site py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div>
-              <div className="img-placeholder aspect-[4/5]" />
+              <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
+                <Image
+                  src={getOfficeImageByIndex(0)}
+                  alt="Pathways Within office"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
             </div>
             <div className="flex flex-col justify-center">
               <p 
@@ -296,10 +306,17 @@ export default function AboutPage() {
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-4">
-              <div className="img-placeholder aspect-square" />
-              <div className="img-placeholder aspect-square" />
-              <div className="img-placeholder aspect-square" />
-              <div className="img-placeholder aspect-square" />
+              {[1, 2, 3, 4].map((index) => (
+                <div key={index} className="relative aspect-square overflow-hidden rounded-lg">
+                  <Image
+                    src={getOfficeImageByIndex(index)}
+                    alt={`Pathways Within office ${index}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>

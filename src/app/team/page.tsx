@@ -1,9 +1,11 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
+import { getOfficeImageByIndex } from '@/lib/office-images'
 
 export const metadata: Metadata = {
   title: 'Meet Our Team | Pathways Within',
@@ -177,7 +179,15 @@ export default function TeamPage() {
           
           {leadership.map((person) => (
             <div key={person.name} className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-              <div className="img-placeholder aspect-[4/5]" />
+              <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
+                <Image
+                  src={getOfficeImageByIndex(0)}
+                  alt={person.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
               <div className="flex flex-col justify-center">
                 <h3 className="mb-2 text-[rgb(var(--color-navy))]">{person.name}</h3>
                 <p 
@@ -215,9 +225,17 @@ export default function TeamPage() {
           </div>
           
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {clinicalTeam.map((person) => (
+            {clinicalTeam.map((person, index) => (
               <div key={person.name} className="group">
-                <div className="img-placeholder mb-6 aspect-square" />
+                <div className="relative mb-6 aspect-square overflow-hidden rounded-lg">
+                  <Image
+                    src={getOfficeImageByIndex(index + 1)}
+                    alt={person.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
                 <h3 className="mb-2 text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>{person.name}</h3>
                 <p className="mb-4 text-sm text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.7 }}>
                   {person.bio}
@@ -245,9 +263,17 @@ export default function TeamPage() {
           </div>
           
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {associateTeam.map((person) => (
+            {associateTeam.map((person, index) => (
               <div key={person.name} className="rounded-lg bg-white p-6">
-                <div className="img-placeholder mb-4 aspect-square" />
+                <div className="relative mb-4 aspect-square overflow-hidden rounded-lg">
+                  <Image
+                    src={getOfficeImageByIndex(index)}
+                    alt={person.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                </div>
                 <h3 className="mb-2 text-sm text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>{person.name}</h3>
                 <p className="text-xs text-[rgb(var(--color-text-light))]/70">
                   {person.specialties.join(' • ')}
@@ -272,9 +298,17 @@ export default function TeamPage() {
           </div>
           
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {wellnessTeam.map((person) => (
+            {wellnessTeam.map((person, index) => (
               <div key={person.name}>
-                <div className="img-placeholder mb-6 aspect-square" />
+                <div className="relative mb-6 aspect-square overflow-hidden rounded-lg">
+                  <Image
+                    src={getOfficeImageByIndex(index)}
+                    alt={person.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                </div>
                 <h3 className="mb-1 text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>{person.name}</h3>
                 <p 
                   className="mb-3 text-xs uppercase tracking-wider text-[rgb(var(--color-green))]"
@@ -308,9 +342,17 @@ export default function TeamPage() {
           </div>
           
           <div className="mx-auto grid max-w-4xl gap-12 md:grid-cols-2">
-            {therapyDogs.map((dog) => (
+            {therapyDogs.map((dog, index) => (
               <div key={dog.name} className="text-center">
-                <div className="img-placeholder mx-auto mb-6 aspect-square max-w-xs rounded-full" />
+                <div className="relative mx-auto mb-6 aspect-square max-w-xs overflow-hidden rounded-full">
+                  <Image
+                    src={getOfficeImageByIndex(index)}
+                    alt={dog.name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
                 <h3 className="mb-3 text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>{dog.name}</h3>
                 <p className="text-sm text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.7 }}>
                   {dog.bio}

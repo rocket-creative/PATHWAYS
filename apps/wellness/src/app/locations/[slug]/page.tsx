@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { MapPin, Phone, Clock, Car, ArrowRight, Check, Video } from 'lucide-react'
 import { PageHero, JsonLd, createBreadcrumbSchema } from '@pathways/ui'
 import { createMedicalClinicSchema } from '@pathways/ui/lib/medical-schema'
-import { getOfficeImageByIndex } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 const siteUrl = process.env.NEXT_PUBLIC_MAIN_URL || 'http://localhost:3000'
 
@@ -336,7 +336,7 @@ export default async function LocationPage({ params }: PageProps) {
       <section className="border-t border-[rgb(var(--border))]/50">
         <div className="relative aspect-[3/2] overflow-hidden">
           <Image
-            src={getOfficeImageByIndex(0)}
+            src={getHeroImageByIndex(0)}
             alt={`Map of ${location.name} office location`}
             fill
             className="object-cover"

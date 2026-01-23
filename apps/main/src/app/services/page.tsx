@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Brain, Leaf, Heart, Sparkles, Shield, Sun } from 'lucide-react'
 import { PageHero, SITE_CONFIG } from '@pathways/ui'
-import { getOfficeImageByIndex } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'Therapy and Wellness Services | Pathways Within',
@@ -121,7 +121,7 @@ export default function ServicesPage() {
           <div className="mb-12 grid gap-8 lg:grid-cols-2">
             <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
               <Image
-                src={getOfficeImageByIndex(0)}
+                src={getHeroImageByIndex(0)}
                 alt="Pathways Within office"
                 fill
                 className="object-cover"
@@ -130,7 +130,7 @@ export default function ServicesPage() {
             </div>
             <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
               <Image
-                src={getOfficeImageByIndex(1)}
+                src={getHeroImageByIndex(1)}
                 alt="Pathways Within office"
                 fill
                 className="object-cover"

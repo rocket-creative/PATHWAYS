@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Heart, Users, Shield, Sparkles } from 'lucide-react'
 import { PageHero, JsonLd, createOrganizationSchema, createBreadcrumbSchema } from '@pathways/ui'
-import { getOfficeImageByIndex } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'About us',
@@ -64,7 +64,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="relative aspect-[3/2] overflow-hidden">
                 <Image
-                  src={getOfficeImageByIndex(0)}
+                  src={getHeroImageByIndex(0)}
                   alt="Team photo placeholder"
                   fill
                   className="object-cover"

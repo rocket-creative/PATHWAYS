@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
-import { getRandomOfficeImage } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'Couples Therapy on Long Island | Pathways Within',
@@ -60,7 +60,7 @@ export default function CouplesTherapyPage() {
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
               <Image
-                src={getRandomOfficeImage()}
+                src={getHeroImageByIndex(0)}
                 alt="Couples therapy session at Pathways Within"
                 fill
                 className="object-cover"

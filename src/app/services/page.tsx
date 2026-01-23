@@ -5,7 +5,7 @@ import { ArrowRight, Brain, Leaf, Heart, Sparkles, Shield, Sun } from 'lucide-re
 import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
-import { getOfficeImageByIndex } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'Therapy and Wellness Services | Pathways Within',
@@ -164,18 +164,18 @@ export default function ServicesPage() {
 
           {/* Service Images Row */}
           <div className="mb-12 grid gap-8 lg:grid-cols-2">
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
               <Image
-                src={getOfficeImageByIndex(0)}
+                src={getHeroImageByIndex(0)}
                 alt="Therapy services at Pathways Within"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
               <Image
-                src={getOfficeImageByIndex(1)}
+                src={getHeroImageByIndex(1)}
                 alt="Wellness services at Pathways Within"
                 fill
                 className="object-cover"

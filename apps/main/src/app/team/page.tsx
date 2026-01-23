@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { PageHero, JsonLd, createBreadcrumbSchema } from '@pathways/ui'
-import { getOfficeImageByIndex } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 import { getHeadshotForPerson } from '@/lib/headshot-images'
 
 export const metadata: Metadata = {
@@ -75,7 +75,7 @@ export default function TeamPage() {
               >
                 <div className="relative aspect-[3/2] overflow-hidden">
                   <Image
-                    src={getOfficeImageByIndex(index)}
+                    src={getHeroImageByIndex(index)}
                     alt={`Photo of ${member.name}`}
                     fill
                     className="object-cover object-top"
@@ -118,7 +118,7 @@ export default function TeamPage() {
               >
                 <div className="relative aspect-[3/2] overflow-hidden">
                   <Image
-                    src={getOfficeImageByIndex(clinicians.length + index)}
+                    src={getHeroImageByIndex(clinicians.length + index)}
                     alt={`Photo of ${member.name}`}
                     fill
                     className="object-cover object-top"
@@ -162,7 +162,7 @@ export default function TeamPage() {
               <article key={dog.name} className="text-center">
                 <div className="relative mx-auto mb-4 aspect-square h-48 w-48 overflow-hidden rounded-full">
                   <Image
-                    src={getOfficeImageByIndex(clinicians.length + wellnessProviders.length + index)}
+                    src={getHeroImageByIndex(clinicians.length + wellnessProviders.length + index)}
                     alt={`Photo of ${dog.name}`}
                     fill
                     className="object-cover object-top"

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { MapPin, Phone, Clock, Video, ArrowRight, Navigation } from 'lucide-react'
 import { PageHero, JsonLd, createBreadcrumbSchema, createLocalBusinessSchema, LOCATIONS } from '@pathways/ui'
-import { getOfficeImageByIndex } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'Locations',
@@ -67,7 +67,7 @@ export default function LocationsPage() {
               >
                 <div className="relative aspect-[3/2] overflow-hidden">
                   <Image
-                    src={getOfficeImageByIndex(index)}
+                    src={getHeroImageByIndex(index)}
                     alt={`${location.name} office`}
                     fill
                     className="object-cover"

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
-import { getRandomOfficeImage } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'Acupuncture on Long Island | Pathways Within',
@@ -43,7 +43,7 @@ export default function AcupuncturePage() {
             <div><p className="mb-4 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>About</p><h2 className="text-[rgb(var(--color-navy))]">Restore balance</h2></div>
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
               <Image
-                src={getRandomOfficeImage()}
+                src={getHeroImageByIndex(0)}
                 alt="Pathways Within office"
                 fill
                 className="object-cover"

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
-import { getRandomOfficeImage } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'Massage Therapy on Long Island | Pathways Within',
@@ -55,7 +55,7 @@ export default function MassagePage() {
             </div>
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
               <Image
-                src={getRandomOfficeImage()}
+                src={getHeroImageByIndex(0)}
                 alt="Massage therapy at Pathways Within"
                 fill
                 className="object-cover"

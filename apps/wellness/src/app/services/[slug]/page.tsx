@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ArrowLeft, Check, Clock, MapPin } from 'lucide-react'
 import { PageHero, JsonLd, createBreadcrumbSchema, createServiceSchema } from '@pathways/ui'
-import { getOfficeImageByIndex } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 const siteUrl = process.env.NEXT_PUBLIC_WELLNESS_URL || 'http://localhost:3002'
 const mainUrl = process.env.NEXT_PUBLIC_MAIN_URL || 'http://localhost:3000'
@@ -426,7 +426,7 @@ export default async function ServicePage({ params }: PageProps) {
             <div className="flex items-center justify-center">
               <div className="relative aspect-[3/2] w-full max-w-2xl overflow-hidden rounded-lg shadow-lg">
                 <Image
-                  src={getOfficeImageByIndex(0)}
+                  src={getHeroImageByIndex(0)}
                   alt={`${service.name} treatment`}
                   fill
                   className="object-cover"

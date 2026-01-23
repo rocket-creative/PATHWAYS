@@ -256,46 +256,6 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Option 2: SendGrid
-    if (!emailSent && process.env.SENDGRID_API_KEY) {
-      try {
-        const sgMail = await import('@sendgrid/mail').catch(() => null)
-        if (sgMail) {
-          sgMail.default.setApiKey(process.env.SENDGRID_API_KEY)
-          
-          for (const recipient of recipients) {
-            await sgMail.default.send({
-              to: recipient,
-              from: process.env.SENDGRID_FROM_EMAIL || 'noreply@pathwayswithin.com',
-              subject: 'New Client Intake Form Submission - Pathways Within',
-              text: emailBody,
-              html: `
-                <!DOCTYPE html>
-                <html>
-                  <head>
-                    <meta charset="utf-8">
-                    <style>
-                      body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-                      .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-                      h1 { color: #01153D; }
-                      h2 { color: #72A23B; border-bottom: 2px solid #72A23B; padding-bottom: 5px; }
-                    </style>
-                  </head>
-                  <body>
-                    <div class="container">
-                      ${htmlBody}
-                    </div>
-                  </body>
-                </html>
-              `,
-            })
-          }
-          emailSent = true
-        }
-      } catch (error: any) {
-        errors.push(`SendGrid error: ${error.message}`)
-      }
-    }
 
     // Log for development/debugging
     if (!emailSent) {
@@ -303,7 +263,7 @@ export async function POST(request: NextRequest) {
       console.log('Recipients:', recipients)
       console.log(emailBody)
       console.log('=====================================')
-      console.log('NOTE: No email service configured. Configure RESEND_API_KEY or SENDGRID_API_KEY in .env.local')
+      console.log('NOTE: No email service configured. Configure RESEND_API_KEY in .env.local')
       if (errors.length > 0) {
         console.error('Email errors:', errors)
       }

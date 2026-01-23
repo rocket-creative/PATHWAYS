@@ -320,7 +320,7 @@ export default function ClientIntakePage() {
           eyebrow="Thank you"
           headline="Form submitted successfully"
           subheadline="We have received your information"
-          body="A member of our team will review your submission and contact you within one business day. For security purposes, please provide passwords through a secure method after completing this form."
+          body="A member of our team will review your submission and contact you within one business day. If you included passwords, they have been sent via email. For maximum security, consider changing passwords after sharing."
           variant="centered"
           size="sm"
         />
@@ -333,7 +333,7 @@ export default function ClientIntakePage() {
                 </div>
                 <h2 className="mb-4 text-[rgb(var(--color-navy))]">Thank you for your submission</h2>
                 <p className="mb-8 text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
-                  We will review your online presence inventory and contact you to discuss next steps. Please do not include passwords in this form. We will arrange a secure method to share credentials.
+                  We will review your online presence inventory and contact you to discuss next steps. If you included passwords, they have been sent via email. For maximum security, we recommend changing passwords after sharing credentials.
                 </p>
                 <Link href="/" className="btn-pill btn-pill-primary">
                   <span className="btn-text">Return home</span>
@@ -411,9 +411,9 @@ export default function ClientIntakePage() {
             <div className="flex items-start gap-4 rounded-lg bg-white p-4 border border-[rgb(var(--color-breezy))]/30">
               <AlertCircle className="h-5 w-5 flex-shrink-0 text-[rgb(var(--color-breezy))] mt-0.5" />
               <div className="flex-1">
-                <p className="text-sm font-medium text-[rgb(var(--color-navy))]">Security notice</p>
+                <p className="text-sm font-medium text-[rgb(var(--color-navy))]">Password security notice</p>
                 <p className="mt-1 text-sm text-[rgb(var(--color-text-light))]">
-                  For your security, please do not include passwords in this form. After submission, we will arrange a secure method to share credentials. This form is for cataloging accounts and URLs only. Your data is automatically saved locally in your browser.
+                  You may include passwords in this form if needed. However, please be aware that passwords will be transmitted via email. For maximum security, consider using a password manager to share credentials separately, or change passwords after sharing. Your data is automatically saved locally in your browser.
                 </p>
               </div>
             </div>
@@ -486,6 +486,7 @@ export default function ClientIntakePage() {
                   <InputField label="Facebook Page Name" name="facebook_page_name" placeholder="Pathways Within" />
                   <InputField label="Facebook Page URL" name="facebook_url" type="url" placeholder="https://facebook.com/pathwayswithin" />
                   <InputField label="Facebook Email/Username" name="facebook_email" type="email" />
+                  <InputField label="Facebook Password" name="facebook_password" type="password" placeholder="Optional - include if needed" />
                   <InputField label="Admin Access Email" name="facebook_admin" type="email" />
                 </div>
                 <TextareaField label="Facebook Notes" name="facebook_notes" placeholder="Any additional information about your Facebook presence" />
@@ -494,6 +495,7 @@ export default function ClientIntakePage() {
                   <InputField label="Instagram Username" name="instagram_username" placeholder="@pathwayswithin" />
                   <InputField label="Instagram Profile URL" name="instagram_url" type="url" />
                   <InputField label="Instagram Email" name="instagram_email" type="email" />
+                  <InputField label="Instagram Password" name="instagram_password" type="password" placeholder="Optional - include if needed" />
                   <InputField label="Admin Access Email" name="instagram_admin" type="email" />
                 </div>
                 <TextareaField label="Instagram Notes" name="instagram_notes" />
@@ -502,6 +504,7 @@ export default function ClientIntakePage() {
                   <InputField label="LinkedIn Company Page URL" name="linkedin_url" type="url" />
                   <InputField label="LinkedIn Admin Profile" name="linkedin_admin" />
                   <InputField label="LinkedIn Email" name="linkedin_email" type="email" />
+                  <InputField label="LinkedIn Password" name="linkedin_password" type="password" placeholder="Optional - include if needed" />
                 </div>
                 <TextareaField label="LinkedIn Notes" name="linkedin_notes" />
 
@@ -509,24 +512,28 @@ export default function ClientIntakePage() {
                   <InputField label="Twitter/X Username" name="twitter_username" placeholder="@pathwayswithin" />
                   <InputField label="Twitter/X Profile URL" name="twitter_url" type="url" />
                   <InputField label="Twitter/X Email" name="twitter_email" type="email" />
+                  <InputField label="Twitter/X Password" name="twitter_password" type="password" placeholder="Optional - include if needed" />
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2">
                   <InputField label="YouTube Channel Name" name="youtube_channel" />
                   <InputField label="YouTube Channel URL" name="youtube_url" type="url" />
                   <InputField label="YouTube Email" name="youtube_email" type="email" />
+                  <InputField label="YouTube Password" name="youtube_password" type="password" placeholder="Optional - include if needed" />
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2">
                   <InputField label="TikTok Username" name="tiktok_username" placeholder="@pathwayswithin" />
                   <InputField label="TikTok Profile URL" name="tiktok_url" type="url" />
                   <InputField label="TikTok Email" name="tiktok_email" type="email" />
+                  <InputField label="TikTok Password" name="tiktok_password" type="password" placeholder="Optional - include if needed" />
                 </div>
 
                 <div className="grid gap-6 md:grid-cols-2">
                   <InputField label="Pinterest Username" name="pinterest_username" />
                   <InputField label="Pinterest Profile URL" name="pinterest_url" type="url" />
                   <InputField label="Pinterest Email" name="pinterest_email" type="email" />
+                  <InputField label="Pinterest Password" name="pinterest_password" type="password" placeholder="Optional - include if needed" />
                 </div>
 
                 <div className="border-t border-[rgb(var(--border))]/50 pt-6">
@@ -536,6 +543,7 @@ export default function ClientIntakePage() {
                     <InputField label="Profile URL" name="other_social_url" type="url" />
                     <InputField label="Username" name="other_social_username" />
                     <InputField label="Email" name="other_social_email" type="email" />
+                    <InputField label="Password" name="other_social_password" type="password" placeholder="Optional - include if needed" />
                   </div>
                   <TextareaField label="Notes" name="other_social_notes" className="mt-4" />
                 </div>
@@ -554,6 +562,7 @@ export default function ClientIntakePage() {
                   <InputField label="Google Business Profile Name" name="gbp_name" />
                   <InputField label="Google Business Profile URL" name="gbp_url" type="url" />
                   <InputField label="Google Account Email" name="gbp_email" type="email" />
+                  <InputField label="Google Account Password" name="gbp_password" type="password" placeholder="Optional - include if needed" />
                   <InputField label="Number of Locations" name="gbp_locations" type="number" />
                 </div>
                 <div className="flex gap-4">
@@ -568,6 +577,7 @@ export default function ClientIntakePage() {
                   <div className="grid gap-6 md:grid-cols-2">
                     <InputField label="Google Ads Account ID" name="ads_account_id" />
                     <InputField label="Account Email" name="ads_email" type="email" />
+                    <InputField label="Account Password" name="ads_password" type="password" placeholder="Optional - include if needed" />
                     <InputField label="Billing Contact" name="ads_billing" />
                     <InputField label="Monthly Budget" name="ads_budget" type="number" />
                   </div>
@@ -578,6 +588,7 @@ export default function ClientIntakePage() {
                   <h4 className="mb-4 text-sm font-semibold text-[rgb(var(--color-navy))]">Google Analytics</h4>
                   <div className="grid gap-6 md:grid-cols-2">
                     <InputField label="Analytics Account Email" name="analytics_email" type="email" />
+                    <InputField label="Analytics Password" name="analytics_password" type="password" placeholder="Optional - include if needed" />
                     <InputField label="Property ID" name="analytics_property_id" />
                     <InputField label="Website URL Tracked" name="analytics_url" type="url" />
                   </div>
@@ -587,6 +598,7 @@ export default function ClientIntakePage() {
                   <h4 className="mb-4 text-sm font-semibold text-[rgb(var(--color-navy))]">Google Search Console</h4>
                   <div className="grid gap-6 md:grid-cols-2">
                     <InputField label="Search Console Email" name="search_console_email" type="email" />
+                    <InputField label="Search Console Password" name="search_console_password" type="password" placeholder="Optional - include if needed" />
                     <InputField label="Property URL" name="search_console_url" type="url" />
                   </div>
                 </div>
@@ -595,6 +607,7 @@ export default function ClientIntakePage() {
                   <h4 className="mb-4 text-sm font-semibold text-[rgb(var(--color-navy))]">Google Tag Manager</h4>
                   <div className="grid gap-6 md:grid-cols-2">
                     <InputField label="Tag Manager Email" name="gtm_email" type="email" />
+                    <InputField label="Tag Manager Password" name="gtm_password" type="password" placeholder="Optional - include if needed" />
                     <InputField label="Container ID" name="gtm_container_id" />
                   </div>
                 </div>
@@ -603,6 +616,7 @@ export default function ClientIntakePage() {
                   <h4 className="mb-4 text-sm font-semibold text-[rgb(var(--color-navy))]">Google Workspace</h4>
                   <div className="grid gap-6 md:grid-cols-2">
                     <InputField label="Admin Email" name="workspace_email" type="email" />
+                    <InputField label="Admin Password" name="workspace_password" type="password" placeholder="Optional - include if needed" />
                     <InputField label="Domain" name="workspace_domain" placeholder="pathwayswithin.com" />
                     <InputField label="Number of Users" name="workspace_users" type="number" />
                   </div>
@@ -622,10 +636,13 @@ export default function ClientIntakePage() {
                   <InputField label="Primary Domain Name" name="primary_domain" placeholder="pathwayswithin.com" />
                   <InputField label="Registrar" name="domain_registrar" placeholder="GoDaddy, Namecheap, etc." />
                   <InputField label="Registrar Account Email" name="registrar_email" type="email" />
+                  <InputField label="Registrar Password" name="registrar_password" type="password" placeholder="Optional - include if needed" />
                   <InputField label="Hosting Provider" name="hosting_provider" placeholder="Vercel, Bluehost, etc." />
                   <InputField label="Hosting Account Email" name="hosting_email" type="email" />
+                  <InputField label="Hosting Password" name="hosting_password" type="password" placeholder="Optional - include if needed" />
                   <InputField label="CMS Platform" name="cms_platform" placeholder="WordPress, Webflow, Next.js" />
                   <InputField label="CMS Admin Email" name="cms_email" type="email" />
+                  <InputField label="CMS Password" name="cms_password" type="password" placeholder="Optional - include if needed" />
                 </div>
                 <div className="flex gap-4">
                   <CheckboxField label="SSL Certificate Active" name="ssl_active" />
@@ -640,6 +657,7 @@ export default function ClientIntakePage() {
                     <InputField label="Purpose" name="additional_domain_purpose" placeholder="Redirect, landing page, etc." />
                     <InputField label="Registrar" name="additional_domain_registrar" />
                     <InputField label="Account Email" name="additional_domain_email" type="email" />
+                    <InputField label="Account Password" name="additional_domain_password" type="password" placeholder="Optional - include if needed" />
                   </div>
                 </div>
 
@@ -670,6 +688,7 @@ export default function ClientIntakePage() {
                         <CheckboxField label={`${directory} profile exists`} name={`${key}_exists`} />
                         <InputField label="Profile URL" name={`${key}_url`} type="url" />
                         <InputField label="Username/Email" name={`${key}_email`} type="email" />
+                        <InputField label="Password" name={`${key}_password`} type="password" placeholder="Optional - include if needed" />
                       </div>
                       <TextareaField label="Notes" name={`${key}_notes`} className="mt-4" />
                     </div>
@@ -682,6 +701,7 @@ export default function ClientIntakePage() {
                     <InputField label="Directory Name" name="other_healthcare_directory" />
                     <InputField label="Profile URL" name="other_healthcare_url" type="url" />
                     <InputField label="Username/Email" name="other_healthcare_email" type="email" />
+                    <InputField label="Password" name="other_healthcare_password" type="password" placeholder="Optional - include if needed" />
                   </div>
                   <TextareaField label="Notes" name="other_healthcare_notes" className="mt-4" />
                 </div>
@@ -705,6 +725,7 @@ export default function ClientIntakePage() {
                         <CheckboxField label={`${directory} listing exists`} name={`${key}_exists`} />
                         <InputField label="Listing URL" name={`${key}_url`} type="url" />
                         <InputField label="Account Email" name={`${key}_email`} type="email" />
+                        <InputField label="Password" name={`${key}_password`} type="password" placeholder="Optional - include if needed" />
                         {directory === 'Yelp' && (
                           <InputField label="Number of Reviews" name="yelp_reviews" type="number" />
                         )}
@@ -742,6 +763,7 @@ export default function ClientIntakePage() {
                         <CheckboxField label={`${directory} listing exists`} name={`${key}_exists`} />
                         <InputField label="Listing URL" name={`${key}_url`} type="url" />
                         <InputField label="Account Email" name={`${key}_email`} type="email" />
+                        <InputField label="Password" name={`${key}_password`} type="password" placeholder="Optional - include if needed" />
                       </div>
                       <TextareaField label="Notes" name={`${key}_notes`} className="mt-4" />
                     </div>
@@ -800,6 +822,7 @@ export default function ClientIntakePage() {
                       <div className="grid gap-6 md:grid-cols-2">
                         <CheckboxField label={`${service} account exists`} name={`${key}_exists`} />
                         <InputField label="Account Email" name={`${key}_email`} type="email" />
+                        <InputField label="Password" name={`${key}_password`} type="password" placeholder="Optional - include if needed" />
                         {(key === 'mailchimp' || key === 'constant_contact') && (
                           <InputField label="List Size" name={`${key}_list_size`} type="number" />
                         )}
@@ -830,6 +853,7 @@ export default function ClientIntakePage() {
                       <div className="grid gap-6 md:grid-cols-2">
                         <CheckboxField label={`${service} account exists`} name={`${key}_exists`} />
                         <InputField label="Account Email" name={`${key}_email`} type="email" />
+                        <InputField label="Password" name={`${key}_password`} type="password" placeholder="Optional - include if needed" />
                         {key === 'jane_app' && (
                           <InputField label="Account Type" name="jane_app_type" placeholder="EHR, Booking, etc." />
                         )}
@@ -944,7 +968,7 @@ export default function ClientIntakePage() {
             {/* Consent */}
             <div className="rounded-lg bg-[rgb(var(--color-linen))] p-6">
               <CheckboxField
-                label="I understand that I should not include passwords in this form. I will provide credentials through a secure method after submission."
+                label="I understand that passwords included in this form will be transmitted via email. I acknowledge the security implications and accept this risk, or I will share passwords through a more secure method separately."
                 name="security_consent"
                 required
               />

@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
-import { getOfficeImageByIndex } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 /**
  * Team Preview - Cream background with overlapping navy block
@@ -30,8 +30,8 @@ export function TeamPreview() {
               <div className="space-y-4">
                 <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                   <Image
-                    src={getOfficeImageByIndex(0)}
-                    alt="Pathways Within office"
+                    src={getHeroImageByIndex(0)}
+                    alt="Pathways Within community"
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 50vw, 25vw"
@@ -39,8 +39,8 @@ export function TeamPreview() {
                 </div>
                 <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                   <Image
-                    src={getOfficeImageByIndex(1)}
-                    alt="Pathways Within office"
+                    src={getHeroImageByIndex(1)}
+                    alt="Pathways Within community"
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 50vw, 25vw"
@@ -50,8 +50,8 @@ export function TeamPreview() {
               <div className="mt-12 space-y-4">
                 <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                   <Image
-                    src={getOfficeImageByIndex(2)}
-                    alt="Pathways Within office"
+                    src={getHeroImageByIndex(2)}
+                    alt="Pathways Within community"
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 50vw, 25vw"
@@ -59,8 +59,8 @@ export function TeamPreview() {
                 </div>
                 <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                   <Image
-                    src={getOfficeImageByIndex(3)}
-                    alt="Pathways Within office"
+                    src={getHeroImageByIndex(3)}
+                    alt="Pathways Within community"
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 50vw, 25vw"

@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Check, Star, Shield, Clock, Heart, Sparkles, Users, MapPin, Phone, Award, Zap, Brain, Leaf } from 'lucide-react'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 const benefits = [
   { icon: Brain, title: 'Expert Therapists', description: 'Licensed clinicians with specialized training in trauma, anxiety, relationships, and more' },
@@ -169,9 +170,15 @@ export default function StartPage() {
             <div className="hidden lg:col-span-6 lg:block">
               <div className="animate-on-scroll" style={{ transitionDelay: '200ms' }}>
                 <div className="relative aspect-[3/2] overflow-hidden rounded-lg shadow-2xl">
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-[rgb(var(--color-breezy))]/30 to-[rgb(var(--color-green))]/20" />
-                  <div className="absolute -top-10 -right-10 w-60 h-60 rounded-full bg-white/10 blur-2xl" />
-                  <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-[rgb(var(--color-green))]/20 blur-xl" />
+                  <Image
+                    src={getHeroImageByIndex(0)}
+                    alt="Pathways Within community"
+                    fill
+                    className="object-cover"
+                    sizes="50vw"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-[rgb(var(--color-breezy))]/10 to-[rgb(var(--color-green))]/10" />
                 </div>
               </div>
             </div>

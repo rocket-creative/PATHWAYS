@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
-import { getRandomOfficeImage } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 /**
  * CTA Section - Cream background with scroll animation
@@ -75,7 +75,7 @@ export function CTASection() {
           >
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
               <Image
-                src={getRandomOfficeImage()}
+                src={getHeroImageByIndex(0)}
                 alt="Pathways Within office"
                 fill
                 className="object-cover"

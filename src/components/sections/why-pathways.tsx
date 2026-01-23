@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { Heart, Users, MapPin, Shield } from 'lucide-react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
-import { getRandomOfficeImage } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 /**
  * Why Pathways - Linen background with scroll animation
@@ -33,7 +33,7 @@ export function WhyPathways() {
           >
             <div className="relative aspect-[3/2] w-full overflow-hidden">
               <Image
-                src={getRandomOfficeImage()}
+                src={getHeroImageByIndex(0)}
                 alt="Pathways Within office"
                 fill
                 className="object-cover"

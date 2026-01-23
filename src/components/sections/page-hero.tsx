@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowDown } from 'lucide-react'
-import { getRandomOfficeImage } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 /**
  * Page Hero - Reusable hero for inner pages with varied layouts and heights
@@ -125,7 +125,7 @@ function HeroImage({ image, className, imageStyle = 'default' }: { image: HeroIm
   if (image.placeholder || !image.src) {
     return (
       <Image
-        src={getRandomOfficeImage()}
+        src={getHeroImageByIndex(0)}
         alt={image.alt}
         fill
         className={`object-cover ${className || ''}`}

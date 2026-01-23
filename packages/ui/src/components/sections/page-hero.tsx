@@ -6,17 +6,22 @@ import Image from 'next/image'
 import { ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react'
 import { type SiteName, SITE_CONFIG } from '../../lib/site-config'
 
-// Office images - these should match the paths in your public/offices folder
-const OFFICE_IMAGES = [
-  '/offices/garden-city.jpg',
-  '/offices/port-jefferson.jpg',
-  '/offices/massapequa.jpg',
-  '/offices/smithtown.jpg',
-  '/offices/rockville-centre.jpg',
+// Hero images - Large, impressive AI-generated people photos for hero sections
+const HERO_IMAGES = [
+  '/hero-images/freepik__a-diverse-group-of-smiling-adults-east-asian-femal__72299.jpeg',
+  '/hero-images/freepik__a-group-of-smiling-adults-of-various-ethnicities-i__72292.jpeg',
+  '/hero-images/freepik__a-diverse-group-of-three-young-adults-two-women-an__72250.jpeg',
+  '/hero-images/freepik__a-black-couple-in-their-late-30s-holding-hands-and__72251.jpeg',
+  '/hero-images/freepik__a-latina-woman-and-a-white-man-a-straight-couple-w__72281.jpeg',
+  '/hero-images/freepik__a-latino-couple-a-man-and-woman-in-their-30s-with-__72268.jpeg',
+  '/hero-images/freepik__a-mixedrace-couple-one-black-and-one-east-asian-in__72275.jpeg',
+  '/hero-images/freepik__two-east-asian-women-a-lesbian-couple-beaming-with__72286.jpeg',
+  '/hero-images/freepik__a-mixedrace-family-of-four-parents-and-two-childre__72248.jpeg',
+  '/hero-images/freepik__a-latino-family-of-four-parents-and-two-children-o__72266.jpeg',
 ]
 
-function getOfficeImageByIndex(index: number): string {
-  return OFFICE_IMAGES[index % OFFICE_IMAGES.length] || OFFICE_IMAGES[0]!
+function getHeroImageByIndex(index: number): string {
+  return HERO_IMAGES[index % HERO_IMAGES.length] || HERO_IMAGES[0]!
 }
 
 /**
@@ -98,8 +103,8 @@ export function PageHero({
           <div className="flex flex-col gap-4">
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
               <Image
-                src={getOfficeImageByIndex(0)}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(0)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -107,8 +112,8 @@ export function PageHero({
             </div>
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
               <Image
-                src={getOfficeImageByIndex(1)}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(1)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -122,8 +127,8 @@ export function PageHero({
           <div className="grid grid-cols-2 gap-4">
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
               <Image
-                src={getOfficeImageByIndex(0)}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(0)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, 25vw"
@@ -131,8 +136,8 @@ export function PageHero({
             </div>
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
               <Image
-                src={getOfficeImageByIndex(1)}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(1)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, 25vw"
@@ -147,8 +152,8 @@ export function PageHero({
             <div className="absolute left-0 top-0 w-[70%] overflow-hidden rounded-lg shadow-lg">
               <div className="relative aspect-[3/2]">
                 <Image
-                  src={getOfficeImageByIndex(0)}
-                  alt="Pathways Within office"
+                  src={getHeroImageByIndex(0)}
+                  alt="Pathways Within community"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 70vw, 35vw"
@@ -158,8 +163,8 @@ export function PageHero({
             <div className="absolute bottom-0 right-0 w-[70%] overflow-hidden rounded-lg shadow-lg">
               <div className="relative aspect-[3/2]">
                 <Image
-                  src={getOfficeImageByIndex(1)}
-                  alt="Pathways Within office"
+                  src={getHeroImageByIndex(1)}
+                  alt="Pathways Within community"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 70vw, 35vw"
@@ -174,8 +179,8 @@ export function PageHero({
           <div className="grid grid-cols-2 gap-3">
             <div className="relative col-span-2 aspect-[3/2] w-full overflow-hidden rounded-lg shadow-lg">
               <Image
-                src={getOfficeImageByIndex(0)}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(0)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -183,8 +188,8 @@ export function PageHero({
             </div>
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
               <Image
-                src={getOfficeImageByIndex(1)}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(1)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, 25vw"
@@ -192,8 +197,8 @@ export function PageHero({
             </div>
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
               <Image
-                src={getOfficeImageByIndex(2)}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(2)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, 25vw"
@@ -216,7 +221,7 @@ export function PageHero({
                     className="relative aspect-[3/2] w-full flex-shrink-0"
                   >
                     <Image
-                      src={getOfficeImageByIndex(i)}
+                      src={getHeroImageByIndex(i)}
                       alt={`Pathways Within office ${i + 1}`}
                       fill
                       className="object-cover"
@@ -265,8 +270,8 @@ export function PageHero({
           <div className="grid grid-cols-3 grid-rows-2 gap-3">
             <div className="relative col-span-2 row-span-2 overflow-hidden rounded-lg shadow-lg">
               <Image
-                src={getOfficeImageByIndex(0)}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(0)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 66vw"
@@ -274,8 +279,8 @@ export function PageHero({
             </div>
             <div className="relative aspect-[3/2] overflow-hidden rounded-lg shadow-md">
               <Image
-                src={getOfficeImageByIndex(1)}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(1)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, 33vw"
@@ -283,8 +288,8 @@ export function PageHero({
             </div>
             <div className="relative aspect-[3/2] overflow-hidden rounded-lg shadow-md">
               <Image
-                src={getOfficeImageByIndex(2)}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(2)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 50vw, 33vw"
@@ -298,8 +303,8 @@ export function PageHero({
         return (
           <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
             <Image
-              src={getOfficeImageByIndex(0)}
-              alt="Pathways Within office"
+              src={getHeroImageByIndex(0)}
+              alt="Pathways Within community"
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 50vw"

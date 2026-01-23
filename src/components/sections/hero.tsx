@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ArrowDown } from 'lucide-react'
-import { getRandomOfficeImage } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 /**
  * Hero Section - Editorial asymmetric layout with single tall image
@@ -71,8 +71,8 @@ export function HeroSection() {
             {/* Main tall image */}
             <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-2xl lg:aspect-[3/2]">
               <Image
-                src={getRandomOfficeImage()}
-                alt="Pathways Within office"
+                src={getHeroImageByIndex(0)}
+                alt="Pathways Within community"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 58vw"

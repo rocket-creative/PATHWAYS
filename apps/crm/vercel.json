@@ -1,5 +1,0 @@
-{
-  "installCommand": "cd ../.. && npm install && cd apps/crm && npm install",
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next"
-}

@@ -1,0 +1,5 @@
+export { HeroSection } from './hero'
+export { PageHero } from './page-hero'
+export { CTASection } from './cta'
+export { TestimonialSection } from './testimonial'
+export { ServicesGrid } from './services-grid'

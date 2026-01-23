@@ -317,7 +317,7 @@ export function PageHero({
   return (
     <section className="relative bg-white">
       <div className="container-site">
-        <div className="pt-12 lg:pt-16">
+        <div className="pt-20 lg:pt-28">
           {site === 'main' ? (
             <Link href="/">
               <img 

@@ -19,11 +19,11 @@ export function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-white">
       <div className="container-site">
-        {/* Main hero grid - asymmetric */}
-        <div className="grid min-h-[85vh] items-start gap-8 pt-4 pb-16 lg:grid-cols-12 lg:gap-0 lg:pt-6 lg:pb-0">
+        {/* Main hero grid - magazine editorial layout */}
+        <div className="grid min-h-[90vh] items-center gap-12 py-20 lg:grid-cols-12 lg:gap-20 lg:py-28">
           
-          {/* Left content - spans 5 cols */}
-          <div className="relative z-10 lg:col-span-5 lg:pt-8 lg:pb-24">
+          {/* Left content - magazine style */}
+          <div className="relative z-10 lg:col-span-6">
             {/* Logo - links to home */}
             <Link href="/">
               <Image 
@@ -36,13 +36,13 @@ export function HeroSection() {
               />
             </Link>
             
-            <h1 className="mb-8 text-[rgb(var(--color-navy))]" style={{ lineHeight: 1.1 }}>
+            <h1 className="mb-12 text-[rgb(var(--color-navy))]" style={{ lineHeight: 0.9, fontSize: 'clamp(3.5rem, 10vw, 8rem)', fontWeight: 700, letterSpacing: '-0.05em' }}>
               Discover<br />
               your path<br />
               to wellness
             </h1>
             
-            <p className="mb-10 max-w-md text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
+            <p className="mb-12 max-w-lg text-xl text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.6, letterSpacing: '-0.01em' }}>
               Since 2018, Pathways Within has offered integrated therapy and 
               wellness services across Long Island. Mind, body, and spirit — 
               we believe true healing honors the whole person.
@@ -66,37 +66,32 @@ export function HeroSection() {
             </div>
           </div>
           
-          {/* Right image area - spans 7 cols, right-justified */}
-          <div className="relative lg:col-span-7 lg:flex lg:justify-end">
-            {/* Main hero image - right-aligned */}
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg shadow-2xl lg:aspect-[3/4] lg:max-w-[480px]">
+          {/* Right image area - editorial style */}
+          <div className="relative lg:col-span-6">
+            {/* Main hero image - full height editorial */}
+            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-none shadow-2xl lg:aspect-[4/5]">
               <Image
                 src={getHeroImageByIndex(0)}
                 alt="Pathways Within community"
                 fill
-                className="object-cover object-right"
-                sizes="(max-width: 1024px) 100vw, 480px"
+                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
               />
             </div>
             
-            {/* Overlapping content block - sits on image */}
-            <div className="absolute -bottom-8 left-0 right-8 bg-gradient-navy p-8 transition-transform duration-300 ease-out hover:-translate-y-2 hover:translate-x-1 lg:-left-16 lg:bottom-24 lg:right-auto lg:w-96 lg:p-12">
-              <h3 className="mb-4 text-white" style={{ fontWeight: 400 }}>
+            {/* Magazine-style text overlay */}
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-8 lg:p-12">
+              <p className="mb-2 text-xs uppercase tracking-[0.2em] text-white/60" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif' }}>
+                Mind • Body • Spirit
+              </p>
+              <h3 className="mb-3 text-2xl text-white lg:text-3xl" style={{ fontWeight: 600, letterSpacing: '-0.02em' }}>
                 Therapy & Wellness
               </h3>
-              <p className="mb-6 text-sm text-white/70" style={{ lineHeight: 1.7 }}>
+              <p className="max-w-md text-sm text-white/80" style={{ lineHeight: 1.6 }}>
                 Individual therapy, couples counseling, massage, 
-                acupuncture, skincare, and more — all under one roof.
+                acupuncture, skincare, and more.
               </p>
-              <Link 
-                href="/services" 
-                className="group inline-flex items-center gap-2 text-sm uppercase tracking-widest text-white transition-all hover:gap-3"
-                style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}
-              >
-                Learn more
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
             </div>
           </div>
         </div>

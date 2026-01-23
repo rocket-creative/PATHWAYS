@@ -313,14 +313,16 @@ export default async function ServicePage({ params }: PageProps) {
                 ))}
               </ul>
             </div>
-            <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
-              <Image
-                src={getOfficeImageByIndex(0)}
-                alt={`${service.name} session`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+            <div className="flex items-center justify-center">
+              <div className="relative aspect-[3/2] w-full max-w-2xl overflow-hidden rounded-lg shadow-lg">
+                <Image
+                  src={getOfficeImageByIndex(0)}
+                  alt={`${service.name} session`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
             </div>
           </div>
         </div>

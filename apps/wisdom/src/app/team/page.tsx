@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { PageHero, JsonLd, createBreadcrumbSchema } from '@pathways/ui'
 import { getOfficeImageByIndex } from '@/lib/office-images'
+import { getHeadshotForPerson } from '@/lib/headshot-images'
 
 export const metadata: Metadata = {
   title: 'Our team',

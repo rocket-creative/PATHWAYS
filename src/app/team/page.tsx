@@ -6,6 +6,7 @@ import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
 import { getOfficeImageByIndex } from '@/lib/office-images'
+import { getHeadshotForPerson } from '@/lib/headshot-images'
 
 export const metadata: Metadata = {
   title: 'Meet Our Team | Pathways Within',
@@ -177,11 +178,11 @@ export default function TeamPage() {
             <h2 className="text-[rgb(var(--color-navy))]">Our founder</h2>
           </div>
           
-          {leadership.map((person) => (
+          {leadership.map((person, index) => (
             <div key={person.name} className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-              <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
+              <div className="relative aspect-[3/2] overflow-hidden rounded-lg shadow-lg">
                 <Image
-                  src={getOfficeImageByIndex(0)}
+                  src={getHeadshotForPerson(person.name, index)}
                   alt={person.name}
                   fill
                   className="object-cover"
@@ -227,9 +228,9 @@ export default function TeamPage() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {clinicalTeam.map((person, index) => (
               <div key={person.name} className="group">
-                <div className="relative mb-6 aspect-[3/2] overflow-hidden rounded-lg">
+                <div className="relative mb-6 aspect-[3/2] overflow-hidden rounded-lg shadow-md">
                   <Image
-                    src={getOfficeImageByIndex(index + 1)}
+                    src={getHeadshotForPerson(person.name, index)}
                     alt={person.name}
                     fill
                     className="object-cover"
@@ -264,10 +265,10 @@ export default function TeamPage() {
           
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {associateTeam.map((person, index) => (
-              <div key={person.name} className="rounded-lg bg-white p-6">
+              <div key={person.name} className="rounded-lg bg-white p-6 shadow-sm">
                 <div className="relative mb-4 aspect-[3/2] overflow-hidden rounded-lg">
                   <Image
-                    src={getOfficeImageByIndex(index)}
+                    src={getHeadshotForPerson(person.name, index)}
                     alt={person.name}
                     fill
                     className="object-cover"
@@ -300,9 +301,9 @@ export default function TeamPage() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {wellnessTeam.map((person, index) => (
               <div key={person.name}>
-                <div className="relative mb-6 aspect-[3/2] overflow-hidden rounded-lg">
+                <div className="relative mb-6 aspect-[3/2] overflow-hidden rounded-lg shadow-md">
                   <Image
-                    src={getOfficeImageByIndex(index)}
+                    src={getHeadshotForPerson(person.name, index)}
                     alt={person.name}
                     fill
                     className="object-cover"

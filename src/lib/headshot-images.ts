@@ -69,9 +69,9 @@ export function getHeadshotForPerson(name: string, fallbackOfficeIndex: number =
     return HEADSHOT_MAP[nameWithoutCredentials]
   }
   
-  // Fallback to office images
-  const { getOfficeImageByIndex } = require('./office-images')
-  return getOfficeImageByIndex(fallbackOfficeIndex)
+  // Fallback to placeholder
+  const { PLACEHOLDER_IMAGE } = require('./placeholder-image')
+  return PLACEHOLDER_IMAGE
 }
 
 /**

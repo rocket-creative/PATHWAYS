@@ -121,7 +121,7 @@ export default function ServicesPage() {
           <div className="mb-12 grid gap-8 lg:grid-cols-2">
             <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
               <Image
-                src={getHeroImageByIndex(0)}
+                src={"/placeholder-grey.svg"}
                 alt="Pathways Within office"
                 fill
                 className="object-cover"
@@ -130,7 +130,7 @@ export default function ServicesPage() {
             </div>
             <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
               <Image
-                src={getHeroImageByIndex(1)}
+                src={"/placeholder-grey.svg"}
                 alt="Pathways Within office"
                 fill
                 className="object-cover"

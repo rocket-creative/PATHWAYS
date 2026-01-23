@@ -64,7 +64,7 @@ export default function AboutPage() {
             <div className="relative">
               <div className="relative aspect-[3/2] overflow-hidden">
                 <Image
-                  src={getHeroImageByIndex(0)}
+                  src={"/placeholder-grey.svg"}
                   alt="Team photo placeholder"
                   fill
                   className="object-cover"

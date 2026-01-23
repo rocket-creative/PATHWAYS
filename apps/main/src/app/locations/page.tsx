@@ -67,7 +67,7 @@ export default function LocationsPage() {
               >
                 <div className="relative aspect-[3/2] overflow-hidden">
                   <Image
-                    src={getHeroImageByIndex(index)}
+                    src={"/placeholder-grey.svg"}
                     alt={`${location.name} office`}
                     fill
                     className="object-cover"

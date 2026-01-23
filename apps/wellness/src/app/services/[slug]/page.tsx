@@ -426,7 +426,7 @@ export default async function ServicePage({ params }: PageProps) {
             <div className="flex items-center justify-center">
               <div className="relative aspect-[3/2] w-full max-w-2xl overflow-hidden rounded-lg shadow-lg">
                 <Image
-                  src={getHeroImageByIndex(0)}
+                  src={"/placeholder-grey.svg"}
                   alt={`${service.name} treatment`}
                   fill
                   className="object-cover"

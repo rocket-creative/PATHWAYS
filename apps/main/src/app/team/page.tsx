@@ -75,7 +75,7 @@ export default function TeamPage() {
               >
                 <div className="relative aspect-[3/2] overflow-hidden">
                   <Image
-                    src={getHeroImageByIndex(index)}
+                    src={"/placeholder-grey.svg"}
                     alt={`Photo of ${member.name}`}
                     fill
                     className="object-cover object-top"
@@ -118,7 +118,7 @@ export default function TeamPage() {
               >
                 <div className="relative aspect-[3/2] overflow-hidden">
                   <Image
-                    src={getHeroImageByIndex(clinicians.length + index)}
+                    src={"/placeholder-grey.svg"}
                     alt={`Photo of ${member.name}`}
                     fill
                     className="object-cover object-top"
@@ -162,7 +162,7 @@ export default function TeamPage() {
               <article key={dog.name} className="text-center">
                 <div className="relative mx-auto mb-4 aspect-square h-48 w-48 overflow-hidden rounded-full">
                   <Image
-                    src={getHeroImageByIndex(clinicians.length + wellnessProviders.length + index)}
+                    src={"/placeholder-grey.svg"}
                     alt={`Photo of ${dog.name}`}
                     fill
                     className="object-cover object-top"

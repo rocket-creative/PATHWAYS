@@ -336,7 +336,7 @@ export default async function LocationPage({ params }: PageProps) {
       <section className="border-t border-[rgb(var(--border))]/50">
         <div className="relative aspect-[3/2] overflow-hidden">
           <Image
-            src={getHeroImageByIndex(0)}
+            src={"/placeholder-grey.svg"}
             alt={`Map of ${location.name} office location`}
             fill
             className="object-cover"

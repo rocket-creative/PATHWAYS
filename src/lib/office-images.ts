@@ -15,14 +15,14 @@ export const OFFICE_IMAGES = [
  * Get a random office image
  */
 export function getRandomOfficeImage(): string {
-  return OFFICE_IMAGES[Math.floor(Math.random() * OFFICE_IMAGES.length)]
+  return OFFICE_IMAGES[Math.floor(Math.random() * OFFICE_IMAGES.length)] ?? OFFICE_IMAGES[0]!
 }
 
 /**
  * Get an office image by index (useful for consistent placement)
  */
 export function getOfficeImageByIndex(index: number): string {
-  return OFFICE_IMAGES[index % OFFICE_IMAGES.length]
+  return OFFICE_IMAGES[index % OFFICE_IMAGES.length] ?? OFFICE_IMAGES[0]!
 }
 
 /**
@@ -36,7 +36,7 @@ export function getOfficeImageForLocation(locationName: string): string {
     'Smithtown': '/offices/smithtown.jpg',
     'Rockville Centre': '/offices/rockville-centre.jpg',
   }
-  return imageMap[locationName] || OFFICE_IMAGES[0]
+  return imageMap[locationName] || OFFICE_IMAGES[0]!
 }
 
 /**

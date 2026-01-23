@@ -78,15 +78,17 @@ export default function ClientIntakePage() {
   const goToSection = (index: number) => {
     if (index >= 0 && index < SECTIONS.length) {
       setCurrentSectionIndex(index)
-      const sectionId = SECTIONS[index].id
-      setOpenSections(prev => new Set([...prev, sectionId]))
-      // Scroll to section
-      setTimeout(() => {
-        const element = document.getElementById(`section-${sectionId}`)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }
-      }, 100)
+      const sectionId = SECTIONS[index]?.id
+      if (sectionId) {
+        setOpenSections(prev => new Set([...prev, sectionId]))
+        // Scroll to section
+        setTimeout(() => {
+          const element = document.getElementById(`section-${sectionId}`)
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          }
+        }, 100)
+      }
     }
   }
 
@@ -215,14 +217,15 @@ export default function ClientIntakePage() {
     </div>
   )
 
-  const TextareaField = ({ label, name, required = false, placeholder, rows = 3 }: {
+  const TextareaField = ({ label, name, required = false, placeholder, rows = 3, className = '' }: {
     label: string
     name: string
     required?: boolean
     placeholder?: string
     rows?: number
+    className?: string
   }) => (
-    <div>
+    <div className={className}>
       <label htmlFor={name} className="mb-2 block text-sm font-medium text-[rgb(var(--color-navy))]">
         {label} {required && <span className="text-[rgb(var(--color-green))]">*</span>}
       </label>

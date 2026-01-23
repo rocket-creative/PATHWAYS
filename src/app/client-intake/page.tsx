@@ -39,7 +39,7 @@ export default function ClientIntakePage() {
           const parsed = JSON.parse(saved)
           setFormData(parsed.data || {})
           setCurrentSectionIndex(parsed.currentSectionIndex || 0)
-          setOpenSections(new Set(parsed.openSections || [SECTIONS[0].id]))
+          setOpenSections(new Set(parsed.openSections || [SECTIONS[0]?.id || 'social-media']))
           setLastSaved(parsed.lastSaved ? new Date(parsed.lastSaved) : null)
         } catch (e) {
           console.error('Failed to load saved form data:', e)
@@ -152,7 +152,7 @@ export default function ClientIntakePage() {
       setLastSaved(null)
       setHasUnsavedChanges(false)
       setCurrentSectionIndex(0)
-      setOpenSections(new Set([SECTIONS[0].id]))
+      setOpenSections(new Set([SECTIONS[0]?.id || 'social-media']))
     }
   }
 

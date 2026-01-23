@@ -60,8 +60,11 @@ export {
   getContactUrl,
   getStartUrl,
   getFooterLinks,
+  THERAPY_SERVICES,
+  WELLNESS_SERVICES,
   // Legacy exports for backwards compatibility
   getNavigationForSite,
   getFooterLinksForSite,
-  type SiteName 
+  type SiteName,
+  type NavLinkWithDropdown
 } from './lib/site-config'

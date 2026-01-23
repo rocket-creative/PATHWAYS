@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Heart, Users, MapPin, Shield } from 'lucide-react'
 import { useScrollAnimation } from '../../lib/use-scroll-animation'
 
@@ -28,7 +29,15 @@ export function WhyPathways() {
               transform: isVisible ? 'translateX(0)' : 'translateX(-30px)'
             }}
           >
-            <div className="img-placeholder aspect-[4/5]" />
+            <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
+              <Image 
+                src="/hero-images/freepik__professional-studio-portrait-of-a-person-diverse-w__19265.jpeg" 
+                alt="Person on their wellness journey" 
+                fill 
+                className="object-cover" 
+                sizes="(max-width: 1024px) 100vw, 50vw" 
+              />
+            </div>
             <div className="absolute -bottom-6 -right-6 h-32 w-32 bg-[rgb(var(--color-green))] lg:-right-12 lg:h-48 lg:w-48" />
           </div>
           

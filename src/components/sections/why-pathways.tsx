@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { Heart, Users, MapPin, Shield } from 'lucide-react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
-// Placeholder images used
 
 /**
  * Why Pathways - Linen background with scroll animation
@@ -31,10 +30,10 @@ export function WhyPathways() {
               transform: isVisible ? 'translateX(0)' : 'translateX(-30px)'
             }}
           >
-            <div className="relative aspect-[3/2] w-full overflow-hidden">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg">
               <Image
-                src={"/placeholder-grey.svg"}
-                alt="Pathways Within community"
+                src="/hero-images/freepik__professional-studio-portrait-of-a-person-diverse-w__19265.jpeg"
+                alt="Person on their wellness journey"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

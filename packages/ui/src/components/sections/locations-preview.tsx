@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { MapPin, ArrowRight, Video } from 'lucide-react'
 import { useScrollAnimation } from '../../lib/use-scroll-animation'
 import { SITE_CONFIG, type SiteName } from '../../lib/site-config'
@@ -37,7 +38,15 @@ export function LocationsPreview({ site = 'main' }: LocationsPreviewProps) {
               transform: isVisible ? 'translateX(0)' : 'translateX(-30px)'
             }}
           >
-            <div className="img-placeholder aspect-square lg:aspect-[4/3]" />
+            <div className="relative aspect-square overflow-hidden rounded-lg lg:aspect-[4/3]">
+              <Image 
+                src="/offices/garden-city.jpg" 
+                alt="Pathways Within Garden City office" 
+                fill 
+                className="object-cover" 
+                sizes="(max-width: 1024px) 100vw, 50vw" 
+              />
+            </div>
             
             <div className="absolute -bottom-4 right-4 flex items-center gap-2 bg-white px-4 py-3 shadow-sm lg:-right-8 lg:bottom-8">
               <Video className="h-4 w-4 text-[rgb(var(--color-green))]" strokeWidth={1.5} />

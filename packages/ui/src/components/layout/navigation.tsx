@@ -1,30 +1,25 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
-import { Menu, X, ArrowRight } from 'lucide-react'
-import { getNavigationLinks, getContactUrl, SITE_CONFIG, type SiteName } from '../../lib/site-config'
+import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react'
+import { getNavigationLinks, getContactUrl, type SiteName, type NavLinkWithDropdown } from '../../lib/site-config'
 
 interface NavigationProps {
-  site?: SiteName // Kept for backwards compatibility, but nav is now unified
-}
-
-// Site links for the 3 apps - use SITE_CONFIG to ensure correct URLs
-const SITE_LINKS = {
-  crm: process.env.NEXT_PUBLIC_CRM_URL || 'https://crm-sooty-one.vercel.app',
-  wisdom: SITE_CONFIG.wisdom.url,
-  wellness: SITE_CONFIG.wellness.url, // Should be https://wellness-phi-three.vercel.app
+  site?: SiteName
 }
 
 /**
- * Navigation - Unified navigation across all 3 sites
- * Shared pages link to main app, services stay on current site
+ * Navigation - Unified navigation across all sites
+ * Features dropdowns for Therapy and Wellness services
  */
 export function Navigation({ site = 'main' }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const pathname = usePathname()
   const navLinks = getNavigationLinks(site)
   const contactUrl = getContactUrl()
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => setIsOpen(false), [pathname])
 
@@ -33,50 +28,46 @@ export function Navigation({ site = 'main' }: NavigationProps) {
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   return (
     <header className="border-b border-[rgb(var(--border))] bg-white">
       <nav className="flex h-14 items-center justify-between px-6 lg:h-16 lg:px-12">
         
-        {/* Site Switcher Links (left side) */}
-        <div className="flex items-center gap-2">
-          <span className="text-[10px] uppercase tracking-wider text-gray-400 mr-2 hidden sm:inline">Sites:</span>
-          <a
-            href={SITE_LINKS.wisdom}
-            className="rounded bg-[rgb(var(--color-navy))] px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-white hover:bg-[rgb(var(--color-navy))]/80 transition-colors"
-          >
-            Wisdom
-          </a>
-          <a
-            href={SITE_LINKS.wellness}
-            className="rounded bg-[rgb(var(--color-green))] px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-white hover:bg-[rgb(var(--color-green))]/80 transition-colors"
-          >
-            Wellness
-          </a>
-          <a
-            href={SITE_LINKS.crm}
-            className="rounded bg-orange-500 px-2 py-1 text-[10px] font-medium uppercase tracking-wider text-white hover:bg-orange-600 transition-colors"
-          >
-            CRM
-          </a>
-        </div>
+        {/* Logo */}
+        <a href={site === 'main' ? '/' : navLinks[0].href} className="flex-shrink-0">
+          <img 
+            src="/pathways-logo.png" 
+            alt="Pathways Within" 
+            className="h-8 w-auto lg:h-10"
+          />
+        </a>
 
-        {/* Desktop */}
-        <div className="hidden items-center gap-8 lg:flex">
+        {/* Desktop Navigation */}
+        <div ref={dropdownRef} className="hidden items-center gap-6 lg:flex xl:gap-8">
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm uppercase tracking-widest transition-colors text-[rgb(var(--color-navy))] hover:text-[rgb(var(--color-green))]"
-              style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}
-            >
-              {link.label}
-            </a>
+            <NavItem 
+              key={link.label} 
+              link={link} 
+              isOpen={openDropdown === link.label}
+              onToggle={() => setOpenDropdown(openDropdown === link.label ? null : link.label)}
+              onClose={() => setOpenDropdown(null)}
+            />
           ))}
           
           {/* CTA Button */}
           <a 
             href={contactUrl} 
-            className="btn-pill btn-pill-primary ml-4 py-2.5 pl-5 pr-2.5 text-sm"
+            className="btn-pill btn-pill-primary ml-2 py-2.5 pl-5 pr-2.5 text-sm"
           >
             <span className="btn-text">Book now</span>
             <span className="btn-arrow !h-6 !w-6">
@@ -101,22 +92,16 @@ export function Navigation({ site = 'main' }: NavigationProps) {
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex h-14 items-center justify-end px-6">
+        <div className="flex h-14 items-center justify-between px-6">
+          <img src="/pathways-logo.png" alt="Pathways Within" className="h-7 brightness-0 invert" />
           <button onClick={() => setIsOpen(false)} className="p-2 text-white">
             <X className="h-6 w-6" />
           </button>
         </div>
         
-        <nav className="mt-8 flex flex-col gap-6 px-6">
+        <nav className="mt-8 flex flex-col gap-4 px-6">
           {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-2xl text-white/60 hover:text-white"
-              style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 400 }}
-            >
-              {link.label}
-            </a>
+            <MobileNavItem key={link.label} link={link} />
           ))}
           
           <div className="my-6 h-px w-16 bg-white/30" />
@@ -130,33 +115,133 @@ export function Navigation({ site = 'main' }: NavigationProps) {
           </a>
           
           <a href="tel:+16313713825" className="mt-4 text-white/60">(631) 371-3825</a>
-          
-          {/* Site Switcher */}
-          <div className="mt-8 pt-6 border-t border-white/20">
-            <span className="text-xs uppercase tracking-wider text-white/40 mb-3 block">Sites</span>
-            <div className="flex gap-2">
-              <a
-                href={SITE_LINKS.wisdom}
-                className="rounded bg-white/20 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-white hover:bg-white/30"
-              >
-                Wisdom
-              </a>
-              <a
-                href={SITE_LINKS.wellness}
-                className="rounded bg-white/20 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-white hover:bg-white/30"
-              >
-                Wellness
-              </a>
-              <a
-                href={SITE_LINKS.crm}
-                className="rounded bg-orange-500/80 px-3 py-1.5 text-xs font-medium uppercase tracking-wider text-white hover:bg-orange-500"
-              >
-                CRM
-              </a>
-            </div>
-          </div>
         </nav>
       </div>
     </header>
+  )
+}
+
+/**
+ * Desktop nav item with optional dropdown
+ */
+function NavItem({ 
+  link, 
+  isOpen, 
+  onToggle,
+  onClose 
+}: { 
+  link: NavLinkWithDropdown
+  isOpen: boolean
+  onToggle: () => void
+  onClose: () => void
+}) {
+  const hasDropdown = link.dropdown && link.dropdown.length > 0
+
+  if (!hasDropdown) {
+    return (
+      <a
+        href={link.href}
+        className="text-sm uppercase tracking-widest transition-colors text-[rgb(var(--color-navy))] hover:text-[rgb(var(--color-green))]"
+        style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}
+      >
+        {link.label}
+      </a>
+    )
+  }
+
+  return (
+    <div className="relative">
+      <button
+        onClick={onToggle}
+        className="flex items-center gap-1 text-sm uppercase tracking-widest transition-colors text-[rgb(var(--color-navy))] hover:text-[rgb(var(--color-green))]"
+        style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}
+      >
+        {link.label}
+        <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      
+      {/* Dropdown */}
+      {isOpen && (
+        <div className="absolute left-0 top-full z-50 mt-2 min-w-[220px] rounded-lg border border-[rgb(var(--border))] bg-white py-2 shadow-lg">
+          {/* View all link */}
+          <a
+            href={link.href}
+            onClick={onClose}
+            className="block px-4 py-2 text-sm font-medium text-[rgb(var(--color-navy))] hover:bg-[rgb(var(--color-cream))]"
+            style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif' }}
+          >
+            View all {link.label.toLowerCase()}
+          </a>
+          <div className="my-2 h-px bg-[rgb(var(--border))]" />
+          
+          {link.dropdown?.map((item) => (
+            <a
+              key={item.slug || item.href}
+              href={item.href}
+              onClick={onClose}
+              className="block px-4 py-2 text-sm text-[rgb(var(--color-navy))]/80 hover:bg-[rgb(var(--color-cream))] hover:text-[rgb(var(--color-navy))]"
+              style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif' }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+/**
+ * Mobile nav item with collapsible dropdown
+ */
+function MobileNavItem({ link }: { link: NavLinkWithDropdown }) {
+  const [isExpanded, setIsExpanded] = useState(false)
+  const hasDropdown = link.dropdown && link.dropdown.length > 0
+
+  if (!hasDropdown) {
+    return (
+      <a
+        href={link.href}
+        className="text-xl text-white/60 hover:text-white"
+        style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 400 }}
+      >
+        {link.label}
+      </a>
+    )
+  }
+
+  return (
+    <div>
+      <button
+        onClick={() => setIsExpanded(!isExpanded)}
+        className="flex w-full items-center justify-between text-xl text-white/60 hover:text-white"
+        style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 400 }}
+      >
+        {link.label}
+        <ChevronDown className={`h-5 w-5 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+      </button>
+      
+      {isExpanded && (
+        <div className="mt-2 space-y-2 pl-4">
+          <a
+            href={link.href}
+            className="block text-sm text-white/40 hover:text-white/80"
+            style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif' }}
+          >
+            View all {link.label.toLowerCase()}
+          </a>
+          {link.dropdown?.map((item) => (
+            <a
+              key={item.slug || item.href}
+              href={item.href}
+              className="block text-sm text-white/40 hover:text-white/80"
+              style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif' }}
+            >
+              {item.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
   )
 }

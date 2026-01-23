@@ -4,7 +4,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
-// Placeholder images used
+
+// Featured team member headshots
+const teamHeadshots = [
+  { src: '/headshots/Rachel Lessard headshot 2.jpeg', alt: 'Rachel Lessard, LCSW' },
+  { src: '/headshots/Jennifer Brooks headshot 1.jpg', alt: 'Jennifer Brooks, LMHC' },
+  { src: '/headshots/Angela Gestone headshot 1.jpeg', alt: 'Angela Gestone, LCSW' },
+  { src: '/headshots/Frank Tropeano headshot 1.jpeg', alt: 'Frank Tropeano, LCSW' },
+]
 
 /**
  * Team Preview - Cream background with overlapping navy block
@@ -28,19 +35,19 @@ export function TeamPreview() {
           >
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
-                <div className="relative aspect-[3/2] w-full overflow-hidden">
+                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
                   <Image
-                    src={"/placeholder-grey.svg"}
-                    alt="Pathways Within community"
+                    src={teamHeadshots[0].src}
+                    alt={teamHeadshots[0].alt}
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 50vw, 25vw"
                   />
                 </div>
-                <div className="relative aspect-[3/2] w-full overflow-hidden">
+                <div className="relative aspect-square w-full overflow-hidden rounded-lg">
                   <Image
-                    src={"/placeholder-grey.svg"}
-                    alt="Pathways Within community"
+                    src={teamHeadshots[1].src}
+                    alt={teamHeadshots[1].alt}
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 50vw, 25vw"
@@ -48,19 +55,19 @@ export function TeamPreview() {
                 </div>
               </div>
               <div className="mt-12 space-y-4">
-                <div className="relative aspect-[3/2] w-full overflow-hidden">
+                <div className="relative aspect-square w-full overflow-hidden rounded-lg">
                   <Image
-                    src={"/placeholder-grey.svg"}
-                    alt="Pathways Within community"
+                    src={teamHeadshots[2].src}
+                    alt={teamHeadshots[2].alt}
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 50vw, 25vw"
                   />
                 </div>
-                <div className="relative aspect-[3/2] w-full overflow-hidden">
+                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
                   <Image
-                    src={"/placeholder-grey.svg"}
-                    alt="Pathways Within community"
+                    src={teamHeadshots[3].src}
+                    alt={teamHeadshots[3].alt}
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 50vw, 25vw"

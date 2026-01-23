@@ -39,6 +39,43 @@ export const SITE_CONFIG = {
 }
 
 /**
+ * Therapy services (Wisdom app)
+ */
+export const THERAPY_SERVICES = [
+  { slug: 'individual-therapy', label: 'Individual Therapy' },
+  { slug: 'couples-therapy', label: 'Couples Therapy' },
+  { slug: 'child-therapy', label: 'Child Therapy' },
+  { slug: 'teen-therapy', label: 'Teen Therapy' },
+  { slug: 'trauma-therapy', label: 'Trauma Therapy' },
+  { slug: 'emdr-therapy', label: 'EMDR Therapy' },
+  { slug: 'somatic-therapy', label: 'Somatic Therapy' },
+  { slug: 'hypnotherapy', label: 'Hypnotherapy' },
+  { slug: 'veterans-first-responders', label: 'Veterans & First Responders' },
+  { slug: 'weight-loss-surgery-support', label: 'Weight Loss Surgery Support' },
+]
+
+/**
+ * Wellness services (Wellness app)
+ */
+export const WELLNESS_SERVICES = [
+  { slug: 'massage', label: 'Massage Therapy' },
+  { slug: 'acupuncture', label: 'Acupuncture' },
+  { slug: 'energy-work', label: 'Energy Work' },
+  { slug: 'iv-vitamin-infusion', label: 'IV Vitamin Infusion' },
+  { slug: 'pain-management', label: 'Pain Management' },
+  { slug: 'skincare', label: 'Skincare' },
+  { slug: 'hydrafacial', label: 'Hydrafacial' },
+  { slug: 'prp-vampire-facial', label: 'PRP Vampire Facial' },
+  { slug: 'injectables', label: 'Injectables' },
+  { slug: 'laser-hair-removal', label: 'Laser Hair Removal' },
+  { slug: 'laser-lipo', label: 'Laser Lipo' },
+  { slug: 'cryotherapy', label: 'Cryotherapy' },
+  { slug: 'permanent-makeup', label: 'Permanent Makeup' },
+  { slug: 'teeth-whitening', label: 'Teeth Whitening' },
+  { slug: 'keralase-hair-restoration', label: 'Keralase Hair Restoration' },
+]
+
+/**
  * Get the base URL for a site
  */
 export function getSiteUrl(site: SiteName): string {
@@ -46,31 +83,52 @@ export function getSiteUrl(site: SiteName): string {
 }
 
 /**
- * Get navigation links for a specific site
- * - Main app: all relative URLs
- * - Wisdom/Wellness: shared pages point to main app, services stay relative
+ * Navigation link with optional dropdown
  */
-export function getNavigationLinks(site: SiteName = 'main'): NavLink[] {
+export interface NavLinkWithDropdown extends NavLink {
+  dropdown?: { href: string; label: string }[]
+}
+
+/**
+ * Get unified navigation links
+ * All apps use the same navigation structure
+ */
+export function getNavigationLinks(site: SiteName = 'main'): NavLinkWithDropdown[] {
   const mainUrl = SITE_CONFIG.main.url
+  const wisdomUrl = SITE_CONFIG.wisdom.url
+  const wellnessUrl = SITE_CONFIG.wellness.url
   
-  if (site === 'main') {
-    // Main app - all relative
-    return [
-      { href: '/about', label: 'About' },
-      { href: '/services', label: 'Services' },
-      { href: '/team', label: 'Team' },
-      { href: '/locations', label: 'Locations' },
-      { href: '/start', label: 'Get Started' },
-    ]
-  }
+  // Home link - relative on main, absolute elsewhere
+  const homeHref = site === 'main' ? '/' : mainUrl
   
-  // Wisdom/Wellness - shared pages go to main, services stay relative
+  // Shared pages always go to main
+  const aboutHref = site === 'main' ? '/about' : `${mainUrl}/about`
+  const teamHref = site === 'main' ? '/team' : `${mainUrl}/team`
+  const locationsHref = site === 'main' ? '/locations' : `${mainUrl}/locations`
+  const startHref = site === 'main' ? '/start' : `${mainUrl}/start`
+
   return [
-    { href: `${mainUrl}/about`, label: 'About' },
-    { href: '/services', label: 'Services' },
-    { href: `${mainUrl}/team`, label: 'Team' },
-    { href: `${mainUrl}/locations`, label: 'Locations' },
-    { href: `${mainUrl}/start`, label: 'Get Started' },
+    { href: homeHref, label: 'Home' },
+    { href: aboutHref, label: 'About' },
+    { 
+      href: `${wisdomUrl}/services`, 
+      label: 'Therapy',
+      dropdown: THERAPY_SERVICES.slice(0, 6).map(s => ({
+        href: `${wisdomUrl}/services/${s.slug}`,
+        label: s.label
+      }))
+    },
+    { 
+      href: `${wellnessUrl}/services`, 
+      label: 'Wellness',
+      dropdown: WELLNESS_SERVICES.slice(0, 6).map(s => ({
+        href: `${wellnessUrl}/services/${s.slug}`,
+        label: s.label
+      }))
+    },
+    { href: teamHref, label: 'Team' },
+    { href: locationsHref, label: 'Locations' },
+    { href: startHref, label: 'Get Started' },
   ]
 }
 

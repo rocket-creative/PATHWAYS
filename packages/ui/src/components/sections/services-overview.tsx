@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Brain, Hand, Leaf } from 'lucide-react'
 import { useScrollAnimation } from '../../lib/use-scroll-animation'
 import { SITE_CONFIG, type SiteName } from '../../lib/site-config'
@@ -66,7 +67,15 @@ export function ServicesOverview({ site = 'main' }: ServicesOverviewProps) {
           </div>
           
           <div className="hidden lg:col-span-2 lg:col-start-11 lg:block">
-            <div className="img-placeholder aspect-square" />
+            <div className="relative aspect-square overflow-hidden rounded-lg">
+              <Image 
+                src="/hero-images/freepik__professional-studio-photograph-of-subject-descript__19259.jpeg" 
+                alt="Wellness services" 
+                fill 
+                className="object-cover" 
+                sizes="200px" 
+              />
+            </div>
           </div>
         </div>
 

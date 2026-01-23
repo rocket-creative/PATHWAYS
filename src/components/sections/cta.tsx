@@ -4,7 +4,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
-// Placeholder images used
 
 /**
  * CTA Section - Cream background with scroll animation
@@ -73,10 +72,10 @@ export function CTASection() {
               transform: isVisible ? 'translateX(0)' : 'translateX(30px)'
             }}
           >
-            <div className="relative aspect-[3/2] w-full overflow-hidden">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
               <Image
-                src={"/placeholder-grey.svg"}
-                alt="Pathways Within community"
+                src="/hero-images/freepik__professional-studio-photograph-of-a-woman-with-pea__19264.jpeg"
+                alt="Woman finding peace and wellness"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"

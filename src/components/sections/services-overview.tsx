@@ -4,7 +4,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Brain, Hand, Leaf } from 'lucide-react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
-// Placeholder images used
 
 /**
  * Services Overview - White background with scroll animation
@@ -62,13 +61,13 @@ export function ServicesOverview() {
           
           {/* Small decorative image */}
           <div className="hidden lg:col-span-2 lg:col-start-11 lg:block">
-            <div className="relative aspect-[3/2] w-full overflow-hidden">
+            <div className="relative aspect-square w-full overflow-hidden rounded-lg">
               <Image
-                src={"/placeholder-grey.svg"}
-                alt="Pathways Within community"
+                src="/hero-images/freepik__professional-studio-photograph-of-subject-descript__19259.jpeg"
+                alt="Wellness services"
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 0vw, 16vw"
+                sizes="200px"
               />
             </div>
           </div>

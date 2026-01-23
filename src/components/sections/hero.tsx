@@ -27,9 +27,9 @@ export function HeroSection({
 
   return (
     <section className="relative min-h-[85vh] bg-white">
-      <div className="grid min-h-[85vh] lg:grid-cols-3">
-        {/* Left 1/3 - Content */}
-        <div className="flex flex-col justify-center px-6 py-12 sm:px-8 lg:px-12 lg:py-20">
+      <div className="grid min-h-[85vh] lg:grid-cols-5">
+        {/* Left ~40% - Content */}
+        <div className="flex flex-col justify-center px-6 py-12 sm:px-8 lg:col-span-2 lg:px-12 lg:py-20 xl:px-16">
           <Link href="/" className="mb-10 block lg:mb-14">
             <img 
               src="/pathways-logo.png" 
@@ -65,15 +65,15 @@ export function HeroSection({
           </div>
         </div>
         
-        {/* Right 2/3 - Full Image */}
-        <div className="relative order-first min-h-[300px] lg:order-last lg:col-span-2">
+        {/* Right ~60% - Full Image */}
+        <div className="relative order-first min-h-[300px] lg:order-last lg:col-span-3">
           <Image
             src={image}
             alt={imageAlt}
             fill
             priority
             className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 66vw"
+            sizes="(max-width: 1024px) 100vw, 60vw"
           />
         </div>
       </div>

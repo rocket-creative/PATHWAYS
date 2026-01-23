@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react'
 
 interface NavLink {
@@ -78,19 +77,7 @@ export function Navigation() {
 
   return (
     <header className="border-b border-[rgb(var(--border))] bg-white">
-      <nav className="flex h-14 items-center justify-between px-6 lg:h-16 lg:px-12">
-        
-        {/* Logo */}
-        <Link href="/" className="flex-shrink-0">
-          <Image 
-            src="/logo.png" 
-            alt="Pathways Within" 
-            width={120}
-            height={40}
-            className="h-8 w-auto lg:h-10"
-          />
-        </Link>
-
+      <nav className="flex h-14 items-center justify-center px-6 lg:h-16 lg:px-12">
         {/* Desktop Navigation */}
         <div ref={dropdownRef} className="hidden items-center gap-6 lg:flex xl:gap-8">
           {navLinks.map((link) => (
@@ -131,8 +118,7 @@ export function Navigation() {
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex h-14 items-center justify-between px-6">
-          <Image src="/logo.png" alt="Pathways Within" width={100} height={28} className="h-7 w-auto brightness-0 invert" />
+        <div className="flex h-14 items-center justify-end px-6">
           <button onClick={() => setIsOpen(false)} className="p-2 text-white" aria-label="Close menu">
             <X className="h-6 w-6" />
           </button>
@@ -177,7 +163,7 @@ function NavItem({
       <Link
         href={link.href}
         className="text-sm uppercase tracking-widest transition-colors text-[rgb(var(--color-navy))] hover:text-[rgb(var(--color-green))]"
-        style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 600 }}
+        style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 300 }}
       >
         {link.label}
       </Link>
@@ -189,7 +175,7 @@ function NavItem({
       <button
         onClick={onToggle}
         className="flex items-center gap-1 text-sm uppercase tracking-widest transition-colors text-[rgb(var(--color-navy))] hover:text-[rgb(var(--color-green))]"
-        style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 600 }}
+        style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 300 }}
       >
         {link.label}
         <ChevronDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />

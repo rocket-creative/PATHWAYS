@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Mail, Phone, Clock, MapPin, AlertTriangle, MessageCircle, Check } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
-// Placeholder images used
+import { PLACEHOLDER_IMAGE } from '@/lib/placeholder-image'
 
 const locations = [
   { name: 'Garden City', address: '520 Franklin Ave, Suite L1', city: 'Garden City, NY 11530' },
@@ -404,7 +404,7 @@ export default function ContactPage() {
               
               <div className="relative aspect-[3/2] overflow-hidden">
                 <Image
-                  src={getHeroImageByIndex(0)}
+                  src={PLACEHOLDER_IMAGE}
                   alt="Pathways Within office"
                   fill
                   className="object-cover"

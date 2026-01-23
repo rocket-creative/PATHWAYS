@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ChevronDown, Phone, MessageCircle, AlertTriangle } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
-// Placeholder images used
+import { PLACEHOLDER_IMAGE } from '@/lib/placeholder-image'
 
 const faqCategories = [
   {
@@ -144,7 +144,7 @@ export default function FAQPage() {
                 {/* Small decorative image */}
                 <div className="relative mb-8 aspect-[3/2] overflow-hidden">
                   <Image
-                    src={getHeroImageByIndex(0)}
+                    src={PLACEHOLDER_IMAGE}
                     alt="Pathways Within"
                     fill
                     className="object-cover"

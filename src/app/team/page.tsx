@@ -5,8 +5,9 @@ import { ArrowRight } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
-// Placeholder images used
+import { PLACEHOLDER_IMAGE } from '@/lib/placeholder-image'
 import { getHeadshotForPerson } from '@/lib/headshot-images'
+import { HERO_IMAGES } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'Meet Our Team | Pathways Within',
@@ -161,7 +162,7 @@ export default function TeamPage() {
         body="Our team brings together decades of combined experience in mental health, holistic wellness, and whole person care. Every member shares our commitment to creating a safe, judgment free space where you can heal and grow."
         variant="stacked"
         size="md"
-        image={{ alt: 'Pathways Within team members', placeholder: true }}
+        image={{ src: HERO_IMAGES.team[0], alt: 'Pathways Within team members' }}
         imageStyle="warm"
       />
 
@@ -348,7 +349,7 @@ export default function TeamPage() {
               <div key={dog.name} className="text-center">
                 <div className="relative mx-auto mb-6 aspect-[3/2] max-w-xs overflow-hidden rounded-full">
                   <Image
-                    src={getHeroImageByIndex(index)}
+                    src={PLACEHOLDER_IMAGE}
                     alt={dog.name}
                     fill
                     className="object-cover"

@@ -5,7 +5,7 @@ import { ArrowRight, Heart, Users, Sparkles, Shield } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
-import { getOfficeImageByIndex } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'About Us | Pathways Within',
@@ -249,10 +249,10 @@ export default function AboutPage() {
         <div className="container-site py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div>
-              <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
+              <div className="relative aspect-[3/2] overflow-hidden rounded-lg shadow-md">
                 <Image
-                  src={getOfficeImageByIndex(0)}
-                  alt="Pathways Within office"
+                  src={getHeroImageByIndex(0)}
+                  alt="Pathways Within community"
                   fill
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -307,10 +307,10 @@ export default function AboutPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[1, 2, 3, 4].map((index) => (
-                <div key={index} className="relative aspect-[3/2] overflow-hidden rounded-lg">
+                <div key={index} className="relative aspect-[3/2] overflow-hidden rounded-lg shadow-sm">
                   <Image
-                    src={getOfficeImageByIndex(index)}
-                    alt={`Pathways Within office ${index}`}
+                    src={getHeroImageByIndex(index)}
+                    alt={`Pathways Within community ${index}`}
                     fill
                     className="object-cover"
                     sizes="(max-width: 1024px) 50vw, 25vw"

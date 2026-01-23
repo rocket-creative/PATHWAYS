@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ChevronDown, Phone, MessageCircle, AlertTriangle } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
-import { getRandomOfficeImage } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 const faqCategories = [
   {
@@ -144,7 +144,7 @@ export default function FAQPage() {
                 {/* Small decorative image */}
                 <div className="relative mb-8 aspect-[3/2] overflow-hidden rounded-lg">
                   <Image
-                    src={getRandomOfficeImage()}
+                    src={getHeroImageByIndex(0)}
                     alt="Pathways Within"
                     fill
                     className="object-cover"

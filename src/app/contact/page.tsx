@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Mail, Phone, Clock, MapPin, AlertTriangle, MessageCircle, Check } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
-import { getRandomOfficeImage } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 
 const locations = [
   { name: 'Garden City', address: '520 Franklin Ave, Suite L1', city: 'Garden City, NY 11530' },
@@ -404,7 +404,7 @@ export default function ContactPage() {
               
               <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
                 <Image
-                  src={getRandomOfficeImage()}
+                  src={getHeroImageByIndex(0)}
                   alt="Pathways Within office"
                   fill
                   className="object-cover"

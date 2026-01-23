@@ -5,7 +5,7 @@ import { ArrowRight } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
-import { getOfficeImageByIndex } from '@/lib/office-images'
+import { getHeroImageByIndex } from '@/lib/hero-images'
 import { getHeadshotForPerson } from '@/lib/headshot-images'
 
 export const metadata: Metadata = {
@@ -347,7 +347,7 @@ export default function TeamPage() {
               <div key={dog.name} className="text-center">
                 <div className="relative mx-auto mb-6 aspect-[3/2] max-w-xs overflow-hidden rounded-full">
                   <Image
-                    src={getOfficeImageByIndex(index)}
+                    src={getHeroImageByIndex(index)}
                     alt={dog.name}
                     fill
                     className="object-cover"

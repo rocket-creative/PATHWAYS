@@ -100,23 +100,23 @@ export function PageHero({
     switch (layout) {
       case 'stacked':
         return (
-          <div className="flex flex-col gap-4">
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+          <div className="flex flex-col gap-3 max-w-[360px]">
+            <div className="relative aspect-square w-full overflow-hidden rounded-lg shadow-md">
               <Image
                 src={getHeroImageByIndex(0)}
                 alt="Pathways Within community"
                 fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover object-top"
+                sizes="360px"
               />
             </div>
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+            <div className="relative aspect-square w-full overflow-hidden rounded-lg shadow-md">
               <Image
                 src={getHeroImageByIndex(1)}
                 alt="Pathways Within community"
                 fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover object-top"
+                sizes="360px"
               />
             </div>
           </div>
@@ -124,23 +124,23 @@ export function PageHero({
 
       case 'sideBySide':
         return (
-          <div className="grid grid-cols-2 gap-4">
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+          <div className="grid grid-cols-2 gap-3 max-w-[480px]">
+            <div className="relative aspect-square w-full overflow-hidden rounded-lg shadow-md">
               <Image
                 src={getHeroImageByIndex(0)}
                 alt="Pathways Within community"
                 fill
-                className="object-cover"
-                sizes="(max-width: 768px) 50vw, 25vw"
+                className="object-cover object-top"
+                sizes="220px"
               />
             </div>
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+            <div className="relative aspect-square w-full overflow-hidden rounded-lg shadow-md">
               <Image
                 src={getHeroImageByIndex(1)}
                 alt="Pathways Within community"
                 fill
-                className="object-cover"
-                sizes="(max-width: 768px) 50vw, 25vw"
+                className="object-cover object-top"
+                sizes="220px"
               />
             </div>
           </div>

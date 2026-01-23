@@ -166,19 +166,19 @@ export default function StartPage() {
               </p>
             </div>
             
-            {/* Single hero image */}
-            <div className="hidden lg:col-span-6 lg:block">
+            {/* Single hero image - right-justified portrait */}
+            <div className="hidden lg:col-span-6 lg:flex lg:justify-end lg:block">
               <div className="animate-on-scroll" style={{ transitionDelay: '200ms' }}>
-                <div className="relative aspect-[3/2] overflow-hidden rounded-lg shadow-2xl">
+                <div className="relative aspect-[4/5] w-full max-w-[440px] overflow-hidden rounded-lg shadow-2xl lg:aspect-[3/4]">
                   <Image
                     src={getHeroImageByIndex(0)}
                     alt="Pathways Within community"
                     fill
-                    className="object-cover"
-                    sizes="50vw"
+                    className="object-cover object-right"
+                    sizes="440px"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-[rgb(var(--color-breezy))]/10 to-[rgb(var(--color-green))]/10" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-black/5 via-[rgb(var(--color-breezy))]/5 to-[rgb(var(--color-green))]/5" />
                 </div>
               </div>
             </div>

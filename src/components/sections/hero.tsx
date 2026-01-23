@@ -66,16 +66,16 @@ export function HeroSection() {
             </div>
           </div>
           
-          {/* Right image area - spans 7 cols, single tall image */}
-          <div className="relative lg:col-span-7 lg:-mr-10">
-            {/* Main tall image */}
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-2xl lg:aspect-[3/2]">
+          {/* Right image area - spans 7 cols, right-justified */}
+          <div className="relative lg:col-span-7 lg:flex lg:justify-end">
+            {/* Main hero image - right-aligned */}
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg shadow-2xl lg:aspect-[3/4] lg:max-w-[480px]">
               <Image
                 src={getHeroImageByIndex(0)}
                 alt="Pathways Within community"
                 fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 58vw"
+                className="object-cover object-right"
+                sizes="(max-width: 1024px) 100vw, 480px"
                 priority
               />
             </div>

@@ -1,11 +1,34 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, MapPin, Phone, Clock, Car, Monitor } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { JsonLd } from '@pathways/ui'
+import { generateBreadcrumbSchema } from '@/lib/structured-data'
 
 export const metadata: Metadata = {
   title: 'Our Locations | Pathways Within',
   description: 'Find Pathways Within at five convenient Long Island locations. Garden City, Port Jefferson, Massapequa, Smithtown, and Rockville Centre offer both therapy and wellness services.',
+  alternates: {
+    canonical: '/locations',
+  },
+  openGraph: {
+    title: 'Our Locations | Pathways Within',
+    description: 'Find Pathways Within at five convenient Long Island locations offering both therapy and wellness services.',
+    url: '/locations',
+  },
+}
+
+// Helper function to get image path for location
+function getLocationImagePath(locationName: string): string {
+  const imageMap: Record<string, string> = {
+    'Garden City': '/offices/garden-city.jpg',
+    'Port Jefferson': '/offices/port-jefferson.jpg',
+    'Massapequa': '/offices/massapequa.jpg',
+    'Smithtown': '/offices/smithtown.jpg',
+    'Rockville Centre': '/offices/rockville-centre.jpg',
+  }
+  return imageMap[locationName] || '/offices/garden-city.jpg'
 }
 
 const locations = [
@@ -52,9 +75,15 @@ const locations = [
   },
 ]
 
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: 'Home', url: 'https://pathwayswithin.com' },
+  { name: 'Our Locations', url: 'https://pathwayswithin.com/locations' },
+])
+
 export default function LocationsPage() {
   return (
     <main>
+      <JsonLd data={breadcrumbSchema} />
       {/* Hero - Centered style */}
       <PageHero
         eyebrow="Our Locations"
@@ -77,7 +106,15 @@ export default function LocationsPage() {
                 className={`overflow-hidden rounded-lg bg-white ${location.featured ? 'ring-2 ring-[rgb(var(--color-green))]' : ''}`}
               >
                 {/* Location image */}
-                <div className="img-placeholder aspect-[16/10]" />
+                <div className="relative aspect-[16/10] w-full overflow-hidden">
+                  <Image
+                    src={getLocationImagePath(location.name)}
+                    alt={`${location.name} office location`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
                 
                 <div className="p-8">
                 {location.featured && (

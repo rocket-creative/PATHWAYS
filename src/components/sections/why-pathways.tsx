@@ -1,7 +1,9 @@
 'use client'
 
+import Image from 'next/image'
 import { Heart, Users, MapPin, Shield } from 'lucide-react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
+import { getRandomOfficeImage } from '@/lib/office-images'
 
 /**
  * Why Pathways - Linen background with scroll animation
@@ -20,7 +22,7 @@ export function WhyPathways() {
     <section className="border-t border-[rgb(var(--border))]/50 bg-linen">
       <div ref={ref} className="container-site section">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
-          {/* Image placeholder */}
+          {/* Image */}
           <div 
             className="relative order-2 lg:order-1"
             style={{ 
@@ -29,7 +31,15 @@ export function WhyPathways() {
               transform: isVisible ? 'translateX(0)' : 'translateX(-30px)'
             }}
           >
-            <div className="img-placeholder aspect-[4/5]" />
+            <div className="relative aspect-[4/5] w-full overflow-hidden">
+              <Image
+                src={getRandomOfficeImage()}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
             {/* Accent block */}
             <div className="absolute -bottom-6 -right-6 h-32 w-32 bg-[rgb(var(--color-green))] lg:-right-12 lg:h-48 lg:w-48" />
           </div>

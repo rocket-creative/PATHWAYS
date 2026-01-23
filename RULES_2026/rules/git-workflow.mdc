@@ -1,0 +1,191 @@
+# git-workflow.mdc
+## Git Workflow & Version Control
+
+### COMMIT MESSAGE FORMAT
+
+**Structure**
+```
+<type>: <short description>
+
+[optional body]
+
+[optional footer]
+```
+
+**Types**
+- `feat`: New feature
+- `fix`: Bug fix
+- `docs`: Documentation only
+- `style`: Formatting, no code change
+- `refactor`: Code change that neither fixes nor adds
+- `perf`: Performance improvement
+- `test`: Adding or updating tests
+- `chore`: Build, config, dependencies
+
+**Rules**
+- Subject line under 72 characters
+- Use imperative mood ("Add feature" not "Added feature")
+- No period at end of subject line
+- Body explains what and why, not how
+
+**Examples**
+```
+feat: add user authentication flow
+
+Implements login, logout, and session management using NextAuth.
+Includes rate limiting on login attempts.
+
+Closes #42
+```
+
+```
+fix: prevent double form submission
+
+Disable submit button during API call to prevent duplicate entries.
+```
+
+### BRANCH NAMING
+
+**Format**
+```
+<type>/<short-description>
+```
+
+**Types**
+- `feature/` — new functionality
+- `fix/` — bug fixes
+- `hotfix/` — urgent production fixes
+- `refactor/` — code improvements
+- `docs/` — documentation updates
+- `test/` — test additions or fixes
+
+**Rules**
+- Lowercase only
+- Use hyphens, not underscores or spaces
+- Keep short but descriptive
+- Include ticket number if applicable
+
+**Examples**
+```
+feature/user-authentication
+fix/login-rate-limiting
+hotfix/payment-processing-error
+refactor/api-error-handling
+docs/api-documentation
+feature/itl-42-breeding-calculator
+```
+
+### BRANCH STRATEGY
+
+**Main Branches**
+- `main` — production ready code
+- `develop` — integration branch (if using gitflow)
+
+**For Most Projects (Simple)**
+- Branch from `main`
+- PR back to `main`
+- Deploy from `main`
+
+**For Larger Projects (Gitflow)**
+- Branch from `develop`
+- PR to `develop`
+- Release branches merge to `main` and back to `develop`
+
+### PULL REQUEST REQUIREMENTS
+
+**Before Opening PR**
+- [ ] Code compiles without errors
+- [ ] Lint passes
+- [ ] Tests pass (if present)
+- [ ] Self review completed
+- [ ] Commit history is clean
+
+**PR Description Must Include**
+- What changed and why
+- How to test
+- Screenshots for UI changes
+- Breaking changes flagged
+
+**PR Template**
+```markdown
+## What
+Brief description of changes
+
+## Why
+Context and motivation
+
+## How to Test
+Steps to verify the changes work
+
+## Screenshots
+(if applicable)
+
+## Checklist
+- [ ] Tests pass
+- [ ] Lint passes
+- [ ] Accessibility verified
+- [ ] No console errors
+```
+
+### MERGE STRATEGY
+
+**Default: Squash and Merge**
+- Creates clean history on main
+- PR title becomes commit message
+- Appropriate for most feature work
+
+**When to Rebase**
+- Clean, atomic commits that tell a story
+- Each commit is independently valid
+
+**When to Merge Commit**
+- Preserving detailed history matters
+- Large features with meaningful commit breakdown
+
+### CODE REVIEW STANDARDS
+
+**Reviewer Responsibilities**
+- Check for correctness
+- Verify tests cover changes
+- Look for security issues
+- Ensure accessibility maintained
+- Confirm no regressions
+
+**Author Responsibilities**
+- Respond to all comments
+- Request re-review after changes
+- Keep PRs reasonably sized (< 400 lines preferred)
+
+### RELEASE TAGGING
+
+**Format**
+```
+v<major>.<minor>.<patch>
+```
+
+**Examples**
+```
+v1.0.0  — initial release
+v1.1.0  — new features, backward compatible
+v1.1.1  — bug fixes
+v2.0.0  — breaking changes
+```
+
+### HOTFIX PROCESS
+
+1. Branch from `main`: `hotfix/critical-issue`
+2. Fix with minimal changes
+3. Test thoroughly
+4. PR with expedited review
+5. Merge to `main`
+6. Tag release
+7. Backport to `develop` if using gitflow
+
+### FORBIDDEN
+- Force pushing to main or shared branches
+- Committing directly to main without PR
+- Merge commits with unresolved conflicts
+- Large PRs without breaking into smaller pieces
+- Vague commit messages ("fix stuff", "updates", "WIP")
+- Committing secrets, keys, or credentials
+- Leaving console.log or debug code in commits

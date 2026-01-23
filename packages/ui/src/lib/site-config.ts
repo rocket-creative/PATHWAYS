@@ -8,13 +8,12 @@ export type SiteName = 'main' | 'wisdom' | 'wellness'
  * 
  * Production URLs (Vercel):
  * - Wisdom: https://wisdom-eight-topaz.vercel.app ✅ LIVE
- * - Wellness: [NEEDS DEPLOYMENT URL]
+ * - Wellness: https://wellness-phi-three.vercel.app ✅ LIVE
  * - Main: [NEEDS DEPLOYMENT URL] - contains /about, /team, /locations, /contact, /start
  * - CRM: https://crm-sooty-one.vercel.app ✅ LIVE
  * 
  * TODO: Update these URLs once all apps are deployed:
  * 1. Deploy apps/main to Vercel and update NEXT_PUBLIC_MAIN_URL
- * 2. Get wellness Vercel URL and update NEXT_PUBLIC_WELLNESS_URL
  */
 export const SITE_CONFIG = {
   main: {
@@ -31,8 +30,7 @@ export const SITE_CONFIG = {
   wellness: {
     name: 'Pathways Within',
     tagline: 'Wisdom and Wellness Collaborative',
-    // TODO: Update with actual wellness app URL when deployed
-    url: process.env.NEXT_PUBLIC_WELLNESS_URL || 'https://wisdom-eight-topaz.vercel.app',
+    url: process.env.NEXT_PUBLIC_WELLNESS_URL || 'https://wellness-phi-three.vercel.app',
   },
 }
 
@@ -56,6 +54,7 @@ export function getNavigationLinks(): NavLink[] {
     { href: `${mainUrl}/team`, label: 'Team' },
     { href: `${mainUrl}/locations`, label: 'Locations' },
     { href: `${mainUrl}/start`, label: 'Get Started' },
+    { href: `${mainUrl}/client-intake`, label: 'Client Intake' },
   ]
 }
 

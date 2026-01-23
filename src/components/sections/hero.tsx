@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ArrowDown } from 'lucide-react'
+import { getRandomOfficeImage } from '@/lib/office-images'
 
 /**
  * Hero Section - Editorial asymmetric layout with single tall image
@@ -68,7 +69,16 @@ export function HeroSection() {
           {/* Right image area - spans 7 cols, single tall image */}
           <div className="relative lg:col-span-7 lg:-mr-10">
             {/* Main tall image */}
-            <div className="img-placeholder aspect-[4/5] rounded-lg shadow-2xl lg:aspect-[3/4]" />
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg shadow-2xl lg:aspect-[3/4]">
+              <Image
+                src={getRandomOfficeImage()}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 58vw"
+                priority
+              />
+            </div>
             
             {/* Overlapping content block - sits on image */}
             <div className="absolute -bottom-8 left-0 right-8 bg-gradient-navy p-8 transition-transform duration-300 ease-out hover:-translate-y-2 hover:translate-x-1 lg:-left-16 lg:bottom-24 lg:right-auto lg:w-96 lg:p-12">

@@ -2,10 +2,20 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { JsonLd } from '@pathways/ui'
+import { generateBreadcrumbSchema } from '@/lib/structured-data'
 
 export const metadata: Metadata = {
   title: 'Meet Our Team | Pathways Within',
   description: 'Meet the licensed therapists, certified wellness providers, and support staff at Pathways Within. Our expert team serves Long Island with compassionate, personalized care.',
+  alternates: {
+    canonical: '/team',
+  },
+  openGraph: {
+    title: 'Meet Our Team | Pathways Within',
+    description: 'Meet the licensed therapists, certified wellness providers, and support staff at Pathways Within.',
+    url: '/team',
+  },
 }
 
 const leadership = [
@@ -131,9 +141,15 @@ const therapyDogs = [
   { name: 'Gypsy Sassafras', bio: 'A kind soul with a warm smile who connects with people on an emotional level. She holds space for laughter and crying and comforts the most sensitive feelings.', instagram: '@Gypsy_Sassafras' },
 ]
 
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: 'Home', url: 'https://pathwayswithin.com' },
+  { name: 'Our Team', url: 'https://pathwayswithin.com/team' },
+])
+
 export default function TeamPage() {
   return (
     <main>
+      <JsonLd data={breadcrumbSchema} />
       {/* Hero - Stacked banner style */}
       <PageHero
         eyebrow="Our Team"

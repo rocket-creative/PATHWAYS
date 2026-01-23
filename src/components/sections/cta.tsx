@@ -1,8 +1,10 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
+import { getRandomOfficeImage } from '@/lib/office-images'
 
 /**
  * CTA Section - Cream background with scroll animation
@@ -71,7 +73,15 @@ export function CTASection() {
               transform: isVisible ? 'translateX(0)' : 'translateX(30px)'
             }}
           >
-            <div className="img-placeholder aspect-[4/3]" />
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+              <Image
+                src={getRandomOfficeImage()}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </div>
       </div>

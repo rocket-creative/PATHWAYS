@@ -1,0 +1,1135 @@
+# seo-ai-readability.mdc
+## SEO, AI Readability & Conversion Tracking Standards (2026)
+
+THIS FILE DEFINES COMPREHENSIVE SEO, AI SEARCH OPTIMIZATION, AND TRACKING REQUIREMENTS.
+Every page must be optimized for both traditional search engines AND AI/LLM discovery.
+
+---
+
+## 1. Page Level Requirements (Every Page)
+
+### Meta Tags (Required on ALL Pages)
+
+```tsx
+// Every page.tsx MUST export metadata
+export const metadata: Metadata = {
+  title: 'Primary Keyword | Brand Name',           // 50-60 chars, keyword first
+  description: 'Compelling description...',         // 150-160 chars, include CTA
+  alternates: {
+    canonical: 'https://domain.com/page',          // REQUIRED: prevent duplicates
+  },
+  openGraph: {
+    title: 'Social Title (can differ)',
+    description: 'Social description',
+    url: 'https://domain.com/page',
+    siteName: 'Brand Name',
+    locale: 'en_US',
+    type: 'website',                               // or 'article' for blog posts
+    images: [{
+      url: '/og-image.jpg',                        // 1200x630px minimum
+      width: 1200,
+      height: 630,
+      alt: 'Descriptive alt text',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Twitter Title',
+    description: 'Twitter description',
+    images: ['/twitter-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+}
+```
+
+### Title Tag Rules
+
+| Rule | Requirement |
+|------|-------------|
+| Length | 50-60 characters (Google truncates at ~60) |
+| Format | Primary Keyword | Secondary | Brand |
+| Uniqueness | Every page MUST have unique title |
+| Keyword placement | Primary keyword within first 3 words |
+| No keyword stuffing | Natural language, readable |
+
+### Meta Description Rules
+
+| Rule | Requirement |
+|------|-------------|
+| Length | 150-160 characters |
+| Include | Primary keyword, value proposition, CTA |
+| Uniqueness | Every page MUST have unique description |
+| Active voice | "Learn how..." not "Information about..." |
+| No quotes | Avoid quotation marks (truncation issues) |
+
+### Canonical URLs
+
+REQUIRED on every page. Prevents duplicate content issues.
+
+```tsx
+alternates: {
+  canonical: 'https://domain.com/exact-page-url',
+}
+```
+
+---
+
+## 2. Structured Data / Schema Markup (JSON-LD)
+
+### Required Schema Types by Page Type
+
+| Page Type | Required Schema | Optional Schema |
+|-----------|-----------------|-----------------|
+| Homepage | Organization, WebSite, LocalBusiness | SiteNavigationElement |
+| Service pages | Service, MedicalProcedure | FAQPage, HowTo |
+| Location pages | LocalBusiness, MedicalBusiness | OpeningHoursSpecification |
+| Team/Provider pages | Person, Physician | MedicalOrganization |
+| About page | Organization, AboutPage | - |
+| Contact page | ContactPage, LocalBusiness | - |
+| FAQ page | FAQPage | - |
+| Blog/Article | Article, MedicalWebPage | BreadcrumbList |
+| Condition pages | MedicalCondition, MedicalWebPage | FAQPage |
+
+### Healthcare Specific Schema (REQUIRED for Medical Sites)
+
+```tsx
+// MedicalBusiness schema for healthcare providers
+const medicalBusinessSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalBusiness',
+  '@id': 'https://domain.com/#organization',
+  name: 'Practice Name',
+  description: 'Practice description',
+  url: 'https://domain.com',
+  telephone: '+1-XXX-XXX-XXXX',
+  email: 'contact@domain.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '123 Main St',
+    addressLocality: 'City',
+    addressRegion: 'State',
+    postalCode: '12345',
+    addressCountry: 'US',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 40.XXXXX,
+    longitude: -73.XXXXX,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '09:00',
+      closes: '17:00',
+    },
+  ],
+  medicalSpecialty: ['Psychiatry', 'Psychology'],
+  availableService: [
+    {
+      '@type': 'MedicalTherapy',
+      name: 'Individual Therapy',
+      description: 'One on one therapy sessions',
+    },
+  ],
+  sameAs: [
+    'https://facebook.com/practice',
+    'https://instagram.com/practice',
+    'https://linkedin.com/company/practice',
+  ],
+  priceRange: '$$',
+  acceptsReservations: true,
+  hasCredential: {
+    '@type': 'EducationalOccupationalCredential',
+    credentialCategory: 'license',
+    recognizedBy: {
+      '@type': 'Organization',
+      name: 'State Medical Board',
+    },
+  },
+}
+```
+
+### Physician/Provider Schema
+
+```tsx
+const physicianSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Physician',
+  name: 'Dr. Jane Smith',
+  jobTitle: 'Licensed Clinical Psychologist',
+  description: 'Bio description',
+  image: 'https://domain.com/images/dr-smith.jpg',
+  telephone: '+1-XXX-XXX-XXXX',
+  email: 'drsmith@domain.com',
+  medicalSpecialty: 'Psychiatry',
+  availableService: ['Individual Therapy', 'EMDR'],
+  worksFor: {
+    '@type': 'MedicalOrganization',
+    name: 'Practice Name',
+  },
+  alumniOf: {
+    '@type': 'EducationalOrganization',
+    name: 'University Name',
+  },
+  hasCredential: [
+    {
+      '@type': 'EducationalOccupationalCredential',
+      credentialCategory: 'degree',
+      name: 'Ph.D. in Clinical Psychology',
+    },
+  ],
+}
+```
+
+### BreadcrumbList (Required on ALL Pages Except Homepage)
+
+```tsx
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    {
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: 'https://domain.com',
+    },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Services',
+      item: 'https://domain.com/services',
+    },
+    {
+      '@type': 'ListItem',
+      position: 3,
+      name: 'Individual Therapy',
+      item: 'https://domain.com/services/individual-therapy',
+    },
+  ],
+}
+```
+
+### FAQPage Schema
+
+```tsx
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    {
+      '@type': 'Question',
+      name: 'What is the question?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'The complete answer text.',
+      },
+    },
+  ],
+}
+```
+
+### Schema Implementation Rules
+
+| Rule | Requirement |
+|------|-------------|
+| Format | JSON-LD only (not microdata or RDFa) |
+| Placement | In `<head>` via Next.js metadata or component |
+| Validation | Must pass Google Rich Results Test |
+| Accuracy | Schema MUST match visible page content |
+| No fabrication | Never fake reviews, ratings, or credentials |
+| Updates | Dynamic content (hours, prices) must stay current |
+
+---
+
+## 3. AI Search Optimization (AEO/GEO)
+
+### Content Structure for LLM Parsing
+
+AI systems (ChatGPT, Perplexity, Gemini, Google AI Overviews) favor:
+
+| Element | Implementation |
+|---------|----------------|
+| Clear headings | H1 → H2 → H3 hierarchy, question format when relevant |
+| Bullet points | Use for lists, features, benefits |
+| Tables | Use for comparisons, specifications, pricing |
+| Definitions | Lead with clear definitions for key terms |
+| Summaries | TL;DR or key takeaways at top or bottom |
+| FAQ sections | Question/answer format on every service page |
+
+### Content Requirements for AI Visibility
+
+```markdown
+## Page Structure Template
+
+1. **Opening definition/summary** (2-3 sentences answering "what is X?")
+2. **Key benefits/features** (bullet list)
+3. **Detailed explanation** (H2 sections)
+4. **How it works** (numbered steps or process)
+5. **Who it's for** (target audience)
+6. **FAQ section** (3-5 common questions)
+7. **CTA** (clear next step)
+```
+
+### E-E-A-T Signals (Critical for Healthcare/YMYL)
+
+| Signal | Implementation |
+|--------|----------------|
+| Experience | Include case studies, patient testimonials (anonymized), practitioner insights |
+| Expertise | Author bios with credentials, degrees, certifications, years of experience |
+| Authoritativeness | Cite reputable sources (NIH, APA, peer reviewed), link to credentials |
+| Trustworthiness | Clear disclaimers, last updated dates, contact info, privacy policy |
+
+### Required E-E-A-T Elements for Medical Content
+
+```tsx
+// Every medical/health content page needs:
+<article>
+  {/* Author attribution */}
+  <div className="author-info">
+    <p>Written by [Name], [Credentials]</p>
+    <p>Reviewed by [Medical Reviewer], [MD/PhD/etc.]</p>
+    <p>Last updated: [Date]</p>
+  </div>
+  
+  {/* Medical disclaimer */}
+  <aside className="disclaimer">
+    This content is for informational purposes only and does not constitute 
+    medical advice. Always consult a qualified healthcare provider.
+  </aside>
+  
+  {/* Sources/References */}
+  <section className="references">
+    <h2>Sources</h2>
+    <ol>
+      <li><a href="https://..." rel="noopener">Source Name (Year)</a></li>
+    </ol>
+  </section>
+</article>
+```
+
+### llms.txt File (Recommended)
+
+Create `/public/llms.txt` to guide AI crawlers:
+
+```txt
+# [Business Name]
+> [One line description of business]
+
+## About
+[Brief description of the business]
+
+## Services
+- [Service 1]
+- [Service 2]
+- [Service 3]
+
+## Locations
+- [Location 1]
+- [Location 2]
+
+## Contact
+Phone: [Phone number]
+Email: [Email address]
+```
+
+---
+
+## 4. Technical SEO Requirements
+
+### Sitemap (Required)
+
+```tsx
+// app/sitemap.ts
+import { MetadataRoute } from 'next'
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = 'https://domain.com'
+  
+  // Static pages
+  const staticPages = [
+    '',
+    '/about',
+    '/services',
+    '/team',
+    '/locations',
+    '/contact',
+    '/faq',
+  ].map(route => ({
+    url: `${baseUrl}${route}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: route === '' ? 1 : 0.8,
+  }))
+  
+  // Dynamic pages (services, locations, etc.)
+  const servicePages = services.map(service => ({
+    url: `${baseUrl}/services/${service.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }))
+  
+  return [...staticPages, ...servicePages]
+}
+```
+
+### Robots.txt (Required)
+
+```txt
+# /public/robots.txt
+User-agent: *
+Allow: /
+
+# Block admin/internal paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Sitemaps
+Sitemap: https://domain.com/sitemap.xml
+
+# AI Crawlers (optional, for control)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+```
+
+### URL Structure Rules
+
+| Rule | Requirement |
+|------|-------------|
+| Format | Lowercase, hyphens (not underscores) |
+| Length | Under 75 characters |
+| Keywords | Include primary keyword |
+| Hierarchy | Reflect site structure: /services/therapy/emdr |
+| No parameters | Avoid ?id=123 style URLs for content pages |
+| Trailing slashes | Be consistent (pick one, stick with it) |
+
+### Internal Linking Requirements
+
+| Rule | Requirement |
+|------|-------------|
+| Contextual links | Link related services/content within body text |
+| Anchor text | Descriptive, keyword rich (not "click here") |
+| Breadcrumbs | Visual breadcrumbs on all pages except homepage |
+| Related content | "Related Services" or "You May Also Like" sections |
+| Footer links | Key pages accessible from footer |
+
+### Image SEO
+
+| Rule | Requirement |
+|------|-------------|
+| Alt text | Descriptive, includes keywords naturally |
+| File names | Descriptive: `individual-therapy-session.jpg` not `IMG_1234.jpg` |
+| Format | WebP/AVIF with fallbacks |
+| Lazy loading | Below fold images lazy loaded |
+| Dimensions | Explicit width/height to prevent CLS |
+
+---
+
+## 5. Conversion Tracking & Retargeting
+
+### Google Ads / GA4 Setup (Required)
+
+Every site MUST have conversion tracking ready, consent gated.
+
+```tsx
+// packages/ui/src/components/analytics/consent-scripts.tsx
+// Google Tag (gtag.js) - loads ONLY after consent
+
+{consent?.analytics && (
+  <>
+    <Script
+      src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+      strategy="afterInteractive"
+    />
+    <Script id="google-analytics" strategy="afterInteractive">
+      {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${GA_MEASUREMENT_ID}', {
+          page_path: window.location.pathname,
+          anonymize_ip: true,
+        });
+        
+        // Google Ads conversion tracking
+        gtag('config', '${GOOGLE_ADS_ID}');
+      `}
+    </Script>
+  </>
+)}
+```
+
+### Google Ads Conversion Events
+
+```tsx
+// Track key conversion events
+const trackConversion = (conversionId: string, value?: number) => {
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', 'conversion', {
+      send_to: conversionId,
+      value: value,
+      currency: 'USD',
+    })
+  }
+}
+
+// Example conversions to track:
+// - Form submission: trackConversion('AW-XXXXX/YYYYY')
+// - Phone click: trackConversion('AW-XXXXX/ZZZZZ')
+// - Book appointment: trackConversion('AW-XXXXX/AAAAA', 150)
+```
+
+### Enhanced Conversions Setup
+
+```tsx
+// Send hashed user data for better attribution
+gtag('set', 'user_data', {
+  email: hashedEmail,        // SHA256 hashed
+  phone_number: hashedPhone, // SHA256 hashed, E.164 format
+  address: {
+    first_name: hashedFirstName,
+    last_name: hashedLastName,
+    postal_code: postalCode,
+  },
+})
+```
+
+### Meta (Facebook) Pixel Setup (Required)
+
+```tsx
+// Meta Pixel - loads ONLY after marketing consent
+
+{consent?.marketing && (
+  <Script id="meta-pixel" strategy="afterInteractive">
+    {`
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      
+      fbq('init', '${META_PIXEL_ID}');
+      fbq('track', 'PageView');
+    `}
+  </Script>
+)}
+```
+
+### Meta Pixel Events
+
+```tsx
+// Standard events to implement
+const MetaEvents = {
+  // Page events
+  PageView: () => fbq('track', 'PageView'),
+  ViewContent: (params) => fbq('track', 'ViewContent', params),
+  
+  // Lead events
+  Lead: (params) => fbq('track', 'Lead', params),
+  CompleteRegistration: (params) => fbq('track', 'CompleteRegistration', params),
+  Contact: () => fbq('track', 'Contact'),
+  
+  // Scheduling events
+  Schedule: (params) => fbq('track', 'Schedule', params),
+  
+  // Custom events
+  FormStart: () => fbq('trackCustom', 'FormStart'),
+  PhoneClick: () => fbq('trackCustom', 'PhoneClick'),
+}
+
+// Example implementation
+<button onClick={() => {
+  MetaEvents.Contact()
+  // Also track in GA4
+  gtag('event', 'contact_click')
+}}>
+  Contact Us
+</button>
+```
+
+### Server Side Tracking (CAPI) - Recommended
+
+For maximum attribution accuracy, implement Conversions API:
+
+```tsx
+// Server action for CAPI
+async function sendMetaConversion(event: {
+  event_name: string
+  event_id: string  // Same as client-side for deduplication
+  user_data: {
+    em?: string     // Hashed email
+    ph?: string     // Hashed phone
+    fn?: string     // Hashed first name
+    ln?: string     // Hashed last name
+    ct?: string     // City
+    st?: string     // State
+    zp?: string     // Zip
+    country?: string
+    client_ip_address?: string
+    client_user_agent?: string
+    fbc?: string    // Click ID from cookie
+    fbp?: string    // Browser ID from cookie
+  }
+  custom_data?: {
+    value?: number
+    currency?: string
+    content_name?: string
+  }
+}) {
+  const response = await fetch(
+    `https://graph.facebook.com/v18.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        data: [{
+          event_name: event.event_name,
+          event_time: Math.floor(Date.now() / 1000),
+          event_id: event.event_id,
+          action_source: 'website',
+          user_data: event.user_data,
+          custom_data: event.custom_data,
+        }],
+      }),
+    }
+  )
+  return response.json()
+}
+```
+
+### Event Deduplication (Critical)
+
+```tsx
+// Generate unique event ID for deduplication
+const generateEventId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+
+// Use same event_id for both client and server
+const eventId = generateEventId()
+
+// Client side
+fbq('track', 'Lead', { eventID: eventId })
+
+// Server side (CAPI)
+sendMetaConversion({
+  event_name: 'Lead',
+  event_id: eventId,  // MUST match client
+  // ...
+})
+```
+
+### Conversion Events to Track
+
+| Event | Trigger | Platforms |
+|-------|---------|-----------|
+| PageView | Every page load | GA4, Meta |
+| ViewContent | Service page view | GA4, Meta |
+| Lead | Form submission | GA4, Meta, Google Ads |
+| Contact | Contact form submit | GA4, Meta, Google Ads |
+| Schedule | Appointment booked | GA4, Meta, Google Ads |
+| PhoneClick | Phone number click | GA4, Meta, Google Ads |
+| FormStart | Form interaction begins | GA4, Meta |
+| Scroll | 25%, 50%, 75%, 90% depth | GA4 |
+
+### Retargeting Audiences to Build
+
+| Audience | Definition | Use Case |
+|----------|------------|----------|
+| All Visitors | Anyone who visited site | Broad awareness |
+| Service Viewers | Viewed specific service pages | Service specific ads |
+| Contact Page Visitors | Visited contact but didn't submit | High intent, didn't convert |
+| Form Abandoners | Started form but didn't complete | Recovery campaigns |
+| Converters | Submitted form / booked | Exclusion or upsell |
+| Engaged Users | 3+ pages or 2+ min on site | Quality traffic |
+
+---
+
+## 6. Page Speed & Core Web Vitals
+
+### Required Metrics
+
+| Metric | Target | Measurement |
+|--------|--------|-------------|
+| LCP | < 2.5s | Largest Contentful Paint |
+| INP | < 200ms | Interaction to Next Paint |
+| CLS | < 0.1 | Cumulative Layout Shift |
+| FCP | < 1.8s | First Contentful Paint |
+| TTFB | < 800ms | Time to First Byte |
+
+### Implementation Requirements
+
+- Server side rendering for content pages
+- Image optimization (Next.js Image component)
+- Font preloading with `font-display: swap`
+- Critical CSS inlined
+- JavaScript deferred/async
+- Third party scripts consent gated and lazy loaded
+
+---
+
+## 7. Local SEO (Multi Location)
+
+### Google Business Profile Integration
+
+Each location MUST have:
+- Verified Google Business Profile
+- NAP consistency (Name, Address, Phone) across all pages
+- Location specific landing pages
+- LocalBusiness schema per location
+- Location specific reviews strategy
+
+### Location Page Requirements
+
+```tsx
+// Each location page needs:
+export const metadata: Metadata = {
+  title: '[Service] in [City], [State] | [Business Name]',
+  description: '[Services description] in [City], [Region]. [Key services]. Call [phone number].',
+}
+
+// LocalBusiness schema with specific address
+// Embedded Google Map
+// Location specific services
+// Hours of operation
+// Parking/transit info
+// Staff at this location
+```
+
+---
+
+## 8. Content Freshness
+
+### Update Requirements
+
+| Content Type | Review Frequency | Update Triggers |
+|--------------|------------------|-----------------|
+| Service pages | Quarterly | New services, pricing changes |
+| Team pages | Monthly | New hires, credential updates |
+| Location pages | Monthly | Hours changes, new locations |
+| FAQ pages | Quarterly | New common questions |
+| Blog/Articles | As needed | New research, guideline changes |
+| Legal pages | Annually | Policy changes |
+
+### Last Updated Display
+
+```tsx
+// Show last updated on content pages
+<p className="text-sm text-muted">
+  Last updated: {new Date(lastUpdated).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })}
+</p>
+```
+
+---
+
+## 9. Checklist: Page Launch Requirements
+
+Before any page goes live, verify:
+
+### SEO Fundamentals
+- [ ] Unique title tag (50-60 chars, keyword first)
+- [ ] Unique meta description (150-160 chars, includes CTA)
+- [ ] Canonical URL set
+- [ ] Open Graph tags complete
+- [ ] Twitter Card tags complete
+- [ ] H1 tag present (one per page, includes keyword)
+- [ ] H2/H3 hierarchy logical
+- [ ] Internal links to related content
+- [ ] External links to authoritative sources (medical content)
+- [ ] Images have descriptive alt text
+- [ ] URL is clean and keyword rich
+
+### Structured Data
+- [ ] Appropriate schema type implemented
+- [ ] Schema validates in Rich Results Test
+- [ ] BreadcrumbList schema (non homepage)
+- [ ] FAQPage schema (if FAQ section exists)
+
+### E-E-A-T (Medical/YMYL Content)
+- [ ] Author attribution with credentials
+- [ ] Medical reviewer attribution (if applicable)
+- [ ] Last updated date displayed
+- [ ] Medical disclaimer present
+- [ ] Sources/references cited
+- [ ] Contact information accessible
+
+### Tracking
+- [ ] GA4 pageview fires (after consent)
+- [ ] Meta Pixel pageview fires (after consent)
+- [ ] Conversion events configured for CTAs
+- [ ] Phone click tracking implemented
+- [ ] Form submission tracking implemented
+
+### Technical
+- [ ] Page loads under 3 seconds
+- [ ] Mobile responsive
+- [ ] No console errors
+- [ ] No broken links
+- [ ] Included in sitemap
+
+---
+
+## 10. Forbidden Practices
+
+### SEO Violations
+- Duplicate title tags across pages
+- Missing or duplicate meta descriptions
+- Keyword stuffing
+- Hidden text or links
+- Doorway pages
+- Cloaking (showing different content to bots)
+- Link schemes or purchased links
+- Thin content (under 300 words for service pages)
+- Missing canonical tags
+- Orphan pages (no internal links)
+
+### Schema Violations
+- Schema that doesn't match visible content
+- Fake reviews or ratings
+- Fabricated credentials
+- Missing required properties
+- Using deprecated schema types
+
+### Tracking Violations
+- Loading tracking scripts before consent
+- Missing event deduplication
+- Tracking PII without hashing
+- Missing consent records
+- Double counting conversions
+
+### E-E-A-T Violations
+- Medical claims without sources
+- Missing author attribution on YMYL content
+- Outdated medical information
+- No medical disclaimer
+- Anonymous health advice
+
+---
+
+## 11. Deprecated/Obsolete Practices (NEVER USE)
+
+These practices are outdated, ignored by search engines, or can actively harm rankings.
+
+### Meta Tags (BANNED)
+
+| Tag | Status | Reason |
+|-----|--------|--------|
+| `<meta name="keywords">` | **BANNED** | Ignored by Google since 2009, can signal spam |
+| `<meta name="revisit-after">` | **BANNED** | Never worked, ignored by all crawlers |
+| `<meta name="distribution">` | **BANNED** | Obsolete, no effect |
+| `<meta name="rating">` | **BANNED** | Not used by search engines |
+| `<meta name="expires">` | **BANNED** | Use HTTP headers instead |
+| `<meta http-equiv="pragma">` | **BANNED** | Use HTTP headers instead |
+| `<meta http-equiv="cache-control">` | **BANNED** | Use HTTP headers instead |
+| `<meta name="copyright">` | **BANNED** | No SEO value |
+| `<meta name="author">` (standalone) | **BANNED** | Use structured data instead |
+| `<meta name="generator">` | **BANNED** | Security risk, no SEO value |
+| `<meta name="abstract">` | **BANNED** | Obsolete |
+| `<meta name="classification">` | **BANNED** | Obsolete |
+| `<meta name="directory">` | **BANNED** | Obsolete |
+| `<meta name="coverage">` | **BANNED** | Obsolete |
+
+### Robots Meta Directives (DEPRECATED)
+
+| Directive | Status | Reason |
+|-----------|--------|--------|
+| `noodp` | **DEPRECATED** | DMOZ/ODP shut down in 2017 |
+| `noydir` | **DEPRECATED** | Yahoo Directory shut down in 2014 |
+| `unavailable_after` | **DEPRECATED** | Google deprecated January 2023 |
+
+### Schema Types (DEPRECATED by Google Jan 2026)
+
+| Schema Type | Status | Alternative |
+|-------------|--------|-------------|
+| `PracticeProblem` | **DEPRECATED** | Remove entirely |
+| `Dataset` (for general search) | **DEPRECATED** | Only for Dataset Search |
+| `CourseInfo` | **DEPRECATED** | Use `Course` instead |
+| `EstimatedSalary` | **DEPRECATED** | Use `JobPosting` with salary |
+| `LearningVideo` | **DEPRECATED** | Use `VideoObject` |
+| `SpecialAnnouncement` | **DEPRECATED** | Remove (COVID era) |
+| `VehicleListing` | **DEPRECATED** | Use `Vehicle` or `Product` |
+
+### Link Attributes (OBSOLETE)
+
+| Attribute | Status | Reason |
+|-----------|--------|--------|
+| `rel="author"` (to Google+) | **OBSOLETE** | Google+ shut down 2019 |
+| `rel="publisher"` | **OBSOLETE** | Google+ shut down 2019 |
+
+### Other Deprecated Practices
+
+| Practice | Status | Reason |
+|----------|--------|--------|
+| XML sitemap `<priority>` | **IGNORED** | Google ignores this field |
+| XML sitemap `<changefreq>` | **IGNORED** | Google ignores this field |
+| Exact match domains | **PENALIZED** | EMD update 2012 |
+| Keyword density targeting | **OBSOLETE** | Focus on intent, not percentages |
+| Meta refresh redirects | **HARMFUL** | Use 301/302 HTTP redirects |
+| Frames/iframes for content | **HARMFUL** | Not crawlable, poor UX |
+| Flash content | **DEAD** | Flash discontinued 2020 |
+| AMP pages | **OPTIONAL** | No longer required for Top Stories |
+| Google Authorship | **DEAD** | Discontinued 2014 |
+| Google+ integration | **DEAD** | Shut down 2019 |
+| rel="prev/next" for pagination | **IGNORED** | Google ignores since 2019 |
+
+### URL Parameters to Avoid
+
+| Parameter Style | Status | Better Alternative |
+|-----------------|--------|-------------------|
+| `?id=123` | **AVOID** | Use clean URLs: `/service/name` |
+| `?page=2` | **AVOID** | Use `/page/2` or infinite scroll |
+| Session IDs in URLs | **HARMFUL** | Use cookies instead |
+| Tracking params in canonical | **HARMFUL** | Strip UTM from canonicals |
+
+### Content Practices (PENALIZED)
+
+| Practice | Status | Reason |
+|----------|--------|--------|
+| Article spinning | **PENALIZED** | Spam, low quality |
+| Hidden text (white on white) | **PENALIZED** | Cloaking/spam |
+| Keyword stuffing | **PENALIZED** | Spam signal |
+| Link farms | **PENALIZED** | Penguin algorithm |
+| Private Blog Networks (PBNs) | **PENALIZED** | Link scheme |
+| Doorway pages | **PENALIZED** | Spam |
+| Scraped/duplicate content | **PENALIZED** | Panda algorithm |
+| Thin affiliate pages | **PENALIZED** | Low value |
+| Auto-generated content (low quality) | **PENALIZED** | Spam |
+
+---
+
+## 12. Current Best Practices Checklist
+
+### What Google DOES Use (2026)
+
+| Signal | Status | Implementation |
+|--------|--------|----------------|
+| Title tag | **ACTIVE** | 50-60 chars, keyword first |
+| Meta description | **ACTIVE** | 150-160 chars, compelling |
+| Canonical URL | **ACTIVE** | Required on all pages |
+| Hreflang | **ACTIVE** | For multilingual sites |
+| Robots meta | **ACTIVE** | index/noindex, follow/nofollow |
+| Open Graph | **ACTIVE** | For social sharing |
+| JSON-LD Schema | **ACTIVE** | Preferred format |
+| Core Web Vitals | **ACTIVE** | Ranking factor |
+| Mobile friendliness | **ACTIVE** | Required |
+| HTTPS | **ACTIVE** | Required |
+| Page Experience | **ACTIVE** | Ranking factor |
+
+### What AI Systems Use (2026)
+
+| Signal | Platform | Implementation |
+|--------|----------|----------------|
+| Structured content | All LLMs | Clear headings, lists, tables |
+| E-E-A-T signals | Google AI | Author bios, credentials, sources |
+| Fresh content | All | Last updated dates |
+| Semantic HTML | All | Proper heading hierarchy |
+| Schema markup | Google | JSON-LD structured data |
+| llms.txt | Emerging | AI crawler guidance file |
+| robots.txt AI rules | Emerging | GPTBot, ChatGPT-User directives |
+
+---
+
+## 13. Link Management
+
+### Internal Links Must Always Work
+
+Every link in the application must resolve correctly in ALL environments.
+
+| Environment | Internal Links | Cross-Site Links |
+|-------------|----------------|------------------|
+| Local dev | `localhost:3000/page` | Other localhost ports or use env vars |
+| Vercel Preview | Preview URL `/page` | Other preview URLs via env vars |
+| Production | Production URL `/page` | Production URLs via `SITE_CONFIG` |
+
+### Link Implementation Rules
+
+```tsx
+// CORRECT: Use relative paths for same-site internal links
+<Link href="/about">About</Link>
+<Link href="/services/therapy">Therapy</Link>
+
+// CORRECT: Use SITE_CONFIG for cross-site links in monorepo
+import { SITE_CONFIG } from '@/lib/site-config'  // or your config location
+<a href={`${SITE_CONFIG.otherSite.url}/services`}>Other Site Services</a>
+
+// WRONG: Hardcoded URLs
+<a href="https://yourdomain.com/about">About</a>  // NO!
+<a href="http://localhost:3000/about">About</a>       // NO!
+```
+
+### Cross-Site Link Matrix (Monorepo Pattern)
+
+For multi-site builds, use a centralized config:
+
+| From Site | To Site | Use |
+|-----------|---------|-----|
+| Site A | Site B | `SITE_CONFIG.siteB.url` |
+| Site B | Site A | `SITE_CONFIG.siteA.url` |
+| Any | Main | `SITE_CONFIG.main.url` |
+
+Define your site URLs in a shared config file that reads from environment variables.
+
+### Link Validation Checklist (Every Build)
+
+- [ ] All navigation links work
+- [ ] All footer links work
+- [ ] All CTA buttons link correctly
+- [ ] Cross-site links use config, not hardcoded URLs
+- [ ] No localhost URLs in production code
+- [ ] No broken internal links (404s)
+- [ ] Phone links use `tel:` protocol
+- [ ] Email links use `mailto:` protocol
+- [ ] External links have `rel="noopener"` and `target="_blank"`
+
+---
+
+## 14. External Linking Strategy (Outbound)
+
+### Why Link Out
+
+Outbound links to authoritative sources:
+- Build E-E-A-T signals (citing experts)
+- Help AI systems understand context and credibility
+- Required for medical/YMYL content claims
+- Improve user trust
+
+### Required Outbound Links by Page Type
+
+| Page Type | Must Link To | Examples |
+|-----------|--------------|----------|
+| Medical conditions | Government health sites, medical associations | NIH, NIMH, APA, Mayo Clinic |
+| Therapy services | Professional associations, research | EMDR International, Gottman Institute |
+| Wellness services | Certification bodies, research | NCCAOM (acupuncture), AMTA (massage) |
+| Team/Providers | Credential verification, profiles | Psychology Today, state license lookup |
+| Locations | Maps, directions | Google Maps link |
+| Legal pages | Regulatory bodies | HHS (HIPAA), state AG (privacy) |
+
+### Outbound Link Implementation
+
+```tsx
+// External links MUST have rel="noopener" and target="_blank"
+<a 
+  href="https://www.nimh.nih.gov/health/topics/anxiety-disorders" 
+  rel="noopener noreferrer"
+  target="_blank"
+>
+  Learn more about anxiety disorders (NIMH)
+</a>
+
+// For medical citations, include organization and year
+<p>
+  According to the <a href="https://..." rel="noopener" target="_blank">
+  American Psychological Association (2024)</a>, ...
+</p>
+```
+
+### Authority Domains to Prioritize
+
+| Domain Type | Trust Level | Examples |
+|-------------|-------------|----------|
+| `.gov` | Highest | NIH, CDC, HHS |
+| `.edu` | High | University research |
+| `.org` (established) | High | APA, Mayo Clinic, WHO |
+| Professional associations | High | EMDR International, Gottman |
+| Peer-reviewed journals | High | PubMed, specific journals |
+
+---
+
+## 15. Inbound Link Opportunities (Per Build)
+
+After reviewing all content for a build, document opportunities for external sites to link back.
+
+### Directory Listings (Local SEO)
+
+| Directory | Priority | Notes |
+|-----------|----------|-------|
+| Google Business Profile | Critical | One per location, verify all |
+| Yelp | High | Claim and optimize |
+| Psychology Today | High | For each therapist |
+| Healthgrades | Medium | If applicable |
+| Zocdoc | Medium | If accepting new patients |
+| Local chamber of commerce | Medium | Community presence |
+| BBB | Low | If relevant |
+
+### Professional Association Directories
+
+| Association | Who Should Be Listed |
+|-------------|---------------------|
+| State licensing board | All licensed providers |
+| APA/state psychological association | Psychologists |
+| NASW | Social workers |
+| EMDR International Association | EMDR certified therapists |
+| Gottman Referral Network | Gottman trained therapists |
+| AMTA | Massage therapists |
+| NCCAOM | Acupuncturists |
+
+### Local Link Opportunities
+
+- Local news/press (new location openings, community events)
+- Community organization partnerships
+- Local event sponsorships
+- Chamber of commerce membership
+- Local business associations
+- University partnerships (internships, research)
+
+### Content-Based Link Opportunities
+
+- Guest posts on mental health blogs
+- Expert quotes for journalists (HARO, Qwoted)
+- Resource page link building
+- Infographics and shareable content
+- Local guides ("Best therapists in [City]")
+
+### Per-Build Inbound Link Audit Template
+
+Document in project notes or separate file:
+
+```markdown
+## Inbound Link Opportunities for [Project Name]
+
+### Directories to Claim/Create
+1. [ ] Google Business Profile - [Location 1]
+2. [ ] Google Business Profile - [Location 2]
+3. [ ] Psychology Today - [Provider 1]
+4. [ ] ...
+
+### Professional Associations
+1. [ ] [Association] - [Provider]
+2. [ ] ...
+
+### Local Opportunities
+1. [ ] [Opportunity description]
+2. [ ] ...
+
+### Content Ideas for Link Building
+1. [ ] [Content idea]
+2. [ ] ...
+```
+
+---
+
+END OF FILE

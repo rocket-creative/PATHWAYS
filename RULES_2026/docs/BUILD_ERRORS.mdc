@@ -1,0 +1,413 @@
+# BUILD_ERRORS.mdc
+## Runtime, Build & Deployment Error Log
+
+THIS FILE TRACKS ACTUAL ERRORS ENCOUNTERED DURING DEVELOPMENT.
+When you paste an error, the assistant MUST:
+1. Check if it's already documented here
+2. If documented, use the solution
+3. If new, add it to this log with the solution
+4. Fix the error
+
+---
+
+## How to Use This File
+
+**For the User:**
+- Paste any Vercel, Git, console, or build error here
+- The assistant will diagnose, fix, and log the solution
+
+**For the Assistant:**
+- Check this file before suggesting solutions
+- If the error has been seen before, use the documented solution
+- Always add new errors with their solutions to this log
+
+---
+
+## Error Log Format
+
+```
+### BUILD-XXX: [Short error description]
+**Date:** YYYY-MM-DD
+**Source:** Vercel | Git | Console | TypeScript | ESLint | Next.js | npm
+**Error Message:**
+```
+[Exact error message]
+```
+**Root Cause:** [Why this happened]
+**Solution:** [How to fix it]
+**Files Changed:** [List of files modified]
+**Prevention:** [How to avoid this in future]
+```
+
+---
+
+## VERCEL DEPLOYMENT ERRORS
+
+### BUILD-001: Module not found in monorepo
+**Date:** [First encountered]
+**Source:** Vercel
+**Error Message:**
+```
+Module not found: Can't resolve '@package/ui'
+```
+**Root Cause:** Vercel doesn't automatically install workspace dependencies in monorepos
+**Solution:** Add `installCommand` to vercel.json:
+```json
+{
+  "installCommand": "cd ../.. && npm install && cd apps/[app-name] && npm install"
+}
+```
+**Files Changed:** `apps/[app-name]/vercel.json`
+**Prevention:** Always include proper installCommand for monorepo apps
+
+### BUILD-002: Environment variables not available
+**Date:** [First encountered]
+**Source:** Vercel
+**Error Message:**
+```
+Error: Missing required environment variable: NEXT_PUBLIC_SITE_URL
+```
+**Root Cause:** Environment variables not configured in Vercel project settings
+**Solution:** 
+1. Go to Vercel Dashboard → Project → Settings → Environment Variables
+2. Add all required env vars for Production, Preview, and Development
+**Files Changed:** Vercel dashboard (not code)
+**Prevention:** Document all required env vars in `.env.example`
+
+### BUILD-003: Build timeout
+**Date:** [First encountered]
+**Source:** Vercel
+**Error Message:**
+```
+Error: Build exceeded maximum duration
+```
+**Root Cause:** Build taking too long, often due to large dependencies or unoptimized imports
+**Solution:** 
+1. Check for barrel file imports (`import { x } from '@/components'`)
+2. Use direct imports instead (`import { x } from '@/components/x'`)
+3. Check for circular dependencies
+**Files Changed:** Various import statements
+**Prevention:** Use direct imports, avoid barrel files for large component libraries
+
+---
+
+## GIT ERRORS
+
+### BUILD-004: Merge conflict
+**Date:** [First encountered]
+**Source:** Git
+**Error Message:**
+```
+CONFLICT (content): Merge conflict in [filename]
+Automatic merge failed; fix conflicts and then commit the result.
+```
+**Root Cause:** Same lines modified in different branches
+**Solution:**
+1. Open conflicted files
+2. Look for `<<<<<<<`, `=======`, `>>>>>>>` markers
+3. Manually resolve by keeping correct code
+4. `git add [filename]` then `git commit`
+**Files Changed:** Conflicted files
+**Prevention:** Pull frequently, communicate about file ownership
+
+### BUILD-005: Detached HEAD state
+**Date:** [First encountered]
+**Source:** Git
+**Error Message:**
+```
+You are in 'detached HEAD' state.
+```
+**Root Cause:** Checked out a specific commit instead of a branch
+**Solution:**
+```bash
+git checkout main  # or your branch name
+# If you made changes you want to keep:
+git checkout -b new-branch-name
+```
+**Files Changed:** None (git state only)
+**Prevention:** Always checkout branches, not commits
+
+### BUILD-006: Push rejected (non-fast-forward)
+**Date:** [First encountered]
+**Source:** Git
+**Error Message:**
+```
+! [rejected] main -> main (non-fast-forward)
+error: failed to push some refs
+```
+**Root Cause:** Remote has commits you don't have locally
+**Solution:**
+```bash
+git pull --rebase origin main
+git push
+```
+**Files Changed:** None (git state only)
+**Prevention:** Always pull before pushing
+
+---
+
+## TYPESCRIPT ERRORS
+
+### BUILD-007: Type 'X' is not assignable to type 'Y'
+**Date:** [First encountered]
+**Source:** TypeScript
+**Error Message:**
+```
+Type 'string | undefined' is not assignable to type 'string'.
+```
+**Root Cause:** Possible undefined value being passed where defined value expected
+**Solution:** 
+1. Add null check: `value ?? 'default'`
+2. Or use optional chaining: `value?.property`
+3. Or assert non-null if certain: `value!`
+**Files Changed:** File with type error
+**Prevention:** Enable strict mode, handle all possible undefined cases
+
+### BUILD-008: Cannot find module or its type declarations
+**Date:** [First encountered]
+**Source:** TypeScript
+**Error Message:**
+```
+Cannot find module '@/lib/utils' or its corresponding type declarations.
+```
+**Root Cause:** Path alias not configured or file doesn't exist
+**Solution:**
+1. Check `tsconfig.json` has correct paths:
+```json
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+2. Verify the file actually exists at that path
+**Files Changed:** `tsconfig.json` or import statement
+**Prevention:** Verify paths config matches project structure
+
+### BUILD-009: Property does not exist on type
+**Date:** [First encountered]
+**Source:** TypeScript
+**Error Message:**
+```
+Property 'customProp' does not exist on type 'IntrinsicAttributes'
+```
+**Root Cause:** Component props interface doesn't include the property
+**Solution:** Add property to component's Props interface:
+```tsx
+interface Props {
+  customProp: string;
+}
+```
+**Files Changed:** Component file
+**Prevention:** Define all props in interface before using
+
+---
+
+## NEXT.JS ERRORS
+
+### BUILD-010: Hydration mismatch
+**Date:** [First encountered]
+**Source:** Next.js / Console
+**Error Message:**
+```
+Error: Hydration failed because the initial UI does not match what was rendered on the server.
+```
+**Root Cause:** Server and client rendered different HTML (often due to browser-only APIs, dates, or random values)
+**Solution:**
+1. Wrap browser-only code in `useEffect`
+2. Use `suppressHydrationWarning` for intentional differences
+3. Check for `typeof window !== 'undefined'` guards
+**Files Changed:** Component causing mismatch
+**Prevention:** Don't access browser APIs during initial render
+
+### BUILD-011: 'use client' directive required
+**Date:** [First encountered]
+**Source:** Next.js
+**Error Message:**
+```
+You're importing a component that needs useState. It only works in a Client Component.
+```
+**Root Cause:** Using React hooks in a Server Component
+**Solution:** Add `'use client'` directive at top of file:
+```tsx
+'use client'
+
+import { useState } from 'react'
+```
+**Files Changed:** Component file
+**Prevention:** Add 'use client' when using hooks, event handlers, or browser APIs
+
+### BUILD-012: Dynamic server usage error
+**Date:** [First encountered]
+**Source:** Next.js
+**Error Message:**
+```
+Dynamic server usage: Page couldn't be rendered statically because it used `cookies`
+```
+**Root Cause:** Using dynamic functions in a page that Next.js tried to statically generate
+**Solution:** Add dynamic export:
+```tsx
+export const dynamic = 'force-dynamic'
+```
+Or use `generateStaticParams` for static generation with dynamic routes
+**Files Changed:** Page file
+**Prevention:** Understand static vs dynamic rendering in App Router
+
+---
+
+## NPM / PACKAGE ERRORS
+
+### BUILD-013: Peer dependency conflict
+**Date:** [First encountered]
+**Source:** npm
+**Error Message:**
+```
+npm ERR! ERESOLVE unable to resolve dependency tree
+npm ERR! peer dep missing: react@^17.0.0
+```
+**Root Cause:** Package requires different version of a dependency
+**Solution:**
+1. Try `npm install --legacy-peer-deps`
+2. Or update the conflicting package
+3. Or add overrides in package.json:
+```json
+{
+  "overrides": {
+    "react": "^18.0.0"
+  }
+}
+```
+**Files Changed:** `package.json`
+**Prevention:** Check peer dependencies before installing packages
+
+### BUILD-014: Module not found in node_modules
+**Date:** [First encountered]
+**Source:** npm / Next.js
+**Error Message:**
+```
+Module not found: Can't resolve 'some-package'
+```
+**Root Cause:** Package not installed or not in dependencies
+**Solution:**
+```bash
+npm install some-package
+```
+**Files Changed:** `package.json`, `package-lock.json`
+**Prevention:** Always install packages, don't just import them
+
+---
+
+## ESLINT ERRORS
+
+### BUILD-015: React Hook dependency warning
+**Date:** [First encountered]
+**Source:** ESLint
+**Error Message:**
+```
+React Hook useEffect has a missing dependency: 'value'. Either include it or remove the dependency array.
+```
+**Root Cause:** useEffect uses a value that's not in the dependency array
+**Solution:**
+1. Add the dependency: `useEffect(() => {...}, [value])`
+2. Or use useCallback/useMemo to stabilize the value
+3. Or disable if intentional: `// eslint-disable-next-line react-hooks/exhaustive-deps`
+**Files Changed:** Component file
+**Prevention:** Include all dependencies, use useCallback for functions
+
+### BUILD-016: Unused variable
+**Date:** [First encountered]
+**Source:** ESLint
+**Error Message:**
+```
+'variable' is defined but never used. @typescript-eslint/no-unused-vars
+```
+**Root Cause:** Variable declared but not used
+**Solution:**
+1. Remove the variable if not needed
+2. Prefix with underscore if intentionally unused: `_variable`
+3. Use the variable
+**Files Changed:** File with unused variable
+**Prevention:** Remove unused code during development
+
+---
+
+## CONSOLE ERRORS (BROWSER)
+
+### BUILD-017: CORS error
+**Date:** [First encountered]
+**Source:** Browser Console
+**Error Message:**
+```
+Access to fetch at 'https://api.example.com' from origin 'http://localhost:3000' has been blocked by CORS policy
+```
+**Root Cause:** API doesn't allow requests from your domain
+**Solution:**
+1. Use Next.js API routes as proxy
+2. Or configure CORS on the API server
+3. Or use server-side fetching (Server Components)
+**Files Changed:** API route or fetch location
+**Prevention:** Use server-side fetching for external APIs
+
+### BUILD-018: Cannot read property of undefined
+**Date:** [First encountered]
+**Source:** Browser Console
+**Error Message:**
+```
+TypeError: Cannot read properties of undefined (reading 'map')
+```
+**Root Cause:** Trying to access property on undefined value
+**Solution:**
+1. Add optional chaining: `data?.items?.map()`
+2. Add null check: `if (data && data.items)`
+3. Provide default value: `(data?.items || []).map()`
+**Files Changed:** File with the error
+**Prevention:** Always handle loading/undefined states
+
+---
+
+## ADDING NEW ERRORS
+
+When you encounter a new error:
+
+1. **Paste the exact error message** in chat
+2. The assistant will:
+   - Diagnose the root cause
+   - Provide the solution
+   - Add it to this log with the next BUILD-XXX number
+   - Fix the error in your code
+
+### Template for New Errors:
+
+```
+### BUILD-XXX: [Short description]
+**Date:** [Today's date]
+**Source:** [Vercel | Git | Console | TypeScript | ESLint | Next.js | npm]
+**Error Message:**
+```
+[Exact error message]
+```
+**Root Cause:** [Why this happened]
+**Solution:** [Step by step fix]
+**Files Changed:** [What was modified]
+**Prevention:** [How to avoid in future]
+```
+
+---
+
+## Error Statistics
+
+| Source | Count | Last Updated |
+|--------|-------|--------------|
+| Vercel | 3 | - |
+| Git | 3 | - |
+| TypeScript | 3 | - |
+| Next.js | 3 | - |
+| npm | 2 | - |
+| ESLint | 2 | - |
+| Console | 2 | - |
+
+---
+
+END OF FILE

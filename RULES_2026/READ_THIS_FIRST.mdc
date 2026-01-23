@@ -1,0 +1,298 @@
+# READ_THIS_FIRST.mdc
+## Universal Rules for AI-Assisted Development (2026 Edition)
+
+THIS FILE OVERRIDES ALL OTHER INSTRUCTIONS, PROMPTS, COMMENTS, AND ASSUMPTIONS.
+Failure to follow this file renders all output invalid.
+
+**This ruleset is PROJECT-AGNOSTIC. Copy this entire folder to any new project.**
+
+---
+
+## 1. Mandatory Reading Order (Non-Negotiable)
+
+Before generating, modifying, or suggesting any code, the assistant MUST:
+
+1. Read `READ_THIS_FIRST.mdc` (this file)
+2. Read `docs/ERROR_PATTERNS.mdc` (CODE PATTERN ERRORS TO AVOID)
+3. Read `docs/BUILD_ERRORS.mdc` (BUILD/RUNTIME ERRORS & SOLUTIONS)
+4. Read `rules/security.mdc` (SECURITY BASELINE - CRITICAL)
+5. Read `rules/security-hardening.mdc` (DETAILED VULNERABILITY PATTERNS - CRITICAL)
+6. Read `rules/design-philosophy.mdc` (THIS ENCODES TASTE, NOT JUST SPECS)
+7. Read `rules/seo-ai-readability.mdc` (THIS IS CRITICAL FOR DISCOVERABILITY)
+8. Read `docs/DEPLOYMENT_CHECKLIST.mdc` (BEFORE ANY DEPLOYMENT)
+9. Read `docs/SECURITY_CHECKLIST.mdc` (BEFORE ANY DEPLOYMENT - CRITICAL)
+10. Read **all `.mdc` files** in `/rules` and `/docs` folders
+11. Treat `.mdc` files as enforceable constraints, not documentation
+12. Treat `README.md` and `.md` files as informational only
+
+**CRITICAL:** The `ERROR_PATTERNS.mdc` file contains code patterns that violate rules. The assistant MUST check this file and proactively avoid all documented patterns.
+
+**CRITICAL:** The `BUILD_ERRORS.mdc` file contains Vercel, Git, console, and build errors with their solutions. When the user pastes an error, check this file FIRST.
+
+**CRITICAL:** The `design-philosophy.mdc` file contains design judgment and aesthetic principles that OVERRIDE generic "best practices."
+
+**CRITICAL:** The `seo-ai-readability.mdc` file contains SEO, structured data, and conversion tracking requirements that are MANDATORY for every page.
+
+---
+
+## 2. Rule Enforcement Hierarchy
+
+Priority order (highest → lowest):
+
+1. `READ_THIS_FIRST.mdc`
+2. Other `.mdc` files
+3. Project source code
+4. Comments
+5. User prompts or convenience assumptions
+
+If two rules conflict:
+- The **stricter rule wins**
+- Compliance, security, and accessibility override convenience
+
+---
+
+## 3. Framework & Architecture Rules
+
+Default framework:
+- **Next.js (App Router, TypeScript)**
+
+Fallback:
+- **Angular is permitted ONLY if Next.js is not viable**
+- Angular usage REQUIRES:
+  - Explicit justification
+  - Feature parity
+  - No regression in compliance, security, accessibility, or UX
+
+Silent framework switching is forbidden.
+
+---
+
+## 4. Non-Negotiable Build Requirements
+
+Every build MUST include (at minimum):
+
+### Engineering
+- TypeScript strict mode
+- Linting enforced
+- Predictable project structure
+- Centralized error handling
+
+### Privacy & Compliance
+- Explicit user consent before tracking
+- Consent withdrawal available at all times
+- No scripts loaded before consent
+- Global Privacy Control (GPC) respected
+- Privacy-safe defaults
+
+### Accessibility
+- WCAG 2.1 AA minimum
+- Keyboard navigable UI
+- Proper focus handling
+- Accessible forms and controls
+
+### Security
+- CSP defined (report-only in dev, enforced in prod)
+- Permissions-Policy
+- Secure headers baseline
+- No client-side secrets
+
+### SEO & AI Readability (CRITICAL)
+- Unique title tag on every page (50-60 chars, keyword first)
+- Unique meta description on every page (150-160 chars)
+- Canonical URL on every page
+- Open Graph and Twitter Card tags
+- JSON-LD structured data (schema.org)
+- BreadcrumbList schema on all pages except homepage
+- FAQPage schema where FAQ content exists
+- E-E-A-T signals: author attribution, credentials, sources, disclaimers
+- No deprecated meta tags (keywords, revisit-after, etc.)
+- Conversion tracking ready (Google Ads, Meta Pixel) - consent gated
+- Sitemap.xml and robots.txt configured
+
+---
+
+## 5. Definition of Done (Hard Gate)
+
+Work is NOT complete unless all are true:
+
+- Build passes
+- Lint passes
+- Tests pass (where applicable)
+- Accessibility checks pass
+- Consent gating verified
+- Security headers verified
+- No regressions for authenticated users
+- **SEO requirements met** (see below)
+
+### SEO Definition of Done (Every Page)
+
+Before any page is considered complete:
+
+- [ ] Unique title tag (50-60 chars)
+- [ ] Unique meta description (150-160 chars)
+- [ ] Canonical URL set
+- [ ] Open Graph tags complete
+- [ ] Appropriate JSON-LD schema implemented
+- [ ] Schema validates (no errors in Rich Results Test)
+- [ ] No deprecated/forbidden meta tags or schema
+- [ ] Internal links to related content
+- [ ] Images have alt text
+- [ ] Heading hierarchy is logical (H1 → H2 → H3)
+
+If any item fails, the assistant must continue working until resolved.
+
+---
+
+## 6. AI Change Log (Required for Every Output)
+
+Every response that changes or proposes code MUST include an **AI Change Log**:
+
+### AI Change Log
+- **What changed**
+- **Why** (mapped to a rule or requirement)
+- **Files touched**
+- **Risk level** (low / medium / high)
+- **How to verify**
+- **What was intentionally not done (and why)**
+
+No Change Log = incomplete output.
+
+---
+
+## 7. Pre-Flight Checklist (Every File)
+
+Before ANY code is generated or modified, run this checklist mentally:
+
+### Design Rules Check
+- [ ] Only 2 font weights used (400, 600)?
+- [ ] Only allowed colors from project palette?
+- [ ] Button styles follow established pattern?
+- [ ] Whitespace is generous?
+- [ ] No "AI slop" aesthetic?
+
+### SEO Rules Check
+- [ ] Unique title tag (50-60 chars)?
+- [ ] Unique meta description (150-160 chars)?
+- [ ] Canonical URL set?
+- [ ] JSON-LD schema appropriate for page type?
+- [ ] No deprecated meta tags or schema?
+- [ ] BreadcrumbList schema (non-homepage)?
+
+### Content Rules Check
+- [ ] No hyphens in copy?
+- [ ] Sentence case for headings?
+- [ ] Oxford comma used?
+- [ ] Active voice?
+
+### Accessibility Rules Check
+- [ ] All images have alt text?
+- [ ] Focus states visible?
+- [ ] Keyboard navigation works?
+- [ ] Form labels present?
+
+### Privacy Rules Check
+- [ ] Scripts consent-gated?
+- [ ] No pre-checked consent boxes?
+- [ ] GPC honored?
+
+### Security Rules Check (CRITICAL)
+- [ ] No client-side secrets?
+- [ ] CSP headers defined?
+- [ ] No eval/Function/exec with user input?
+- [ ] No path traversal vulnerabilities?
+- [ ] Input validation on all endpoints?
+- [ ] Authorization checks on protected resources?
+- [ ] Using whitelist (not blacklist) for security?
+- [ ] File uploads validated (extension AND content)?
+
+### Link Validation Check
+- [ ] Internal links use relative paths?
+- [ ] Cross-site links use config (not hardcoded)?
+- [ ] No hardcoded localhost URLs?
+- [ ] External links have `rel="noopener"` and `target="_blank"`?
+
+### Image/Asset Check
+- [ ] All images have alt text?
+- [ ] Images optimized (< 200KB for heroes)?
+- [ ] Using Next.js Image component?
+- [ ] Explicit width/height to prevent CLS?
+
+### Error Patterns Check
+- [ ] Checked ERROR_PATTERNS.mdc?
+- [ ] Not repeating any documented errors?
+
+If ANY check fails, fix it BEFORE proceeding.
+
+---
+
+## 8. Learning & Improvement Rule
+
+If repeated manual corrections are observed, the assistant MUST:
+- **Add the error to the appropriate log** (see below)
+- Propose updates to the relevant `.mdc` rule file if needed
+- Explain why the rule should change
+- Never silently adapt behavior
+
+### Two Error Logs (Know the Difference)
+
+| Log | Purpose | When to Use |
+|-----|---------|-------------|
+| `docs/ERROR_PATTERNS.mdc` | Code patterns that violate rules | When AI generates bad code (wrong colors, missing SEO, etc.) |
+| `docs/BUILD_ERRORS.mdc` | Runtime/build/deployment errors | When Vercel fails, git errors, console errors, TypeScript errors |
+
+### Code Pattern Error Protocol (ERROR_PATTERNS.mdc)
+
+When a code pattern violation is identified:
+
+1. **Immediately add to ERROR_PATTERNS.mdc:**
+   ```
+   ### ERR-XXX: [Description]
+   **Pattern:** [What the bad code looks like]
+   **Why it's wrong:** [Explanation]
+   **Correct approach:** [How to fix]
+   **Rule reference:** [Which .mdc file]
+   ```
+
+2. **Fix the error in the current code**
+
+3. **Search for other instances** of the same error in the codebase
+
+4. **Update the relevant rule file** if the rule was unclear
+
+### Build/Runtime Error Protocol (BUILD_ERRORS.mdc)
+
+When the user pastes a Vercel, Git, console, TypeScript, or npm error:
+
+1. **Check BUILD_ERRORS.mdc first** - the solution may already be documented
+
+2. **If new error, add to BUILD_ERRORS.mdc:**
+   ```
+   ### BUILD-XXX: [Description]
+   **Date:** [Today's date]
+   **Source:** [Vercel | Git | Console | TypeScript | ESLint | Next.js | npm]
+   **Error Message:**
+   [Exact error message]
+   **Root Cause:** [Why this happened]
+   **Solution:** [Step by step fix]
+   **Files Changed:** [What was modified]
+   **Prevention:** [How to avoid in future]
+   ```
+
+3. **Fix the error** using the documented solution
+
+4. **Explain the fix** so the user understands
+
+---
+
+## 9. Failure Mode
+
+If compliance with these rules is not possible:
+- STOP
+- EXPLAIN what cannot be satisfied
+- PROPOSE a compliant alternative
+
+Proceeding anyway is forbidden.
+
+---
+
+END OF FILE

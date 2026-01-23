@@ -1,11 +1,23 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Brain, Leaf, Heart, Sparkles, Shield, Sun } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { JsonLd } from '@pathways/ui'
+import { generateBreadcrumbSchema } from '@/lib/structured-data'
+import { getOfficeImageByIndex } from '@/lib/office-images'
 
 export const metadata: Metadata = {
   title: 'Therapy and Wellness Services | Pathways Within',
   description: 'Explore our integrated therapy and wellness services on Long Island. From individual therapy to massage and skincare, we offer complete care for your mind, body, and spirit.',
+  alternates: {
+    canonical: '/services',
+  },
+  openGraph: {
+    title: 'Therapy and Wellness Services | Pathways Within',
+    description: 'Explore our integrated therapy and wellness services on Long Island.',
+    url: '/services',
+  },
 }
 
 const therapyServices = [
@@ -39,9 +51,15 @@ const wellnessServices = [
   { name: 'Permanent Makeup', slug: 'permanent-makeup', description: 'Microblading, lip liner, and other permanent cosmetic services.' },
 ]
 
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: 'Home', url: 'https://pathwayswithin.com' },
+  { name: 'Services', url: 'https://pathwayswithin.com/services' },
+])
+
 export default function ServicesPage() {
   return (
     <main>
+      <JsonLd data={breadcrumbSchema} />
       {/* Hero - Default side-by-side */}
       <PageHero
         eyebrow="Our Services"
@@ -146,8 +164,24 @@ export default function ServicesPage() {
 
           {/* Service Images Row */}
           <div className="mb-12 grid gap-8 lg:grid-cols-2">
-            <div className="img-placeholder aspect-[16/9] rounded-lg" />
-            <div className="img-placeholder aspect-[16/9] rounded-lg" />
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
+              <Image
+                src={getOfficeImageByIndex(0)}
+                alt="Therapy services at Pathways Within"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg">
+              <Image
+                src={getOfficeImageByIndex(1)}
+                alt="Wellness services at Pathways Within"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
           </div>
 
           {/* Services Links Row */}

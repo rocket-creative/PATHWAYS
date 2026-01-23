@@ -1,0 +1,271 @@
+# ENV_REGISTRY.mdc
+## Environment Variables Registry
+
+THIS FILE DOCUMENTS ALL ENVIRONMENT VARIABLES USED ACROSS THE PROJECT.
+When adding new env vars, document them here.
+When deploying, ensure all required vars are set.
+
+---
+
+## Quick Reference
+
+### Required for ALL Apps
+
+| Variable | Required | Public | Description |
+|----------|----------|--------|-------------|
+| `NEXT_PUBLIC_SITE_URL` | Yes | Yes | Canonical URL for the app |
+
+### Cross-Site URLs (Monorepo)
+
+| Variable | Required | Public | Description |
+|----------|----------|--------|-------------|
+| `NEXT_PUBLIC_MAIN_URL` | Yes | Yes | Main/marketing site URL |
+| `NEXT_PUBLIC_WISDOM_URL` | Yes | Yes | Therapy services site URL |
+| `NEXT_PUBLIC_WELLNESS_URL` | Yes | Yes | Wellness services site URL |
+| `NEXT_PUBLIC_CRM_URL` | No | Yes | Internal CRM URL |
+
+### Analytics (Consent-Gated)
+
+| Variable | Required | Public | Description |
+|----------|----------|--------|-------------|
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | No | Yes | Google Analytics 4 ID (G-XXXXXXXX) |
+| `NEXT_PUBLIC_GOOGLE_ADS_ID` | No | Yes | Google Ads ID (AW-XXXXXXXX) |
+| `NEXT_PUBLIC_META_PIXEL_ID` | No | Yes | Meta/Facebook Pixel ID |
+
+### API Keys (Server-Side Only)
+
+| Variable | Required | Public | Description |
+|----------|----------|--------|-------------|
+| `META_CAPI_ACCESS_TOKEN` | No | **No** | Meta Conversions API token |
+| `SUPABASE_URL` | No | **No** | Supabase project URL |
+| `SUPABASE_ANON_KEY` | No | **No** | Supabase anonymous key |
+| `SUPABASE_SERVICE_ROLE_KEY` | No | **No** | Supabase service role key |
+
+---
+
+## Detailed Documentation
+
+### NEXT_PUBLIC_SITE_URL
+
+**Purpose:** The canonical URL for the current app. Used for:
+- Meta tags (canonical URL)
+- Open Graph URLs
+- Sitemap generation
+- Structured data URLs
+
+**Format:** `https://domain.com` (no trailing slash)
+
+**Per Environment:**
+| Environment | Value |
+|-------------|-------|
+| Production | `https://pathwayswithin.com` |
+| Preview | Vercel preview URL |
+| Development | `http://localhost:3000` |
+
+---
+
+### NEXT_PUBLIC_MAIN_URL
+
+**Purpose:** URL for the main marketing site. Used for:
+- Cross-site navigation
+- Shared footer links
+- Contact/booking links
+
+**Format:** `https://domain.com` (no trailing slash)
+
+**Current Production Value:** `https://pathwayswithin.com` (or Vercel URL until custom domain)
+
+---
+
+### NEXT_PUBLIC_WISDOM_URL
+
+**Purpose:** URL for the therapy services site.
+
+**Current Production Value:** `https://wisdom-eight-topaz.vercel.app`
+
+---
+
+### NEXT_PUBLIC_WELLNESS_URL
+
+**Purpose:** URL for the wellness services site.
+
+**Current Production Value:** `https://wellness-phi-three.vercel.app`
+
+---
+
+### NEXT_PUBLIC_GA_MEASUREMENT_ID
+
+**Purpose:** Google Analytics 4 measurement ID for tracking.
+
+**Format:** `G-XXXXXXXXXX`
+
+**Important:** Only loads after user consent (analytics category).
+
+**Setup:**
+1. Create GA4 property at analytics.google.com
+2. Get Measurement ID from Admin → Data Streams
+3. Add to Vercel environment variables
+
+---
+
+### NEXT_PUBLIC_GOOGLE_ADS_ID
+
+**Purpose:** Google Ads conversion tracking ID.
+
+**Format:** `AW-XXXXXXXXXX`
+
+**Important:** Only loads after user consent (marketing category).
+
+**Setup:**
+1. Get from Google Ads → Tools → Conversions
+2. Add to Vercel environment variables
+
+---
+
+### NEXT_PUBLIC_META_PIXEL_ID
+
+**Purpose:** Meta (Facebook) Pixel for conversion tracking and retargeting.
+
+**Format:** Numeric ID (e.g., `1234567890123456`)
+
+**Important:** Only loads after user consent (marketing category).
+
+**Setup:**
+1. Create Pixel at business.facebook.com → Events Manager
+2. Get Pixel ID
+3. Add to Vercel environment variables
+
+---
+
+## Per-App Requirements
+
+### apps/main
+
+| Variable | Required |
+|----------|----------|
+| `NEXT_PUBLIC_SITE_URL` | Yes |
+| `NEXT_PUBLIC_MAIN_URL` | Yes |
+| `NEXT_PUBLIC_WISDOM_URL` | Yes |
+| `NEXT_PUBLIC_WELLNESS_URL` | Yes |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Recommended |
+| `NEXT_PUBLIC_META_PIXEL_ID` | Recommended |
+
+### apps/wisdom
+
+| Variable | Required |
+|----------|----------|
+| `NEXT_PUBLIC_SITE_URL` | Yes |
+| `NEXT_PUBLIC_MAIN_URL` | Yes |
+| `NEXT_PUBLIC_WISDOM_URL` | Yes |
+| `NEXT_PUBLIC_WELLNESS_URL` | Yes |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Recommended |
+| `NEXT_PUBLIC_META_PIXEL_ID` | Recommended |
+
+### apps/wellness
+
+| Variable | Required |
+|----------|----------|
+| `NEXT_PUBLIC_SITE_URL` | Yes |
+| `NEXT_PUBLIC_MAIN_URL` | Yes |
+| `NEXT_PUBLIC_WISDOM_URL` | Yes |
+| `NEXT_PUBLIC_WELLNESS_URL` | Yes |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Recommended |
+| `NEXT_PUBLIC_META_PIXEL_ID` | Recommended |
+
+### apps/crm
+
+| Variable | Required |
+|----------|----------|
+| `NEXT_PUBLIC_SITE_URL` | Yes |
+| `NEXT_PUBLIC_CRM_URL` | Yes |
+| `SUPABASE_URL` | Yes |
+| `SUPABASE_ANON_KEY` | Yes |
+
+---
+
+## Vercel Setup Instructions
+
+### Adding Environment Variables
+
+1. Go to Vercel Dashboard
+2. Select Project
+3. Settings → Environment Variables
+4. Add each variable with appropriate scope:
+   - **Production:** Live site
+   - **Preview:** PR previews
+   - **Development:** Local dev (optional, use .env.local instead)
+
+### Environment Variable Scopes
+
+| Variable Type | Production | Preview | Development |
+|---------------|------------|---------|-------------|
+| Site URLs | Production URLs | Preview URLs | localhost |
+| Analytics IDs | Real IDs | Test IDs or empty | Empty |
+| API Keys | Production keys | Test keys | Test keys |
+
+---
+
+## Local Development (.env.local)
+
+Create `.env.local` in each app directory:
+
+```bash
+# apps/wisdom/.env.local
+NEXT_PUBLIC_SITE_URL=http://localhost:3001
+NEXT_PUBLIC_MAIN_URL=http://localhost:3000
+NEXT_PUBLIC_WISDOM_URL=http://localhost:3001
+NEXT_PUBLIC_WELLNESS_URL=http://localhost:3002
+
+# Analytics (optional for local dev)
+# NEXT_PUBLIC_GA_MEASUREMENT_ID=
+# NEXT_PUBLIC_META_PIXEL_ID=
+```
+
+---
+
+## Adding New Environment Variables
+
+When adding a new env var:
+
+1. **Document it here** with:
+   - Variable name
+   - Purpose
+   - Format
+   - Required or optional
+   - Public or server-only
+
+2. **Add to `.env.example`** in the app directory
+
+3. **Update Vercel** for all environments
+
+4. **Update this registry**
+
+---
+
+## Security Rules
+
+### Public vs Private
+
+| Prefix | Visibility | Use For |
+|--------|------------|---------|
+| `NEXT_PUBLIC_` | Exposed to browser | Non-sensitive config |
+| No prefix | Server-only | API keys, secrets, tokens |
+
+### Never Expose
+
+- Database credentials
+- API secret keys
+- Authentication tokens
+- Encryption keys
+- Service account credentials
+
+### Safe to Expose
+
+- Site URLs
+- Analytics IDs (they're in the HTML anyway)
+- Public API endpoints
+- Feature flags
+
+---
+
+END OF FILE

@@ -1,7 +1,9 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { getRandomOfficeImage } from '@/lib/office-images'
 
 export const metadata: Metadata = {
   title: 'Teeth Whitening on Long Island | Pathways Within',
@@ -49,7 +51,15 @@ export default function TeethWhiteningPage() {
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">
         <div className="container-site py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-            <div className="img-placeholder aspect-[4/3]" />
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+              <Image
+                src={getRandomOfficeImage()}
+                alt="Teeth whitening at Pathways Within"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
             <div className="flex flex-col justify-center">
               <p className="mb-4 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>Benefits</p>
               <h2 className="mb-6 text-[rgb(var(--color-navy))]">Why professional whitening?</h2>

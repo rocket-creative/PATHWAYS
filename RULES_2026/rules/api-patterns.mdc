@@ -1,0 +1,145 @@
+# api-patterns.mdc
+## API & Data Patterns
+
+### DATA FETCHING STRATEGY
+
+**Server Components (Default)**
+- Fetch data in server components whenever possible
+- Use Next.js fetch with appropriate caching/revalidation
+- Colocate data fetching with the component that needs it
+
+**Client Components (When Necessary)**
+- Use React Query or SWR for client side data fetching
+- Never fetch in useEffect without a data fetching library
+- Implement proper loading and error states
+
+**Server Actions**
+- Prefer server actions for mutations
+- Always validate inputs on the server
+- Return typed responses, not raw data
+
+### API DESIGN CONVENTIONS
+
+**REST Endpoints**
+- Use plural nouns for resources (`/api/users`, not `/api/user`)
+- HTTP methods match intent: GET read, POST create, PATCH update, DELETE remove
+- Version APIs when breaking changes are unavoidable (`/api/v1/`)
+
+**Response Shapes**
+```typescript
+// Success
+{ data: T, meta?: { pagination, etc } }
+
+// Error
+{ error: { code: string, message: string, details?: unknown } }
+```
+
+**Status Codes**
+- 200: Success
+- 201: Created
+- 400: Bad request (client error)
+- 401: Unauthorized (not logged in)
+- 403: Forbidden (logged in but not allowed)
+- 404: Not found
+- 422: Validation error
+- 500: Server error
+
+### ERROR HANDLING
+
+**Required Pattern**
+- Catch errors at boundaries, not everywhere
+- Log errors server side with context
+- Return user safe messages client side
+- Never expose stack traces or internal details to clients
+
+**Error Boundary Usage**
+- Wrap route segments with error boundaries
+- Provide recovery actions when possible
+- Log to observability system before displaying fallback
+
+### PAGINATION
+
+**Standard Shape**
+```typescript
+{
+  data: T[],
+  meta: {
+    page: number,
+    pageSize: number,
+    total: number,
+    totalPages: number
+  }
+}
+```
+
+**Query Parameters**
+- `page` (1 indexed)
+- `pageSize` (with sensible default and max)
+- `sort` (field name)
+- `order` (asc/desc)
+
+### RATE LIMITING
+
+**Client Side**
+- Debounce search inputs (300ms minimum)
+- Disable submit buttons during requests
+- Show loading states to prevent double submission
+
+**Server Side**
+- Rate limit public endpoints
+- Return 429 with Retry-After header when exceeded
+- Log rate limit hits for monitoring
+
+### CACHING STRATEGY
+
+**Static Data**
+- Cache aggressively (revalidate: false or long TTL)
+- Examples: reference data, config, feature flags
+
+**Dynamic Data**
+- Short TTL or on demand revalidation
+- Examples: user data, inventory, pricing
+
+**User Specific Data**
+- No shared caching
+- Use private cache or fetch fresh
+
+### AUTHENTICATION PATTERNS
+
+**Session Based**
+- HTTP only cookies for session tokens
+- Refresh tokens stored securely server side
+- Session timeout appropriate to use case
+
+**API Keys**
+- Never expose in client code
+- Environment variables server side only
+- Rotate on suspected compromise
+
+### VALIDATION
+
+**Required**
+- Validate all inputs at API boundary
+- Use schema validation (Zod recommended)
+- Return specific validation errors, not generic failures
+
+**Pattern**
+```typescript
+const schema = z.object({
+  email: z.string().email(),
+  name: z.string().min(1).max(100)
+})
+
+// Validate before processing
+const result = schema.safeParse(input)
+if (!result.success) {
+  return { error: { code: 'VALIDATION_ERROR', details: result.error } }
+}
+```
+
+### FORBIDDEN
+- Fetching in useEffect without a data fetching library
+- Exposing internal error details to clients
+- Client side API keys or secrets
+- Unbounded queries (always paginate or limit)
+- Trusting client side validation alone

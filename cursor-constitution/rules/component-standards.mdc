@@ -1,0 +1,467 @@
+# component-standards.mdc
+## Component Architecture & Documentation Standards
+
+THIS FILE DEFINES HOW TO CREATE, ORGANIZE, AND DOCUMENT COMPONENTS.
+Consistent component patterns make the codebase maintainable and scalable.
+
+---
+
+## Component Organization
+
+### When to Create Shared vs Local Components
+
+| Create SHARED component when: | Create LOCAL component when: |
+|-------------------------------|------------------------------|
+| Used in 2+ places | Used only in one page/feature |
+| Part of design system | Highly specific to one context |
+| Needs consistent behavior | Unlikely to be reused |
+| Has complex logic worth centralizing | Simple, one-off UI |
+
+### Directory Structure
+
+```
+packages/ui/src/components/     # Shared across all apps
+├── layout/
+│   ├── navigation.tsx
+│   ├── footer.tsx
+│   └── index.ts
+├── sections/
+│   ├── hero.tsx
+│   ├── page-hero.tsx
+│   └── index.ts
+├── ui/
+│   ├── button.tsx
+│   ├── cookie-consent.tsx
+│   └── index.ts
+└── index.ts                    # Main export
+
+apps/[app]/src/components/      # App-specific components
+├── sections/
+│   └── custom-section.tsx
+└── ui/
+    └── custom-widget.tsx
+```
+
+---
+
+## Component File Structure
+
+### Single Component File
+
+```tsx
+// components/ui/Button.tsx
+
+// 1. Imports
+import { forwardRef } from 'react'
+import { cn } from '@/lib/utils'
+
+// 2. Types
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'ghost'
+  size?: 'sm' | 'md' | 'lg'
+  isLoading?: boolean
+}
+
+// 3. Component
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant = 'primary', size = 'md', isLoading, children, ...props }, ref) => {
+    return (
+      <button
+        ref={ref}
+        className={cn(
+          'btn-pill',
+          variant === 'primary' && 'btn-pill-primary',
+          variant === 'secondary' && 'btn-pill-secondary',
+          className
+        )}
+        disabled={isLoading || props.disabled}
+        {...props}
+      >
+        {isLoading ? 'Loading...' : children}
+      </button>
+    )
+  }
+)
+
+Button.displayName = 'Button'
+```
+
+### Component with Subcomponents
+
+```tsx
+// components/ui/Card.tsx
+
+interface CardProps {
+  children: React.ReactNode
+  className?: string
+}
+
+export function Card({ children, className }: CardProps) {
+  return (
+    <div className={cn('bg-white rounded-lg border border-linen-300 shadow-sm', className)}>
+      {children}
+    </div>
+  )
+}
+
+function CardHeader({ children, className }: CardProps) {
+  return <div className={cn('p-6 border-b border-linen-200', className)}>{children}</div>
+}
+
+function CardContent({ children, className }: CardProps) {
+  return <div className={cn('p-6', className)}>{children}</div>
+}
+
+function CardFooter({ children, className }: CardProps) {
+  return <div className={cn('p-6 border-t border-linen-200', className)}>{children}</div>
+}
+
+// Attach subcomponents
+Card.Header = CardHeader
+Card.Content = CardContent
+Card.Footer = CardFooter
+```
+
+---
+
+## Props Documentation
+
+### Required Props Interface
+
+Every component MUST have a typed props interface:
+
+```tsx
+// CORRECT
+interface HeroProps {
+  /** Main headline text */
+  headline: string
+  /** Supporting text below headline */
+  subheadline?: string
+  /** Background variant */
+  variant?: 'navy' | 'gradient' | 'image'
+  /** Call-to-action configuration */
+  cta?: {
+    text: string
+    href: string
+  }
+}
+
+export function Hero({ headline, subheadline, variant = 'navy', cta }: HeroProps) {
+  // ...
+}
+
+// WRONG - no types
+export function Hero({ headline, subheadline, variant, cta }) {
+  // ...
+}
+```
+
+### Props Best Practices
+
+| Do | Don't |
+|----|-------|
+| Use descriptive prop names | Use abbreviations (`txt`, `bg`) |
+| Provide sensible defaults | Require optional props |
+| Use union types for variants | Use `string` for limited options |
+| Document complex props with JSDoc | Leave props undocumented |
+
+---
+
+## Component Patterns
+
+### Composition Over Configuration
+
+```tsx
+// PREFER: Composition
+<Card>
+  <Card.Header>
+    <h3>Title</h3>
+  </Card.Header>
+  <Card.Content>
+    <p>Content here</p>
+  </Card.Content>
+</Card>
+
+// AVOID: Configuration overload
+<Card
+  title="Title"
+  titleSize="lg"
+  titleColor="navy"
+  content="Content here"
+  contentPadding="lg"
+  showBorder={true}
+  borderColor="linen"
+/>
+```
+
+### Render Props / Children
+
+```tsx
+// For flexible content
+interface SectionProps {
+  children: React.ReactNode
+  className?: string
+}
+
+export function Section({ children, className }: SectionProps) {
+  return (
+    <section className={cn('container-site section', className)}>
+      {children}
+    </section>
+  )
+}
+```
+
+### Forwarding Refs
+
+For components that wrap native elements:
+
+```tsx
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <input
+        ref={ref}
+        className={cn('input-base', className)}
+        {...props}
+      />
+    )
+  }
+)
+
+Input.displayName = 'Input'
+```
+
+---
+
+## Server vs Client Components
+
+### Default to Server Components
+
+```tsx
+// Server Component (default in App Router)
+// Can fetch data, access backend, no client JS
+
+export function ServicesList() {
+  // Can do async operations
+  const services = await getServices()
+  
+  return (
+    <ul>
+      {services.map(s => <li key={s.id}>{s.name}</li>)}
+    </ul>
+  )
+}
+```
+
+### Use Client Components When Needed
+
+```tsx
+'use client'
+
+// Client Component - only when you need:
+// - useState, useEffect, useRef
+// - Event handlers (onClick, onChange)
+// - Browser APIs (localStorage, window)
+// - Third-party client libraries
+
+import { useState } from 'react'
+
+export function Counter() {
+  const [count, setCount] = useState(0)
+  return <button onClick={() => setCount(c => c + 1)}>{count}</button>
+}
+```
+
+### Mixing Server and Client
+
+```tsx
+// Server Component (parent)
+export function Page() {
+  const data = await fetchData()
+  
+  return (
+    <div>
+      <StaticContent data={data} />     {/* Server */}
+      <InteractiveWidget />              {/* Client */}
+    </div>
+  )
+}
+
+// Client Component (child)
+'use client'
+export function InteractiveWidget() {
+  const [open, setOpen] = useState(false)
+  // ...
+}
+```
+
+---
+
+## Accessibility Requirements
+
+### Every Interactive Component Must Have:
+
+```tsx
+// Buttons
+<button
+  onClick={handleClick}
+  aria-label="Close menu"        // If icon-only
+  aria-expanded={isOpen}         // If controls expandable
+  aria-controls="menu-id"        // If controls another element
+>
+
+// Links
+<a
+  href="/about"
+  aria-current={isActive ? 'page' : undefined}  // For nav
+>
+
+// Form inputs
+<input
+  id="email"
+  aria-describedby="email-error"  // If has error message
+  aria-invalid={hasError}
+/>
+<label htmlFor="email">Email</label>
+
+// Icons (decorative)
+<Icon aria-hidden="true" />
+
+// Icons (meaningful)
+<Icon aria-label="Warning" role="img" />
+```
+
+---
+
+## Styling Conventions
+
+### Use Tailwind + cn() Helper
+
+```tsx
+import { cn } from '@/lib/utils'
+
+interface Props {
+  variant?: 'primary' | 'secondary'
+  className?: string
+}
+
+export function Component({ variant = 'primary', className }: Props) {
+  return (
+    <div
+      className={cn(
+        // Base styles
+        'rounded-lg p-4',
+        // Variant styles
+        variant === 'primary' && 'bg-navy text-white',
+        variant === 'secondary' && 'bg-white text-navy border',
+        // Allow override
+        className
+      )}
+    >
+      {/* ... */}
+    </div>
+  )
+}
+```
+
+### Style Organization
+
+```tsx
+className={cn(
+  // 1. Layout (display, position, size)
+  'flex items-center justify-between w-full',
+  // 2. Spacing (margin, padding)
+  'px-6 py-4',
+  // 3. Typography
+  'text-sm font-medium',
+  // 4. Colors
+  'bg-white text-navy',
+  // 5. Borders
+  'border border-linen-300 rounded-lg',
+  // 6. Effects
+  'shadow-sm',
+  // 7. Transitions
+  'transition-colors duration-200',
+  // 8. States
+  'hover:bg-cream focus:ring-2 focus:ring-green',
+  // 9. Responsive
+  'md:px-8 lg:flex-row',
+  // 10. Custom override
+  className
+)}
+```
+
+---
+
+## Export Patterns
+
+### Barrel Exports
+
+```tsx
+// components/ui/index.ts
+export { Button } from './button'
+export { Card } from './card'
+export { Input } from './input'
+
+// Usage
+import { Button, Card, Input } from '@/components/ui'
+```
+
+### Named Exports (Preferred)
+
+```tsx
+// PREFER: Named exports
+export function Button() { }
+export function Card() { }
+
+// AVOID: Default exports (harder to refactor)
+export default function Button() { }
+```
+
+---
+
+## Component Checklist
+
+Before considering a component complete:
+
+### Functionality
+- [ ] Works as expected
+- [ ] Handles edge cases (empty state, loading, error)
+- [ ] Props are typed
+- [ ] Has sensible defaults
+
+### Accessibility
+- [ ] Keyboard navigable
+- [ ] Has appropriate ARIA attributes
+- [ ] Focus states visible
+- [ ] Screen reader friendly
+
+### Styling
+- [ ] Follows design system
+- [ ] Responsive
+- [ ] Allows className override
+- [ ] No hardcoded colors outside palette
+
+### Code Quality
+- [ ] TypeScript strict (no `any`)
+- [ ] No console.log
+- [ ] Clean, readable code
+- [ ] Follows naming conventions
+
+---
+
+## FORBIDDEN
+
+- Components without TypeScript types
+- Inline styles (use Tailwind)
+- `any` type
+- Default exports (use named exports)
+- Hardcoded colors outside design system
+- Missing accessibility attributes on interactive elements
+- Client components that could be server components
+- Props drilling more than 2 levels (use composition or context)
+
+---
+
+END OF FILE

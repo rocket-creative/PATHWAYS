@@ -1,11 +1,23 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { JsonLd } from '@pathways/ui'
+import { generateBreadcrumbSchema } from '@/lib/structured-data'
+import { getRandomOfficeImage } from '@/lib/office-images'
 
 export const metadata: Metadata = {
   title: 'Individual Therapy on Long Island | Pathways Within',
   description: 'Find personal growth and healing through individual therapy at Pathways Within. Our licensed therapists offer CBT, psychodynamic therapy, and personalized care across Long Island.',
+  alternates: {
+    canonical: '/services/therapy/individual-therapy',
+  },
+  openGraph: {
+    title: 'Individual Therapy on Long Island | Pathways Within',
+    description: 'Find personal growth and healing through individual therapy at Pathways Within.',
+    url: '/services/therapy/individual-therapy',
+  },
 }
 
 const faqs = [
@@ -22,9 +34,16 @@ const relatedServices = [
   { name: 'Somatic Therapy', href: '/services/therapy/somatic-therapy' },
 ]
 
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: 'Home', url: 'https://pathwayswithin.com' },
+  { name: 'Services', url: 'https://pathwayswithin.com/services' },
+  { name: 'Individual Therapy', url: 'https://pathwayswithin.com/services/therapy/individual-therapy' },
+])
+
 export default function IndividualTherapyPage() {
   return (
     <main>
+      <JsonLd data={breadcrumbSchema} />
       <PageHero
         eyebrow="Therapy Services"
         headline="Individual therapy"
@@ -59,7 +78,15 @@ export default function IndividualTherapyPage() {
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">
         <div className="container-site py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-            <div className="img-placeholder aspect-[4/3]" />
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+              <Image
+                src={getRandomOfficeImage()}
+                alt="Therapy session at Pathways Within"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
             <div className="flex flex-col justify-center">
               <p className="mb-4 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>Our Approach</p>
               <h2 className="mb-6 text-[rgb(var(--color-navy))]">Skilled professionals, personalized care</h2>

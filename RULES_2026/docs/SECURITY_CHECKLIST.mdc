@@ -1,0 +1,315 @@
+# SECURITY_CHECKLIST.mdc
+## Pre-Deployment Security Verification
+
+THIS CHECKLIST MUST BE COMPLETED BEFORE ANY PRODUCTION DEPLOYMENT.
+Every item must be verified. No exceptions.
+
+---
+
+## How to Use This Checklist
+
+1. **Before deployment:** Complete every section
+2. **Mark each item:** ✅ Pass | ❌ Fail | ⏭️ N/A (with justification)
+3. **If ANY critical item fails:** STOP deployment, fix first
+4. **Document exceptions:** Any N/A must have written justification
+
+---
+
+## SECTION 1: Code Injection Prevention (CRITICAL)
+
+These vulnerabilities are CVSS 9.9 - highest severity.
+
+### Dynamic Code Execution
+- [ ] No `eval()` with user input anywhere in codebase
+- [ ] No `new Function()` with user input
+- [ ] No `require()` or `import()` with user-controlled paths
+- [ ] No template literal execution with user data
+- [ ] Search performed: `grep -r "eval\|new Function\|require(" --include="*.ts" --include="*.js"`
+
+### Shell Command Injection
+- [ ] No `exec()`, `execSync()`, `spawn()` with user input
+- [ ] All shell commands use parameterized inputs
+- [ ] Search performed: `grep -r "exec\|execSync\|spawn" --include="*.ts" --include="*.js"`
+
+### Constructor Chain Protection
+- [ ] No user access to `constructor` property in templates
+- [ ] Template engines configured to block prototype access
+- [ ] Sandbox environments properly configured (if applicable)
+
+---
+
+## SECTION 2: Input Validation (CRITICAL)
+
+### All User Inputs
+- [ ] Every API endpoint validates input with schema (Zod/Joi)
+- [ ] File paths validated against directory traversal
+- [ ] URLs validated for protocol and domain
+- [ ] SQL/NoSQL queries use parameterized statements only
+
+### File Uploads (if applicable)
+- [ ] File extensions validated against whitelist
+- [ ] File content validated (magic bytes match extension)
+- [ ] Files stored outside web root
+- [ ] Filenames generated server-side (not from user input)
+- [ ] File size limits enforced
+
+### Search: Path Traversal Vulnerabilities
+- [ ] `grep -r "path.join\|path.resolve" --include="*.ts"` reviewed
+- [ ] All file operations validate paths stay within allowed directories
+
+---
+
+## SECTION 3: Authentication & Authorization (CRITICAL)
+
+### Session Security
+- [ ] Sessions use HTTP-only cookies
+- [ ] Secure flag set for production
+- [ ] SameSite attribute set (strict or lax)
+- [ ] Session timeout configured
+- [ ] Session ID rotated on privilege changes
+
+### Authorization Checks
+- [ ] Every protected route has auth middleware
+- [ ] Resource access checks ownership/permissions
+- [ ] No client-side only authorization
+- [ ] Authorization failures logged
+
+### Password & Credentials
+- [ ] Passwords hashed with bcrypt/argon2 (not MD5/SHA1)
+- [ ] No default credentials in any environment
+- [ ] Password reset tokens expire appropriately
+- [ ] Failed login attempts rate-limited
+
+---
+
+## SECTION 4: Secrets Management (CRITICAL)
+
+### Environment Variables
+- [ ] No secrets in client-side code (no NEXT_PUBLIC_ for secrets)
+- [ ] No hardcoded API keys, tokens, or passwords
+- [ ] `.env` files in `.gitignore`
+- [ ] Production secrets in secure vault/KMS
+
+### Search: Exposed Secrets
+- [ ] `grep -r "sk-\|api_key\|apiKey\|secret\|password" --include="*.ts" --include="*.js"` reviewed
+- [ ] No secrets found in committed code
+- [ ] Git history checked for accidentally committed secrets
+
+---
+
+## SECTION 5: Security Headers (HIGH)
+
+### Required Headers Present
+- [ ] Content-Security-Policy defined and enforced
+- [ ] X-Frame-Options: DENY
+- [ ] X-Content-Type-Options: nosniff
+- [ ] Referrer-Policy: strict-origin-when-cross-origin
+- [ ] Permissions-Policy defined
+- [ ] Strict-Transport-Security (HSTS) for production
+
+### CSP Configuration
+- [ ] No `unsafe-eval` in production CSP (unless absolutely required with justification)
+- [ ] `unsafe-inline` minimized or removed where possible
+- [ ] Report-URI configured for CSP violations
+
+### Verification
+- [ ] Headers tested with securityheaders.com or similar
+- [ ] Score: A or higher
+
+---
+
+## SECTION 6: Dependency Security (HIGH)
+
+### Audit Results
+- [ ] `npm audit` run with no high/critical vulnerabilities
+- [ ] `npm audit --audit-level=high` passes
+- [ ] Known vulnerable packages updated or have documented mitigation
+
+### Version Pinning
+- [ ] Security-critical packages pinned to exact versions
+- [ ] Lock file (package-lock.json) committed
+- [ ] `npm ci` used in CI/CD (not `npm install`)
+
+### Supply Chain
+- [ ] No unnecessary dependencies
+- [ ] Dependencies from trusted sources only
+- [ ] No typosquatting risks in package names
+
+---
+
+## SECTION 7: Error Handling (HIGH)
+
+### Error Messages
+- [ ] Production errors show generic messages to users
+- [ ] No stack traces exposed to clients
+- [ ] No internal paths or versions leaked
+- [ ] Error details logged server-side only
+
+### Error Boundaries
+- [ ] React error boundaries in place
+- [ ] API errors return consistent format
+- [ ] 500 errors don't expose sensitive information
+
+---
+
+## SECTION 8: Rate Limiting (MEDIUM)
+
+### Endpoint Protection
+- [ ] Authentication endpoints rate-limited
+- [ ] Public API endpoints rate-limited
+- [ ] Form submissions rate-limited
+- [ ] 429 responses include Retry-After header
+
+### Configuration
+- [ ] Rate limits appropriate for expected traffic
+- [ ] Rate limit violations logged
+- [ ] Progressive delays for repeated failures (optional)
+
+---
+
+## SECTION 9: Network & Infrastructure (MEDIUM)
+
+### Service Exposure
+- [ ] Database not accessible from internet
+- [ ] Cache/queue services not accessible from internet
+- [ ] Admin interfaces require VPN or IP whitelist
+- [ ] Debug endpoints disabled in production
+
+### HTTPS
+- [ ] All traffic over HTTPS in production
+- [ ] HTTP redirects to HTTPS
+- [ ] Valid SSL certificate
+- [ ] Certificate auto-renewal configured
+
+---
+
+## SECTION 10: Logging & Monitoring (MEDIUM)
+
+### Security Logging
+- [ ] Authentication events logged
+- [ ] Authorization failures logged
+- [ ] Rate limit violations logged
+- [ ] Suspicious activity patterns detectable
+
+### Log Security
+- [ ] No passwords in logs
+- [ ] No API keys in logs
+- [ ] No PII in logs (or properly masked)
+- [ ] Logs stored securely
+
+---
+
+## SECTION 11: Third-Party Integrations (MEDIUM)
+
+### API Security
+- [ ] Third-party API keys stored securely
+- [ ] Webhook endpoints validate signatures
+- [ ] OAuth implementations follow best practices
+- [ ] API responses validated before use
+
+### External Scripts
+- [ ] Third-party scripts loaded from trusted CDNs
+- [ ] Subresource Integrity (SRI) hashes used where possible
+- [ ] Scripts consent-gated where required
+
+---
+
+## SECTION 12: AI-Generated Code Review (HIGH)
+
+### Boundary Checks
+- [ ] All AI-generated code reviewed for input validation
+- [ ] Authorization checks present on protected routes
+- [ ] No hardcoded credentials introduced
+- [ ] Error handling doesn't leak information
+- [ ] Data flow reviewed for sensitive information exposure
+
+### System Integration Points
+- [ ] Contracts between systems verified
+- [ ] Edge cases at system boundaries tested
+- [ ] Human review completed for security-critical code
+
+---
+
+## Final Sign-Off
+
+| Section | Status | Reviewer | Date |
+|---------|--------|----------|------|
+| 1. Code Injection | | | |
+| 2. Input Validation | | | |
+| 3. Auth & Authorization | | | |
+| 4. Secrets Management | | | |
+| 5. Security Headers | | | |
+| 6. Dependencies | | | |
+| 7. Error Handling | | | |
+| 8. Rate Limiting | | | |
+| 9. Network/Infrastructure | | | |
+| 10. Logging | | | |
+| 11. Third-Party | | | |
+| 12. AI Code Review | | | |
+
+### Deployment Authorization
+
+- [ ] All CRITICAL sections pass
+- [ ] All HIGH sections pass or have documented exceptions
+- [ ] MEDIUM sections reviewed
+
+**Authorized for deployment:** _________________ **Date:** _________
+
+---
+
+## Quick Commands for Security Verification
+
+```bash
+# Check for potential secrets in code
+grep -rn "password\|secret\|api_key\|apiKey\|token" --include="*.ts" --include="*.js" --include="*.tsx" | grep -v node_modules | grep -v ".test."
+
+# Check for dangerous functions
+grep -rn "eval\|new Function\|exec\|execSync\|spawn" --include="*.ts" --include="*.js" | grep -v node_modules
+
+# Check for path operations that might be vulnerable
+grep -rn "path.join\|path.resolve\|fs.read\|fs.write" --include="*.ts" --include="*.js" | grep -v node_modules
+
+# Run dependency audit
+npm audit --audit-level=high
+
+# Check for NEXT_PUBLIC secrets (should not contain actual secrets)
+grep -rn "NEXT_PUBLIC_.*KEY\|NEXT_PUBLIC_.*SECRET\|NEXT_PUBLIC_.*TOKEN" --include="*.ts" --include="*.js" --include=".env*"
+
+# Verify security headers (requires curl)
+curl -I https://your-production-url.com 2>/dev/null | grep -i "content-security\|x-frame\|x-content-type\|strict-transport"
+```
+
+---
+
+## When This Checklist Fails
+
+If any CRITICAL item fails:
+1. **STOP** - Do not deploy
+2. **Document** - Record the vulnerability
+3. **Fix** - Address the issue
+4. **Re-verify** - Complete checklist again
+5. **Log** - Add to ERROR_PATTERNS.mdc if new pattern
+
+---
+
+## Ongoing Security Monitoring
+
+Security is not a one-time checklist. See `security-hardening.mdc` Section 11 for:
+- Security researcher channels to follow (Low Level, LiveOverflow, etc.)
+- Vulnerability databases to monitor
+- Framework-specific security pages
+- Recommended monitoring schedule
+
+### Quick Links for Regular Checks
+
+| Check | Frequency | Command/URL |
+|-------|-----------|-------------|
+| Dependency audit | Daily | `npm audit` |
+| GitHub Dependabot | Daily | Check repo alerts |
+| Low Level YouTube | Weekly | https://www.youtube.com/@LowLevelTV |
+| CISA Alerts | Weekly | https://www.cisa.gov/news-events/cybersecurity-advisories |
+| NVD Search | After disclosure | https://nvd.nist.gov/ |
+
+---
+
+END OF FILE

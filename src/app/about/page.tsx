@@ -2,15 +2,31 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, Heart, Users, Sparkles, Shield } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { JsonLd } from '@pathways/ui'
+import { generateBreadcrumbSchema } from '@/lib/structured-data'
 
 export const metadata: Metadata = {
   title: 'About Us | Pathways Within',
   description: 'Learn about Pathways Within, a Long Island collaborative offering integrated therapy and wellness services. Our 360 degree approach honors your whole self.',
+  alternates: {
+    canonical: '/about',
+  },
+  openGraph: {
+    title: 'About Us | Pathways Within',
+    description: 'Learn about Pathways Within, a Long Island collaborative offering integrated therapy and wellness services.',
+    url: '/about',
+  },
 }
+
+const breadcrumbSchema = generateBreadcrumbSchema([
+  { name: 'Home', url: 'https://pathwayswithin.com' },
+  { name: 'About Us', url: 'https://pathwayswithin.com/about' },
+])
 
 export default function AboutPage() {
   return (
     <main>
+      <JsonLd data={breadcrumbSchema} />
       {/* Hero - Offset image style */}
       <PageHero
         eyebrow="About Us"
@@ -70,7 +86,7 @@ export default function AboutPage() {
           <div className="mt-16 grid gap-8 md:grid-cols-3">
             <div className="text-center">
               <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[rgb(var(--color-linen))]">
-                <span className="text-2xl font-light text-[rgb(var(--color-navy))]">1</span>
+                <span className="text-2xl font-normal text-[rgb(var(--color-navy))]">1</span>
               </div>
               <h3 className="mb-3 text-[rgb(var(--color-navy))]" style={{ fontWeight: 400 }}>Intake Conversation</h3>
               <p className="text-sm text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.7 }}>
@@ -79,7 +95,7 @@ export default function AboutPage() {
             </div>
             <div className="text-center">
               <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[rgb(var(--color-linen))]">
-                <span className="text-2xl font-light text-[rgb(var(--color-navy))]">2</span>
+                <span className="text-2xl font-normal text-[rgb(var(--color-navy))]">2</span>
               </div>
               <h3 className="mb-3 text-[rgb(var(--color-navy))]" style={{ fontWeight: 400 }}>Personalized Plan</h3>
               <p className="text-sm text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.7 }}>
@@ -88,7 +104,7 @@ export default function AboutPage() {
             </div>
             <div className="text-center">
               <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[rgb(var(--color-linen))]">
-                <span className="text-2xl font-light text-[rgb(var(--color-navy))]">3</span>
+                <span className="text-2xl font-normal text-[rgb(var(--color-navy))]">3</span>
               </div>
               <h3 className="mb-3 text-[rgb(var(--color-navy))]" style={{ fontWeight: 400 }}>Ongoing Support</h3>
               <p className="text-sm text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.7 }}>

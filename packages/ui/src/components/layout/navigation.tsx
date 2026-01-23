@@ -9,11 +9,11 @@ interface NavigationProps {
   site?: SiteName // Kept for backwards compatibility, but nav is now unified
 }
 
-// Site links for the 3 apps
+// Site links for the 3 apps - use SITE_CONFIG to ensure correct URLs
 const SITE_LINKS = {
   crm: process.env.NEXT_PUBLIC_CRM_URL || 'https://crm-sooty-one.vercel.app',
   wisdom: SITE_CONFIG.wisdom.url,
-  wellness: SITE_CONFIG.wellness.url,
+  wellness: SITE_CONFIG.wellness.url, // Should be https://wellness-phi-three.vercel.app
 }
 
 /**

@@ -1,0 +1,763 @@
+# security-hardening.mdc
+## Comprehensive Security Hardening Guide
+
+THIS FILE CONTAINS CRITICAL SECURITY PATTERNS EXTRACTED FROM REAL-WORLD VULNERABILITIES.
+Every code change MUST be checked against these patterns before deployment.
+
+---
+
+## Executive Summary: The Three Pillars of Security
+
+1. **Whitelist over Blacklist** - Only allow what is explicitly permitted
+2. **Least Privilege** - Every component gets minimum necessary access
+3. **Defense in Depth** - Multiple layers of security, never single points of failure
+
+---
+
+## SECTION 1: Code Injection & Remote Code Execution (RCE)
+
+### CVE Pattern: Constructor Chain Exploitation
+
+**The Vulnerability:**
+Attackers can chain JavaScript constructors to escape sandboxes and execute arbitrary code:
+
+```javascript
+// DANGEROUS - This pattern enables RCE
+constructor.constructor('return require("child_process")')().execSync('malicious command')
+```
+
+**Why It Works:**
+- `constructor` returns the object's constructor function
+- `constructor.constructor` returns the Function constructor
+- Function constructor can create new functions from strings
+- This bypasses most sandboxing attempts
+
+### REQUIRED: Input Sanitization Rules
+
+**Never allow user input to:**
+- Be passed to `eval()`, `Function()`, or `new Function()`
+- Be interpolated into template literals that execute code
+- Be used in `require()` or dynamic imports
+- Be passed to `child_process.exec()`, `execSync()`, or `spawn()` without validation
+
+**Sanitization Pattern:**
+```typescript
+// REQUIRED: Whitelist validation for any dynamic code paths
+const ALLOWED_OPERATIONS = ['read', 'write', 'list'] as const;
+type AllowedOperation = typeof ALLOWED_OPERATIONS[number];
+
+function validateOperation(input: string): AllowedOperation {
+  if (!ALLOWED_OPERATIONS.includes(input as AllowedOperation)) {
+    throw new SecurityError(`Invalid operation: ${input}`);
+  }
+  return input as AllowedOperation;
+}
+```
+
+### FORBIDDEN Patterns
+
+```typescript
+// FORBIDDEN: Dynamic code execution from user input
+eval(userInput);
+new Function(userInput);
+require(userInput);
+import(userInput);
+
+// FORBIDDEN: Shell command injection
+exec(`ls ${userInput}`);
+execSync(`grep ${userInput} file.txt`);
+spawn('sh', ['-c', userInput]);
+
+// FORBIDDEN: Template injection
+const template = `${userInput}`;
+eval(template);
+```
+
+---
+
+## SECTION 2: Sandbox Bypass Prevention
+
+### The Problem: Blacklist vs Whitelist
+
+**Blacklist Approach (DANGEROUS):**
+```typescript
+// WRONG: Trying to block dangerous functions
+const BLOCKED = ['eval', 'exec', 'spawn', 'require'];
+
+function runCode(code: string) {
+  for (const blocked of BLOCKED) {
+    if (code.includes(blocked)) throw new Error('Blocked');
+  }
+  // Attacker uses: constructor.constructor or import() or other bypass
+}
+```
+
+**Whitelist Approach (REQUIRED):**
+```typescript
+// CORRECT: Only allow specific, known-safe operations
+const ALLOWED_FUNCTIONS = new Set(['Math.abs', 'Math.round', 'String.trim']);
+
+function runCode(code: string, context: SafeContext) {
+  const ast = parseCode(code);
+  for (const call of ast.functionCalls) {
+    if (!ALLOWED_FUNCTIONS.has(call.name)) {
+      throw new SecurityError(`Function not allowed: ${call.name}`);
+    }
+  }
+  // Execute in restricted context
+}
+```
+
+### Sandbox Requirements
+
+If your application runs user-provided code:
+
+1. **Process Isolation** - Run in separate process with limited permissions
+2. **Resource Limits** - CPU time, memory, file descriptors
+3. **Network Isolation** - No network access by default
+4. **Filesystem Isolation** - Read-only access to specific directories only
+5. **No Shell Access** - Block all shell execution primitives
+
+**Recommended Approach:**
+```typescript
+// Use dedicated sandboxing solutions, not DIY
+// Options: vm2 (deprecated, use alternatives), isolated-vm, or external services
+
+import ivm from 'isolated-vm';
+
+const isolate = new ivm.Isolate({ memoryLimit: 128 });
+const context = await isolate.createContext();
+
+// Expose only safe APIs
+await context.global.set('safeLog', new ivm.Callback((msg: string) => {
+  console.log('[Sandbox]:', msg.slice(0, 1000)); // Limit output
+}));
+
+// Execute with timeout
+const script = await isolate.compileScript(userCode);
+await script.run(context, { timeout: 1000 });
+```
+
+---
+
+## SECTION 3: File Upload & Path Traversal
+
+### CVE Pattern: Arbitrary File Write
+
+**The Vulnerability:**
+Attackers can write files outside intended directories:
+
+```typescript
+// DANGEROUS: User controls destination path
+const destination = path.join(uploadDir, userFilename);
+fs.writeFileSync(destination, fileContent);
+// Attacker uses: ../../../etc/cron.d/malicious
+```
+
+### REQUIRED: File Path Validation
+
+```typescript
+import path from 'path';
+import fs from 'fs';
+
+// REQUIRED: Validate file paths are within allowed directory
+function safeFilePath(baseDir: string, userPath: string): string {
+  // Normalize and resolve the path
+  const normalizedBase = path.resolve(baseDir);
+  const targetPath = path.resolve(baseDir, userPath);
+  
+  // Ensure the resolved path is within the base directory
+  if (!targetPath.startsWith(normalizedBase + path.sep)) {
+    throw new SecurityError('Path traversal attempt detected');
+  }
+  
+  return targetPath;
+}
+
+// REQUIRED: Validate file extensions
+const ALLOWED_EXTENSIONS = new Set(['.jpg', '.jpeg', '.png', '.gif', '.pdf']);
+
+function validateFileExtension(filename: string): void {
+  const ext = path.extname(filename).toLowerCase();
+  if (!ALLOWED_EXTENSIONS.has(ext)) {
+    throw new SecurityError(`File extension not allowed: ${ext}`);
+  }
+}
+
+// REQUIRED: Validate file content matches extension
+async function validateFileContent(filepath: string, expectedType: string): Promise<void> {
+  const { fileTypeFromFile } = await import('file-type');
+  const detected = await fileTypeFromFile(filepath);
+  
+  if (!detected || detected.mime !== expectedType) {
+    throw new SecurityError('File content does not match extension');
+  }
+}
+```
+
+### FORBIDDEN Patterns
+
+```typescript
+// FORBIDDEN: Direct path concatenation with user input
+const filePath = uploadDir + '/' + userFilename;
+const filePath = `${uploadDir}/${userFilename}`;
+
+// FORBIDDEN: Using user input in require/import paths
+require(`./plugins/${userInput}`);
+import(`./modules/${userInput}`);
+
+// FORBIDDEN: Trusting file extensions without content validation
+if (filename.endsWith('.jpg')) { /* process as image */ }
+```
+
+---
+
+## SECTION 4: Authentication & Session Security
+
+### Multi-User Environment Risks
+
+**The Problem:**
+In shared environments (like automation platforms), one authenticated user can potentially:
+- Access other users' credentials
+- Read other users' workflows/data
+- Escalate privileges through process-level access
+
+### REQUIRED: Privilege Separation
+
+```typescript
+// REQUIRED: User context isolation
+interface UserContext {
+  userId: string;
+  permissions: Set<Permission>;
+  resourceQuota: ResourceQuota;
+}
+
+// Every operation MUST validate user context
+async function executeWorkflow(workflowId: string, ctx: UserContext) {
+  const workflow = await getWorkflow(workflowId);
+  
+  // REQUIRED: Ownership check
+  if (workflow.ownerId !== ctx.userId && !ctx.permissions.has('admin')) {
+    throw new AuthorizationError('Not authorized to access this workflow');
+  }
+  
+  // REQUIRED: Resource isolation
+  const sandbox = createUserSandbox(ctx.userId, ctx.resourceQuota);
+  return sandbox.execute(workflow);
+}
+```
+
+### Session Security Requirements
+
+```typescript
+// REQUIRED: Secure session configuration
+const sessionConfig = {
+  // HTTP-only prevents JavaScript access
+  httpOnly: true,
+  
+  // Secure flag for HTTPS only
+  secure: process.env.NODE_ENV === 'production',
+  
+  // SameSite prevents CSRF
+  sameSite: 'strict' as const,
+  
+  // Reasonable timeout
+  maxAge: 60 * 60 * 24, // 24 hours
+  
+  // Rotate session ID on privilege changes
+  rolling: true,
+};
+
+// REQUIRED: Session invalidation on sensitive operations
+async function changePassword(userId: string, newPassword: string) {
+  await updatePassword(userId, newPassword);
+  await invalidateAllSessions(userId); // Force re-authentication
+}
+```
+
+---
+
+## SECTION 5: API & Credential Security
+
+### REQUIRED: Credential Storage
+
+```typescript
+// REQUIRED: Never store credentials in plain text
+// Use encryption at rest with proper key management
+
+import { createCipheriv, createDecipheriv, randomBytes } from 'crypto';
+
+class CredentialStore {
+  private encryptionKey: Buffer;
+  
+  constructor() {
+    // Key MUST come from secure key management (KMS, Vault, etc.)
+    this.encryptionKey = Buffer.from(process.env.CREDENTIAL_ENCRYPTION_KEY!, 'hex');
+  }
+  
+  encrypt(plaintext: string): { iv: string; encrypted: string } {
+    const iv = randomBytes(16);
+    const cipher = createCipheriv('aes-256-gcm', this.encryptionKey, iv);
+    const encrypted = Buffer.concat([cipher.update(plaintext, 'utf8'), cipher.final()]);
+    const authTag = cipher.getAuthTag();
+    
+    return {
+      iv: iv.toString('hex'),
+      encrypted: Buffer.concat([encrypted, authTag]).toString('hex'),
+    };
+  }
+  
+  decrypt(iv: string, encrypted: string): string {
+    const ivBuffer = Buffer.from(iv, 'hex');
+    const encryptedBuffer = Buffer.from(encrypted, 'hex');
+    const authTag = encryptedBuffer.slice(-16);
+    const data = encryptedBuffer.slice(0, -16);
+    
+    const decipher = createDecipheriv('aes-256-gcm', this.encryptionKey, ivBuffer);
+    decipher.setAuthTag(authTag);
+    
+    return decipher.update(data) + decipher.final('utf8');
+  }
+}
+```
+
+### REQUIRED: API Key Handling
+
+```typescript
+// REQUIRED: API keys never in client code
+// WRONG:
+const apiKey = 'sk-1234567890abcdef'; // NEVER DO THIS
+
+// CORRECT: Server-side only, from environment
+// In server component or API route only:
+const apiKey = process.env.API_KEY; // Not NEXT_PUBLIC_
+
+// REQUIRED: Validate API key format before use
+function validateApiKey(key: string | undefined): string {
+  if (!key) {
+    throw new ConfigurationError('API key not configured');
+  }
+  if (!/^sk-[a-zA-Z0-9]{32,}$/.test(key)) {
+    throw new ConfigurationError('Invalid API key format');
+  }
+  return key;
+}
+```
+
+---
+
+## SECTION 6: Dependency & Supply Chain Security
+
+### REQUIRED: Dependency Auditing
+
+```bash
+# REQUIRED: Run before every deployment
+npm audit --audit-level=high
+
+# REQUIRED: Check for known vulnerabilities
+npx better-npm-audit audit
+
+# REQUIRED: Lock file integrity
+npm ci # Use ci, not install, in CI/CD
+```
+
+### REQUIRED: Dependency Pinning
+
+```json
+// package.json - REQUIRED: Pin exact versions for security-critical deps
+{
+  "dependencies": {
+    "next": "14.2.3",           // Exact version
+    "react": "18.3.1",          // Exact version
+    "zod": "3.23.8"             // Exact version
+  },
+  "overrides": {
+    // Force specific versions to patch vulnerabilities
+    "semver": "7.5.4"
+  }
+}
+```
+
+### FORBIDDEN Patterns
+
+```json
+// FORBIDDEN: Loose version ranges for critical packages
+{
+  "dependencies": {
+    "next": "^14.0.0",     // DANGEROUS: Could pull vulnerable version
+    "express": "*",         // EXTREMELY DANGEROUS
+    "lodash": ">=4.0.0"    // DANGEROUS: Too broad
+  }
+}
+```
+
+---
+
+## SECTION 7: Git & Version Control Security
+
+### REQUIRED: Pre-commit Security Checks
+
+```yaml
+# .pre-commit-config.yaml
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.0
+    hooks:
+      - id: gitleaks
+        name: Detect secrets in code
+        
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: detect-private-key
+      - id: detect-aws-credentials
+```
+
+### REQUIRED: .gitignore Security Entries
+
+```gitignore
+# REQUIRED: Never commit these
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+service-account.json
+secrets/
+.secrets/
+
+# IDE and editor files that may contain secrets
+.idea/
+.vscode/settings.json
+*.code-workspace
+```
+
+### Git Hooks Security
+
+```typescript
+// FORBIDDEN: Git hooks that execute arbitrary code from repo
+// Attackers can add malicious hooks via .git/hooks/ or commit hooks
+
+// REQUIRED: If using git automation, validate operations
+const ALLOWED_GIT_OPERATIONS = ['clone', 'pull', 'fetch', 'status', 'log'];
+
+function validateGitOperation(operation: string): void {
+  if (!ALLOWED_GIT_OPERATIONS.includes(operation)) {
+    throw new SecurityError(`Git operation not allowed: ${operation}`);
+  }
+}
+
+// REQUIRED: Never execute post-checkout or post-merge hooks from untrusted repos
+```
+
+---
+
+## SECTION 8: Network & Exposure Security
+
+### REQUIRED: Service Exposure Rules
+
+**Never expose to public internet:**
+- Database ports (5432, 3306, 27017)
+- Redis/cache ports (6379)
+- Internal APIs without authentication
+- Admin interfaces
+- Development/debug endpoints
+- Automation platforms (N8N, Airflow, etc.)
+
+**Required Network Architecture:**
+```
+Internet → Load Balancer → WAF → Application → Internal Services
+                                      ↓
+                              [Private Network]
+                                      ↓
+                    Database, Cache, Queue, Automation
+```
+
+### REQUIRED: Security Headers
+
+```typescript
+// next.config.js - REQUIRED headers
+const securityHeaders = [
+  {
+    key: 'Content-Security-Policy',
+    value: [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // Tighten in production
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: https:",
+      "font-src 'self'",
+      "connect-src 'self'",
+      "frame-ancestors 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+    ].join('; '),
+  },
+  {
+    key: 'X-Frame-Options',
+    value: 'DENY',
+  },
+  {
+    key: 'X-Content-Type-Options',
+    value: 'nosniff',
+  },
+  {
+    key: 'Referrer-Policy',
+    value: 'strict-origin-when-cross-origin',
+  },
+  {
+    key: 'Permissions-Policy',
+    value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+  },
+  {
+    key: 'Strict-Transport-Security',
+    value: 'max-age=31536000; includeSubDomains',
+  },
+];
+
+module.exports = {
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: securityHeaders,
+      },
+    ];
+  },
+};
+```
+
+---
+
+## SECTION 9: AI-Generated Code Security Review
+
+### The Problem with AI-Generated Code
+
+As noted by security experts:
+> "AI codegen is okay for the most part. The problem is that it's not able to see the totality of systems. It's only able to see the system itself. Where those edges touch and the contracts between systems is where a human in the loop still needs to be."
+
+### REQUIRED: AI Code Review Checklist
+
+Before accepting AI-generated code, verify:
+
+**Input Handling:**
+- [ ] All user inputs are validated
+- [ ] No dynamic code execution from user data
+- [ ] SQL queries use parameterized statements
+- [ ] File paths are validated against traversal
+
+**Authentication & Authorization:**
+- [ ] Auth checks present on all protected routes
+- [ ] Authorization checks use least privilege
+- [ ] Session handling follows security requirements
+- [ ] No hardcoded credentials
+
+**Data Flow:**
+- [ ] Sensitive data not logged
+- [ ] Error messages don't leak internal details
+- [ ] API responses don't include unnecessary data
+- [ ] Credentials encrypted at rest
+
+**System Boundaries:**
+- [ ] External API calls validated and rate-limited
+- [ ] File operations bounded to allowed directories
+- [ ] Network calls to expected destinations only
+- [ ] Process spawning properly sandboxed
+
+---
+
+## SECTION 10: Security Testing Requirements
+
+### REQUIRED: Security Test Coverage
+
+```typescript
+// Example security test patterns
+
+describe('Security: Input Validation', () => {
+  it('rejects path traversal attempts', async () => {
+    const maliciousInputs = [
+      '../../../etc/passwd',
+      '..\\..\\..\\windows\\system32',
+      '%2e%2e%2f%2e%2e%2f',
+      '....//....//etc/passwd',
+    ];
+    
+    for (const input of maliciousInputs) {
+      await expect(uploadFile(input, 'content'))
+        .rejects.toThrow('Path traversal');
+    }
+  });
+  
+  it('rejects code injection attempts', async () => {
+    const maliciousInputs = [
+      'constructor.constructor("return this")()',
+      '{{constructor.constructor("return process")()}}',
+      '${require("child_process").execSync("id")}',
+    ];
+    
+    for (const input of maliciousInputs) {
+      await expect(processTemplate(input))
+        .rejects.toThrow(/injection|blocked|invalid/i);
+    }
+  });
+});
+
+describe('Security: Authorization', () => {
+  it('prevents access to other users resources', async () => {
+    const user1 = await createTestUser();
+    const user2 = await createTestUser();
+    const resource = await createResource(user1.id);
+    
+    await expect(getResource(resource.id, user2.context))
+      .rejects.toThrow('Not authorized');
+  });
+});
+```
+
+### REQUIRED: Penetration Testing Checklist
+
+Before production deployment:
+
+- [ ] OWASP Top 10 vulnerabilities checked
+- [ ] Authentication bypass attempts tested
+- [ ] Authorization boundary tests completed
+- [ ] Input validation fuzzing performed
+- [ ] Rate limiting verified
+- [ ] Error handling doesn't leak information
+- [ ] Security headers present and correct
+- [ ] Dependencies audited for vulnerabilities
+
+---
+
+## Quick Reference: Security Severity Levels
+
+| Severity | CVSS Score | Response Time | Examples |
+|----------|------------|---------------|----------|
+| Critical | 9.0-10.0 | Immediate | RCE, Auth bypass, Data breach |
+| High | 7.0-8.9 | 24 hours | Privilege escalation, XSS, SQLi |
+| Medium | 4.0-6.9 | 1 week | CSRF, Information disclosure |
+| Low | 0.1-3.9 | Next release | Minor info leak, Missing headers |
+
+---
+
+## Incident Response
+
+If a security vulnerability is discovered:
+
+1. **Contain** - Disable affected functionality immediately
+2. **Assess** - Determine scope and impact
+3. **Fix** - Patch the vulnerability
+4. **Verify** - Test the fix doesn't introduce new issues
+5. **Deploy** - Push fix to production
+6. **Document** - Add to ERROR_PATTERNS.mdc and this file
+7. **Review** - Conduct post-mortem, update processes
+
+---
+
+## SECTION 11: Security Intelligence Sources
+
+### REQUIRED: Regular Security Monitoring
+
+Check these sources regularly (weekly minimum) for new vulnerabilities affecting your stack.
+
+---
+
+### Security Researchers & Educators
+
+| Source | Platform | Focus | URL |
+|--------|----------|-------|-----|
+| **Low Level** | YouTube | Vulnerability deep-dives, exploit analysis, security fundamentals | https://www.youtube.com/@LowLevelTV |
+| **Low Level** | Website | Articles and resources | https://lowlevel.academy/ |
+| **LiveOverflow** | YouTube | CTF walkthroughs, binary exploitation, web security | https://www.youtube.com/@LiveOverflow |
+| **John Hammond** | YouTube | Malware analysis, CTF, practical security | https://www.youtube.com/@_JohnHammond |
+| **IppSec** | YouTube | HackTheBox walkthroughs, penetration testing | https://www.youtube.com/@ippsec |
+| **The Cyber Mentor** | YouTube | Ethical hacking, penetration testing tutorials | https://www.youtube.com/@TCMSecurityAcademy |
+| **STÖK** | YouTube | Bug bounty hunting, web application security | https://www.youtube.com/@STOKfredrik |
+| **PwnFunction** | YouTube | Animated security concepts, web vulnerabilities | https://www.youtube.com/@PwnFunction |
+| **Seytonic** | YouTube | Hardware hacking, physical security | https://www.youtube.com/@Seytonic |
+| **David Bombal** | YouTube | Network security, ethical hacking | https://www.youtube.com/@davidbombal |
+
+---
+
+### Official Vulnerability Databases
+
+| Source | Purpose | URL |
+|--------|---------|-----|
+| **NVD (NIST)** | Official US vulnerability database | https://nvd.nist.gov/ |
+| **CVE** | Common Vulnerabilities and Exposures | https://cve.mitre.org/ |
+| **GitHub Advisory Database** | Security advisories for packages | https://github.com/advisories |
+| **npm Security Advisories** | Node.js package vulnerabilities | https://www.npmjs.com/advisories |
+| **Snyk Vulnerability DB** | Multi-language vulnerability database | https://snyk.io/vuln/ |
+
+---
+
+### Security News & Alerts
+
+| Source | Type | URL |
+|--------|------|-----|
+| **Krebs on Security** | Blog | https://krebsonsecurity.com/ |
+| **The Hacker News** | News | https://thehackernews.com/ |
+| **Bleeping Computer** | News | https://www.bleepingcomputer.com/ |
+| **Ars Technica Security** | News | https://arstechnica.com/security/ |
+| **CISA Alerts** | Government advisories | https://www.cisa.gov/news-events/cybersecurity-advisories |
+| **Rapid7 Blog** | Research & advisories | https://www.rapid7.com/blog/ |
+| **PortSwigger Research** | Web security research | https://portswigger.net/research |
+
+---
+
+### Framework-Specific Security
+
+| Framework | Security Page | RSS/Updates |
+|-----------|---------------|-------------|
+| **Next.js** | https://nextjs.org/docs/security | GitHub releases |
+| **React** | https://react.dev/reference/react | GitHub releases |
+| **Node.js** | https://nodejs.org/en/security | https://nodejs.org/en/feed/vulnerability.xml |
+| **Vercel** | https://vercel.com/security | Status page |
+
+---
+
+### Recommended Monitoring Schedule
+
+**Daily:**
+- [ ] Check `npm audit` in active projects
+- [ ] Review GitHub Dependabot alerts
+
+**Weekly:**
+- [ ] Check security researcher channels for new vulnerability disclosures
+- [ ] Review CISA alerts for critical vulnerabilities
+- [ ] Scan The Hacker News for relevant threats
+
+**Monthly:**
+- [ ] Full dependency audit across all projects
+- [ ] Review and update security rules if new patterns discovered
+- [ ] Check framework security pages for updates
+
+**After Major Vulnerability Disclosure:**
+- [ ] Assess if your stack is affected
+- [ ] Check security researcher breakdowns for exploitation details
+- [ ] Update security-hardening.mdc with new patterns
+- [ ] Add to ERROR_PATTERNS.mdc if applicable
+- [ ] Patch affected systems immediately
+
+---
+
+### How to Use Security Research Videos
+
+When a security researcher like Low Level posts a vulnerability breakdown:
+
+1. **Watch the full analysis** - Understand the root cause, not just the fix
+2. **Extract the pattern** - What coding mistake enabled this?
+3. **Search your codebase** - Do you have similar patterns?
+4. **Update documentation** - Add to ERROR_PATTERNS.mdc
+5. **Add detection** - Can you lint or test for this pattern?
+
+**Example from N8N vulnerabilities (source: Low Level):**
+- CVE-2025-68613: Constructor chain → Added ERR-032
+- CVE-2025-68668: Blacklist bypass → Added ERR-033  
+- CVE-2026-21877: Path traversal → Added ERR-034
+
+---
+
+END OF FILE

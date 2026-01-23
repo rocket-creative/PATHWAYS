@@ -1,7 +1,9 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { getRandomOfficeImage } from '@/lib/office-images'
 
 export const metadata: Metadata = {
   title: 'Massage Therapy on Long Island | Pathways Within',
@@ -51,7 +53,15 @@ export default function MassagePage() {
               <h2 className="mb-6 text-[rgb(var(--color-navy))]">Why massage therapy?</h2>
               <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>A therapeutic massage is the perfect complement to your wellness journey. Whether you are looking to relieve stress, reduce pain, or simply enjoy some relaxation, our services are tailored to your individual needs.</p>
             </div>
-            <div className="img-placeholder aspect-[4/3] rounded-lg" />
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg">
+              <Image
+                src={getRandomOfficeImage()}
+                alt="Massage therapy at Pathways Within"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
           </div>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {['Stress relief', 'Reduced muscle tension', 'Improved circulation', 'Promotes relaxation', 'Increased flexibility', 'Supports better sleep'].map((benefit) => (

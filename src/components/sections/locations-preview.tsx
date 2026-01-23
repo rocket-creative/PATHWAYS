@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { MapPin, ArrowRight, Video } from 'lucide-react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
 
@@ -23,7 +24,7 @@ export function LocationsPreview() {
       <div ref={ref} className="container-site section-lg">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-0">
           
-          {/* Left - Map placeholder */}
+          {/* Left - Office image */}
           <div 
             className="relative lg:col-span-6"
             style={{ 
@@ -32,7 +33,15 @@ export function LocationsPreview() {
               transform: isVisible ? 'translateX(0)' : 'translateX(-30px)'
             }}
           >
-            <div className="img-placeholder aspect-square lg:aspect-[4/3]" />
+            <div className="relative aspect-square w-full overflow-hidden rounded-lg lg:aspect-[4/3]">
+              <Image
+                src="/offices/massapequa.jpg"
+                alt="Pathways Within office location"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
             
             {/* Telehealth badge - overlapping */}
             <div className="absolute -bottom-4 right-4 flex items-center gap-2 bg-white px-4 py-3 shadow-sm lg:-right-8 lg:bottom-8">

@@ -412,7 +412,7 @@ export default function StartPage() {
               >
                 <div className="mb-6 flex gap-1">
                   {[...Array(testimonial.stars)].map((_, i) => (
-                    <Star key={i} className="h-5 w-5 fill-yellow-400 text-yellow-400 transition-transform duration-300" style={{ transitionDelay: `${i * 50}ms` }} />
+                    <Star key={i} className="h-5 w-5 fill-[rgb(var(--color-green))] text-[rgb(var(--color-green))] transition-transform duration-300" style={{ transitionDelay: `${i * 50}ms` }} />
                   ))}
                 </div>
                 <p className="mb-8 text-[rgb(var(--color-text))]" style={{ lineHeight: 1.8 }}>

@@ -1,0 +1,228 @@
+# ENV_REGISTRY.mdc
+## Environment Variables Registry Template
+
+THIS FILE DOCUMENTS ALL ENVIRONMENT VARIABLES USED ACROSS THE PROJECT.
+When adding new env vars, document them here.
+When deploying, ensure all required vars are set.
+
+**Copy this template and customize for each project.**
+
+---
+
+## Quick Reference
+
+### Required for ALL Apps
+
+| Variable | Required | Public | Description |
+|----------|----------|--------|-------------|
+| `NEXT_PUBLIC_SITE_URL` | Yes | Yes | Canonical URL for the app |
+
+### Analytics (Consent-Gated)
+
+| Variable | Required | Public | Description |
+|----------|----------|--------|-------------|
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | No | Yes | Google Analytics 4 ID (G-XXXXXXXX) |
+| `NEXT_PUBLIC_GOOGLE_ADS_ID` | No | Yes | Google Ads ID (AW-XXXXXXXX) |
+| `NEXT_PUBLIC_META_PIXEL_ID` | No | Yes | Meta/Facebook Pixel ID |
+
+### API Keys (Server-Side Only)
+
+| Variable | Required | Public | Description |
+|----------|----------|--------|-------------|
+| `META_CAPI_ACCESS_TOKEN` | No | **No** | Meta Conversions API token |
+| `DATABASE_URL` | Varies | **No** | Database connection string |
+| `API_SECRET_KEY` | Varies | **No** | API authentication key |
+
+---
+
+## Detailed Documentation
+
+### NEXT_PUBLIC_SITE_URL
+
+**Purpose:** The canonical URL for the current app. Used for:
+- Meta tags (canonical URL)
+- Open Graph URLs
+- Sitemap generation
+- Structured data URLs
+
+**Format:** `https://domain.com` (no trailing slash)
+
+**Per Environment:**
+| Environment | Value |
+|-------------|-------|
+| Production | `https://yourdomain.com` |
+| Preview | Platform preview URL |
+| Development | `http://localhost:3000` |
+
+---
+
+### NEXT_PUBLIC_GA_MEASUREMENT_ID
+
+**Purpose:** Google Analytics 4 measurement ID for tracking.
+
+**Format:** `G-XXXXXXXXXX`
+
+**Important:** Only loads after user consent (analytics category).
+
+**Setup:**
+1. Create GA4 property at analytics.google.com
+2. Get Measurement ID from Admin → Data Streams
+3. Add to deployment platform environment variables
+
+---
+
+### NEXT_PUBLIC_GOOGLE_ADS_ID
+
+**Purpose:** Google Ads conversion tracking ID.
+
+**Format:** `AW-XXXXXXXXXX`
+
+**Important:** Only loads after user consent (marketing category).
+
+**Setup:**
+1. Get from Google Ads → Tools → Conversions
+2. Add to deployment platform environment variables
+
+---
+
+### NEXT_PUBLIC_META_PIXEL_ID
+
+**Purpose:** Meta (Facebook) Pixel for conversion tracking and retargeting.
+
+**Format:** Numeric ID (e.g., `1234567890123456`)
+
+**Important:** Only loads after user consent (marketing category).
+
+**Setup:**
+1. Create Pixel at business.facebook.com → Events Manager
+2. Get Pixel ID
+3. Add to deployment platform environment variables
+
+---
+
+## Project-Specific Variables
+
+Add your project-specific environment variables here:
+
+```markdown
+### [VARIABLE_NAME]
+
+**Purpose:** [What this variable is used for]
+
+**Format:** [Expected format]
+
+**Required:** Yes/No
+
+**Public:** Yes/No (can it be exposed to browser?)
+
+**Default:** [Default value if any]
+
+**Setup:**
+1. [Step 1]
+2. [Step 2]
+```
+
+---
+
+## Deployment Platform Setup
+
+### Vercel
+
+1. Go to Vercel Dashboard
+2. Select Project
+3. Settings → Environment Variables
+4. Add each variable with appropriate scope:
+   - **Production:** Live site
+   - **Preview:** PR previews
+   - **Development:** Local dev (optional, use .env.local instead)
+
+### Netlify
+
+1. Go to Netlify Dashboard
+2. Select Site
+3. Site settings → Environment variables
+4. Add variables for each context (Production, Deploy previews, etc.)
+
+### Other Platforms
+
+Document your platform-specific setup here.
+
+---
+
+## Local Development (.env.local)
+
+Create `.env.local` in your project root:
+
+```bash
+# Site URL
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+
+# Analytics (optional for local dev)
+# NEXT_PUBLIC_GA_MEASUREMENT_ID=
+# NEXT_PUBLIC_META_PIXEL_ID=
+
+# API Keys (if needed locally)
+# DATABASE_URL=
+```
+
+**Note:** `.env.local` should be in `.gitignore` and never committed.
+
+---
+
+## Adding New Environment Variables
+
+When adding a new env var:
+
+1. **Document it here** with:
+   - Variable name
+   - Purpose
+   - Format
+   - Required or optional
+   - Public or server-only
+
+2. **Add to `.env.example`** in the project root
+
+3. **Update deployment platform** for all environments
+
+4. **Update this registry**
+
+---
+
+## Security Rules
+
+### Public vs Private
+
+| Prefix | Visibility | Use For |
+|--------|------------|---------|
+| `NEXT_PUBLIC_` | Exposed to browser | Non-sensitive config |
+| No prefix | Server-only | API keys, secrets, tokens |
+
+### Never Expose
+
+- Database credentials
+- API secret keys
+- Authentication tokens
+- Encryption keys
+- Service account credentials
+
+### Safe to Expose
+
+- Site URLs
+- Analytics IDs (they're in the HTML anyway)
+- Public API endpoints
+- Feature flags
+
+---
+
+## Checklist for New Projects
+
+- [ ] Copy this template
+- [ ] Remove example variables not needed
+- [ ] Add project-specific variables
+- [ ] Create `.env.example` file
+- [ ] Set up variables in deployment platform
+- [ ] Document any platform-specific setup
+
+---
+
+END OF FILE

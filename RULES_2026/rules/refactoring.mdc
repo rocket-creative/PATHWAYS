@@ -1,0 +1,597 @@
+# refactoring.mdc
+## LLM-Assisted Code Refactoring
+
+### OVERVIEW
+
+Code refactoring is the process of restructuring existing code without changing its external behavior. With the advent of LLM coding agents, refactoring has become significantly faster and more accessible, but requires careful process to ensure safety and correctness.
+
+**Key Principle:** Refactoring should be performed more frequently now than before LLMs, as the cost of refactoring has decreased while the benefits (faster iteration, cleaner code) remain high.
+
+---
+
+## WHEN TO REFACTOR
+
+### Triggers for Refactoring
+
+Refactor when you observe:
+
+1. **Code Quality Issues**
+   - Excessive code duplication (DRY violations)
+   - Missing or incomplete documentation (docstrings, type hints)
+   - Poor separation of concerns
+   - Deeply nested code structures
+   - Functions/classes that violate single responsibility principle
+   - Inconsistent naming conventions
+
+2. **Performance Indicators**
+   - Coding agent takes longer than usual to understand codebase
+   - Agent struggles with implementations and introduces errors elsewhere
+   - You spend more time explaining context than implementing features
+   - New features require touching multiple unrelated files
+
+3. **Maintainability Red Flags**
+   - Tests are difficult to write or maintain
+   - Small changes require modifications across many files
+   - Code reviews consistently identify the same patterns
+   - Onboarding new developers is slowed by code complexity
+
+### Threshold Adjustment
+
+**Lower your refactoring threshold** compared to pre-LLM workflows:
+- Refactoring is now faster and cheaper with LLMs
+- LLMs excel at refactoring tasks (it's part of their training)
+- Early refactoring prevents technical debt accumulation
+- Better to refactor incrementally than wait for major issues
+
+**Rule of Thumb:** If you notice 3+ antipatterns in a single module/component, consider refactoring.
+
+---
+
+## REFACTORING PROCESS
+
+### Phase 1: Discovery & Assessment
+
+**1.1 Identify Scope**
+- Determine which files/components need refactoring
+- Identify dependencies and affected areas
+- **CRITICAL:** Minimize scope to reduce risk
+- Create a branch: `refactor/<module-name>` (see `git-workflow.mdc`)
+
+**1.2 Document Current State**
+- Note current input/output behavior
+- List known edge cases
+- Identify existing tests that validate behavior
+- Document any performance characteristics that must be preserved
+
+**1.3 Risk Assessment**
+- High risk: Core business logic, authentication, payment processing
+- Medium risk: UI components, utility functions
+- Low risk: Styling, documentation, type definitions
+- Adjust verification rigor based on risk level
+
+---
+
+### Phase 2: Planning
+
+**2.1 Architectural Discussion (Optional but Recommended)**
+
+For significant refactorings, start with a high-level discussion:
+
+- Use Gemini or Claude in console for architectural decisions
+- **Have a conversation, not just a question-answer**
+- Discuss trade-offs between different approaches
+- Explore multiple solutions before committing
+- Spend 10-15 minutes on this for significant refactorings
+
+**Topics to Cover:**
+- What patterns are we moving toward?
+- What patterns are we moving away from?
+- How will this affect future development?
+- What are the migration risks?
+- Are there breaking changes?
+
+**2.2 Plan Mode (Required)**
+
+Always use plan mode in Cursor or Claude Code:
+
+- Provide context about what needs refactoring
+- Include your architectural discussion (if performed)
+- Let the agent analyze the codebase and propose a plan
+- Review the plan thoroughly before execution
+- **Modify the plan** if it misses important considerations
+
+**Plan Should Include:**
+- File structure changes (new files, deleted files, moved files)
+- Step-by-step implementation phases
+- Dependencies between steps
+- Verification checkpoints
+- Rollback points if something goes wrong
+
+**Example Plan Structure:**
+```markdown
+# Plan: [Refactoring Description]
+
+## Context
+[Current state and problems]
+
+## Goals
+[What we want to achieve]
+
+## Proposed Changes
+[File structure, new patterns]
+
+## Implementation Phases
+1. Phase 1: [Description]
+   - [ ] Step 1.1
+   - [ ] Step 1.2
+2. Phase 2: [Description]
+   - [ ] Step 2.1
+
+## Verification Steps
+- [ ] Compilation check
+- [ ] Test suite passes
+- [ ] Manual testing
+- [ ] Performance comparison
+
+## Risks & Mitigations
+[Known risks and how to address them]
+```
+
+**2.3 Plan Review Checklist**
+
+Before executing the plan, verify:
+- [ ] Plan addresses all identified issues
+- [ ] Plan maintains backward compatibility (or explicitly breaks it)
+- [ ] Plan includes verification steps
+- [ ] Plan has clear rollback points
+- [ ] Plan doesn't introduce new antipatterns
+- [ ] Plan aligns with project architecture (see `core-stack.mdc`)
+
+---
+
+### Phase 3: Execution
+
+**3.1 Agent Configuration**
+
+**Model Selection:**
+- **Preferred:** Claude Sonnet/Opus 4.5 (best for refactoring)
+- **Alternative:** GPT-4 Turbo, Gemini Pro
+- Use models with large context windows for multi-file refactorings
+
+**Permission Settings:**
+- **Be liberal with read permissions** (cannot cause damage)
+- **Be cautious with write permissions** (review before allowing)
+- **Be very restrictive with destructive commands** (git force push, file deletion)
+- Allow test script creation and execution
+- Allow dependency installation (but review changes to package.json)
+
+**3.2 Execution Strategy**
+
+**Incremental Approach:**
+- Execute plan phase by phase
+- Verify after each phase before proceeding
+- Don't skip verification steps
+- If a phase fails, fix before continuing
+
+**During Execution:**
+- Let the agent work autonomously for routine refactorings
+- Monitor for unexpected changes
+- If agent gets stuck, provide targeted guidance
+- **Don't interrupt** unless you see a clear problem
+
+**3.3 Testing During Refactoring**
+
+**Create Test Scripts:**
+- Ask agent to create test scripts if needed
+- Test input/output behavior, not just compilation
+- Run tests after each significant change
+- Keep test scripts for future regression testing
+
+**Test Types:**
+- Unit tests for isolated functions
+- Integration tests for component interactions
+- Snapshot tests for UI components (if applicable)
+- Manual test scripts for complex workflows
+
+**3.4 Common Execution Issues**
+
+**Agent Makes Unexpected Changes:**
+- Stop execution
+- Review what changed
+- Revert if necessary
+- Provide more specific instructions
+
+**Agent Gets Stuck in Loop:**
+- Provide fresh context
+- Break down the task further
+- Switch to a different model if needed
+
+**Compilation Errors:**
+- Don't let agent continue with errors
+- Fix errors before proceeding
+- Check `docs/BUILD_ERRORS.mdc` for known solutions
+
+---
+
+### Phase 4: Verification
+
+**4.1 Input/Output Comparison (CRITICAL)**
+
+**Before considering refactoring complete:**
+
+1. **Ask the agent to compare against main/dev branch:**
+   ```
+   Compare the input and output behavior of [component/module] 
+   before and after this refactoring. Point to the main branch 
+   for the "before" state. Ensure all inputs produce the same 
+   outputs.
+   ```
+
+2. **Review the comparison:**
+   - Verify no behavioral changes (unless intentional)
+   - Check edge cases are handled the same way
+   - Confirm error handling is preserved
+   - Validate performance characteristics
+
+3. **Manual Verification:**
+   - Test critical user flows manually
+   - Verify API endpoints return same responses
+   - Check UI components render correctly
+   - Test error scenarios
+
+**4.2 Secondary AI Review**
+
+**Perform a fresh review with new context:**
+
+1. **Start a new conversation** (fresh context window)
+2. **Provide the refactored code** and ask for review
+3. **Ask specific questions:**
+   - Are there any bugs or logic errors?
+   - Does this follow best practices?
+   - Are there any security concerns?
+   - Is the code maintainable?
+   - Are there any missed opportunities?
+
+4. **Address findings** before merging
+
+**4.3 Automated Verification**
+
+**Run all automated checks:**
+- [ ] TypeScript compilation passes (strict mode)
+- [ ] Linter passes (no new warnings)
+- [ ] Test suite passes (all tests green)
+- [ ] Build succeeds (no build errors)
+- [ ] No new console errors/warnings
+- [ ] Accessibility checks pass (if applicable)
+- [ ] Performance metrics maintained (if measured)
+
+**4.4 Code Review Checklist**
+
+**Review the refactored code for:**
+- [ ] No new antipatterns introduced
+- [ ] Follows project coding style (see `coding-style.mdc`)
+- [ ] Proper error handling maintained
+- [ ] Documentation updated (if needed)
+- [ ] Type safety improved (not degraded)
+- [ ] No dead code or commented blocks
+- [ ] Consistent with project architecture
+
+---
+
+### Phase 5: Integration
+
+**5.1 Commit Message**
+
+**Ask the agent to generate a commit message:**
+```
+Generate a thoughtful commit message for this refactoring. 
+Follow the format in git-workflow.mdc. Include:
+- What was refactored
+- Why it was refactored
+- What patterns were improved
+```
+
+**Commit Message Format:**
+```
+refactor: [module/component] - [brief description]
+
+[Detailed explanation of changes]
+[What patterns were improved]
+[What was maintained (behavior, APIs, etc.)]
+
+Closes #[issue-number] (if applicable)
+```
+
+**5.2 Pull Request**
+
+**Create PR with comprehensive description:**
+
+**PR Template for Refactoring:**
+```markdown
+## Refactoring Summary
+[What was refactored and why]
+
+## Changes Made
+- [List of major changes]
+- [File structure changes]
+- [Pattern improvements]
+
+## Verification
+- [x] Input/output behavior verified
+- [x] Tests pass
+- [x] No regressions observed
+- [x] Code review completed
+
+## Before/After Comparison
+[Key improvements or metrics]
+
+## Testing Instructions
+[How to verify the refactoring]
+
+## Breaking Changes
+[None / List any breaking changes]
+```
+
+**5.3 Merge Strategy**
+
+- Use **squash and merge** for refactorings (clean history)
+- Ensure all verification steps completed
+- Don't merge if any automated checks fail
+- Get human review for high-risk refactorings
+
+---
+
+## REFACTORING PATTERNS
+
+### What LLMs Excel At
+
+**Low-Level Refactoring (High Success Rate):**
+- Variable/function/class renaming across scopes
+- Function extraction (extract method)
+- Dead code elimination
+- Type annotation improvements
+- Documentation generation
+- Code formatting and style consistency
+- Import organization
+
+**Maintainability Improvements:**
+- Reducing code duplication
+- Improving function/class organization
+- Extracting constants and configuration
+- Simplifying complex conditionals
+- Breaking down large functions
+
+### What Requires Human Oversight
+
+**Architectural Changes:**
+- Major structural reorganization
+- Framework migrations
+- Design pattern implementations
+- Database schema changes
+- API contract changes
+
+**Business Logic:**
+- Algorithm changes
+- Performance-critical code
+- Security-sensitive code
+- Complex state management
+
+**Rule:** For architectural or business-critical refactorings, increase verification rigor and human review.
+
+---
+
+## SAFETY PRINCIPLES
+
+### 1. Preserve Behavior
+
+**Golden Rule:** Refactoring must not change external behavior.
+
+**Verification:**
+- Same inputs → same outputs
+- Same error handling
+- Same performance characteristics (or better)
+- Same API contracts
+
+### 2. Incremental Changes
+
+**Don't refactor everything at once:**
+- Break large refactorings into smaller phases
+- Verify after each phase
+- Use feature flags if needed for gradual rollout
+
+### 3. Test Coverage
+
+**Before refactoring:**
+- Ensure existing tests cover critical paths
+- Add tests for uncovered areas if needed
+- Document expected behavior
+
+**After refactoring:**
+- All existing tests should still pass
+- Add new tests for refactored code
+- Verify edge cases still handled
+
+### 4. Rollback Plan
+
+**Always have a rollback strategy:**
+- Keep original code in version control
+- Use feature branches (never refactor directly on main)
+- Tag known good states before major refactorings
+- Document rollback steps if complex
+
+### 5. Communication
+
+**For team projects:**
+- Communicate refactoring plans
+- Get approval for high-risk refactorings
+- Document breaking changes
+- Update team documentation
+
+---
+
+## COMMON PITFALLS & SOLUTIONS
+
+### Pitfall 1: Agent Introduces Bugs
+
+**Symptoms:**
+- Tests fail after refactoring
+- Runtime errors in production
+- Unexpected behavior changes
+
+**Prevention:**
+- Always compare input/output before/after
+- Run comprehensive test suite
+- Perform secondary AI review
+- Manual testing of critical paths
+
+**Solution:**
+- Revert to last known good state
+- Identify what went wrong
+- Fix incrementally with more verification
+
+### Pitfall 2: Agent Changes Too Much
+
+**Symptoms:**
+- Unrelated files modified
+- Unintended pattern changes
+- Scope creep
+
+**Prevention:**
+- Clearly define scope in plan
+- Review plan before execution
+- Monitor agent during execution
+- Use more specific instructions
+
+**Solution:**
+- Revert unrelated changes
+- Re-execute with tighter scope
+- Break into smaller refactorings
+
+### Pitfall 3: Agent Gets Stuck
+
+**Symptoms:**
+- Agent repeats same errors
+- Agent asks for clarification repeatedly
+- No progress made
+
+**Prevention:**
+- Provide clear, specific instructions
+- Break down complex tasks
+- Use plan mode to structure work
+
+**Solution:**
+- Provide fresh context
+- Simplify the task
+- Switch models if needed
+- Do partial refactoring manually
+
+### Pitfall 4: Performance Degradation
+
+**Symptoms:**
+- Slower execution times
+- Higher memory usage
+- Reduced throughput
+
+**Prevention:**
+- Benchmark before refactoring (if performance-critical)
+- Monitor performance during refactoring
+- Ask agent to preserve performance characteristics
+
+**Solution:**
+- Compare performance metrics
+- Identify bottlenecks
+- Optimize or revert if needed
+
+---
+
+## REFACTORING CHECKLIST
+
+### Before Starting
+- [ ] Identified clear refactoring goals
+- [ ] Assessed risk level
+- [ ] Created feature branch
+- [ ] Documented current behavior
+- [ ] Ensured test coverage exists
+
+### Planning
+- [ ] Discussed architecture (if significant)
+- [ ] Used plan mode to generate plan
+- [ ] Reviewed and approved plan
+- [ ] Identified verification steps
+- [ ] Defined rollback strategy
+
+### Execution
+- [ ] Configured agent with appropriate permissions
+- [ ] Executing plan phase by phase
+- [ ] Verifying after each phase
+- [ ] Running tests during execution
+- [ ] Monitoring for unexpected changes
+
+### Verification
+- [ ] Compared input/output with main branch
+- [ ] Performed secondary AI review
+- [ ] All automated checks pass
+- [ ] Manual testing completed
+- [ ] Code review performed
+
+### Integration
+- [ ] Commit message generated
+- [ ] PR created with comprehensive description
+- [ ] All team members notified (if applicable)
+- [ ] Ready for merge
+
+---
+
+## INTEGRATION WITH OTHER RULES
+
+**This refactoring process must align with:**
+- `coding-style.mdc` - Code style conventions
+- `git-workflow.mdc` - Branch and commit standards
+- `testing-strategy.mdc` - Testing requirements
+- `security.mdc` - Security considerations
+- `performance.mdc` - Performance requirements
+- `component-standards.mdc` - Component architecture
+
+**When refactoring:**
+- Maintain compliance with all rules
+- Don't introduce violations
+- Improve rule compliance where possible
+
+---
+
+## METRICS & IMPROVEMENT
+
+### Track Refactoring Success
+
+**Metrics to Monitor:**
+- Time saved in future implementations
+- Reduction in code duplication
+- Improvement in test coverage
+- Reduction in bugs introduced
+- Developer satisfaction
+
+### Continuous Improvement
+
+**After each refactoring:**
+- Document what worked well
+- Document what didn't work
+- Update this guide with learnings
+- Share patterns with team
+
+---
+
+## FORBIDDEN
+
+**Never:**
+- Refactor directly on main branch
+- Skip verification steps
+- Merge refactoring with failing tests
+- Refactor without understanding current behavior
+- Make architectural changes without discussion
+- Refactor security-critical code without review
+- Change external APIs without documentation
+- Remove functionality without deprecation process
+
+---
+
+END OF FILE

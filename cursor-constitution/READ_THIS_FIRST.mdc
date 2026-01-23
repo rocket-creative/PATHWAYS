@@ -12,13 +12,23 @@ Failure to follow this file renders all output invalid.
 Before generating, modifying, or suggesting any code, the assistant MUST:
 
 1. Read `READ_THIS_FIRST.mdc`
-2. Read `design-philosophy.mdc` (THIS ENCODES TASTE, NOT JUST SPECS)
-3. Read **all `.mdc` files** in the repository root
-4. Read **all `.mdc` files** in `/rules`, `/docs`, `/config`, or equivalent folders
-5. Treat `.mdc` files as enforceable constraints, not documentation
-6. Treat `README.md` and `.md` files as informational only
+2. Read `docs/ERROR_PATTERNS.mdc` (CODE PATTERN ERRORS TO AVOID)
+3. Read `docs/BUILD_ERRORS.mdc` (BUILD/RUNTIME ERRORS & SOLUTIONS)
+4. Read `rules/design-philosophy.mdc` (THIS ENCODES TASTE, NOT JUST SPECS)
+5. Read `rules/seo-ai-readability.mdc` (THIS IS CRITICAL FOR DISCOVERABILITY)
+6. Read `docs/DEPLOYMENT_CHECKLIST.mdc` (BEFORE ANY DEPLOYMENT)
+7. Read `docs/ENV_REGISTRY.mdc` (ENVIRONMENT VARIABLES)
+8. Read **all `.mdc` files** in `/rules`, `/docs`, `/config`, or equivalent folders
+9. Treat `.mdc` files as enforceable constraints, not documentation
+10. Treat `README.md` and `.md` files as informational only
+
+**CRITICAL:** The `ERROR_PATTERNS.mdc` file contains code patterns that violate rules. The assistant MUST check this file and proactively avoid all documented patterns. If you are about to make an error from this list, STOP and fix it before proceeding.
+
+**CRITICAL:** The `BUILD_ERRORS.mdc` file contains Vercel, Git, console, and build errors with their solutions. When the user pastes an error, check this file FIRST. If the error is documented, use the solution. If it's new, add it to the log after fixing.
 
 **CRITICAL:** The `design-philosophy.mdc` file contains design judgment and aesthetic principles that OVERRIDE generic "best practices." If the philosophy says "use 2 font weights," you use 2 font weights—not 4 because some library defaults to more.
+
+**CRITICAL:** The `seo-ai-readability.mdc` file contains SEO, structured data, and conversion tracking requirements that are MANDATORY for every page. Every page must have proper metadata, schema markup, and tracking setup.
 
 If any required rule is missing, the assistant MUST create it rather than proceed without it.
 
@@ -85,6 +95,21 @@ Every build MUST include (at minimum):
 - Secure headers baseline
 - No client-side secrets
 
+### SEO & AI Readability (CRITICAL)
+- Unique title tag on every page (50-60 chars, keyword first)
+- Unique meta description on every page (150-160 chars)
+- Canonical URL on every page
+- Open Graph and Twitter Card tags
+- JSON-LD structured data (schema.org)
+- BreadcrumbList schema on all pages except homepage
+- FAQPage schema where FAQ content exists
+- Healthcare pages: MedicalBusiness, Physician, MedicalCondition schemas
+- E-E-A-T signals: author attribution, credentials, sources, disclaimers
+- No deprecated meta tags (keywords, revisit-after, etc.)
+- No deprecated schema types
+- Conversion tracking ready (Google Ads, Meta Pixel) - consent gated
+- Sitemap.xml and robots.txt configured
+
 ---
 
 ## 5. Definition of Done (Hard Gate)
@@ -98,6 +123,23 @@ Work is NOT complete unless all are true:
 - Consent gating verified
 - Security headers verified
 - No regressions for authenticated users
+- **SEO requirements met** (see below)
+
+### SEO Definition of Done (Every Page)
+
+Before any page is considered complete:
+
+- [ ] Unique title tag (50-60 chars)
+- [ ] Unique meta description (150-160 chars)
+- [ ] Canonical URL set
+- [ ] Open Graph tags complete
+- [ ] Appropriate JSON-LD schema implemented
+- [ ] Schema validates (no errors in Rich Results Test)
+- [ ] No deprecated/forbidden meta tags or schema
+- [ ] Internal links to related content
+- [ ] Images have alt text
+- [ ] Heading hierarchy is logical (H1 → H2 → H3)
+- [ ] For medical content: E-E-A-T elements present (author, sources, disclaimer)
 
 If any item fails, the assistant must continue working until resolved.
 
@@ -119,16 +161,128 @@ No Change Log = incomplete output.
 
 ---
 
-## 7. Learning & Improvement Rule
+## 7. Pre-Flight Checklist (Every File)
 
-If repeated manual corrections are observed, the assistant MUST:
-- Propose updates to the relevant `.mdc` rule file
-- Explain why the rule should change
-- Never silently adapt behavior
+Before ANY code is generated or modified, run this checklist mentally:
+
+### Design Rules Check
+- [ ] Only 2 font weights used (400, 600)?
+- [ ] Only allowed colors (navy, green, breezy, cream, linen, white)?
+- [ ] Button styles follow pill pattern?
+- [ ] Whitespace is generous?
+- [ ] No "AI slop" aesthetic?
+
+### SEO Rules Check
+- [ ] Unique title tag (50-60 chars)?
+- [ ] Unique meta description (150-160 chars)?
+- [ ] Canonical URL set?
+- [ ] JSON-LD schema appropriate for page type?
+- [ ] No deprecated meta tags or schema?
+- [ ] BreadcrumbList schema (non-homepage)?
+
+### Content Rules Check
+- [ ] No hyphens in copy?
+- [ ] Sentence case for headings?
+- [ ] Oxford comma used?
+- [ ] Active voice?
+
+### Accessibility Rules Check
+- [ ] All images have alt text?
+- [ ] Focus states visible?
+- [ ] Keyboard navigation works?
+- [ ] Form labels present?
+
+### Privacy Rules Check
+- [ ] Scripts consent-gated?
+- [ ] No pre-checked consent boxes?
+- [ ] GPC honored?
+
+### Security Rules Check
+- [ ] No client-side secrets?
+- [ ] CSP headers defined?
+
+### Link Validation Check
+- [ ] Internal links use relative paths?
+- [ ] Cross-site links use SITE_CONFIG?
+- [ ] No hardcoded localhost URLs?
+- [ ] External links have `rel="noopener"` and `target="_blank"`?
+
+### Image/Asset Check
+- [ ] All images have alt text?
+- [ ] Images optimized (< 200KB for heroes)?
+- [ ] Using Next.js Image component?
+- [ ] Explicit width/height to prevent CLS?
+
+### Error Patterns Check
+- [ ] Checked ERROR_PATTERNS.mdc?
+- [ ] Not repeating any documented errors?
+
+If ANY check fails, fix it BEFORE proceeding.
 
 ---
 
-## 8. Failure Mode
+## 8. Learning & Improvement Rule
+
+If repeated manual corrections are observed, the assistant MUST:
+- **Add the error to the appropriate log** (see below)
+- Propose updates to the relevant `.mdc` rule file if needed
+- Explain why the rule should change
+- Never silently adapt behavior
+
+### Two Error Logs (Know the Difference)
+
+| Log | Purpose | When to Use |
+|-----|---------|-------------|
+| `docs/ERROR_PATTERNS.mdc` | Code patterns that violate rules | When AI generates bad code (wrong colors, missing SEO, etc.) |
+| `docs/BUILD_ERRORS.mdc` | Runtime/build/deployment errors | When Vercel fails, git errors, console errors, TypeScript errors |
+
+### Code Pattern Error Protocol (ERROR_PATTERNS.mdc)
+
+When a code pattern violation is identified:
+
+1. **Immediately add to ERROR_PATTERNS.mdc:**
+   ```
+   ### ERR-XXX: [Description]
+   **Pattern:** [What the bad code looks like]
+   **Why it's wrong:** [Explanation]
+   **Correct approach:** [How to fix]
+   **Rule reference:** [Which .mdc file]
+   ```
+
+2. **Fix the error in the current code**
+
+3. **Search for other instances** of the same error in the codebase
+
+4. **Update the relevant rule file** if the rule was unclear
+
+### Build/Runtime Error Protocol (BUILD_ERRORS.mdc)
+
+When the user pastes a Vercel, Git, console, TypeScript, or npm error:
+
+1. **Check BUILD_ERRORS.mdc first** - the solution may already be documented
+
+2. **If new error, add to BUILD_ERRORS.mdc:**
+   ```
+   ### BUILD-XXX: [Description]
+   **Date:** [Today's date]
+   **Source:** [Vercel | Git | Console | TypeScript | ESLint | Next.js | npm]
+   **Error Message:**
+   [Exact error message]
+   **Root Cause:** [Why this happened]
+   **Solution:** [Step by step fix]
+   **Files Changed:** [What was modified]
+   **Prevention:** [How to avoid in future]
+   ```
+
+3. **Fix the error** using the documented solution
+
+4. **Explain the fix** so the user understands
+
+This ensures errors are caught once and never repeated.
+
+---
+
+## 9. Failure Mode
 
 If compliance with these rules is not possible:
 - STOP

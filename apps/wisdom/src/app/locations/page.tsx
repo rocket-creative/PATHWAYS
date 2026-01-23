@@ -1,7 +1,9 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { MapPin, Phone, Clock, Video, ArrowRight, Navigation } from 'lucide-react'
 import { PageHero, JsonLd, createBreadcrumbSchema, createLocalBusinessSchema, LOCATIONS } from '@pathways/ui'
+import { getOfficeImageByIndex } from '@/lib/office-images'
 
 export const metadata: Metadata = {
   title: 'Locations',
@@ -57,13 +59,21 @@ export default function LocationsPage() {
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">
         <div className="container-site section">
           <div className="grid gap-8 lg:grid-cols-2">
-            {LOCATIONS.map((location) => (
+            {LOCATIONS.map((location, index) => (
               <article 
                 key={location.name}
                 id={location.name.toLowerCase().replace(/\s+/g, '-')}
                 className="overflow-hidden rounded-lg border border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]"
               >
-                <div className="img-placeholder aspect-video" aria-label={`${location.name} office`} />
+                <div className="relative aspect-[3/2] overflow-hidden">
+                  <Image
+                    src={getOfficeImageByIndex(index)}
+                    alt={`${location.name} office`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                </div>
                 <div className="p-6 lg:p-8">
                   <h2 className="mb-4 text-[rgb(var(--color-navy))]">{location.name}</h2>
                   

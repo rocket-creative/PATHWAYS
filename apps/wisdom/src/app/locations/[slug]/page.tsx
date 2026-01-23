@@ -1,9 +1,11 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { MapPin, Phone, Clock, Car, ArrowRight, Check, Video } from 'lucide-react'
 import { PageHero, JsonLd, createBreadcrumbSchema } from '@pathways/ui'
 import { createMedicalClinicSchema } from '@pathways/ui/lib/medical-schema'
+import { getOfficeImageByIndex } from '@/lib/office-images'
 
 const siteUrl = process.env.NEXT_PUBLIC_MAIN_URL || 'http://localhost:3000'
 
@@ -332,7 +334,15 @@ export default async function LocationPage({ params }: PageProps) {
 
       {/* Map Placeholder */}
       <section className="border-t border-[rgb(var(--border))]/50">
-        <div className="img-placeholder aspect-[21/9]" aria-label={`Map of ${location.name} office location`} />
+        <div className="relative aspect-[3/2] overflow-hidden">
+          <Image
+            src={getOfficeImageByIndex(0)}
+            alt={`Map of ${location.name} office location`}
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
+        </div>
       </section>
 
       {/* CTA */}

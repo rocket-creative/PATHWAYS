@@ -1,7 +1,9 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { PageHero, JsonLd, createBreadcrumbSchema } from '@pathways/ui'
+import { getOfficeImageByIndex } from '@/lib/office-images'
 
 export const metadata: Metadata = {
   title: 'Our team',
@@ -70,7 +72,15 @@ export default function TeamPage() {
                 key={index}
                 className="group overflow-hidden rounded-lg border border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))] transition-all hover:shadow-md"
               >
-                <div className="img-placeholder aspect-[3/4]" aria-label={`Photo of ${member.name}`} />
+                <div className="relative aspect-[3/2] overflow-hidden">
+                  <Image
+                    src={getOfficeImageByIndex(index)}
+                    alt={`Photo of ${member.name}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
                 <div className="p-6">
                   <h3 className="mb-1 text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>{member.name}</h3>
                   <p className="mb-3 text-sm text-[rgb(var(--color-green))]">{member.title}</p>
@@ -105,7 +115,15 @@ export default function TeamPage() {
                 key={index}
                 className="group overflow-hidden rounded-lg border border-[rgb(var(--border))]/50 bg-white transition-all hover:shadow-md"
               >
-                <div className="img-placeholder aspect-[3/4]" aria-label={`Photo of ${member.name}`} />
+                <div className="relative aspect-[3/2] overflow-hidden">
+                  <Image
+                    src={getOfficeImageByIndex(clinicians.length + index)}
+                    alt={`Photo of ${member.name}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
                 <div className="p-6">
                   <h3 className="mb-1 text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>{member.name}</h3>
                   <p className="mb-3 text-sm text-[rgb(var(--color-green))]">{member.title}</p>
@@ -139,10 +157,16 @@ export default function TeamPage() {
           </div>
           
           <div className="mx-auto grid max-w-2xl gap-8 md:grid-cols-2">
-            {therapyDogs.map((dog) => (
+            {therapyDogs.map((dog, index) => (
               <article key={dog.name} className="text-center">
-                <div className="mx-auto mb-4 h-48 w-48 overflow-hidden rounded-full">
-                  <div className="img-placeholder h-full w-full" aria-label={`Photo of ${dog.name}`} />
+                <div className="relative mx-auto mb-4 aspect-square h-48 w-48 overflow-hidden rounded-full">
+                  <Image
+                    src={getOfficeImageByIndex(clinicians.length + wellnessProviders.length + index)}
+                    alt={`Photo of ${dog.name}`}
+                    fill
+                    className="object-cover"
+                    sizes="192px"
+                  />
                 </div>
                 <h3 className="mb-1 text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>{dog.name}</h3>
                 <p className="mb-2 text-sm text-[rgb(var(--color-green))]">{dog.title}</p>

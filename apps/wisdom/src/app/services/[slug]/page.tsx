@@ -1,8 +1,10 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, ArrowLeft, Check, Clock, MapPin } from 'lucide-react'
 import { PageHero, JsonLd, createBreadcrumbSchema, createServiceSchema } from '@pathways/ui'
+import { getOfficeImageByIndex } from '@/lib/office-images'
 
 const siteUrl = process.env.NEXT_PUBLIC_WISDOM_URL || 'http://localhost:3001'
 const mainUrl = process.env.NEXT_PUBLIC_MAIN_URL || 'http://localhost:3000'
@@ -311,7 +313,15 @@ export default async function ServicePage({ params }: PageProps) {
                 ))}
               </ul>
             </div>
-            <div className="img-placeholder aspect-[4/3] rounded-lg" aria-label={`${service.name} session`} />
+            <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
+              <Image
+                src={getOfficeImageByIndex(0)}
+                alt={`${service.name} session`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </div>
       </section>

@@ -213,7 +213,7 @@ export default function TeamPage() {
       </section>
 
       {/* Clinical Team */}
-      <section className="border-t border-[rgb(var(--border))]/50 bg-white">
+      <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-linen))]">
         <div className="container-site py-20 lg:py-28">
           <div className="mb-12">
             <p 
@@ -251,7 +251,7 @@ export default function TeamPage() {
       </section>
 
       {/* Associate Team */}
-      <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-linen))]">
+      <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">
           <div className="mb-12">
             <p 
@@ -265,7 +265,7 @@ export default function TeamPage() {
           
           <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-5">
             {associateTeam.map((person, index) => (
-              <div key={person.name} className="rounded-lg bg-white p-4 shadow-sm text-center">
+              <div key={person.name} className="text-center">
                 <div className="relative mx-auto mb-4 aspect-square w-full max-w-[180px] overflow-hidden rounded-lg">
                   <Image
                     src={getHeadshotForPerson(person.name, index)}
@@ -286,7 +286,7 @@ export default function TeamPage() {
       </section>
 
       {/* Wellness Team */}
-      <section className="border-t border-[rgb(var(--border))]/50 bg-white">
+      <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-linen))]">
         <div className="container-site py-20 lg:py-28">
           <div className="mb-12">
             <p 

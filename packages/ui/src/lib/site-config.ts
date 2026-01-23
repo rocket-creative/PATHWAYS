@@ -53,7 +53,7 @@ export function getNavigationLinks(): NavLink[] {
     { href: '/team', label: 'Team' },
     { href: '/locations', label: 'Locations' },
     { href: '/start', label: 'Get Started' },
-    { href: '/client-intake', label: 'Client Intake' },
+    { href: '/client-intake', label: 'PATHWAYS INFO' },
   ]
 }
 

@@ -21,8 +21,9 @@ export default function PrivacyPage() {
       <PageHero
         eyebrow="Legal"
         headline="Privacy policy"
-        subheadline="How we protect your information"
-        site="main"
+        body="How we protect your information"
+        image="/hero-images/freepik__professional-studio-photograph-of-4-diverse-smilin__19260.jpeg"
+        site="wellness"
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

@@ -21,8 +21,8 @@ export default function WisdomHomePage() {
       <PageHero
         eyebrow="Therapy Services"
         headline="Mental health & healing"
-        subheadline="Licensed therapists supporting your journey to wellness"
         body="Our therapy team brings decades of combined experience in mental health. We offer a safe, compassionate space to explore your experiences and find your path forward."
+        image="/hero-images/freepik__professional-studio-portrait-of-a-person-diverse-w__19265.jpeg"
         site="wisdom"
       />
 

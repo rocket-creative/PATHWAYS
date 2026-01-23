@@ -26,8 +26,8 @@ export default function WellnessHomePage() {
       <PageHero
         eyebrow="Wellness Services"
         headline="Body care & beauty"
-        subheadline="Holistic treatments for your complete well being"
         body="Our wellness team brings expertise in massage, skincare, and restorative treatments. We help you look and feel your best from the outside in."
+        image="/hero-images/freepik__professional-studio-photograph-of-subject-descript__19259.jpeg"
         site="wellness"
       />
 

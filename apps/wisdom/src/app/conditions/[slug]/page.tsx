@@ -241,8 +241,8 @@ export default async function ConditionPage({ params }: PageProps) {
       <PageHero
         eyebrow="Mental health conditions"
         headline={condition.name}
-        subheadline={condition.headline}
         body={condition.overview}
+        image="/hero-images/freepik__professional-studio-portrait-of-a-person-diverse-w__19265.jpeg"
         site="wisdom"
       />
 

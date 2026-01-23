@@ -402,8 +402,8 @@ export default async function ServicePage({ params }: PageProps) {
       <PageHero
         eyebrow="Wellness services"
         headline={service.name}
-        subheadline={service.headline}
         body={service.description}
+        image="/hero-images/freepik__professional-studio-photograph-of-subject-descript__19259.jpeg"
         site="wellness"
       />
 

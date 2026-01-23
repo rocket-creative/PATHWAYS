@@ -21,8 +21,9 @@ export default function AccessibilityPage() {
       <PageHero
         eyebrow="Accessibility"
         headline="Accessibility statement"
-        subheadline="Our commitment to inclusive design"
-        site="main"
+        body="Our commitment to inclusive design"
+        image="/hero-images/freepik__professional-studio-photograph-of-4-diverse-smilin__19260.jpeg"
+        site="wellness"
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

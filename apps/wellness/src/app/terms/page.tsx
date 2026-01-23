@@ -21,8 +21,9 @@ export default function TermsPage() {
       <PageHero
         eyebrow="Legal"
         headline="Terms of service"
-        subheadline="Please read carefully"
-        site="main"
+        body="Please read carefully before using our services"
+        image="/hero-images/freepik__professional-studio-photograph-of-4-diverse-smilin__19260.jpeg"
+        site="wellness"
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

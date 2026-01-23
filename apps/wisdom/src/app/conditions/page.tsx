@@ -63,8 +63,8 @@ export default function ConditionsPage() {
       <PageHero
         eyebrow="Conditions we treat"
         headline="Expert care for mental health"
-        subheadline="Evidence-based treatment from licensed therapists"
         body="Our licensed clinicians specialize in treating a wide range of mental health conditions using proven, research-backed approaches. Learn more about specific conditions below."
+        image="/hero-images/freepik__professional-studio-portrait-of-a-person-diverse-w__19265.jpeg"
         site="wisdom"
       />
 

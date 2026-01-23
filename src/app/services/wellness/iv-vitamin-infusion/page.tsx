@@ -41,7 +41,7 @@ export default function IVVitaminInfusionPage() {
         <div className="container-site py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div><p className="mb-4 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>About</p><h2 className="text-[rgb(var(--color-navy))]">Maximum absorption</h2></div>
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+            <div className="relative aspect-[3/2] w-full overflow-hidden">
               <Image
                 src={getHeroImageByIndex(16)}
                 alt="Pathways Within office"

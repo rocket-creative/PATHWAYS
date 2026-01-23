@@ -180,7 +180,7 @@ export default function TeamPage() {
           
           {leadership.map((person, index) => (
             <div key={person.name} className="grid gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center">
-              <div className="relative mx-auto aspect-square w-full max-w-[360px] overflow-hidden rounded-lg shadow-lg">
+              <div className="relative mx-auto aspect-square w-full max-w-[360px] overflow-hidden shadow-2xl">
                 <Image
                   src={getHeadshotForPerson(person.name, index)}
                   alt={person.name}
@@ -228,7 +228,7 @@ export default function TeamPage() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {clinicalTeam.map((person, index) => (
               <div key={person.name} className="group">
-                <div className="relative mx-auto mb-6 aspect-square w-full max-w-[260px] overflow-hidden rounded-lg shadow-md">
+                <div className="relative mx-auto mb-6 aspect-square w-full max-w-[260px] overflow-hidden shadow-lg">
                   <Image
                     src={getHeadshotForPerson(person.name, index)}
                     alt={person.name}
@@ -266,7 +266,7 @@ export default function TeamPage() {
           <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-5">
             {associateTeam.map((person, index) => (
               <div key={person.name} className="text-center">
-                <div className="relative mx-auto mb-4 aspect-square w-full max-w-[180px] overflow-hidden rounded-lg">
+                <div className="relative mx-auto mb-4 aspect-square w-full max-w-[180px] overflow-hidden">
                   <Image
                     src={getHeadshotForPerson(person.name, index)}
                     alt={person.name}
@@ -301,7 +301,7 @@ export default function TeamPage() {
           <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-5">
             {wellnessTeam.map((person, index) => (
               <div key={person.name} className="text-center">
-                <div className="relative mx-auto mb-4 aspect-square w-full max-w-[180px] overflow-hidden rounded-lg shadow-sm">
+                <div className="relative mx-auto mb-4 aspect-square w-full max-w-[180px] overflow-hidden shadow-sm">
                   <Image
                     src={getHeadshotForPerson(person.name, index)}
                     alt={person.name}

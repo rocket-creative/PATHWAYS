@@ -103,7 +103,7 @@ export default function LocationsPage() {
             {locations.map((location) => (
               <div 
                 key={location.name} 
-                className={`overflow-hidden rounded-lg bg-white ${location.featured ? 'ring-2 ring-[rgb(var(--color-green))]' : ''}`}
+                className={`overflow-hidden bg-white ${location.featured ? 'ring-2 ring-[rgb(var(--color-green))]' : ''}`}
               >
                 {/* Location image */}
                 <div className="relative aspect-[3/2] w-full overflow-hidden">

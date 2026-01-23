@@ -62,7 +62,7 @@ export function ServicesOverview() {
           
           {/* Small decorative image */}
           <div className="hidden lg:col-span-2 lg:col-start-11 lg:block">
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+            <div className="relative aspect-[3/2] w-full overflow-hidden">
               <Image
                 src={getHeroImageByIndex(14)}
                 alt="Pathways Within community"

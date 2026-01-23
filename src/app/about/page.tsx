@@ -195,7 +195,7 @@ export default function AboutPage() {
             <h2 className="text-[rgb(var(--color-navy))]">What we believe</h2>
           </div>
           
-          <div className="grid gap-px overflow-hidden rounded-lg bg-[rgb(var(--border))]/30 md:grid-cols-2">
+          <div className="grid gap-px overflow-hidden bg-[rgb(var(--border))]/30 md:grid-cols-2">
             <div className="bg-white p-10">
               <h3 className="mb-3 text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>The whole person matters</h3>
               <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.7 }}>
@@ -249,7 +249,7 @@ export default function AboutPage() {
         <div className="container-site py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div>
-              <div className="relative aspect-[3/2] overflow-hidden rounded-lg shadow-md">
+              <div className="relative aspect-[3/2] overflow-hidden shadow-md">
                 <Image
                   src={getHeroImageByIndex(1)}
                   alt="Pathways Within community"
@@ -307,7 +307,7 @@ export default function AboutPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[1, 2, 3, 4].map((index) => (
-                <div key={index} className="relative aspect-[3/2] overflow-hidden rounded-lg shadow-sm">
+                <div key={index} className="relative aspect-[3/2] overflow-hidden shadow-sm">
                   <Image
                     src={getHeroImageByIndex(index)}
                     alt={`Pathways Within community ${index}`}

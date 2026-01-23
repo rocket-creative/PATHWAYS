@@ -69,7 +69,7 @@ export function HeroSection() {
           {/* Right image area - editorial style */}
           <div className="relative lg:col-span-6">
             {/* Main hero image - full height editorial */}
-            <div className="relative aspect-[3/4] w-full overflow-hidden rounded-none shadow-2xl lg:aspect-[4/5]">
+            <div className="relative aspect-[3/4] w-full overflow-hidden shadow-2xl lg:aspect-[4/5]">
               <Image
                 src={getHeroImageByIndex(0)}
                 alt="Pathways Within community"

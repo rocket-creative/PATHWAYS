@@ -100,23 +100,23 @@ export function PageHero({
     switch (layout) {
       case 'stacked':
         return (
-          <div className="flex flex-col gap-3 max-w-[360px]">
-            <div className="relative aspect-square w-full overflow-hidden rounded-lg shadow-md">
+          <div className="flex flex-col gap-4">
+            <div className="relative aspect-[4/5] w-full overflow-hidden shadow-md">
               <Image
                 src={getHeroImageByIndex(0)}
                 alt="Pathways Within community"
                 fill
-                className="object-cover object-top"
-                sizes="360px"
+                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
-            <div className="relative aspect-square w-full overflow-hidden rounded-lg shadow-md">
+            <div className="relative aspect-[4/5] w-full overflow-hidden shadow-md lg:hidden">
               <Image
                 src={getHeroImageByIndex(1)}
                 alt="Pathways Within community"
                 fill
-                className="object-cover object-top"
-                sizes="360px"
+                className="object-cover object-center"
+                sizes="100vw"
               />
             </div>
           </div>
@@ -124,32 +124,21 @@ export function PageHero({
 
       case 'sideBySide':
         return (
-          <div className="grid grid-cols-2 gap-3 max-w-[480px]">
-            <div className="relative aspect-square w-full overflow-hidden rounded-lg shadow-md">
-              <Image
-                src={getHeroImageByIndex(0)}
-                alt="Pathways Within community"
-                fill
-                className="object-cover object-top"
-                sizes="220px"
-              />
-            </div>
-            <div className="relative aspect-square w-full overflow-hidden rounded-lg shadow-md">
-              <Image
-                src={getHeroImageByIndex(1)}
-                alt="Pathways Within community"
-                fill
-                className="object-cover object-top"
-                sizes="220px"
-              />
-            </div>
+          <div className="relative aspect-[4/5] w-full overflow-hidden shadow-lg">
+            <Image
+              src={getHeroImageByIndex(0)}
+              alt="Pathways Within community"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
         )
 
       case 'overlapping':
         return (
           <div className="relative h-[300px] lg:h-[400px]">
-            <div className="absolute left-0 top-0 w-[70%] overflow-hidden rounded-lg shadow-lg">
+            <div className="absolute left-0 top-0 w-[70%] overflow-hidden shadow-lg">
               <div className="relative aspect-[3/2]">
                 <Image
                   src={getHeroImageByIndex(0)}
@@ -160,7 +149,7 @@ export function PageHero({
                 />
               </div>
             </div>
-            <div className="absolute bottom-0 right-0 w-[70%] overflow-hidden rounded-lg shadow-lg">
+            <div className="absolute bottom-0 right-0 w-[70%] overflow-hidden shadow-lg">
               <div className="relative aspect-[3/2]">
                 <Image
                   src={getHeroImageByIndex(1)}
@@ -177,7 +166,7 @@ export function PageHero({
       case 'trio':
         return (
           <div className="grid grid-cols-2 gap-3">
-            <div className="relative col-span-2 aspect-[3/2] w-full overflow-hidden rounded-lg shadow-lg">
+            <div className="relative col-span-2 aspect-[3/2] w-full overflow-hidden shadow-lg">
               <Image
                 src={getHeroImageByIndex(0)}
                 alt="Pathways Within community"
@@ -186,7 +175,7 @@ export function PageHero({
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+            <div className="relative aspect-[3/2] w-full overflow-hidden shadow-md">
               <Image
                 src={getHeroImageByIndex(1)}
                 alt="Pathways Within community"
@@ -195,7 +184,7 @@ export function PageHero({
                 sizes="(max-width: 768px) 50vw, 25vw"
               />
             </div>
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+            <div className="relative aspect-[3/2] w-full overflow-hidden shadow-md">
               <Image
                 src={getHeroImageByIndex(2)}
                 alt="Pathways Within community"
@@ -210,7 +199,7 @@ export function PageHero({
       case 'carousel':
         return (
           <div className="relative">
-            <div className="overflow-hidden rounded-lg shadow-lg">
+            <div className="overflow-hidden shadow-lg">
               <div 
                 className="flex transition-transform duration-500 ease-out"
                 style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
@@ -268,7 +257,7 @@ export function PageHero({
       case 'mosaic':
         return (
           <div className="grid grid-cols-3 grid-rows-2 gap-3">
-            <div className="relative col-span-2 row-span-2 overflow-hidden rounded-lg shadow-lg">
+            <div className="relative col-span-2 row-span-2 overflow-hidden shadow-lg">
               <Image
                 src={getHeroImageByIndex(0)}
                 alt="Pathways Within community"
@@ -277,7 +266,7 @@ export function PageHero({
                 sizes="(max-width: 768px) 100vw, 66vw"
               />
             </div>
-            <div className="relative aspect-[3/2] overflow-hidden rounded-lg shadow-md">
+            <div className="relative aspect-[3/2] overflow-hidden shadow-md">
               <Image
                 src={getHeroImageByIndex(1)}
                 alt="Pathways Within community"
@@ -286,7 +275,7 @@ export function PageHero({
                 sizes="(max-width: 768px) 50vw, 33vw"
               />
             </div>
-            <div className="relative aspect-[3/2] overflow-hidden rounded-lg shadow-md">
+            <div className="relative aspect-[3/2] overflow-hidden shadow-md">
               <Image
                 src={getHeroImageByIndex(2)}
                 alt="Pathways Within community"
@@ -301,7 +290,7 @@ export function PageHero({
       case 'single':
       default:
         return (
-          <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+          <div className="relative aspect-[3/2] w-full overflow-hidden shadow-md">
             <Image
               src={getHeroImageByIndex(0)}
               alt="Pathways Within community"
@@ -316,61 +305,59 @@ export function PageHero({
 
   return (
     <section className="relative bg-white">
-      <div className="container-site">
-        <div className="pt-20 lg:pt-28">
-          {site === 'main' ? (
-            <Link href="/">
-              <img 
-                src="/pathways-logo.png" 
-                alt="Pathways Within - Home" 
-                className="w-[200px] transition-opacity hover:opacity-80 lg:w-[280px]"
-              />
-            </Link>
-          ) : (
-            <a href={homeUrl}>
-              <img 
-                src="/pathways-logo.png" 
-                alt="Pathways Within - Home" 
-                className="w-[200px] transition-opacity hover:opacity-80 lg:w-[280px]"
-              />
-            </a>
-          )}
-        </div>
-        
-        <div className="grid items-start gap-8 py-12 lg:grid-cols-12 lg:gap-12 lg:py-16">
-          {/* Left content */}
-          <div className="lg:col-span-6">
+      <div className="container-site">        
+        <div className="grid min-h-[75vh] items-center gap-16 py-20 lg:grid-cols-2 lg:gap-20 lg:py-28">
+          {/* Left content - Logo + Text */}
+          <div className="order-1">
+            {site === 'main' ? (
+              <Link href="/" className="mb-12 block lg:mb-16">
+                <img 
+                  src="/pathways-logo.png" 
+                  alt="Pathways Within - Home" 
+                  className="w-[200px] transition-opacity hover:opacity-80 lg:w-[280px]"
+                />
+              </Link>
+            ) : (
+              <a href={homeUrl} className="mb-12 block lg:mb-16">
+                <img 
+                  src="/pathways-logo.png" 
+                  alt="Pathways Within - Home" 
+                  className="w-[200px] transition-opacity hover:opacity-80 lg:w-[280px]"
+                />
+              </a>
+            )}
+            
             {eyebrow && (
               <p 
-                className="mb-4 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]"
-                style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}
+                className="mb-6 text-xs uppercase tracking-[0.2em] text-[rgb(var(--color-green))]"
+                style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 600 }}
               >
                 {eyebrow}
               </p>
             )}
             
-            <h1 className="text-[rgb(var(--color-navy))]" style={{ lineHeight: 1.1 }}>
+            <h1 className="mb-8 text-[rgb(var(--color-navy))]" style={{ lineHeight: 0.95, fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 700, letterSpacing: '-0.04em' }}>
               {headline}
             </h1>
             
             {subheadline && (
               <p 
-                className="mt-4 text-xl text-[rgb(var(--color-text-light))]"
-                style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 400 }}
+                className="mb-8 text-2xl text-[rgb(var(--color-green))] lg:text-3xl"
+                style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 600, letterSpacing: '-0.02em' }}
               >
                 {subheadline}
               </p>
             )}
             
             {body && (
-              <p className="mt-6 text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
+              <p className="max-w-lg text-xl text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.6, letterSpacing: '-0.01em' }}>
                 {body}
               </p>
             )}
           </div>
           
           {/* Right image area */}
-          <div className="lg:col-span-6">
+          <div className="order-2">
             {renderImages()}
           </div>
         </div>

@@ -28,7 +28,7 @@ export function TeamPreview() {
           >
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
-                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+                <div className="relative aspect-[3/2] w-full overflow-hidden">
                   <Image
                     src={getHeroImageByIndex(12)}
                     alt="Pathways Within community"
@@ -37,7 +37,7 @@ export function TeamPreview() {
                     sizes="(max-width: 1024px) 50vw, 25vw"
                   />
                 </div>
-                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+                <div className="relative aspect-[3/2] w-full overflow-hidden">
                   <Image
                     src={getHeroImageByIndex(13)}
                     alt="Pathways Within community"
@@ -48,7 +48,7 @@ export function TeamPreview() {
                 </div>
               </div>
               <div className="mt-12 space-y-4">
-                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+                <div className="relative aspect-[3/2] w-full overflow-hidden">
                   <Image
                     src={getHeroImageByIndex(10)}
                     alt="Pathways Within community"
@@ -57,7 +57,7 @@ export function TeamPreview() {
                     sizes="(max-width: 1024px) 50vw, 25vw"
                   />
                 </div>
-                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+                <div className="relative aspect-[3/2] w-full overflow-hidden">
                   <Image
                     src={getHeroImageByIndex(11)}
                     alt="Pathways Within community"

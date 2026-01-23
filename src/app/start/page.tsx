@@ -169,7 +169,7 @@ export default function StartPage() {
             {/* Single hero image - right-justified portrait */}
             <div className="hidden lg:col-span-6 lg:flex lg:justify-end lg:block">
               <div className="animate-on-scroll" style={{ transitionDelay: '200ms' }}>
-                <div className="relative aspect-[4/5] w-full max-w-[440px] overflow-hidden rounded-lg shadow-2xl lg:aspect-[3/4]">
+                <div className="relative aspect-[4/5] w-full max-w-[440px] overflow-hidden shadow-2xl lg:aspect-[3/4]">
                   <Image
                     src={getHeroImageByIndex(4)}
                     alt="Pathways Within community"

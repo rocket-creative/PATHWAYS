@@ -219,7 +219,7 @@ export function PageHero({
                 
                 {/* Single image below */}
                 <div className="mx-auto mt-10 max-w-4xl">
-                  <div className={`relative ${imageAspect[size]} overflow-hidden rounded-lg`}>
+                  <div className={`relative ${imageAspect[size]} overflow-hidden`}>
                     <HeroImage image={image} imageStyle={imageStyle} />
                   </div>
                 </div>
@@ -311,7 +311,7 @@ export function PageHero({
               
               <div className={sizePadding[size]}>
                 {/* Wide banner image on top */}
-                <div className={`relative mb-8 ${stackedImageAspect[size]} overflow-hidden rounded-lg`}>
+                <div className={`relative mb-8 ${stackedImageAspect[size]} overflow-hidden`}>
                   <HeroImage image={image} imageStyle={imageStyle} />
                 </div>
                 
@@ -379,7 +379,7 @@ export function PageHero({
                 
                 {/* Offset image - extends past container on right */}
                 <div className="relative lg:col-span-7 lg:-mr-20">
-                  <div className={`relative ${offsetImageAspect[size]} overflow-hidden rounded-lg shadow-xl`}>
+                  <div className={`relative ${offsetImageAspect[size]} overflow-hidden shadow-xl`}>
                     <HeroImage image={image} imageStyle={imageStyle} />
                   </div>
                 </div>
@@ -430,7 +430,7 @@ export function PageHero({
                 </div>
                 
                 <div className="lg:col-span-6">
-                  <div className={`relative ${defaultImageAspect[size]} overflow-hidden rounded-lg`}>
+                  <div className={`relative ${defaultImageAspect[size]} overflow-hidden`}>
                     <HeroImage image={image} imageStyle={imageStyle} />
                   </div>
                 </div>

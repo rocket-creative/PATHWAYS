@@ -73,7 +73,7 @@ export function CTASection() {
               transform: isVisible ? 'translateX(0)' : 'translateX(30px)'
             }}
           >
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+            <div className="relative aspect-[3/2] w-full overflow-hidden">
               <Image
                 src={getHeroImageByIndex(2)}
                 alt="Pathways Within community"

@@ -164,7 +164,7 @@ export default function ServicesPage() {
 
           {/* Service Images Row */}
           <div className="mb-12 grid gap-8 lg:grid-cols-2">
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+            <div className="relative aspect-[3/2] w-full overflow-hidden shadow-md">
               <Image
                 src={getHeroImageByIndex(3)}
                 alt="Therapy services at Pathways Within"
@@ -173,7 +173,7 @@ export default function ServicesPage() {
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
             </div>
-            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+            <div className="relative aspect-[3/2] w-full overflow-hidden shadow-md">
               <Image
                 src={getHeroImageByIndex(5)}
                 alt="Wellness services at Pathways Within"

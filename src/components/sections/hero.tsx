@@ -36,10 +36,8 @@ export function HeroSection() {
               />
             </Link>
             
-            <h1 className="mb-12 text-[rgb(var(--color-navy))]" style={{ lineHeight: 0.9, fontSize: 'clamp(3.5rem, 10vw, 8rem)', fontWeight: 700, letterSpacing: '-0.05em' }}>
-              Discover<br />
-              your path<br />
-              to wellness
+            <h1 className="mb-8 text-[rgb(var(--color-navy))]">
+              Discover your path to wellness
             </h1>
             
             <p className="mb-12 max-w-lg text-xl text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.6, letterSpacing: '-0.01em' }}>

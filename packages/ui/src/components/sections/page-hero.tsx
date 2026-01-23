@@ -325,7 +325,7 @@ export function PageHero({
               </p>
             )}
             
-            <h1 className="mb-8 text-[rgb(var(--color-navy))]" style={{ lineHeight: 0.95, fontSize: 'clamp(3rem, 8vw, 6rem)', fontWeight: 700, letterSpacing: '-0.04em' }}>
+            <h1 className="mb-8 text-[rgb(var(--color-navy))]">
               {headline}
             </h1>
             

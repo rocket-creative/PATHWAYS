@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 
 const STORAGE_KEY = 'pathways-cookie-consent'
 const CONSENT_VERSION = '1'
@@ -111,6 +112,9 @@ export function CookieConsent() {
                 className="btn-pill btn-pill-green"
               >
                 <span className="btn-text">Accept all</span>
+                <span className="btn-arrow">
+                  <ArrowRight />
+                </span>
               </button>
               <button
                 type="button"
@@ -118,6 +122,9 @@ export function CookieConsent() {
                 className="btn-pill btn-pill-secondary"
               >
                 <span className="btn-text">Reject non-essential</span>
+                <span className="btn-arrow">
+                  <ArrowRight />
+                </span>
               </button>
               <button
                 type="button"
@@ -157,6 +164,9 @@ export function CookieConsent() {
             <div className="flex flex-wrap items-center gap-3">
               <button type="button" onClick={saveSettings} className="btn-pill btn-pill-green">
                 <span className="btn-text">Save</span>
+                <span className="btn-arrow">
+                  <ArrowRight />
+                </span>
               </button>
               <button
                 type="button"

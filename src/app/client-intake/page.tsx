@@ -23,7 +23,7 @@ const SECTIONS = [
 
 export default function ClientIntakePage() {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0)
-  const [openSections, setOpenSections] = useState<Set<string>>(new Set([SECTIONS[0].id]))
+  const [openSections, setOpenSections] = useState<Set<string>>(new Set([SECTIONS[0]?.id || 'social-media']))
   const [formData, setFormData] = useState<Record<string, any>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)

@@ -176,7 +176,7 @@ function NavItem({
           
           {link.dropdown?.map((item) => (
             <a
-              key={item.slug || item.href}
+              key={item.href}
               href={item.href}
               onClick={onClose}
               className="block px-4 py-2 text-sm text-[rgb(var(--color-navy))]/80 hover:bg-[rgb(var(--color-cream))] hover:text-[rgb(var(--color-navy))]"
@@ -232,7 +232,7 @@ function MobileNavItem({ link }: { link: NavLinkWithDropdown }) {
           </a>
           {link.dropdown?.map((item) => (
             <a
-              key={item.slug || item.href}
+              key={item.href}
               href={item.href}
               className="block text-sm text-white/40 hover:text-white/80"
               style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif' }}

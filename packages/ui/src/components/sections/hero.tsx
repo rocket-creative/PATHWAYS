@@ -32,10 +32,10 @@ export function HeroSection({
   const contactUrl = site === 'main' ? '/contact' : `${SITE_CONFIG.main.url}/contact`
 
   return (
-    <section className="relative min-h-[85vh] bg-white">
+    <section className="relative min-h-[85vh]">
       <div className="grid min-h-[85vh] lg:grid-cols-5">
         {/* Left ~40% - Content */}
-        <div className="flex flex-col justify-center px-6 py-12 sm:px-8 lg:col-span-2 lg:px-12 lg:py-20 xl:px-16">
+        <div className="relative z-10 flex flex-col justify-center bg-white px-6 py-12 sm:px-8 lg:col-span-2 lg:px-12 lg:py-20 xl:px-16">
           <Link href="/" className="mb-10 block lg:mb-14">
             <img 
               src="/pathways-logo.png" 

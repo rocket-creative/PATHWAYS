@@ -9,7 +9,9 @@ interface PageHeroProps {
   eyebrow?: string
   /** Main H1 heading */
   headline: string
-  /** Body text below headline */
+  /** Subheadline - displays in green below headline */
+  subheadline?: string
+  /** Body text below subheadline */
   body?: string
   /** Hero image path - required */
   image: string
@@ -28,6 +30,7 @@ interface PageHeroProps {
 export function PageHero({ 
   eyebrow, 
   headline, 
+  subheadline,
   body, 
   image,
   imageAlt = 'Pathways Within',
@@ -45,10 +48,10 @@ export function PageHero({
   }
 
   return (
-    <section className="relative min-h-[85vh] bg-white">
+    <section className="relative min-h-[85vh]">
       <div className="grid min-h-[85vh] lg:grid-cols-5">
         {/* Left ~40% - Content */}
-        <div className="flex flex-col justify-center px-6 py-12 sm:px-8 lg:col-span-2 lg:px-12 lg:py-20 xl:px-16">
+        <div className="relative z-10 flex flex-col justify-center bg-white px-6 py-12 sm:px-8 lg:col-span-2 lg:px-12 lg:py-20 xl:px-16">
           {/* Logo */}
           <Link href="/" className="mb-10 block lg:mb-14">
             <img 
@@ -69,9 +72,19 @@ export function PageHero({
           )}
           
           {/* Headline */}
-          <h1 className="mb-6 text-[rgb(var(--color-navy))]">
+          <h1 className="mb-4 text-[rgb(var(--color-navy))]">
             {headline}
           </h1>
+          
+          {/* Subheadline - green accent text */}
+          {subheadline && (
+            <p 
+              className="mb-6 text-xl text-[rgb(var(--color-green))] lg:text-2xl"
+              style={{ fontFamily: 'var(--font-clarendon), serif', fontWeight: 600, lineHeight: 1.3 }}
+            >
+              {subheadline}
+            </p>
+          )}
           
           {/* Body */}
           {body && (

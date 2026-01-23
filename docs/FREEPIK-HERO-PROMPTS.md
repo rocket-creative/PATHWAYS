@@ -7,7 +7,18 @@
 | **Aspect Ratio** | **3:4 Portrait** (vertical) |
 | **Dimensions** | 1200 × 1600 px (or 1600 × 2133 px for hi-res) |
 | **Images Needed** | **10-15 images** (minimum 5 for launch) |
-| **Style** | Professional, warm, authentic, editorial |
+| **Style** | Clean, bright, editorial, white background |
+| **Text** | **NO TEXT IN IMAGES** |
+
+---
+
+## CRITICAL STYLE REQUIREMENTS
+
+**ALWAYS INCLUDE THESE IN EVERY PROMPT:**
+```
+Pure white background. No text, no graphics, no watermarks, no logos. 
+Clean minimal aesthetic. Bright even studio lighting.
+```
 
 ---
 
@@ -37,7 +48,7 @@ To match the Pathways Within brand without looking uniform/cult-like:
 Use this as your base prompt for all images:
 
 ```
-Professional editorial photograph of [SUBJECT DESCRIPTION], wearing relaxed clothing in warm neutral earth tones (cream, beige, soft sage, dusty rose, taupe), natural fabrics like linen and cotton. Soft natural lighting, shallow depth of field with blurred background. Clean, minimal aesthetic. Warm, welcoming expression. Shot on professional camera with 85mm portrait lens. High-end lifestyle magazine style. Authentic, not overly posed. 3:4 portrait aspect ratio.
+Professional studio photograph of [SUBJECT DESCRIPTION], wearing relaxed clothing in warm neutral earth tones (cream, beige, soft sage, dusty rose, taupe), natural fabrics like linen and cotton. PURE WHITE BACKGROUND. Bright even studio lighting, soft shadows. Clean, minimal aesthetic. Warm, welcoming expression. Shot on professional camera with 85mm portrait lens. High-end lifestyle magazine style. Authentic, not overly posed. NO TEXT, NO GRAPHICS, NO WATERMARKS. 3:4 portrait aspect ratio.
 ```
 
 ---
@@ -48,12 +59,12 @@ Professional editorial photograph of [SUBJECT DESCRIPTION], wearing relaxed clot
 **Need: 1-2 images**
 
 ```
-Professional editorial photograph of a diverse group of 3-4 adults (mixed ethnicities, ages 25-50, mixed genders) standing together naturally, warm genuine smiles, wearing relaxed clothing in coordinated neutral earth tones (cream, beige, taupe, soft sage) but NOT matching - each person has unique style. Natural fabrics like linen and cotton. Soft natural window lighting, shallow depth of field, clean minimal background. Warm, welcoming, inclusive feeling. Authentic candid moment, not overly posed. High-end wellness lifestyle magazine aesthetic. Shot on professional camera, 85mm lens. 3:4 portrait aspect ratio.
+Professional studio photograph of a diverse group of 3-4 adults (mixed ethnicities, ages 25-50, mixed genders) standing together naturally, warm genuine smiles, wearing relaxed clothing in coordinated neutral earth tones (cream, beige, taupe, soft sage) but NOT matching - each person has unique style. Natural fabrics like linen and cotton. PURE WHITE BACKGROUND. Bright even studio lighting, soft shadows. Warm, welcoming, inclusive feeling. Authentic candid moment, not overly posed. NO TEXT, NO GRAPHICS, NO WATERMARKS. High-end wellness lifestyle magazine aesthetic. 3:4 portrait aspect ratio.
 ```
 
 **Variation:**
 ```
-Professional editorial photograph of 4 diverse smiling adults in a bright airy space, mixed ages and ethnicities, dressed in harmonious but varied earth-tone casual wear (off-white, sand, sage green, dusty rose). Standing in relaxed natural poses, genuine warm expressions. Soft diffused lighting. Editorial wellness magazine style. Feeling of community and connection without looking staged. Portrait orientation 3:4.
+Professional studio photograph of 4 diverse smiling adults, mixed ages and ethnicities, dressed in harmonious but varied earth-tone casual wear (off-white, sand, sage green, dusty rose). Standing in relaxed natural poses, genuine warm expressions. PURE WHITE BACKGROUND. Bright studio lighting. Feeling of community and connection without looking staged. NO TEXT OR GRAPHICS. Portrait orientation 3:4.
 ```
 
 ---
@@ -63,17 +74,17 @@ Professional editorial photograph of 4 diverse smiling adults in a bright airy s
 
 #### Individual Therapy
 ```
-Professional editorial portrait of one person (woman or man, any ethnicity, 30s-40s) in a moment of peaceful reflection, slight smile, wearing a soft cream or beige linen top. Sitting comfortably in a bright, minimal space. Soft natural lighting from side. Warm, hopeful expression. Clean background with subtle greenery. Feeling of calm and self-awareness. High-end wellness editorial style. 3:4 portrait ratio.
+Professional studio portrait of one person (woman or man, any ethnicity, 30s-40s) in a moment of peaceful reflection, slight smile, wearing a soft cream or beige linen top. PURE WHITE BACKGROUND. Bright even studio lighting, soft shadows. Warm, hopeful expression. Feeling of calm and self-awareness. NO TEXT, NO GRAPHICS. High-end wellness editorial style. 3:4 portrait ratio.
 ```
 
 #### Couples/Relationships
 ```
-Professional editorial photograph of a couple (any combination, diverse, 30s-50s) sitting close together, holding hands or touching shoulders naturally. Wearing coordinated but not matching earth tones (one in cream, one in soft sage or taupe). Genuine warm smiles, looking at each other or camera. Soft window light, minimal background. Feeling of connection, trust, partnership. Editorial lifestyle magazine style. 3:4 portrait.
+Professional studio photograph of a couple (any combination, diverse, 30s-50s) sitting close together, holding hands or touching shoulders naturally. Wearing coordinated but not matching earth tones (one in cream, one in soft sage or taupe). Genuine warm smiles, looking at each other or camera. PURE WHITE BACKGROUND. Bright studio lighting. Feeling of connection, trust, partnership. NO TEXT OR GRAPHICS. 3:4 portrait.
 ```
 
 #### Family/Child/Teen
 ```
-Professional editorial photograph of a parent and teenager (or child) sharing a genuine moment of connection, soft smiles. Dressed in relaxed earth-tone clothing (beige, cream, soft blue). Natural poses, not overly staged. Bright airy setting with soft natural light. Warm family wellness feeling. Editorial magazine quality. 3:4 portrait aspect ratio.
+Professional studio photograph of a parent and teenager (or child) sharing a genuine moment of connection, soft smiles. Dressed in relaxed earth-tone clothing (beige, cream, soft blue). Natural poses, not overly staged. PURE WHITE BACKGROUND. Bright even studio lighting. Warm family wellness feeling. NO TEXT, NO WATERMARKS. 3:4 portrait aspect ratio.
 ```
 
 ---
@@ -83,12 +94,12 @@ Professional editorial photograph of a parent and teenager (or child) sharing a 
 
 #### Relaxation/Massage
 ```
-Professional editorial photograph of a woman with peaceful closed-eye expression, appearing relaxed and serene. Wrapped in soft cream or white towel/robe in spa setting. Soft diffused lighting, shallow depth of field. Clean minimal background with subtle natural elements. Feeling of tranquility and self-care. High-end spa lifestyle aesthetic. 3:4 portrait.
+Professional studio photograph of a woman with peaceful closed-eye expression, appearing relaxed and serene. Wrapped in soft cream or white towel/robe. PURE WHITE BACKGROUND. Bright even studio lighting with soft shadows. Feeling of tranquility and self-care. High-end spa lifestyle aesthetic. NO TEXT, NO GRAPHICS. 3:4 portrait.
 ```
 
 #### Wellness/Beauty
 ```
-Professional editorial portrait of a person (any gender, diverse) with glowing healthy skin, natural minimal makeup, serene confident expression. Wearing soft neutral top or robe. Bright clean background. Soft ring light or natural window light. Feeling of wellness, vitality, self-care. Editorial beauty magazine style. 3:4 portrait ratio.
+Professional studio portrait of a person (any gender, diverse) with glowing healthy skin, natural minimal makeup, serene confident expression. Wearing soft neutral top or robe. PURE WHITE BACKGROUND. Bright even studio lighting. Feeling of wellness, vitality, self-care. NO TEXT OR WATERMARKS. Editorial beauty magazine style. 3:4 portrait ratio.
 ```
 
 ---
@@ -98,12 +109,12 @@ Professional editorial portrait of a person (any gender, diverse) with glowing h
 
 #### Team/Staff Feel
 ```
-Professional editorial photograph of 2-3 diverse professionals in a modern bright office or wellness space. Casual professional attire in earth tones (cream blazer, beige sweater, soft sage blouse). Friendly confident expressions, natural poses. One person could be gesturing while talking. Feeling of expertise and approachability. Editorial corporate wellness style. 3:4 portrait.
+Professional studio photograph of 2-3 diverse professionals standing together. Casual professional attire in earth tones (cream blazer, beige sweater, soft sage blouse). Friendly confident expressions, natural poses. PURE WHITE BACKGROUND. Bright even studio lighting. Feeling of expertise and approachability. NO TEXT, NO GRAPHICS. 3:4 portrait.
 ```
 
 #### Community/Support
 ```
-Professional editorial photograph of a small group (3-4 diverse adults) in what appears to be a casual support or conversation setting. Seated or standing naturally, engaged with each other. Wearing varied earth-tone casual clothing. Warm natural lighting. Feeling of trust, community, shared journey. Not looking at camera. Candid editorial style. 3:4 portrait ratio.
+Professional studio photograph of a small group (3-4 diverse adults) standing or seated naturally, engaged with each other. Wearing varied earth-tone casual clothing. PURE WHITE BACKGROUND. Bright studio lighting. Feeling of trust, community, shared journey. NO TEXT OR WATERMARKS. Candid editorial style. 3:4 portrait ratio.
 ```
 
 ---
@@ -112,12 +123,12 @@ Professional editorial photograph of a small group (3-4 diverse adults) in what 
 **Need: 1-2 images**
 
 ```
-Professional editorial portrait of one person (diverse, 30s-40s) looking directly at camera with warm, encouraging, welcoming expression. Slight smile, open body language. Wearing soft cream or beige natural fabric top. Bright clean background. Soft natural lighting. Feeling of "we're here for you" - inviting, trustworthy. High-end editorial portrait style. 3:4 portrait aspect ratio.
+Professional studio portrait of one person (diverse, 30s-40s) looking directly at camera with warm, encouraging, welcoming expression. Slight smile, open body language. Wearing soft cream or beige natural fabric top. PURE WHITE BACKGROUND. Bright even studio lighting. Feeling of "we're here for you" - inviting, trustworthy. NO TEXT, NO GRAPHICS. 3:4 portrait aspect ratio.
 ```
 
 **Action-oriented:**
 ```
-Professional editorial photograph of a person walking forward confidently, turning slightly toward camera with hopeful smile. Dressed in relaxed earth-tone outfit (cream, beige, soft colors). Bright airy space. Motion blur in background. Feeling of taking first step, new beginning, positive momentum. Editorial lifestyle magazine style. 3:4 portrait.
+Professional studio photograph of a person standing confidently, turning slightly toward camera with hopeful smile. Dressed in relaxed earth-tone outfit (cream, beige, soft colors). PURE WHITE BACKGROUND. Bright studio lighting. Feeling of taking first step, new beginning, positive momentum. NO TEXT OR WATERMARKS. 3:4 portrait.
 ```
 
 ---

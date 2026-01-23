@@ -150,12 +150,14 @@ export async function POST(request: NextRequest) {
         if (line.includes(':')) {
           const [label, ...valueParts] = line.split(':')
           const value = valueParts.join(':').trim()
-          html += `
-            <div class="field" style="margin: 10px 0; padding: 8px 0; border-bottom: 1px solid #eee;">
-              <span class="label" style="font-weight: bold; color: #01153D; display: inline-block; min-width: 200px;">${label.trim()}:</span>
-              <span class="value" style="color: #666;">${value || '(empty)'}</span>
-            </div>
-          `
+          if (label) {
+            html += `
+              <div class="field" style="margin: 10px 0; padding: 8px 0; border-bottom: 1px solid #eee;">
+                <span class="label" style="font-weight: bold; color: #01153D; display: inline-block; min-width: 200px;">${label.trim()}:</span>
+                <span class="value" style="color: #666;">${value || '(empty)'}</span>
+              </div>
+            `
+          }
         } else if (line.trim()) {
           html += `<p style="margin: 10px 0; font-weight: bold; font-size: 1.1em; color: #01153D;">${line.trim()}</p>`
         }

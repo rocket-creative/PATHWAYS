@@ -187,6 +187,7 @@ export default function TeamPage() {
                   fill
                   className="object-cover object-top"
                   sizes="360px"
+                  style={{ filter: 'brightness(1.02) contrast(1.02)' }}
                 />
               </div>
               <div className="flex flex-col justify-center">

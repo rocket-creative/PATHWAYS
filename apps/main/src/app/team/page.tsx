@@ -79,6 +79,7 @@ export default function TeamPage() {
                     alt={`Photo of ${member.name}`}
                     fill
                     className="object-cover object-top"
+                  style={{ filter: 'brightness(1.02) contrast(1.02)' }}
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
@@ -122,6 +123,7 @@ export default function TeamPage() {
                     alt={`Photo of ${member.name}`}
                     fill
                     className="object-cover object-top"
+                  style={{ filter: 'brightness(1.02) contrast(1.02)' }}
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                 </div>
@@ -166,6 +168,7 @@ export default function TeamPage() {
                     alt={`Photo of ${dog.name}`}
                     fill
                     className="object-cover object-top"
+                  style={{ filter: 'brightness(1.02) contrast(1.02)' }}
                     sizes="192px"
                   />
                 </div>

@@ -87,14 +87,21 @@ export function getHomepageHeroImage(): string {
  * Get a random image from a category
  */
 export function getRandomImage(images: readonly string[]): string {
-  return images[Math.floor(Math.random() * images.length)] ?? images[0]
+  if (images.length === 0) {
+    return '/hero-images/freepik__professional-studio-photograph-of-4-diverse-smilin__19260.jpeg'
+  }
+  const randomIndex = Math.floor(Math.random() * images.length)
+  return images[randomIndex] as string
 }
 
 /**
  * Get an image by index (for consistent placement)
  */
 export function getImageByIndex(images: readonly string[], index: number): string {
-  return images[index % images.length] ?? images[0]
+  if (images.length === 0) {
+    return '/hero-images/freepik__professional-studio-photograph-of-4-diverse-smilin__19260.jpeg'
+  }
+  return images[index % images.length] as string
 }
 
 /**

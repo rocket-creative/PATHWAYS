@@ -44,7 +44,7 @@ export function Navigation({ site = 'main' }: NavigationProps) {
       <nav className="flex h-14 items-center justify-between px-6 lg:h-16 lg:px-12">
         
         {/* Logo */}
-        <a href={site === 'main' ? '/' : navLinks[0].href} className="flex-shrink-0">
+        <a href={site === 'main' ? '/' : (navLinks[0]?.href || '/')} className="flex-shrink-0">
           <img 
             src="/pathways-logo.png" 
             alt="Pathways Within" 

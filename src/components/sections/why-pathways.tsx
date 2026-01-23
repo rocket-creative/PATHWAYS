@@ -31,7 +31,7 @@ export function WhyPathways() {
               transform: isVisible ? 'translateX(0)' : 'translateX(-30px)'
             }}
           >
-            <div className="relative aspect-[4/5] w-full overflow-hidden">
+            <div className="relative aspect-[3/2] w-full overflow-hidden">
               <Image
                 src={getRandomOfficeImage()}
                 alt="Pathways Within office"

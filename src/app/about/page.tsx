@@ -249,7 +249,7 @@ export default function AboutPage() {
         <div className="container-site py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div>
-              <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
+              <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
                 <Image
                   src={getOfficeImageByIndex(0)}
                   alt="Pathways Within office"
@@ -307,7 +307,7 @@ export default function AboutPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {[1, 2, 3, 4].map((index) => (
-                <div key={index} className="relative aspect-square overflow-hidden rounded-lg">
+                <div key={index} className="relative aspect-[3/2] overflow-hidden rounded-lg">
                   <Image
                     src={getOfficeImageByIndex(index)}
                     alt={`Pathways Within office ${index}`}

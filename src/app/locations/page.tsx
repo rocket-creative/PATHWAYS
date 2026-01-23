@@ -106,7 +106,7 @@ export default function LocationsPage() {
                 className={`overflow-hidden rounded-lg bg-white ${location.featured ? 'ring-2 ring-[rgb(var(--color-green))]' : ''}`}
               >
                 {/* Location image */}
-                <div className="relative aspect-[16/10] w-full overflow-hidden">
+                <div className="relative aspect-[3/2] w-full overflow-hidden">
                   <Image
                     src={getLocationImagePath(location.name)}
                     alt={`${location.name} office location`}

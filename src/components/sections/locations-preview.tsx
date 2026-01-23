@@ -33,7 +33,7 @@ export function LocationsPreview() {
               transform: isVisible ? 'translateX(0)' : 'translateX(-30px)'
             }}
           >
-            <div className="relative aspect-square w-full overflow-hidden rounded-lg lg:aspect-[4/3]">
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg lg:aspect-[3/2]">
               <Image
                 src="/offices/massapequa.jpg"
                 alt="Pathways Within office location"

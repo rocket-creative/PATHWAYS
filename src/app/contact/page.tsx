@@ -402,7 +402,7 @@ export default function ContactPage() {
                 After you reach out, a member of our team will contact you within one business day to discuss your needs and answer any questions. There is no pressure and no obligation. This is simply a conversation to help you decide if Pathways Within is right for you.
               </p>
               
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+              <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
                 <Image
                   src={getRandomOfficeImage()}
                   alt="Pathways Within office"

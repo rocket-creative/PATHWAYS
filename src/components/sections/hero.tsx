@@ -69,7 +69,7 @@ export function HeroSection() {
           {/* Right image area - spans 7 cols, single tall image */}
           <div className="relative lg:col-span-7 lg:-mr-10">
             {/* Main tall image */}
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg shadow-2xl lg:aspect-[3/4]">
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-2xl lg:aspect-[3/2]">
               <Image
                 src={getRandomOfficeImage()}
                 alt="Pathways Within office"

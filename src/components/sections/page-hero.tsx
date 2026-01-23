@@ -173,8 +173,8 @@ export function PageHero({
 
   // Size-based image aspect ratios
   const imageAspect = {
-    sm: 'aspect-[16/9]',
-    md: 'aspect-[4/3]',
+    sm: 'aspect-[3/2]',
+    md: 'aspect-[3/2]',
     lg: 'aspect-[3/2]'
   }
 
@@ -339,9 +339,9 @@ export function PageHero({
       // ===== OFFSET: Image offset/overlapping edge =====
       case 'offset':
         const offsetImageAspect = {
-          sm: 'aspect-[4/3]',
-          md: 'aspect-[4/3]',
-          lg: 'aspect-[3/4]'
+          sm: 'aspect-[3/2]',
+          md: 'aspect-[3/2]',
+          lg: 'aspect-[3/2]'
         }
         return (
           <section className="relative overflow-hidden bg-white">
@@ -391,8 +391,8 @@ export function PageHero({
       // ===== DEFAULT: Standard side-by-side =====
       default:
         const defaultImageAspect = {
-          sm: 'aspect-[4/3]',
-          md: 'aspect-[4/3]',
+          sm: 'aspect-[3/2]',
+          md: 'aspect-[3/2]',
           lg: 'aspect-[3/2]'
         }
         return (

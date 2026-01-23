@@ -142,7 +142,7 @@ export default function FAQPage() {
             <div className="lg:col-span-1">
               <nav className="sticky top-32">
                 {/* Small decorative image */}
-                <div className="relative mb-8 aspect-square overflow-hidden rounded-lg">
+                <div className="relative mb-8 aspect-[3/2] overflow-hidden rounded-lg">
                   <Image
                     src={getRandomOfficeImage()}
                     alt="Pathways Within"

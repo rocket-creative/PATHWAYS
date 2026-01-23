@@ -1,7 +1,9 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { getRandomOfficeImage } from '@/lib/office-images'
 
 export const metadata: Metadata = {
   title: 'Skincare & Facials on Long Island | Pathways Within',
@@ -39,10 +41,19 @@ export default function SkincarePage() {
         <div className="container-site py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div><p className="mb-4 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>About</p><h2 className="text-[rgb(var(--color-navy))]">Healthy, glowing skin</h2></div>
-            <div className="space-y-6">
-              <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>Your skin deserves expert care. Our licensed esthetician offers a range of treatments to address your unique concerns and help you achieve your skincare goals.</p>
-              <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>Whether you are dealing with acne, aging, dryness, or simply want to maintain beautiful skin, we have treatments for you.</p>
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+              <Image
+                src={getRandomOfficeImage()}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
+          </div>
+          <div className="mt-12 space-y-6">
+            <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>Your skin deserves expert care. Our licensed esthetician offers a range of treatments to address your unique concerns and help you achieve your skincare goals.</p>
+            <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>Whether you are dealing with acne, aging, dryness, or simply want to maintain beautiful skin, we have treatments for you.</p>
           </div>
         </div>
       </section>

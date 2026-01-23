@@ -1,7 +1,9 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { getRandomOfficeImage } from '@/lib/office-images'
 
 export const metadata: Metadata = {
   title: 'Acupuncture on Long Island | Pathways Within',
@@ -39,10 +41,19 @@ export default function AcupuncturePage() {
         <div className="container-site py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div><p className="mb-4 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>About</p><h2 className="text-[rgb(var(--color-navy))]">Restore balance</h2></div>
-            <div className="space-y-6">
-              <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>Acupuncture is a time-tested healing practice that works by stimulating specific points on the body to restore the natural flow of energy, or qi.</p>
-              <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>By addressing imbalances in the body's energy system, acupuncture can help with a wide range of physical and emotional conditions.</p>
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+              <Image
+                src={getRandomOfficeImage()}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
+          </div>
+          <div className="mt-12 space-y-6">
+            <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>Acupuncture is a time-tested healing practice that works by stimulating specific points on the body to restore the natural flow of energy, or qi.</p>
+            <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>By addressing imbalances in the body's energy system, acupuncture can help with a wide range of physical and emotional conditions.</p>
           </div>
         </div>
       </section>

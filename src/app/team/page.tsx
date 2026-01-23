@@ -179,7 +179,7 @@ export default function TeamPage() {
           
           {leadership.map((person) => (
             <div key={person.name} className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
+              <div className="relative aspect-[3/2] overflow-hidden rounded-lg">
                 <Image
                   src={getOfficeImageByIndex(0)}
                   alt={person.name}
@@ -227,7 +227,7 @@ export default function TeamPage() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {clinicalTeam.map((person, index) => (
               <div key={person.name} className="group">
-                <div className="relative mb-6 aspect-square overflow-hidden rounded-lg">
+                <div className="relative mb-6 aspect-[3/2] overflow-hidden rounded-lg">
                   <Image
                     src={getOfficeImageByIndex(index + 1)}
                     alt={person.name}
@@ -265,7 +265,7 @@ export default function TeamPage() {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {associateTeam.map((person, index) => (
               <div key={person.name} className="rounded-lg bg-white p-6">
-                <div className="relative mb-4 aspect-square overflow-hidden rounded-lg">
+                <div className="relative mb-4 aspect-[3/2] overflow-hidden rounded-lg">
                   <Image
                     src={getOfficeImageByIndex(index)}
                     alt={person.name}
@@ -300,7 +300,7 @@ export default function TeamPage() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {wellnessTeam.map((person, index) => (
               <div key={person.name}>
-                <div className="relative mb-6 aspect-square overflow-hidden rounded-lg">
+                <div className="relative mb-6 aspect-[3/2] overflow-hidden rounded-lg">
                   <Image
                     src={getOfficeImageByIndex(index)}
                     alt={person.name}
@@ -344,7 +344,7 @@ export default function TeamPage() {
           <div className="mx-auto grid max-w-4xl gap-12 md:grid-cols-2">
             {therapyDogs.map((dog, index) => (
               <div key={dog.name} className="text-center">
-                <div className="relative mx-auto mb-6 aspect-square max-w-xs overflow-hidden rounded-full">
+                <div className="relative mx-auto mb-6 aspect-[3/2] max-w-xs overflow-hidden rounded-full">
                   <Image
                     src={getOfficeImageByIndex(index)}
                     alt={dog.name}

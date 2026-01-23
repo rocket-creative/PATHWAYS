@@ -28,7 +28,7 @@ export function TeamPreview() {
           >
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
-                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
+                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                   <Image
                     src={getOfficeImageByIndex(0)}
                     alt="Pathways Within office"
@@ -37,7 +37,7 @@ export function TeamPreview() {
                     sizes="(max-width: 1024px) 50vw, 25vw"
                   />
                 </div>
-                <div className="relative aspect-square w-full overflow-hidden rounded-lg">
+                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                   <Image
                     src={getOfficeImageByIndex(1)}
                     alt="Pathways Within office"
@@ -48,7 +48,7 @@ export function TeamPreview() {
                 </div>
               </div>
               <div className="mt-12 space-y-4">
-                <div className="relative aspect-square w-full overflow-hidden rounded-lg">
+                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                   <Image
                     src={getOfficeImageByIndex(2)}
                     alt="Pathways Within office"
@@ -57,7 +57,7 @@ export function TeamPreview() {
                     sizes="(max-width: 1024px) 50vw, 25vw"
                   />
                 </div>
-                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-lg">
+                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
                   <Image
                     src={getOfficeImageByIndex(3)}
                     alt="Pathways Within office"

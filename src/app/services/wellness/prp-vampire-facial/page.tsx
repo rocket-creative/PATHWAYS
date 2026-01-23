@@ -1,7 +1,9 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { getRandomOfficeImage } from '@/lib/office-images'
 
 export const metadata: Metadata = {
   title: 'PRP Vampire Facial on Long Island | Pathways Within',
@@ -40,10 +42,19 @@ export default function PRPVampireFacialPage() {
         <div className="container-site py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div><p className="mb-4 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>About</p><h2 className="text-[rgb(var(--color-navy))]">How it works</h2></div>
-            <div className="space-y-6">
-              <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>We draw a small amount of your blood and process it to concentrate the platelets. This PRP is then applied to your skin with microneedling to stimulate your body's natural healing response.</p>
-              <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>The result is increased collagen production, improved texture, and a more youthful appearance—all using your own natural growth factors.</p>
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg">
+              <Image
+                src={getRandomOfficeImage()}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
+          </div>
+          <div className="mt-12 space-y-6">
+            <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>We draw a small amount of your blood and process it to concentrate the platelets. This PRP is then applied to your skin with microneedling to stimulate your body's natural healing response.</p>
+            <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>The result is increased collagen production, improved texture, and a more youthful appearance—all using your own natural growth factors.</p>
           </div>
         </div>
       </section>

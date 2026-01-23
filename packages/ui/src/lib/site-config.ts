@@ -46,15 +46,14 @@ export function getSiteUrl(site: SiteName): string {
  * Links point to the appropriate domain based on content type
  */
 export function getNavigationLinks(): NavLink[] {
-  const mainUrl = SITE_CONFIG.main.url
-  
+  // Use relative URLs since all pages are on the same site now
   return [
-    { href: `${mainUrl}/about`, label: 'About' },
-    { href: `${mainUrl}/services`, label: 'Services' },
-    { href: `${mainUrl}/team`, label: 'Team' },
-    { href: `${mainUrl}/locations`, label: 'Locations' },
-    { href: `${mainUrl}/start`, label: 'Get Started' },
-    { href: `${mainUrl}/client-intake`, label: 'Client Intake' },
+    { href: '/about', label: 'About' },
+    { href: '/services', label: 'Services' },
+    { href: '/team', label: 'Team' },
+    { href: '/locations', label: 'Locations' },
+    { href: '/start', label: 'Get Started' },
+    { href: '/client-intake', label: 'Client Intake' },
   ]
 }
 

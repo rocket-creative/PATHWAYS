@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowDown } from 'lucide-react'
 import { type SiteName, SITE_CONFIG } from '../../lib/site-config'
 
@@ -27,7 +26,7 @@ interface PageHeroProps {
 }
 
 /**
- * Page Hero - Simple 1/3 content + 2/3 image layout
+ * Page Hero - Background image with text overlay on left
  * Used on all inner pages for consistent design
  */
 export function PageHero({ 
@@ -54,10 +53,16 @@ export function PageHero({
   const homeUrl = site === 'main' ? '/' : SITE_CONFIG.main.url
 
   return (
-    <section className="relative min-h-[85vh]">
-      <div className="grid min-h-[85vh] lg:grid-cols-5">
-        {/* Left ~40% - Content */}
-        <div className="relative z-10 flex flex-col justify-center bg-white px-6 py-12 sm:px-8 lg:col-span-2 lg:px-12 lg:py-20 xl:px-16">
+    <section 
+      className="relative min-h-[85vh] bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: `url(${image})` }}
+      role="img"
+      aria-label={imageAlt}
+    >
+      {/* Two-column overlay */}
+      <div className="flex min-h-[85vh]">
+        {/* Left - Content with white background (~40%) */}
+        <div className="flex w-full flex-col justify-center bg-white px-6 py-12 sm:px-8 lg:w-[40%] lg:px-12 xl:px-16">
           {/* Logo */}
           {site === 'main' ? (
             <Link href="/" className="mb-10 block lg:mb-14">
@@ -125,23 +130,14 @@ export function PageHero({
           )}
         </div>
         
-        {/* Right ~60% - Full Image */}
-        <div className="relative order-first min-h-[300px] lg:order-last lg:col-span-3">
-          <Image
-            src={image}
-            alt={imageAlt}
-            fill
-            priority
-            className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 60vw"
-          />
-        </div>
+        {/* Right - Empty spacer to show background image (~60%) */}
+        <div className="hidden lg:block lg:w-[60%]" />
       </div>
       
       {/* Scroll indicator */}
       <button 
         onClick={scrollToContent}
-        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-sm text-[rgb(var(--color-text-light))] transition-colors hover:text-[rgb(var(--color-navy))] lg:flex"
+        className="absolute bottom-6 left-[20%] hidden -translate-x-1/2 flex-col items-center gap-2 text-sm text-[rgb(var(--color-text-light))] transition-colors hover:text-[rgb(var(--color-navy))] lg:flex"
         aria-label="Scroll to content"
       >
         <span className="text-xs uppercase tracking-wider">Explore</span>

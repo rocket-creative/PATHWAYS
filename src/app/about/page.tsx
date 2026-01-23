@@ -5,7 +5,7 @@ import { ArrowRight, Heart, Users, Sparkles, Shield } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
-// Placeholder images used
+import { PLACEHOLDER_IMAGE } from '@/lib/placeholder-image'
 
 export const metadata: Metadata = {
   title: 'About Us | Pathways Within',
@@ -309,7 +309,7 @@ export default function AboutPage() {
               {[1, 2, 3, 4].map((index) => (
                 <div key={index} className="relative aspect-[3/2] overflow-hidden shadow-sm">
                   <Image
-                    src={getHeroImageByIndex(index)}
+                    src={PLACEHOLDER_IMAGE}
                     alt={`Pathways Within community ${index}`}
                     fill
                     className="object-cover"

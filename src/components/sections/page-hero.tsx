@@ -125,7 +125,7 @@ function HeroImage({ image, className, imageStyle = 'default' }: { image: HeroIm
   if (image.placeholder || !image.src) {
     return (
       <Image
-        src={getHeroImageByIndex(0)}
+        src={"/placeholder-grey.svg"}
         alt={image.alt}
         fill
         className={`object-cover ${className || ''}`}

@@ -54,9 +54,9 @@ export default function HydrafacialPage() {
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">
         <div className="container-site py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-            <div className="relative aspect-[3/2] w-full overflow-hidden">
+            <div className="relative aspect-[3/2] w-full overflow-hidden border-8 border-black">
               <Image
-                src={getHeroImageByIndex(16)}
+                src={"/placeholder-grey.svg"}
                 alt="HydraFacial at Pathways Within"
                 fill
                 className="object-cover"

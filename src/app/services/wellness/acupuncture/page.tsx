@@ -41,9 +41,9 @@ export default function AcupuncturePage() {
         <div className="container-site py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
             <div><p className="mb-4 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>About</p><h2 className="text-[rgb(var(--color-navy))]">Restore balance</h2></div>
-            <div className="relative aspect-[3/2] w-full overflow-hidden">
+            <div className="relative aspect-[3/2] w-full overflow-hidden border-8 border-black">
               <Image
-                src={getHeroImageByIndex(17)}
+                src={"/placeholder-grey.svg"}
                 alt="Pathways Within office"
                 fill
                 className="object-cover"

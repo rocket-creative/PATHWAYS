@@ -66,12 +66,12 @@ export function HeroSection() {
             </div>
           </div>
           
-          {/* Right image area - editorial style */}
-          <div className="relative lg:col-span-6">
-            {/* Main hero image - full height editorial */}
-            <div className="relative aspect-[3/4] w-full overflow-hidden shadow-2xl lg:aspect-[4/5]">
+          {/* Right image area - full height */}
+          <div className="relative lg:col-span-6 lg:h-full">
+            {/* Main hero image - full vertical height */}
+            <div className="relative h-full w-full overflow-hidden lg:absolute lg:inset-0">
               <Image
-                src={getHeroImageByIndex(0)}
+                src="/placeholder-grey.svg"
                 alt="Pathways Within community"
                 fill
                 className="object-cover object-center"

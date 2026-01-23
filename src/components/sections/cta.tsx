@@ -75,7 +75,7 @@ export function CTASection() {
           >
             <div className="relative aspect-[3/2] w-full overflow-hidden">
               <Image
-                src={getHeroImageByIndex(2)}
+                src={"/placeholder-grey.svg"}
                 alt="Pathways Within community"
                 fill
                 className="object-cover"

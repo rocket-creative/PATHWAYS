@@ -166,7 +166,7 @@ export default function ServicesPage() {
           <div className="mb-12 grid gap-8 lg:grid-cols-2">
             <div className="relative aspect-[3/2] w-full overflow-hidden shadow-md">
               <Image
-                src={getHeroImageByIndex(3)}
+                src={"/placeholder-grey.svg"}
                 alt="Therapy services at Pathways Within"
                 fill
                 className="object-cover"
@@ -175,7 +175,7 @@ export default function ServicesPage() {
             </div>
             <div className="relative aspect-[3/2] w-full overflow-hidden shadow-md">
               <Image
-                src={getHeroImageByIndex(5)}
+                src={"/placeholder-grey.svg"}
                 alt="Wellness services at Pathways Within"
                 fill
                 className="object-cover"

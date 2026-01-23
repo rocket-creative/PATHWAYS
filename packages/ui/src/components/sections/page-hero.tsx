@@ -100,34 +100,23 @@ export function PageHero({
     switch (layout) {
       case 'stacked':
         return (
-          <div className="flex flex-col gap-4">
-            <div className="relative aspect-[4/5] w-full overflow-hidden shadow-md">
-              <Image
-                src={getHeroImageByIndex(0)}
-                alt="Pathways Within community"
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-            </div>
-            <div className="relative aspect-[4/5] w-full overflow-hidden shadow-md lg:hidden">
-              <Image
-                src={getHeroImageByIndex(1)}
-                alt="Pathways Within community"
-                fill
-                className="object-cover object-center"
-                sizes="100vw"
-              />
-            </div>
+          <div className="relative h-full w-full overflow-hidden lg:absolute lg:inset-0">
+            <Image
+              src="/placeholder-grey.svg"
+              alt="Pathways Within"
+              fill
+              className="object-cover object-center"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
         )
 
       case 'sideBySide':
         return (
-          <div className="relative aspect-[4/5] w-full overflow-hidden shadow-lg">
+          <div className="relative h-full w-full overflow-hidden lg:absolute lg:inset-0">
             <Image
-              src={getHeroImageByIndex(0)}
-              alt="Pathways Within community"
+              src="/placeholder-grey.svg"
+              alt="Pathways Within"
               fill
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -356,8 +345,8 @@ export function PageHero({
             )}
           </div>
           
-          {/* Right image area */}
-          <div className="order-2">
+          {/* Right image area - full height */}
+          <div className="relative order-2 lg:h-full">
             {renderImages()}
           </div>
         </div>

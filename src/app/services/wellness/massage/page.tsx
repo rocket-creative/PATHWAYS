@@ -53,9 +53,9 @@ export default function MassagePage() {
               <h2 className="mb-6 text-[rgb(var(--color-navy))]">Why massage therapy?</h2>
               <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>A therapeutic massage is the perfect complement to your wellness journey. Whether you are looking to relieve stress, reduce pain, or simply enjoy some relaxation, our services are tailored to your individual needs.</p>
             </div>
-            <div className="relative aspect-[3/2] w-full overflow-hidden">
+            <div className="relative aspect-[3/2] w-full overflow-hidden border-8 border-black">
               <Image
-                src={getHeroImageByIndex(16)}
+                src={"/placeholder-grey.svg"}
                 alt="Massage therapy at Pathways Within"
                 fill
                 className="object-cover"

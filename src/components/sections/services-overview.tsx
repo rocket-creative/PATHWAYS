@@ -64,7 +64,7 @@ export function ServicesOverview() {
           <div className="hidden lg:col-span-2 lg:col-start-11 lg:block">
             <div className="relative aspect-[3/2] w-full overflow-hidden">
               <Image
-                src={getHeroImageByIndex(14)}
+                src={"/placeholder-grey.svg"}
                 alt="Pathways Within community"
                 fill
                 className="object-cover"

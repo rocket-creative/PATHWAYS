@@ -251,7 +251,7 @@ export default function AboutPage() {
             <div>
               <div className="relative aspect-[3/2] overflow-hidden shadow-md">
                 <Image
-                  src={getHeroImageByIndex(1)}
+                  src={"/placeholder-grey.svg"}
                   alt="Pathways Within community"
                   fill
                   className="object-cover"

@@ -28,8 +28,8 @@ export default function TherapyServicesPage() {
         eyebrow="Therapy Services"
         headline="Mental health support for every stage of life"
         body="Our licensed therapists offer a range of evidence-based approaches to help you heal, grow, and thrive."
+        image="/hero-images/freepik__professional-studio-portrait-of-a-person-diverse-w__19265.jpeg"
         site="wisdom"
-        layout="trio"
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

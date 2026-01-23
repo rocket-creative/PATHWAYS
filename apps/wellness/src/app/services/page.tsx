@@ -33,8 +33,8 @@ export default function WellnessServicesPage() {
         eyebrow="Wellness Services"
         headline="Treatments for body, beauty, and balance"
         body="Our certified wellness practitioners offer a comprehensive range of services to help you look and feel your best."
+        image="/hero-images/freepik__professional-studio-photograph-of-subject-descript__19259.jpeg"
         site="wellness"
-        layout="trio"
       />
 
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Mail, Phone, Clock, MapPin, AlertTriangle, MessageCircle, Check } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
-import { getHeroImageByIndex } from '@/lib/hero-images'
+// Placeholder images used
 
 const locations = [
   { name: 'Garden City', address: '520 Franklin Ave, Suite L1', city: 'Garden City, NY 11530' },

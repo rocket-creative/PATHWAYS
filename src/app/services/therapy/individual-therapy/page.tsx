@@ -5,7 +5,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
-import { getHeroImageByIndex } from '@/lib/hero-images'
+// Placeholder images used
 
 export const metadata: Metadata = {
   title: 'Individual Therapy on Long Island | Pathways Within',

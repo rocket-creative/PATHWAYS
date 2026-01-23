@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ChevronDown } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
-import { getHeroImageByIndex } from '@/lib/hero-images'
+// Placeholder images used
 
 export const metadata: Metadata = {
   title: 'Trauma Therapy on Long Island | Pathways Within',

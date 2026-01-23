@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ChevronDown, Phone, MessageCircle, AlertTriangle } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
-import { getHeroImageByIndex } from '@/lib/hero-images'
+// Placeholder images used
 
 const faqCategories = [
   {

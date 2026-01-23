@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Check, Star, Shield, Clock, Heart, Sparkles, Users, MapPin, Phone, Award, Zap, Brain, Leaf } from 'lucide-react'
-import { getHeroImageByIndex } from '@/lib/hero-images'
+// Placeholder images used
 
 const benefits = [
   { icon: Brain, title: 'Expert Therapists', description: 'Licensed clinicians with specialized training in trauma, anxiety, relationships, and more' },

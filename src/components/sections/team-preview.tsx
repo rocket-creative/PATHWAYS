@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
-import { getHeroImageByIndex } from '@/lib/hero-images'
+// Placeholder images used
 
 /**
  * Team Preview - Cream background with overlapping navy block

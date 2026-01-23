@@ -5,7 +5,7 @@ import { ArrowRight, Brain, Leaf, Heart, Sparkles, Shield, Sun } from 'lucide-re
 import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
-import { getHeroImageByIndex } from '@/lib/hero-images'
+// Placeholder images used
 
 export const metadata: Metadata = {
   title: 'Therapy and Wellness Services | Pathways Within',

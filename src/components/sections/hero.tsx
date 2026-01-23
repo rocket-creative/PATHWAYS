@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, ArrowDown } from 'lucide-react'
-import { getHeroImageByIndex } from '@/lib/hero-images'
+// Placeholder images used
 
 /**
  * Hero Section - Editorial asymmetric layout with single tall image

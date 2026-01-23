@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { Heart, Users, MapPin, Shield } from 'lucide-react'
 import { useScrollAnimation } from '@/lib/use-scroll-animation'
-import { getHeroImageByIndex } from '@/lib/hero-images'
+// Placeholder images used
 
 /**
  * Why Pathways - Linen background with scroll animation

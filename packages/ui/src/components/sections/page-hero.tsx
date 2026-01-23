@@ -130,7 +130,7 @@ export function PageHero({
             <div className="absolute left-0 top-0 w-[70%] overflow-hidden shadow-lg">
               <div className="relative aspect-[3/2]">
                 <Image
-                  src={getHeroImageByIndex(0)}
+                  src={"/placeholder-grey.svg"}
                   alt="Pathways Within community"
                   fill
                   className="object-cover"
@@ -141,7 +141,7 @@ export function PageHero({
             <div className="absolute bottom-0 right-0 w-[70%] overflow-hidden shadow-lg">
               <div className="relative aspect-[3/2]">
                 <Image
-                  src={getHeroImageByIndex(1)}
+                  src={"/placeholder-grey.svg"}
                   alt="Pathways Within community"
                   fill
                   className="object-cover"
@@ -157,7 +157,7 @@ export function PageHero({
           <div className="grid grid-cols-2 gap-3">
             <div className="relative col-span-2 aspect-[3/2] w-full overflow-hidden shadow-lg">
               <Image
-                src={getHeroImageByIndex(0)}
+                src={"/placeholder-grey.svg"}
                 alt="Pathways Within community"
                 fill
                 className="object-cover"
@@ -166,7 +166,7 @@ export function PageHero({
             </div>
             <div className="relative aspect-[3/2] w-full overflow-hidden shadow-md">
               <Image
-                src={getHeroImageByIndex(1)}
+                src={"/placeholder-grey.svg"}
                 alt="Pathways Within community"
                 fill
                 className="object-cover"
@@ -175,7 +175,7 @@ export function PageHero({
             </div>
             <div className="relative aspect-[3/2] w-full overflow-hidden shadow-md">
               <Image
-                src={getHeroImageByIndex(2)}
+                src={"/placeholder-grey.svg"}
                 alt="Pathways Within community"
                 fill
                 className="object-cover"
@@ -248,7 +248,7 @@ export function PageHero({
           <div className="grid grid-cols-3 grid-rows-2 gap-3">
             <div className="relative col-span-2 row-span-2 overflow-hidden shadow-lg">
               <Image
-                src={getHeroImageByIndex(0)}
+                src={"/placeholder-grey.svg"}
                 alt="Pathways Within community"
                 fill
                 className="object-cover"
@@ -257,7 +257,7 @@ export function PageHero({
             </div>
             <div className="relative aspect-[3/2] overflow-hidden shadow-md">
               <Image
-                src={getHeroImageByIndex(1)}
+                src={"/placeholder-grey.svg"}
                 alt="Pathways Within community"
                 fill
                 className="object-cover"
@@ -266,7 +266,7 @@ export function PageHero({
             </div>
             <div className="relative aspect-[3/2] overflow-hidden shadow-md">
               <Image
-                src={getHeroImageByIndex(2)}
+                src={"/placeholder-grey.svg"}
                 alt="Pathways Within community"
                 fill
                 className="object-cover"
@@ -281,7 +281,7 @@ export function PageHero({
         return (
           <div className="relative aspect-[3/2] w-full overflow-hidden shadow-md">
             <Image
-              src={getHeroImageByIndex(0)}
+              src={"/placeholder-grey.svg"}
               alt="Pathways Within community"
               fill
               className="object-cover"

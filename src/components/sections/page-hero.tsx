@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowDown } from 'lucide-react'
-import { getHeroImageByIndex } from '@/lib/hero-images'
+// Placeholder images used
 
 /**
  * Page Hero - Reusable hero for inner pages with varied layouts and heights

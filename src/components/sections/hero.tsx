@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, ArrowDown } from 'lucide-react'
 
 interface HeroSectionProps {
@@ -12,6 +13,7 @@ interface HeroSectionProps {
 
 /**
  * Hero Section - Background image with text overlay on left for homepage
+ * Uses Next.js Image for optimization while maintaining visual layout
  */
 export function HeroSection({ 
   image = '/hero-images/freepik__professional-studio-photograph-of-4-diverse-smilin__19260.jpeg',
@@ -25,20 +27,29 @@ export function HeroSection({
   }
 
   return (
-    <section 
-      className="relative min-h-[85vh] bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${image})` }}
-      role="img"
-      aria-label={imageAlt}
-    >
-      {/* Two-column overlay */}
-      <div className="flex min-h-[85vh]">
+    <section className="relative min-h-[85vh]">
+      {/* Background Image - using Next.js Image for optimization */}
+      <div className="absolute inset-0">
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+      </div>
+
+      {/* Content Overlay */}
+      <div className="relative flex min-h-[85vh]">
         {/* Left - Content with white background (~40%) */}
         <div className="flex w-full flex-col justify-center bg-white px-6 py-12 sm:px-8 lg:w-[40%] lg:px-12 xl:px-16">
           <Link href="/" className="mb-10 block lg:mb-14">
-            <img 
+            <Image 
               src="/pathways-logo.png" 
               alt="Pathways Within - Home" 
+              width={280}
+              height={100}
               className="w-[200px] transition-opacity hover:opacity-80 lg:w-[280px]"
             />
           </Link>
@@ -61,17 +72,17 @@ export function HeroSection({
           <div className="flex flex-wrap items-center gap-4">
             <Link href="/services" className="btn-pill btn-pill-primary">
               <span className="btn-text">Explore services</span>
-              <span className="btn-arrow"><ArrowRight /></span>
+              <span className="btn-arrow"><ArrowRight aria-hidden="true" /></span>
             </Link>
             <Link href="/contact" className="btn-pill btn-pill-secondary">
               <span className="btn-text">Book a session</span>
-              <span className="btn-arrow"><ArrowRight /></span>
+              <span className="btn-arrow"><ArrowRight aria-hidden="true" /></span>
             </Link>
           </div>
         </div>
         
         {/* Right - Empty spacer to show background image (~60%) */}
-        <div className="hidden lg:block lg:w-[60%]" />
+        <div className="hidden lg:block lg:w-[60%]" aria-hidden="true" />
       </div>
       
       {/* Scroll indicator */}
@@ -81,7 +92,7 @@ export function HeroSection({
         aria-label="Scroll to next section"
       >
         <span className="text-xs uppercase tracking-wider">View more</span>
-        <ArrowDown className="h-4 w-4 animate-bounce" />
+        <ArrowDown className="h-4 w-4 animate-bounce" aria-hidden="true" />
       </button>
     </section>
   )

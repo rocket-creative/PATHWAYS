@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowDown } from 'lucide-react'
 
 interface PageHeroProps {
@@ -24,7 +25,7 @@ interface PageHeroProps {
 
 /**
  * Page Hero - Background image with text overlay on left
- * Used on all inner pages for consistent design
+ * Uses Next.js Image for optimization while maintaining visual layout
  */
 export function PageHero({ 
   eyebrow, 
@@ -47,21 +48,30 @@ export function PageHero({
   }
 
   return (
-    <section 
-      className="relative min-h-[85vh] bg-cover bg-center bg-no-repeat"
-      style={{ backgroundImage: `url(${image})` }}
-      role="img"
-      aria-label={imageAlt}
-    >
-      {/* Two-column overlay */}
-      <div className="flex min-h-[85vh]">
+    <section className="relative min-h-[85vh]">
+      {/* Background Image - using Next.js Image for optimization */}
+      <div className="absolute inset-0">
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+      </div>
+
+      {/* Content Overlay */}
+      <div className="relative flex min-h-[85vh]">
         {/* Left - Content with white background (~40%) */}
         <div className="flex w-full flex-col justify-center bg-white px-6 py-12 sm:px-8 lg:w-[40%] lg:px-12 xl:px-16">
-          {/* Logo */}
+          {/* Logo - using Next.js Image */}
           <Link href="/" className="mb-10 block lg:mb-14">
-            <img 
+            <Image 
               src="/pathways-logo.png" 
               alt="Pathways Within - Home" 
+              width={220}
+              height={80}
               className="w-[180px] transition-opacity hover:opacity-80 lg:w-[220px]"
             />
           </Link>
@@ -115,7 +125,7 @@ export function PageHero({
         </div>
         
         {/* Right - Empty spacer to show background image (~60%) */}
-        <div className="hidden lg:block lg:w-[60%]" />
+        <div className="hidden lg:block lg:w-[60%]" aria-hidden="true" />
       </div>
       
       {/* Scroll indicator */}
@@ -125,7 +135,7 @@ export function PageHero({
         aria-label="Scroll to content"
       >
         <span className="text-xs uppercase tracking-wider">Explore</span>
-        <ArrowDown className="h-4 w-4 animate-bounce" />
+        <ArrowDown className="h-4 w-4 animate-bounce" aria-hidden="true" />
       </button>
     </section>
   )

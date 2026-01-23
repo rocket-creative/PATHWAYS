@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
+import Image from 'next/image'
 import { Menu, X, ArrowRight, ChevronDown } from 'lucide-react'
 import { getNavigationLinks, getContactUrl, type SiteName, type NavLinkWithDropdown } from '../../lib/site-config'
 
@@ -45,9 +46,11 @@ export function Navigation({ site = 'main' }: NavigationProps) {
         
         {/* Logo */}
         <a href={site === 'main' ? '/' : (navLinks[0]?.href || '/')} className="flex-shrink-0">
-          <img 
+          <Image 
             src="/pathways-logo.png" 
             alt="Pathways Within" 
+            width={120}
+            height={40}
             className="h-8 w-auto lg:h-10"
           />
         </a>
@@ -93,8 +96,8 @@ export function Navigation({ site = 'main' }: NavigationProps) {
         }`}
       >
         <div className="flex h-14 items-center justify-between px-6">
-          <img src="/pathways-logo.png" alt="Pathways Within" className="h-7 brightness-0 invert" />
-          <button onClick={() => setIsOpen(false)} className="p-2 text-white">
+          <Image src="/pathways-logo.png" alt="Pathways Within" width={100} height={28} className="h-7 w-auto brightness-0 invert" />
+          <button onClick={() => setIsOpen(false)} className="p-2 text-white" aria-label="Close menu">
             <X className="h-6 w-6" />
           </button>
         </div>

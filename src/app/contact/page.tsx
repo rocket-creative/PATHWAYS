@@ -52,16 +52,13 @@ export default function ContactPage() {
 
   return (
     <main>
-      {/* Hero - Full bleed welcoming image */}
+      {/* Hero */}
       <PageHero
         eyebrow="Contact"
         headline="Let's talk"
-        subheadline="We are here to help you take the first step"
         body="Fill out the form below and someone from our team will be in touch. Or contact us directly by phone or email."
-        variant="fullBleed"
-        size="sm"
-        image={{ alt: 'Warm and welcoming reception area at Pathways Within', placeholder: true }}
-        imageStyle="dark"
+        image="/hero-images/freepik__professional-studio-photograph-of-a-person-standin__19269.jpeg"
+        imageAlt="Warm and welcoming reception area at Pathways Within"
       />
 
       {/* Contact Form Section */}

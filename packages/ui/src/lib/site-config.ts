@@ -1,64 +1,81 @@
 import type { NavLink } from '../types'
 
-export type SiteName = 'main' | 'wisdom' | 'wellness'
+export type SiteName = 'main' | 'wisdom' | 'wellness' | 'crm'
 
 /**
- * Site URLs - These are the 3 separate domains required for NY state compliance
- * Despite being on different URLs, the site should look and function as ONE website
+ * Site URLs - Multi-app architecture
  * 
- * Production URLs (Vercel):
- * - Wisdom: https://wisdom-eight-topaz.vercel.app ✅ LIVE
- * - Wellness: https://wellness-phi-three.vercel.app ✅ LIVE
- * - Main: [NEEDS DEPLOYMENT URL] - contains /about, /team, /locations, /contact, /start
- * - CRM: https://crm-sooty-one.vercel.app ✅ LIVE
+ * Main app = Hub with shared pages (about, team, locations, contact, start, faq)
+ * Wisdom app = Therapy services only
+ * Wellness app = Wellness services only
  * 
- * TODO: Update these URLs once all apps are deployed:
- * 1. Deploy apps/main to Vercel and update NEXT_PUBLIC_MAIN_URL
+ * Production URLs:
+ * - Main: pathwayswithin.com (or current Vercel URL)
+ * - Wisdom: wisdom-eight-topaz.vercel.app
+ * - Wellness: wellness-phi-three.vercel.app
+ * - CRM: crm-sooty-one.vercel.app
  */
 export const SITE_CONFIG = {
   main: {
     name: 'Pathways Within',
     tagline: 'Wisdom and Wellness Collaborative',
-    // TODO: Update with actual main app URL when deployed
-    url: process.env.NEXT_PUBLIC_MAIN_URL || 'https://wisdom-eight-topaz.vercel.app',
+    url: process.env.NEXT_PUBLIC_MAIN_URL || 'https://pathways-2-eight.vercel.app',
   },
   wisdom: {
     name: 'Pathways Within',
-    tagline: 'Wisdom and Wellness Collaborative',
+    tagline: 'Therapy Services',
     url: process.env.NEXT_PUBLIC_WISDOM_URL || 'https://wisdom-eight-topaz.vercel.app',
   },
   wellness: {
     name: 'Pathways Within',
-    tagline: 'Wisdom and Wellness Collaborative',
+    tagline: 'Wellness Services',
     url: process.env.NEXT_PUBLIC_WELLNESS_URL || 'https://wellness-phi-three.vercel.app',
+  },
+  crm: {
+    name: 'Pathways CRM',
+    tagline: 'Internal Dashboard',
+    url: process.env.NEXT_PUBLIC_CRM_URL || 'https://crm-sooty-one.vercel.app',
   },
 }
 
 /**
- * Get the base URL for cross-site navigation
+ * Get the base URL for a site
  */
 export function getSiteUrl(site: SiteName): string {
   return SITE_CONFIG[site].url
 }
 
 /**
- * Unified navigation links - SAME on all 3 sites
- * Links point to the appropriate domain based on content type
+ * Get navigation links for a specific site
+ * - Main app: all relative URLs
+ * - Wisdom/Wellness: shared pages point to main app, services stay relative
  */
-export function getNavigationLinks(): NavLink[] {
-  // Use relative URLs since all pages are on the same site now
+export function getNavigationLinks(site: SiteName = 'main'): NavLink[] {
+  const mainUrl = SITE_CONFIG.main.url
+  
+  if (site === 'main') {
+    // Main app - all relative
+    return [
+      { href: '/about', label: 'About' },
+      { href: '/services', label: 'Services' },
+      { href: '/team', label: 'Team' },
+      { href: '/locations', label: 'Locations' },
+      { href: '/start', label: 'Get Started' },
+    ]
+  }
+  
+  // Wisdom/Wellness - shared pages go to main, services stay relative
   return [
-    { href: '/about', label: 'About' },
+    { href: `${mainUrl}/about`, label: 'About' },
     { href: '/services', label: 'Services' },
-    { href: '/team', label: 'Team' },
-    { href: '/locations', label: 'Locations' },
-    { href: '/start', label: 'Get Started' },
-    { href: '/client-intake', label: 'PATHWAYS INFO' },
+    { href: `${mainUrl}/team`, label: 'Team' },
+    { href: `${mainUrl}/locations`, label: 'Locations' },
+    { href: `${mainUrl}/start`, label: 'Get Started' },
   ]
 }
 
 /**
- * Get the contact/booking URL (always on main site)
+ * Get the contact URL (always on main site)
  */
 export function getContactUrl(): string {
   return `${SITE_CONFIG.main.url}/contact`
@@ -72,7 +89,7 @@ export function getStartUrl(): string {
 }
 
 /**
- * Unified footer links - SAME on all 3 sites
+ * Unified footer links
  */
 export function getFooterLinks() {
   const mainUrl = SITE_CONFIG.main.url
@@ -111,8 +128,8 @@ export function getFooterLinks() {
 }
 
 // Legacy exports for backwards compatibility
-export function getNavigationForSite(_site: SiteName): NavLink[] {
-  return getNavigationLinks()
+export function getNavigationForSite(site: SiteName): NavLink[] {
+  return getNavigationLinks(site)
 }
 
 export function getFooterLinksForSite(_site: SiteName) {

@@ -18,12 +18,12 @@ const SITE_LINKS = {
 
 /**
  * Navigation - Unified navigation across all 3 sites
- * All links use absolute URLs so they work seamlessly across domains
+ * Shared pages link to main app, services stay on current site
  */
-export function Navigation({ site: _site }: NavigationProps) {
+export function Navigation({ site = 'main' }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
-  const navLinks = getNavigationLinks()
+  const navLinks = getNavigationLinks(site)
   const contactUrl = getContactUrl()
 
   useEffect(() => setIsOpen(false), [pathname])

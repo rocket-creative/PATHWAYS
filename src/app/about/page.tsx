@@ -6,7 +6,6 @@ import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
 import { PLACEHOLDER_IMAGE } from '@/lib/placeholder-image'
-import { HERO_IMAGES } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'About Us | Pathways Within',
@@ -30,16 +29,15 @@ export default function AboutPage() {
   return (
     <main>
       <JsonLd data={breadcrumbSchema} />
-      {/* Hero - Offset image style */}
+      {/* Hero */}
       <PageHero
         eyebrow="About Us"
         headline="Wisdom and Wellness Collaborative"
-        subheadline="One entry. Many personalized routes."
         body="At Pathways Within, we believe true healing happens when we care for the whole person. Our 360 degree approach brings together mental health therapy and holistic wellness services in one collaborative environment."
-        variant="offset"
-        size="md"
-        image={{ src: HERO_IMAGES.homepage[1], alt: 'Diverse group representing the Pathways Within community' }}
-        imageStyle="gradient"
+        image="/hero-images/freepik__professional-studio-photograph-of-23-diverse-profe__19266.jpeg"
+        imageAlt="Diverse group representing the Pathways Within community"
+        ctaText="Get Started"
+        ctaHref="/start"
       />
 
       {/* Philosophy Section */}
@@ -252,7 +250,7 @@ export default function AboutPage() {
             <div>
               <div className="relative aspect-[3/2] overflow-hidden shadow-md">
                 <Image
-                  src={HERO_IMAGES.homepage[0]}
+                  src="/hero-images/freepik__professional-studio-photograph-of-4-diverse-smilin__19260.jpeg"
                   alt="Pathways Within community"
                   fill
                   className="object-cover"

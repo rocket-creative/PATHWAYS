@@ -3,158 +3,36 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowDown } from 'lucide-react'
-import { HERO_IMAGES, getRandomImage } from '@/lib/hero-images'
-
-/**
- * Page Hero - Reusable hero for inner pages with varied layouts and heights
- * 
- * Variants (all use single image):
- * - default: Standard side-by-side text + image
- * - centered: Centered text with image below
- * - fullBleed: Full-width background image with overlay
- * - stacked: Wide banner image above text
- * - offset: Image offset/overlapping the edge
- * 
- * Image Styles:
- * - default: Standard gray placeholder
- * - gradient: Navy to green gradient
- * - warm: Warm cream/linen tones
- * - cool: Cool breezy blue tones
- * - dark: Dark navy with subtle pattern
- * - organic: Soft organic shapes
- * - geometric: Geometric pattern overlay
- * - split: Split diagonal design
- * 
- * Sizes:
- * - sm: Compact hero for service pages
- * - md: Medium hero for main sections  
- * - lg: Large hero (default for main pages)
- */
-
-interface HeroImage {
-  src?: string
-  alt: string
-  placeholder?: boolean
-}
 
 interface PageHeroProps {
+  /** Small label above headline */
   eyebrow?: string
+  /** Main H1 heading */
   headline: string
-  subheadline?: string
+  /** Body text below headline */
   body?: string
-  variant?: 'default' | 'centered' | 'fullBleed' | 'stacked' | 'offset'
-  size?: 'sm' | 'md' | 'lg'
-  image?: HeroImage
-  imageStyle?: 'default' | 'gradient' | 'warm' | 'cool' | 'dark' | 'organic' | 'geometric' | 'split'
+  /** Hero image path - required */
+  image: string
+  /** Alt text for image */
+  imageAlt?: string
+  /** CTA button text */
+  ctaText?: string
+  /** CTA button link */
+  ctaHref?: string
 }
 
-// Image placeholder component with varied styles
-function ImagePlaceholder({ className, alt, style = 'default' }: { className?: string; alt: string; style?: string }) {
-  const baseClasses = `absolute inset-0 ${className || ''}`
-  
-  switch (style) {
-    case 'gradient':
-      return (
-        <div className={baseClasses} role="img" aria-label={alt}>
-          <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--color-navy))] via-[rgb(var(--color-navy))]/80 to-[rgb(var(--color-green))]/60" />
-          <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 30% 70%, rgba(114,162,59,0.4) 0%, transparent 50%)' }} />
-        </div>
-      )
-    case 'warm':
-      return (
-        <div className={baseClasses} role="img" aria-label={alt}>
-          <div className="absolute inset-0 bg-gradient-to-tr from-[rgb(var(--color-linen))] via-[rgb(var(--color-cream))] to-[rgb(var(--color-linen))]/80" />
-          <div className="absolute inset-0 opacity-30" style={{ backgroundImage: 'radial-gradient(circle at 70% 30%, rgba(114,162,59,0.3) 0%, transparent 40%)' }} />
-          <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-[rgb(var(--color-navy))]/10 to-transparent" />
-        </div>
-      )
-    case 'cool':
-      return (
-        <div className={baseClasses} role="img" aria-label={alt}>
-          <div className="absolute inset-0 bg-gradient-to-bl from-[rgb(var(--color-breezy))]/40 via-[rgb(var(--color-breezy))]/20 to-white" />
-          <div className="absolute inset-0 opacity-40" style={{ backgroundImage: 'radial-gradient(circle at 20% 80%, rgba(134,168,225,0.5) 0%, transparent 50%)' }} />
-          <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-[rgb(var(--color-green))]/10 to-transparent" />
-        </div>
-      )
-    case 'dark':
-      return (
-        <div className={baseClasses} role="img" aria-label={alt}>
-          <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--color-navy))] to-[rgb(var(--color-navy))]/90" />
-          <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px)' }} />
-          <div className="absolute bottom-0 left-0 w-2/3 h-1/2 bg-gradient-to-tr from-[rgb(var(--color-green))]/20 to-transparent" />
-        </div>
-      )
-    case 'organic':
-      return (
-        <div className={baseClasses} role="img" aria-label={alt}>
-          <div className="absolute inset-0 bg-[rgb(var(--color-cream))]" />
-          <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-[rgb(var(--color-green))]/10 blur-3xl" />
-          <div className="absolute -bottom-10 -left-10 w-60 h-60 rounded-full bg-[rgb(var(--color-breezy))]/20 blur-2xl" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-[rgb(var(--color-navy))]/5 blur-xl" />
-        </div>
-      )
-    case 'geometric':
-      return (
-        <div className={baseClasses} role="img" aria-label={alt}>
-          <div className="absolute inset-0 bg-gradient-to-br from-[rgb(var(--color-linen))] to-white" />
-          <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'linear-gradient(30deg, rgb(var(--color-navy)) 12%, transparent 12.5%, transparent 87%, rgb(var(--color-navy)) 87.5%, rgb(var(--color-navy))), linear-gradient(150deg, rgb(var(--color-navy)) 12%, transparent 12.5%, transparent 87%, rgb(var(--color-navy)) 87.5%, rgb(var(--color-navy))), linear-gradient(30deg, rgb(var(--color-navy)) 12%, transparent 12.5%, transparent 87%, rgb(var(--color-navy)) 87.5%, rgb(var(--color-navy))), linear-gradient(150deg, rgb(var(--color-navy)) 12%, transparent 12.5%, transparent 87%, rgb(var(--color-navy)) 87.5%, rgb(var(--color-navy))), linear-gradient(60deg, rgba(114,162,59,0.3) 25%, transparent 25.5%, transparent 75%, rgba(114,162,59,0.3) 75%, rgba(114,162,59,0.3)), linear-gradient(60deg, rgba(114,162,59,0.3) 25%, transparent 25.5%, transparent 75%, rgba(114,162,59,0.3) 75%, rgba(114,162,59,0.3))', backgroundSize: '80px 140px', backgroundPosition: '0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px' }} />
-        </div>
-      )
-    case 'split':
-      return (
-        <div className={baseClasses} role="img" aria-label={alt}>
-          <div className="absolute inset-0 bg-[rgb(var(--color-cream))]" />
-          <div className="absolute inset-0 clip-diagonal bg-gradient-to-br from-[rgb(var(--color-navy))]/10 to-[rgb(var(--color-breezy))]/20" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 40% 100%)' }} />
-          <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-gradient-to-tl from-[rgb(var(--color-green))]/15 to-transparent" />
-        </div>
-      )
-    default:
-      return (
-        <div 
-          className={`img-placeholder ${className || ''}`}
-          role="img"
-          aria-label={alt}
-        />
-      )
-  }
-}
-
-// Actual image or placeholder
-function HeroImage({ image, className, imageStyle = 'default' }: { image: HeroImage; className?: string; imageStyle?: string }) {
-  // Use a hero image if placeholder is true or no src provided
-  if (image.placeholder || !image.src) {
-    // Use a random hero image from the library
-    const fallbackSrc = getRandomImage(HERO_IMAGES.all)
-    return (
-      <Image
-        src={fallbackSrc}
-        alt={image.alt}
-        fill
-        className={`object-cover ${className || ''}`}
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-      />
-    )
-  }
-  return (
-    <Image
-      src={image.src}
-      alt={image.alt}
-      fill
-      className={`object-cover ${className || ''}`}
-      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-    />
-  )
-}
-
+/**
+ * Page Hero - Simple 1/3 content + 2/3 image layout
+ * Used on all inner pages for consistent design
+ */
 export function PageHero({ 
   eyebrow, 
   headline, 
-  subheadline, 
   body, 
-  variant = 'default',
-  size = 'md',
-  image = { alt: 'Hero image', placeholder: true },
-  imageStyle = 'default'
+  image,
+  imageAlt = 'Pathways Within',
+  ctaText,
+  ctaHref
 }: PageHeroProps) {
   const scrollToContent = () => {
     const main = document.querySelector('main')
@@ -166,282 +44,80 @@ export function PageHero({
     }
   }
 
-  // Size-based padding
-  const sizePadding = {
-    sm: 'py-8 lg:py-12',
-    md: 'py-10 lg:py-14',
-    lg: 'py-12 lg:py-16'
-  }
-
-  // Size-based image aspect ratios
-  const imageAspect = {
-    sm: 'aspect-[3/2]',
-    md: 'aspect-[3/2]',
-    lg: 'aspect-[3/2]'
-  }
-
-  // Render different variants
-  const renderVariant = () => {
-    switch (variant) {
-      // ===== CENTERED: Centered text with image below =====
-      case 'centered':
-        return (
-          <section className="relative bg-white">
-            <div className="container-site">
-              <div className="pt-10 lg:pt-14">
-                <Link href="/">
-                  <Image 
-                    src="/pathways-logo.png" 
-                    alt="Pathways Within - Home" 
-                    width={240}
-                    height={240}
-                    className="mx-auto w-[180px] transition-opacity hover:opacity-80 lg:w-[240px]"
-                    priority
-                  />
-                </Link>
-              </div>
-              
-              <div className={sizePadding[size]}>
-                <div className="mx-auto max-w-3xl text-center">
-                  {eyebrow && (
-                    <p className="mb-3 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>
-                      {eyebrow}
-                    </p>
-                  )}
-                  <h1 className="text-[rgb(var(--color-navy))]" style={{ lineHeight: 1.1 }}>{headline}</h1>
-                  {subheadline && (
-                    <p className="mt-4 text-lg text-[rgb(var(--color-text-light))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 400 }}>
-                      {subheadline}
-                    </p>
-                  )}
-                  {body && (
-                    <p className="mt-5 text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>{body}</p>
-                  )}
-                </div>
-                
-                {/* Single image below */}
-                <div className="mx-auto mt-10 max-w-4xl">
-                  <div className={`relative ${imageAspect[size]} overflow-hidden`}>
-                    <HeroImage image={image} imageStyle={imageStyle} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        )
-
-      // ===== FULL BLEED: Background image with overlay =====
-      case 'fullBleed':
-        const fullBleedHeight = {
-          sm: 'min-h-[40vh]',
-          md: 'min-h-[50vh]',
-          lg: 'min-h-[60vh]'
-        }
-        return (
-          <section className={`relative overflow-hidden ${fullBleedHeight[size]}`}>
-            {/* Background image */}
-            <div className="absolute inset-0">
-              <HeroImage image={image} imageStyle={imageStyle} />
-              <div className="absolute inset-0 bg-gradient-to-r from-[rgb(var(--color-navy))]/90 via-[rgb(var(--color-navy))]/70 to-transparent" />
-            </div>
-            
-            <div className="container-site relative z-10">
-              <div className="pt-10 lg:pt-14">
-                <Link href="/">
-                  <Image 
-                    src="/pathways-logo.png" 
-                    alt="Pathways Within - Home" 
-                    width={240}
-                    height={240}
-                    className="w-[180px] brightness-0 invert transition-opacity hover:opacity-80 lg:w-[240px]"
-                    priority
-                  />
-                </Link>
-              </div>
-              
-              <div className={`max-w-2xl ${sizePadding[size]}`}>
-                {eyebrow && (
-                  <p className="mb-3 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>
-                    {eyebrow}
-                  </p>
-                )}
-                <h1 className="text-white" style={{ lineHeight: 1.1 }}>{headline}</h1>
-                {subheadline && (
-                  <p className="mt-4 text-lg text-white/80" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 400 }}>
-                    {subheadline}
-                  </p>
-                )}
-                {body && (
-                  <p className="mt-5 text-white/70" style={{ lineHeight: 1.8 }}>{body}</p>
-                )}
-              </div>
-            </div>
-            
-            <button 
-              onClick={scrollToContent}
-              className="scroll-indicator absolute bottom-6 left-1/2 hidden -translate-x-1/2 lg:flex"
-              aria-label="Scroll to content"
+  return (
+    <section className="relative min-h-[85vh] bg-white">
+      <div className="grid min-h-[85vh] lg:grid-cols-3">
+        {/* Left 1/3 - Content */}
+        <div className="flex flex-col justify-center px-6 py-12 sm:px-8 lg:px-12 lg:py-20">
+          {/* Logo */}
+          <Link href="/" className="mb-10 block lg:mb-14">
+            <img 
+              src="/pathways-logo.png" 
+              alt="Pathways Within - Home" 
+              className="w-[180px] transition-opacity hover:opacity-80 lg:w-[220px]"
+            />
+          </Link>
+          
+          {/* Eyebrow */}
+          {eyebrow && (
+            <p 
+              className="mb-4 text-xs uppercase tracking-[0.2em] text-[rgb(var(--color-green))]"
+              style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 600 }}
             >
-              <span className="text-white/70">Explore</span>
-              <ArrowDown className="h-4 w-4 text-white/50" />
-            </button>
-          </section>
-        )
-
-      // ===== STACKED: Wide banner image above text =====
-      case 'stacked':
-        const stackedImageAspect = {
-          sm: 'aspect-[21/7]',
-          md: 'aspect-[21/8]',
-          lg: 'aspect-[21/9]'
-        }
-        return (
-          <section className="relative bg-white">
-            <div className="container-site">
-              <div className="pt-10 lg:pt-14">
-                <Link href="/">
-                  <Image 
-                    src="/pathways-logo.png" 
-                    alt="Pathways Within - Home" 
-                    width={240}
-                    height={240}
-                    className="w-[180px] transition-opacity hover:opacity-80 lg:w-[240px]"
-                    priority
-                  />
-                </Link>
-              </div>
-              
-              <div className={sizePadding[size]}>
-                {/* Wide banner image on top */}
-                <div className={`relative mb-8 ${stackedImageAspect[size]} overflow-hidden`}>
-                  <HeroImage image={image} imageStyle={imageStyle} />
-                </div>
-                
-                <div className="max-w-3xl">
-                  {eyebrow && (
-                    <p className="mb-3 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>
-                      {eyebrow}
-                    </p>
-                  )}
-                  <h1 className="text-[rgb(var(--color-navy))]" style={{ lineHeight: 1.1 }}>{headline}</h1>
-                  {subheadline && (
-                    <p className="mt-4 text-lg text-[rgb(var(--color-text-light))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 400 }}>
-                      {subheadline}
-                    </p>
-                  )}
-                  {body && (
-                    <p className="mt-5 text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>{body}</p>
-                  )}
-                </div>
-              </div>
+              {eyebrow}
+            </p>
+          )}
+          
+          {/* Headline */}
+          <h1 className="mb-6 text-[rgb(var(--color-navy))]">
+            {headline}
+          </h1>
+          
+          {/* Body */}
+          {body && (
+            <p 
+              className="mb-8 max-w-md text-lg text-[rgb(var(--color-text-light))]" 
+              style={{ lineHeight: 1.7, letterSpacing: '-0.01em' }}
+            >
+              {body}
+            </p>
+          )}
+          
+          {/* CTA Button */}
+          {ctaText && ctaHref && (
+            <div>
+              <Link
+                href={ctaHref}
+                className="btn-pill-primary inline-flex"
+              >
+                {ctaText}
+              </Link>
             </div>
-          </section>
-        )
-
-      // ===== OFFSET: Image offset/overlapping edge =====
-      case 'offset':
-        const offsetImageAspect = {
-          sm: 'aspect-[3/2]',
-          md: 'aspect-[3/2]',
-          lg: 'aspect-[3/2]'
-        }
-        return (
-          <section className="relative overflow-hidden bg-white">
-            <div className="container-site">
-              <div className="pt-10 lg:pt-14">
-                <Link href="/">
-                  <Image 
-                    src="/pathways-logo.png" 
-                    alt="Pathways Within - Home" 
-                    width={240}
-                    height={240}
-                    className="w-[180px] transition-opacity hover:opacity-80 lg:w-[240px]"
-                    priority
-                  />
-                </Link>
-              </div>
-              
-              <div className={`grid items-center gap-8 lg:grid-cols-12 lg:gap-12 ${sizePadding[size]}`}>
-                <div className="lg:col-span-5">
-                  {eyebrow && (
-                    <p className="mb-3 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>
-                      {eyebrow}
-                    </p>
-                  )}
-                  <h1 className="text-[rgb(var(--color-navy))]" style={{ lineHeight: 1.1 }}>{headline}</h1>
-                  {subheadline && (
-                    <p className="mt-4 text-lg text-[rgb(var(--color-text-light))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 400 }}>
-                      {subheadline}
-                    </p>
-                  )}
-                  {body && (
-                    <p className="mt-5 text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>{body}</p>
-                  )}
-                </div>
-                
-                {/* Offset image - extends past container on right */}
-                <div className="relative lg:col-span-7 lg:-mr-20">
-                  <div className={`relative ${offsetImageAspect[size]} overflow-hidden shadow-xl`}>
-                    <HeroImage image={image} imageStyle={imageStyle} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        )
-
-      // ===== DEFAULT: Standard side-by-side =====
-      default:
-        const defaultImageAspect = {
-          sm: 'aspect-[3/2]',
-          md: 'aspect-[3/2]',
-          lg: 'aspect-[3/2]'
-        }
-        return (
-          <section className="relative bg-white">
-            <div className="container-site">
-              <div className="pt-10 lg:pt-14">
-                <Link href="/">
-                  <Image 
-                    src="/pathways-logo.png" 
-                    alt="Pathways Within - Home" 
-                    width={240}
-                    height={240}
-                    className="w-[180px] transition-opacity hover:opacity-80 lg:w-[240px]"
-                    priority
-                  />
-                </Link>
-              </div>
-              
-              <div className={`grid items-start gap-8 lg:grid-cols-12 lg:gap-12 ${sizePadding[size]}`}>
-                <div className="lg:col-span-6">
-                  {eyebrow && (
-                    <p className="mb-3 text-sm uppercase tracking-widest text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>
-                      {eyebrow}
-                    </p>
-                  )}
-                  <h1 className="text-[rgb(var(--color-navy))]" style={{ lineHeight: 1.1 }}>{headline}</h1>
-                  {subheadline && (
-                    <p className="mt-4 text-lg text-[rgb(var(--color-text-light))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 400 }}>
-                      {subheadline}
-                    </p>
-                  )}
-                  {body && (
-                    <p className="mt-5 text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>{body}</p>
-                  )}
-                </div>
-                
-                <div className="lg:col-span-6">
-                  <div className={`relative ${defaultImageAspect[size]} overflow-hidden`}>
-                    <HeroImage image={image} imageStyle={imageStyle} />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-        )
-    }
-  }
-
-  return renderVariant()
+          )}
+        </div>
+        
+        {/* Right 2/3 - Full Image */}
+        <div className="relative order-first min-h-[300px] lg:order-last lg:col-span-2">
+          <Image
+            src={image}
+            alt={imageAlt}
+            fill
+            priority
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 66vw"
+          />
+        </div>
+      </div>
+      
+      {/* Scroll indicator */}
+      <button 
+        onClick={scrollToContent}
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-sm text-[rgb(var(--color-text-light))] transition-colors hover:text-[rgb(var(--color-navy))] lg:flex"
+        aria-label="Scroll to content"
+      >
+        <span className="text-xs uppercase tracking-wider">Explore</span>
+        <ArrowDown className="h-4 w-4 animate-bounce" />
+      </button>
+    </section>
+  )
 }

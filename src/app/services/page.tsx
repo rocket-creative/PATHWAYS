@@ -5,7 +5,10 @@ import { ArrowRight, Brain, Leaf, Heart, Sparkles, Shield, Sun } from 'lucide-re
 import { PageHero } from '@/components/sections/page-hero'
 import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
-// Placeholder images used
+
+// External app URLs
+const WISDOM_URL = process.env.NEXT_PUBLIC_WISDOM_URL || 'https://wisdom-eight-topaz.vercel.app'
+const WELLNESS_URL = process.env.NEXT_PUBLIC_WELLNESS_URL || 'https://wellness-phi-three.vercel.app'
 
 export const metadata: Metadata = {
   title: 'Therapy and Wellness Services | Pathways Within',
@@ -60,16 +63,15 @@ export default function ServicesPage() {
   return (
     <main>
       <JsonLd data={breadcrumbSchema} />
-      {/* Hero - Default side-by-side */}
+      {/* Hero */}
       <PageHero
         eyebrow="Our Services"
         headline="Complete care for your whole self"
-        subheadline="Therapy and wellness services working together for your well being"
         body="At Pathways Within, we offer a full range of mental health therapy and holistic wellness services. Our 360 degree approach means your care team can work together to support every aspect of your health."
-        variant="default"
-        size="md"
-        image={{ alt: 'Therapy and wellness services', placeholder: true }}
-        imageStyle="split"
+        image="/hero-images/freepik__professional-studio-photograph-of-subject-descript__19259.jpeg"
+        imageAlt="Therapy and wellness services"
+        ctaText="Get Started"
+        ctaHref="/start"
       />
 
       {/* How It Works */}
@@ -189,32 +191,32 @@ export default function ServicesPage() {
             {/* Therapy Links */}
             <div className="flex flex-col gap-3">
               {therapyServices.map((service) => (
-                <Link
+                <a
                   key={service.slug}
-                  href={`/services/therapy/${service.slug}`}
+                  href={`${WISDOM_URL}/services/${service.slug}`}
                   className="group flex items-center justify-between gap-4 rounded-lg border border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))] px-5 py-4 transition-all hover:border-[rgb(var(--color-green))] hover:bg-white hover:shadow-md"
                 >
                   <h3 className="text-base text-[rgb(var(--color-navy))] transition-colors group-hover:text-[rgb(var(--color-green))]" style={{ fontWeight: 500 }}>
                     {service.name}
                   </h3>
                   <ArrowRight className="h-4 w-4 flex-shrink-0 text-[rgb(var(--color-text-light))] transition-all group-hover:translate-x-1 group-hover:text-[rgb(var(--color-green))]" />
-                </Link>
+                </a>
               ))}
             </div>
 
             {/* Wellness Links */}
             <div className="flex flex-col gap-3">
               {wellnessServices.map((service) => (
-                <Link
+                <a
                   key={service.slug}
-                  href={`/services/wellness/${service.slug}`}
+                  href={`${WELLNESS_URL}/services/${service.slug}`}
                   className="group flex items-center justify-between gap-4 rounded-lg border border-[rgb(var(--border))]/50 bg-[rgb(var(--color-linen))] px-5 py-4 transition-all hover:border-[rgb(var(--color-green))] hover:bg-white hover:shadow-md"
                 >
                   <h3 className="text-base text-[rgb(var(--color-navy))] transition-colors group-hover:text-[rgb(var(--color-green))]" style={{ fontWeight: 500 }}>
                     {service.name}
                   </h3>
                   <ArrowRight className="h-4 w-4 flex-shrink-0 text-[rgb(var(--color-text-light))] transition-all group-hover:translate-x-1 group-hover:text-[rgb(var(--color-green))]" />
-                </Link>
+                </a>
               ))}
             </div>
           </div>

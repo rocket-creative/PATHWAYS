@@ -88,12 +88,9 @@ export default function LocationsPage() {
       <PageHero
         eyebrow="Our Locations"
         headline="Five locations to serve you"
-        subheadline="Therapy and wellness services at each location"
         body="We have five locations across the greater Long Island area. Each location offers both therapy and wellness services with dedicated parking for your convenience."
-        variant="centered"
-        size="md"
-        image={{ alt: 'Pathways Within Long Island locations', placeholder: true }}
-        imageStyle="geometric"
+        image="/hero-images/freepik__professional-studio-portrait-of-one-person-30s40s-__19267.jpeg"
+        imageAlt="Pathways Within Long Island locations"
       />
 
       {/* Locations Grid */}

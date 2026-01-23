@@ -7,7 +7,6 @@ import { JsonLd } from '@pathways/ui'
 import { generateBreadcrumbSchema } from '@/lib/structured-data'
 import { PLACEHOLDER_IMAGE } from '@/lib/placeholder-image'
 import { getHeadshotForPerson } from '@/lib/headshot-images'
-import { HERO_IMAGES } from '@/lib/hero-images'
 
 export const metadata: Metadata = {
   title: 'Meet Our Team | Pathways Within',
@@ -158,12 +157,9 @@ export default function TeamPage() {
       <PageHero
         eyebrow="Our Team"
         headline="The people behind your care"
-        subheadline="Licensed therapists, certified providers, and compassionate support staff"
         body="Our team brings together decades of combined experience in mental health, holistic wellness, and whole person care. Every member shares our commitment to creating a safe, judgment free space where you can heal and grow."
-        variant="stacked"
-        size="md"
-        image={{ src: HERO_IMAGES.team[0], alt: 'Pathways Within team members' }}
-        imageStyle="warm"
+        image="/hero-images/freepik__professional-studio-photograph-of-a-small-group-34__19268.jpeg"
+        imageAlt="Pathways Within team members"
       />
 
       {/* Leadership */}

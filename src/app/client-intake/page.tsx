@@ -319,10 +319,9 @@ export default function ClientIntakePage() {
         <PageHero
           eyebrow="Thank you"
           headline="Form submitted successfully"
-          subheadline="We have received your information"
           body="A member of our team will review your submission and contact you within one business day. If you included passwords, they have been sent via email. For maximum security, consider changing passwords after sharing."
-          variant="centered"
-          size="sm"
+          image="/hero-images/freepik__professional-studio-photograph-of-4-diverse-smilin__19260.jpeg"
+          imageAlt="Success"
         />
         <section className="border-t border-[rgb(var(--border))]/50 bg-white">
           <div className="container-site py-20">
@@ -357,12 +356,9 @@ export default function ClientIntakePage() {
       <PageHero
         eyebrow="Client Intake"
         headline="Online presence inventory"
-        subheadline="Help us catalog your digital accounts and listings"
         body="This comprehensive form helps us identify and manage all your online accounts, profiles, and listings. Your progress is automatically saved as you type. You can navigate between sections and return anytime to continue where you left off."
-        variant="default"
-        size="sm"
-        image={{ alt: 'Professional workspace with digital devices', placeholder: true }}
-        imageStyle="warm"
+        image="/hero-images/freepik__professional-studio-photograph-of-4-diverse-smilin__19260.jpeg"
+        imageAlt="Professional workspace"
       />
 
       {/* Progress & Save Status */}

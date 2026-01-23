@@ -126,12 +126,9 @@ export default function FAQPage() {
       <PageHero
         eyebrow="FAQ"
         headline="We love answering questions"
-        subheadline="Here are some of the most common things people ask us"
-        body="If you are curious about anything else, just reach out. We are always happy to help."
-        variant="centered"
-        size="sm"
-        image={{ alt: 'Friendly conversation in a comfortable setting', placeholder: true }}
-        imageStyle="cool"
+        body="Here are some of the most common things people ask us. If you are curious about anything else, just reach out. We are always happy to help."
+        image="/hero-images/freepik__professional-studio-photograph-of-a-woman-with-pea__19264.jpeg"
+        imageAlt="Friendly conversation"
       />
 
       {/* FAQ Content */}

@@ -2,8 +2,22 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react'
 import { type SiteName, SITE_CONFIG } from '../../lib/site-config'
+
+// Office images - these should match the paths in your public/offices folder
+const OFFICE_IMAGES = [
+  '/offices/garden-city.jpg',
+  '/offices/port-jefferson.jpg',
+  '/offices/massapequa.jpg',
+  '/offices/smithtown.jpg',
+  '/offices/rockville-centre.jpg',
+]
+
+function getOfficeImageByIndex(index: number): string {
+  return OFFICE_IMAGES[index % OFFICE_IMAGES.length] || OFFICE_IMAGES[0]!
+}
 
 /**
  * Layout variants for PageHero:
@@ -82,40 +96,116 @@ export function PageHero({
       case 'stacked':
         return (
           <div className="flex flex-col gap-4">
-            <div className={`${imageClass} aspect-[16/9] w-full rounded-lg`} />
-            <div className={`${imageClass} aspect-[16/9] w-full rounded-lg opacity-80`} />
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+              <Image
+                src={getOfficeImageByIndex(0)}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+              <Image
+                src={getOfficeImageByIndex(1)}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
           </div>
         )
 
       case 'sideBySide':
         return (
           <div className="grid grid-cols-2 gap-4">
-            <div className={`${imageClass} aspect-[3/4] w-full rounded-lg`} />
-            <div className={`${imageClass} aspect-[3/4] w-full rounded-lg opacity-90`} />
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+              <Image
+                src={getOfficeImageByIndex(0)}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+            </div>
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+              <Image
+                src={getOfficeImageByIndex(1)}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+            </div>
           </div>
         )
 
       case 'overlapping':
         return (
           <div className="relative h-[300px] lg:h-[400px]">
-            <div className={`${imageClass} absolute left-0 top-0 aspect-[4/3] w-[70%] rounded-lg shadow-lg`} />
-            <div className={`${imageClass} absolute bottom-0 right-0 aspect-[4/3] w-[70%] rounded-lg shadow-lg opacity-95`} />
+            <div className="absolute left-0 top-0 w-[70%] overflow-hidden rounded-lg shadow-lg">
+              <div className="relative aspect-[3/2]">
+                <Image
+                  src={getOfficeImageByIndex(0)}
+                  alt="Pathways Within office"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 70vw, 35vw"
+                />
+              </div>
+            </div>
+            <div className="absolute bottom-0 right-0 w-[70%] overflow-hidden rounded-lg shadow-lg">
+              <div className="relative aspect-[3/2]">
+                <Image
+                  src={getOfficeImageByIndex(1)}
+                  alt="Pathways Within office"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 70vw, 35vw"
+                />
+              </div>
+            </div>
           </div>
         )
 
       case 'trio':
         return (
           <div className="grid grid-cols-2 gap-3">
-            <div className={`${imageClass} col-span-2 aspect-[16/9] w-full rounded-lg`} />
-            <div className={`${imageClass} aspect-square w-full rounded-lg opacity-90`} />
-            <div className={`${imageClass} aspect-square w-full rounded-lg opacity-85`} />
+            <div className="relative col-span-2 aspect-[3/2] w-full overflow-hidden rounded-lg shadow-lg">
+              <Image
+                src={getOfficeImageByIndex(0)}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            </div>
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+              <Image
+                src={getOfficeImageByIndex(1)}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+            </div>
+            <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+              <Image
+                src={getOfficeImageByIndex(2)}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+            </div>
           </div>
         )
 
       case 'carousel':
         return (
           <div className="relative">
-            <div className="overflow-hidden rounded-lg">
+            <div className="overflow-hidden rounded-lg shadow-lg">
               <div 
                 className="flex transition-transform duration-500 ease-out"
                 style={{ transform: `translateX(-${carouselIndex * 100}%)` }}
@@ -123,9 +213,16 @@ export function PageHero({
                 {[...Array(carouselCount)].map((_, i) => (
                   <div 
                     key={i} 
-                    className={`${imageClass} aspect-[4/3] w-full flex-shrink-0`}
-                    style={{ opacity: 1 - (i * 0.05) }}
-                  />
+                    className="relative aspect-[3/2] w-full flex-shrink-0"
+                  >
+                    <Image
+                      src={getOfficeImageByIndex(i)}
+                      alt={`Pathways Within office ${i + 1}`}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
                 ))}
               </div>
             </div>
@@ -166,16 +263,48 @@ export function PageHero({
       case 'mosaic':
         return (
           <div className="grid grid-cols-3 grid-rows-2 gap-3">
-            <div className={`${imageClass} col-span-2 row-span-2 rounded-lg`} />
-            <div className={`${imageClass} rounded-lg opacity-90`} />
-            <div className={`${imageClass} rounded-lg opacity-85`} />
+            <div className="relative col-span-2 row-span-2 overflow-hidden rounded-lg shadow-lg">
+              <Image
+                src={getOfficeImageByIndex(0)}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 66vw"
+              />
+            </div>
+            <div className="relative aspect-[3/2] overflow-hidden rounded-lg shadow-md">
+              <Image
+                src={getOfficeImageByIndex(1)}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, 33vw"
+              />
+            </div>
+            <div className="relative aspect-[3/2] overflow-hidden rounded-lg shadow-md">
+              <Image
+                src={getOfficeImageByIndex(2)}
+                alt="Pathways Within office"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 50vw, 33vw"
+              />
+            </div>
           </div>
         )
 
       case 'single':
       default:
         return (
-          <div className={`${imageClass} aspect-[4/3] w-full rounded-lg lg:aspect-[3/2]`} />
+          <div className="relative aspect-[3/2] w-full overflow-hidden rounded-lg shadow-md">
+            <Image
+              src={getOfficeImageByIndex(0)}
+              alt="Pathways Within office"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
         )
     }
   }

@@ -19,7 +19,7 @@ export default function TherapyServicesPage() {
         eyebrow="Therapy Services"
         headline="Our therapy offerings"
         body="We provide a comprehensive range of therapy services to support your mental health and personal growth. Our licensed clinicians use evidence-based approaches tailored to your needs."
-        image="/images/hero/therapy-services-hero.jpg"
+        image="/images/hero/freepik__ecommerce-catalog-photo-of-a-group-of-4-happy-dive__69753.jpeg"
         imageAlt="Therapy services at Pathways Within"
       />
 

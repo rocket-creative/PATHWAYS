@@ -19,7 +19,7 @@ export default function WellnessHomePage() {
         eyebrow="Wellness"
         headline="Whole body wellness"
         body="Our wellness services support your physical health and complement your mental health journey. From massage to advanced aesthetics, we offer a range of services to help you look and feel your best."
-        image="/images/hero/wellness-hero.jpg"
+        image="/images/hero/freepik__catalog-style-portrait-blonde-white-woman-in-her-4__69759.jpeg"
         imageAlt="Wellness services at Pathways Within"
         ctaText="View all services"
         ctaHref="/wellness/services"

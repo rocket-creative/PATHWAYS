@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight, MapPin, Phone, Clock, Car, Monitor } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { ImageCarousel } from '@/components/ui/image-carousel'
 import { SITE_URL } from '@/lib/site-config'
 
 export const metadata: Metadata = {
@@ -15,44 +15,54 @@ export const metadata: Metadata = {
 const locations = [
   {
     name: 'Garden City',
+    slug: 'garden-city',
     address: '520 Franklin Ave, Suite L1',
     city: 'Garden City, NY 11530',
     phone: '(631) 371-3825',
     services: ['Individual, couples, and family therapy', 'Child and teen therapy', 'Trauma and EMDR therapy', 'Wellness services (contact for availability)'],
     mapsUrl: 'https://maps.google.com/?q=520+Franklin+Ave+Suite+L1+Garden+City+NY+11530',
+    images: ['/images/offices/garden-city/1.jpg', '/images/offices/garden-city/2.jpg', '/images/offices/garden-city/3.jpg', '/images/offices/garden-city/4.jpg'],
   },
   {
     name: 'Port Jefferson',
+    slug: 'port-jefferson',
     address: '1227 Main Street, Suite 101',
     city: 'Port Jefferson, NY 11777',
     phone: '(631) 371-3825',
     services: ['Individual, couples, and family therapy', 'Child and teen therapy', 'Trauma and EMDR therapy', 'Wellness services (contact for availability)'],
     mapsUrl: 'https://maps.google.com/?q=1227+Main+Street+Suite+101+Port+Jefferson+NY+11777',
+    images: ['/images/offices/port-jefferson/1.jpg', '/images/offices/port-jefferson/2.jpg', '/images/offices/port-jefferson/3.jpg', '/images/offices/port-jefferson/4.jpg'],
   },
   {
     name: 'Massapequa',
+    slug: 'massapequa',
     address: '4160 Merrick Rd, Suite 5 & Suite 7',
     city: 'Massapequa, NY 11758',
     phone: '(631) 371-3825',
     services: ['Individual, couples, and family therapy', 'Child and teen therapy', 'Trauma and EMDR therapy', 'Full wellness services including massage, facials, injectables, and more'],
     featured: true,
     mapsUrl: 'https://maps.google.com/?q=4160+Merrick+Rd+Massapequa+NY+11758',
+    images: ['/images/offices/massapequa/1.jpg', '/images/offices/massapequa/2.jpg', '/images/offices/massapequa/3.jpg', '/images/offices/massapequa/4.jpg'],
   },
   {
     name: 'Smithtown',
+    slug: 'smithtown',
     address: '496 Smithtown Bypass, Suite 203 & Suite 204',
     city: 'Smithtown, NY 11787',
     phone: '(631) 371-3825',
     services: ['Individual, couples, and family therapy', 'Child and teen therapy', 'Trauma and EMDR therapy', 'Wellness services (contact for availability)'],
     mapsUrl: 'https://maps.google.com/?q=496+Smithtown+Bypass+Smithtown+NY+11787',
+    images: ['/images/offices/smithtown/1.jpg', '/images/offices/smithtown/2.jpg', '/images/offices/smithtown/3.jpg', '/images/offices/smithtown/4.jpg'],
   },
   {
     name: 'Rockville Centre',
+    slug: 'rockville-centre',
     address: '53 N Park Ave, Suite 203',
     city: 'Rockville Centre, NY 11570',
     phone: '(631) 371-3825',
     services: ['Individual, couples, and family therapy', 'Child and teen therapy', 'Trauma and EMDR therapy', 'Wellness services (contact for availability)'],
     mapsUrl: 'https://maps.google.com/?q=53+N+Park+Ave+Suite+203+Rockville+Centre+NY+11570',
+    images: ['/images/offices/rockville-centre/1.jpg', '/images/offices/rockville-centre/2.jpg', '/images/offices/rockville-centre/3.jpg', '/images/offices/rockville-centre/4.jpg'],
   },
 ]
 
@@ -63,7 +73,7 @@ export default function LocationsPage() {
         eyebrow="Our Locations"
         headline="Five locations to serve you"
         body="We have five locations across the greater Long Island area. Each location offers both therapy and wellness services with dedicated parking for your convenience."
-        image="/images/hero/locations-hero.jpg"
+        image="/images/hero/freepik__a-group-of-smiling-adults-of-various-ethnicities-i__72292.jpeg"
         imageAlt="Pathways Within Long Island locations"
       />
 
@@ -74,13 +84,9 @@ export default function LocationsPage() {
             {locations.map((location) => (
               <div 
                 key={location.name} 
-                className={`overflow-hidden bg-white ${location.featured ? 'ring-2 ring-[rgb(var(--color-green))]' : ''}`}
+                className={`overflow-hidden rounded-lg bg-white shadow-sm ${location.featured ? 'ring-2 ring-[rgb(var(--color-green))]' : ''}`}
               >
-                <div className="relative aspect-[3/2] w-full overflow-hidden bg-[rgb(var(--color-placeholder))]">
-                  <div className="absolute inset-0 flex items-center justify-center text-white/50">
-                    <MapPin className="h-12 w-12" />
-                  </div>
-                </div>
+                <ImageCarousel images={location.images} locationName={location.name} />
                 
                 <div className="p-8">
                   {location.featured && (

@@ -60,7 +60,7 @@ export default async function TherapyServicePage({ params }: PageProps) {
         headline={service.name}
         subheadline={service.headline}
         body={service.description}
-        image="/images/hero/therapy-service-hero.jpg"
+        image="/images/hero/freepik__ecommerce-catalog-photo-of-a-group-of-4-happy-dive__69753.jpeg"
         imageAlt={`${service.name} at Pathways Within`}
         ctaText="Schedule consultation"
         ctaHref="/contact"

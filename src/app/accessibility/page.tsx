@@ -17,7 +17,7 @@ export default function AccessibilityPage() {
         eyebrow="Accessibility"
         headline="Accessibility statement"
         body="We are committed to ensuring our website is accessible to everyone. We aim to meet WCAG 2.1 AA where possible."
-        image="/images/hero/wellness-hero.jpg"
+        image="/images/hero/freepik__a-diverse-group-of-three-young-adults-two-women-an__72250.jpeg"
         imageAlt="Pathways Within"
       />
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

@@ -67,7 +67,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         headline="Let's talk"
         body="Fill out the form below and someone from our team will be in touch. Or contact us directly by phone or email."
-        image="/images/hero/contact-hero.jpg"
+        image="/images/hero/freepik__ecommerce-catalog-photo-of-a-group-of-4-happy-dive__69753.jpeg"
         imageAlt="Warm and welcoming reception area at Pathways Within"
       />
 

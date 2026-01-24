@@ -36,7 +36,7 @@ export function HeroSection({
 
       {/* Content Overlay - positioned on the left */}
       <div className="relative flex min-h-[85vh] items-center">
-        <div className="w-full px-6 py-12 sm:px-8 lg:max-w-[50%] lg:px-12 xl:px-16">
+        <div className="w-full px-6 py-12 sm:px-8 lg:max-w-[58%] lg:px-12 xl:px-16">
           {/* Content box with glass effect */}
           <div className="rounded-lg bg-white/70 p-8 shadow-2xl backdrop-blur-xl lg:p-12">
             <Link href="/" className="mb-8 block lg:mb-10">

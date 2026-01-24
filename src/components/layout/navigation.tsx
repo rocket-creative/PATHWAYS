@@ -35,18 +35,24 @@ const navLinks: NavLink[] = [
   { 
     href: '/wisdom/services', 
     label: 'Therapy',
-    dropdown: THERAPY_SERVICES.map(s => ({
-      href: `/wisdom/services/${s.slug}`,
-      label: s.label
-    }))
+    dropdown: [
+      ...THERAPY_SERVICES.map(s => ({
+        href: `/wisdom/services/${s.slug}`,
+        label: s.label
+      })),
+      { href: '/wisdom/team', label: 'Meet Our Therapists' }
+    ]
   },
   { 
     href: '/wellness/services', 
     label: 'Wellness',
-    dropdown: WELLNESS_SERVICES.map(s => ({
-      href: `/wellness/services/${s.slug}`,
-      label: s.label
-    }))
+    dropdown: [
+      ...WELLNESS_SERVICES.map(s => ({
+        href: `/wellness/services/${s.slug}`,
+        label: s.label
+      })),
+      { href: '/wellness/team', label: 'Meet Our Wellness Team' }
+    ]
   },
   { href: '/locations', label: 'Locations' },
   { href: '/start', label: 'Get Started' },
@@ -77,7 +83,15 @@ export function Navigation() {
 
   return (
     <header className="border-b border-[rgb(var(--border))] bg-white">
-      <nav className="flex h-14 items-center justify-end px-6 lg:h-16 lg:px-12">
+      <nav className="flex h-14 items-center justify-between px-6 lg:h-16 lg:px-12">
+        {/* Admin Intake Button - Top Left */}
+        <Link 
+          href="/business-intake"
+          className="rounded bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700 transition-colors"
+        >
+          Intake
+        </Link>
+
         {/* Desktop Navigation */}
         <div ref={dropdownRef} className="hidden items-center gap-6 lg:flex xl:gap-8">
           {navLinks.map((link) => (
@@ -118,7 +132,13 @@ export function Navigation() {
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
-        <div className="flex h-14 items-center justify-end px-6">
+        <div className="flex h-14 items-center justify-between px-6">
+          <Link 
+            href="/business-intake"
+            className="rounded bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700 transition-colors"
+          >
+            Intake
+          </Link>
           <button onClick={() => setIsOpen(false)} className="p-2 text-white" aria-label="Close menu">
             <X className="h-6 w-6" />
           </button>

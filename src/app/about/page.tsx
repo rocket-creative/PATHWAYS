@@ -48,8 +48,54 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* What Makes Us Different */}
+      {/* Founder Section */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">
+        <div className="container-site py-20 lg:py-28">
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            {/* Image */}
+            <div className="lg:col-span-5">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
+                <Image
+                  src="/images/team/rachel-lessard.jpeg"
+                  alt="Rachel Lessard, Founder of Pathways Within"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 40vw"
+                />
+              </div>
+            </div>
+            
+            {/* Content */}
+            <div className="flex flex-col justify-center lg:col-span-7">
+              <p className="eyebrow mb-4">Our Founder</p>
+              <h2 className="mb-2 text-[rgb(var(--color-navy))]">Rachel Lessard, LCSW</h2>
+              <p className="mb-6 text-lg text-[rgb(var(--color-green))]" style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}>
+                Licensed Clinical Social Worker & Founder
+              </p>
+              <div className="space-y-4">
+                <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
+                  Rachel founded Pathways Within with a vision of creating a space where mental health and physical wellness work together. After years of practicing as a licensed clinical social worker, she saw how often clients needed support that went beyond traditional talk therapy.
+                </p>
+                <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
+                  Her passion for holistic healing led her to build a collaborative where therapists and wellness practitioners work side by side, offering clients a truly integrated approach to wellbeing. Today, Pathways Within serves hundreds of clients across five Long Island locations.
+                </p>
+                <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
+                  Rachel specializes in trauma, anxiety, depression, and life transitions. She brings warmth, authenticity, and deep expertise to every session, helping clients find their own path to healing.
+                </p>
+              </div>
+              <div className="mt-8">
+                <Link href="/wisdom/team" className="btn-pill btn-pill-secondary">
+                  <span className="btn-text">Meet the full team</span>
+                  <span className="btn-arrow"><ArrowRight /></span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* What Makes Us Different */}
+      <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">
           <div className="mb-16">
             <p className="eyebrow mb-4">Why Choose Us</p>

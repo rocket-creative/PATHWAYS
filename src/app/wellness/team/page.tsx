@@ -100,7 +100,7 @@ export default function WellnessTeamPage() {
         eyebrow="Our Team"
         headline="Meet our wellness providers"
         body="Our wellness team includes certified massage therapists, licensed estheticians, registered nurses, and energy work practitioners. Each provider brings specialized training and a commitment to your wellbeing."
-        image="/images/hero/freepik__catalog-style-portrait-blonde-white-woman-in-her-4__69759.jpeg"
+        image="/images/hero/hero-main.png"
         imageAlt="Wellness team at Pathways Within"
       />
 

@@ -53,7 +53,23 @@ export default function StartPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-hero-gradient">
-        <div className="container-site py-12 lg:py-20">
+        {/* Background Image Overlay */}
+        <div className="absolute inset-0 hidden lg:block">
+          <div className="absolute right-0 top-0 h-full w-1/2">
+            <Image
+              src="/images/hero/hero-main.png"
+              alt="People finding wellness at Pathways Within"
+              fill
+              className="object-cover object-center"
+              priority
+            />
+            {/* Gradient overlay to blend with left side */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[rgb(var(--color-navy))] via-[rgb(var(--color-navy))]/80 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[rgb(var(--color-navy))]/50 to-transparent" />
+          </div>
+        </div>
+
+        <div className="container-site relative py-12 lg:py-20">
           <div className="mb-8 lg:mb-10">
             <Link href="/">
               <Image 
@@ -97,6 +113,17 @@ export default function StartPage() {
               <p className="mt-6 text-sm text-white/50">
                 Insurance accepted • Same-week appointments available • No referral needed
               </p>
+            </div>
+            
+            {/* Mobile Hero Image */}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl lg:hidden">
+              <Image
+                src="/images/hero/hero-main.png"
+                alt="People finding wellness at Pathways Within"
+                fill
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgb(var(--color-navy))]/30 to-transparent" />
             </div>
           </div>
         </div>

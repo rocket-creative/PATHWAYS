@@ -51,7 +51,7 @@ export default function PrivacyPage() {
         eyebrow="Legal"
         headline="Privacy policy"
         body="We take your privacy seriously. This page outlines how we collect, use, and protect your information."
-        image="/images/hero/freepik__a-diverse-group-of-three-young-adults-two-women-an__72250.jpeg"
+        image="/images/hero/hero-main.png"
         imageAlt="Pathways Within"
       />
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

@@ -10,7 +10,7 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ 
-  image = '/images/hero/freepik__4-diverse-happy-people-standing-together-on-right-__69755.jpeg',
+  image = '/images/hero/hero-main.png',
   imageAlt = 'Diverse group of smiling people'
 }: HeroSectionProps) {
   const scrollToNext = () => {
@@ -38,7 +38,7 @@ export function HeroSection({
       <div className="relative flex min-h-[85vh] items-center">
         <div className="w-full px-6 py-12 sm:px-8 lg:max-w-[58%] lg:px-12 xl:px-16">
           {/* Content box with glass effect */}
-          <div className="rounded-lg bg-white/70 p-8 shadow-2xl backdrop-blur-xl lg:p-12">
+          <div className="rounded-lg bg-white/50 p-8 shadow-2xl backdrop-blur-xl lg:p-12">
             <Link href="/" className="mb-8 block lg:mb-10">
               <Image 
                 src="/logo.png" 

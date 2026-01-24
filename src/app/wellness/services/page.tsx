@@ -44,7 +44,7 @@ export default function WellnessServicesPage() {
         eyebrow="Wellness Services"
         headline="Our wellness offerings"
         body="From therapeutic massage to advanced aesthetic treatments, we offer a comprehensive range of wellness services to support your physical health and overall wellbeing."
-        image="/images/hero/freepik__catalog-style-portrait-blonde-white-woman-in-her-4__69759.jpeg"
+        image="/images/hero/hero-main.png"
         imageAlt="Wellness services at Pathways Within"
       />
 

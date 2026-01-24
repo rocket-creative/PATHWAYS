@@ -44,7 +44,7 @@ export default function ConditionsPage() {
         eyebrow="Conditions"
         headline="Conditions we treat"
         body="We provide expert, compassionate care for a range of mental health conditions. Learn about symptoms, causes, and evidence-based treatments available at Pathways Within."
-        image="/images/hero/freepik__professional-studio-portrait-of-one-person-30s40s-__19267.jpeg"
+        image="/images/hero/hero-main.png"
         imageAlt="Mental health support at Pathways Within"
       />
 

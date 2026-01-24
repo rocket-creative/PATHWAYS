@@ -14,11 +14,16 @@
 
 ## CRITICAL STYLE REQUIREMENTS
 
-**ALWAYS INCLUDE THESE IN EVERY PROMPT:**
+**ALWAYS INCLUDE THESE AT THE END OF EVERY PROMPT:**
 ```
-Pure white background. No text, no graphics, no watermarks, no logos. 
-Clean minimal aesthetic. Bright even studio lighting.
+PURE WHITE SEAMLESS BACKDROP. Absolutely no text anywhere in image. No words, no letters, no logos, no watermarks, no magazine covers, no titles, no captions, no graphics, no overlays. Clean photography only. Bright even studio lighting.
 ```
+
+**⚠️ IMPORTANT:** If AI still adds text/watermarks, try:
+1. Add "raw unedited photograph" to prompt
+2. Remove words like "editorial" or "magazine" which trigger text
+3. Try "product photography style" framing instead
+4. Generate 4+ variations and pick the cleanest one
 
 ---
 
@@ -48,7 +53,7 @@ To match the Pathways Within brand without looking uniform/cult-like:
 Use this as your base prompt for all images:
 
 ```
-Professional studio photograph of [SUBJECT DESCRIPTION], wearing relaxed clothing in warm neutral earth tones (cream, beige, soft sage, dusty rose, taupe), natural fabrics like linen and cotton. PURE WHITE BACKGROUND. Bright even studio lighting, soft shadows. Clean, minimal aesthetic. Warm, welcoming expression. Shot on professional camera with 85mm portrait lens. High-end lifestyle magazine style. Authentic, not overly posed. NO TEXT, NO GRAPHICS, NO WATERMARKS. 3:4 portrait aspect ratio.
+Professional studio portrait photograph of [SUBJECT DESCRIPTION], wearing relaxed clothing in warm neutral earth tones (cream, beige, soft sage, dusty rose, taupe), natural fabrics like linen and cotton. Pure white seamless studio backdrop. Bright even studio lighting, soft shadows. Clean aesthetic. Warm, welcoming expression. Shot on professional camera with 85mm portrait lens. Authentic, not overly posed. Raw unedited photograph with absolutely no text, no words, no letters, no titles, no watermarks, no logos, no graphics anywhere in the image. Portrait orientation 3:4.
 ```
 
 ---
@@ -59,12 +64,12 @@ Professional studio photograph of [SUBJECT DESCRIPTION], wearing relaxed clothin
 **Need: 1-2 images**
 
 ```
-Professional studio photograph of a diverse group of 3-4 adults (mixed ethnicities, ages 25-50, mixed genders) standing together naturally, warm genuine smiles, wearing relaxed clothing in coordinated neutral earth tones (cream, beige, taupe, soft sage) but NOT matching - each person has unique style. Natural fabrics like linen and cotton. PURE WHITE BACKGROUND. Bright even studio lighting, soft shadows. Warm, welcoming, inclusive feeling. Authentic candid moment, not overly posed. NO TEXT, NO GRAPHICS, NO WATERMARKS. High-end wellness lifestyle magazine aesthetic. 3:4 portrait aspect ratio.
+Professional studio portrait of a diverse group of 4-5 adults (mixed ethnicities, ages 30-55, mixed genders) standing together naturally with warm genuine smiles. Wearing relaxed casual clothing in coordinated neutral earth tones (cream, beige, taupe, soft sage, dusty rose) but NOT matching - each person has unique style. Natural fabrics like linen and cotton. Pure white seamless studio backdrop. Bright even studio lighting, soft natural shadows. Authentic candid group photo feeling. Raw photograph with absolutely no text, no words, no letters, no titles, no logos, no watermarks, no graphics anywhere. Portrait orientation 3:4.
 ```
 
-**Variation:**
+**Variation (try if first has text issues):**
 ```
-Professional studio photograph of 4 diverse smiling adults, mixed ages and ethnicities, dressed in harmonious but varied earth-tone casual wear (off-white, sand, sage green, dusty rose). Standing in relaxed natural poses, genuine warm expressions. PURE WHITE BACKGROUND. Bright studio lighting. Feeling of community and connection without looking staged. NO TEXT OR GRAPHICS. Portrait orientation 3:4.
+Product photography style studio shot of 4 diverse happy adults standing together casually. Mixed ethnicities and ages 30-50. Dressed in harmonious earth-tone casual wear (off-white, sand, beige, soft sage). Natural relaxed poses, genuine warm expressions. Clean white seamless backdrop. Soft even studio lighting. Community feeling. Absolutely no text or graphics of any kind in the image. No words, no letters, no watermarks. Clean photograph only. 3:4 vertical.
 ```
 
 ---

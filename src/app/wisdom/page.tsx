@@ -43,7 +43,7 @@ export default function WisdomHomePage() {
         eyebrow="Therapy"
         headline="Mental health therapy"
         body="Our licensed clinicians provide compassionate, evidence-based therapy for individuals, couples, children, and families. We specialize in trauma, anxiety, depression, and life transitions."
-        image="/images/hero/hero-main.png"
+        image="/images/hero/hero-original-4-people.jpeg"
         imageAlt="Therapy services at Pathways Within"
         ctaText="View all services"
         ctaHref="/wisdom/services"

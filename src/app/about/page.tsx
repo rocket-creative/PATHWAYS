@@ -55,7 +55,7 @@ export default function AboutPage() {
         eyebrow="About Us"
         headline="Wisdom and Wellness Collaborative"
         body="At Pathways Within, we believe true healing happens when we care for the whole person. Our 360 degree approach brings together mental health therapy and holistic wellness services in one collaborative environment."
-        image="/images/hero/hero-main.png"
+        image="/images/hero/hero-original-4-people.jpeg"
         imageAlt="Diverse group representing the Pathways Within community"
         ctaText="Get Started"
         ctaHref="/start"

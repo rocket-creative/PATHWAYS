@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { 
   LayoutDashboard, 
   Users, 
@@ -13,7 +14,9 @@ import {
   Plus,
   Search,
   Filter,
-  Shield
+  Shield,
+  LogOut,
+  Settings
 } from 'lucide-react'
 
 // Mock data - replace with real data later
@@ -56,75 +59,92 @@ export default function CRMPage() {
     apt.therapist.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
+  const navItems = [
+    { id: 'dashboard' as View, icon: LayoutDashboard, label: 'Dashboard' },
+    { id: 'patients' as View, icon: Users, label: 'Patients' },
+    { id: 'appointments' as View, icon: Calendar, label: 'Appointments' },
+  ]
+
   return (
-    <div className="min-h-screen bg-cream">
-      {/* Header */}
-      <header className="border-b border-linen-300 bg-white">
-        <div className="container-site py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-semibold text-navy">CRM Dashboard</h1>
-              <p className="text-sm text-navy-400">Practice Management System</p>
+    <div className="flex min-h-screen bg-cream">
+      {/* Sidebar */}
+      <aside className="fixed left-0 top-0 h-full w-64 bg-gradient-to-b from-navy-900 via-navy to-navy-950 border-r border-white/10">
+        <div className="flex h-full flex-col">
+          {/* Logo */}
+          <div className="border-b border-white/10 p-6">
+            <Link href="/" className="block">
+              <Image 
+                src="/logo.png" 
+                alt="Pathways Within" 
+                width={160}
+                height={160}
+                className="w-32 brightness-0 invert opacity-95"
+              />
+            </Link>
+            <p className="mt-2 text-xs text-white/50">Practice Management</p>
+          </div>
+
+          {/* Navigation */}
+          <nav className="flex-1 space-y-1 px-3 py-4">
+            {navItems.map((item) => {
+              const Icon = item.icon
+              const isActive = currentView === item.id
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setCurrentView(item.id)}
+                  className={`w-full flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
+                    isActive
+                      ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg shadow-green/20'
+                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <Icon className="h-5 w-5" />
+                  <span>{item.label}</span>
+                </button>
+              )
+            })}
+          </nav>
+
+          {/* Bottom Section */}
+          <div className="border-t border-white/10 p-4">
+            <div className="mb-3 flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2">
+              <Shield className="h-4 w-4 text-white/70" />
+              <span className="text-xs text-white/70">Staff Only</span>
             </div>
-            <div className="flex items-center gap-3">
-              <Link 
-                href="/"
-                className="text-sm text-navy-400 hover:text-navy transition-colors"
-              >
-                Back to Site
-              </Link>
-              <div className="flex items-center gap-2 rounded-lg bg-linen-200 px-3 py-2">
-                <Shield className="h-4 w-4 text-navy-400" />
-                <span className="text-xs text-navy-400">Staff Only</span>
+            <Link
+              href="/"
+              className="flex items-center gap-3 rounded-lg px-4 py-2 text-sm text-white/70 transition-colors hover:text-white hover:bg-white/10"
+            >
+              <LogOut className="h-4 w-4" />
+              <span>Back to Site</span>
+            </Link>
+          </div>
+        </div>
+      </aside>
+
+      {/* Main Content Area */}
+      <div className="ml-64 flex-1">
+        {/* Header */}
+        <header className="border-b border-linen-300 bg-white">
+          <div className="px-8 py-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-2xl font-semibold text-navy">CRM Dashboard</h1>
+                <p className="text-sm text-navy-400">Practice Management System</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <button className="flex items-center gap-2 rounded-lg border border-linen-300 bg-white px-4 py-2 text-sm text-navy-400 transition-colors hover:bg-cream">
+                  <Settings className="h-4 w-4" />
+                  Settings
+                </button>
               </div>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      {/* Navigation Tabs */}
-      <nav className="border-b border-linen-300 bg-white">
-        <div className="container-site">
-          <div className="flex gap-1">
-            <button
-              onClick={() => setCurrentView('dashboard')}
-              className={`px-6 py-3 text-sm font-medium transition-colors ${
-                currentView === 'dashboard'
-                  ? 'border-b-2 border-green text-green'
-                  : 'text-navy-400 hover:text-navy'
-              }`}
-            >
-              <LayoutDashboard className="mr-2 inline h-4 w-4" />
-              Dashboard
-            </button>
-            <button
-              onClick={() => setCurrentView('patients')}
-              className={`px-6 py-3 text-sm font-medium transition-colors ${
-                currentView === 'patients'
-                  ? 'border-b-2 border-green text-green'
-                  : 'text-navy-400 hover:text-navy'
-              }`}
-            >
-              <Users className="mr-2 inline h-4 w-4" />
-              Patients
-            </button>
-            <button
-              onClick={() => setCurrentView('appointments')}
-              className={`px-6 py-3 text-sm font-medium transition-colors ${
-                currentView === 'appointments'
-                  ? 'border-b-2 border-green text-green'
-                  : 'text-navy-400 hover:text-navy'
-              }`}
-            >
-              <Calendar className="mr-2 inline h-4 w-4" />
-              Appointments
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Main Content */}
-      <main className="container-site py-8">
+        {/* Main Content */}
+        <main className="px-8 py-8">
         {currentView === 'dashboard' && (
           <div className="space-y-6">
             {/* Stats Grid */}
@@ -337,7 +357,8 @@ export default function CRMPage() {
             </div>
           </div>
         )}
-      </main>
+        </main>
+      </div>
     </div>
   )
 }

@@ -51,7 +51,7 @@ export default function TermsPage() {
         eyebrow="Legal"
         headline="Terms of service"
         body="Terms governing use of our website and services."
-        image="/images/hero/hero-main.png"
+        image="/images/hero/hero-original-4-people.jpeg"
         imageAlt="Pathways Within"
       />
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

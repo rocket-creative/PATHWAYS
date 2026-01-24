@@ -10,8 +10,8 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ 
-  image = '/images/hero/hero-main.png',
-  imageAlt = 'Smiling couple'
+  image = '/images/hero/hero-original-4-people.jpeg',
+  imageAlt = 'Diverse group of four people representing Pathways Within community'
 }: HeroSectionProps) {
   const scrollToNext = () => {
     const sections = document.querySelectorAll('section')

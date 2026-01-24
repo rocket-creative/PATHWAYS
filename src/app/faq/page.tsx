@@ -43,7 +43,7 @@ export default function FAQPage() {
         eyebrow="FAQ"
         headline="We love answering questions"
         body="Here are some of the most common things people ask us. If you are curious about anything else, just reach out. We are always happy to help."
-        image="/images/hero/hero-main.png"
+        image="/images/hero/hero-original-4-people.jpeg"
         imageAlt="Friendly conversation"
       />
 

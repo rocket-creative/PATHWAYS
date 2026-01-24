@@ -53,19 +53,6 @@ export default function StartPage() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-hero-gradient">
-        {/* Background Image Overlay */}
-        <div className="absolute inset-0 hidden lg:block">
-          <div className="absolute right-0 top-0 h-full w-1/2">
-            <Image
-              src="/images/hero/hero-main.png"
-              alt="People finding wellness at Pathways Within"
-              fill
-              className="object-cover object-center"
-              priority
-            />
-          </div>
-        </div>
-
         <div className="container-site relative py-12 lg:py-20">
           <div className="mb-8 lg:mb-10">
             <Link href="/">
@@ -110,6 +97,17 @@ export default function StartPage() {
               <p className="mt-6 text-sm text-white/50">
                 Insurance accepted • Same-week appointments available • No referral needed
               </p>
+            </div>
+            
+            {/* Desktop Hero Image - Right Justified, Not Full Bleed */}
+            <div className="relative hidden aspect-[3/4] overflow-hidden rounded-2xl lg:col-span-6 lg:block">
+              <Image
+                src="/images/hero/hero-main.png"
+                alt="People finding wellness at Pathways Within"
+                fill
+                className="object-cover object-center"
+                priority
+              />
             </div>
             
             {/* Mobile Hero Image */}

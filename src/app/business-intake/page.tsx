@@ -25,6 +25,8 @@ type SectionKey =
 
 export default function BusinessIntakePage() {
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [expandedSections, setExpandedSections] = useState<Record<SectionKey, boolean>>({
     socialMedia: true,
     google: false,
@@ -46,6 +48,54 @@ export default function BusinessIntakePage() {
 
   const toggleSection = (section: SectionKey) => {
     setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setError(null)
+    setIsSubmitting(true)
+
+    try {
+      // Collect all form data
+      const formData = new FormData(e.currentTarget)
+      const data: Record<string, unknown> = {}
+
+      // Convert FormData to object
+      for (const [key, value] of formData.entries()) {
+        // Handle checkboxes - if multiple values, create array
+        if (data[key]) {
+          if (Array.isArray(data[key])) {
+            (data[key] as unknown[]).push(value)
+          } else {
+            data[key] = [data[key], value]
+          }
+        } else {
+          data[key] = value
+        }
+      }
+
+      // Send to API
+      const response = await fetch('/api/business-intake', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+
+      const result = await response.json().catch(() => ({}))
+      
+      if (!response.ok) {
+        const msg = (result?.error as { message?: string })?.message ?? 'Something went wrong. Please try again.'
+        setError(msg)
+        setIsSubmitting(false)
+        return
+      }
+
+      setIsSubmitted(true)
+      window.scrollTo(0, 0)
+    } catch (err) {
+      setError('Something went wrong. Please try again.')
+      setIsSubmitting(false)
+    }
   }
 
   if (isSubmitted) {
@@ -93,37 +143,47 @@ export default function BusinessIntakePage() {
     </button>
   )
 
-  const InputField = ({ label, placeholder, type = 'text' }: { label: string; placeholder?: string; type?: string }) => (
+  const InputField = ({ label, placeholder, type = 'text', name }: { label: string; placeholder?: string; type?: string; name: string }) => (
     <div>
       <label className="mb-2 block text-sm font-semibold text-[#01153D]">{label}</label>
       <input
         type={type}
+        name={name}
         placeholder={placeholder}
         className="w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-[#72A23B] focus:outline-none focus:ring-2 focus:ring-[#72A23B]/20"
       />
     </div>
   )
 
-  const CheckboxField = ({ label }: { label: string }) => (
+  const CheckboxField = ({ label, name, value }: { label: string; name: string; value?: string }) => (
     <label className="flex items-center gap-3 cursor-pointer">
       <input 
         type="checkbox" 
+        name={name}
+        value={value || label}
         className="h-5 w-5 rounded border-2 border-gray-400 text-[#72A23B] focus:ring-[#72A23B] focus:ring-2" 
       />
       <span className="text-sm font-medium text-gray-800">{label}</span>
     </label>
   )
 
-  const AccountSection = ({ name, fields }: { name: string; fields: string[] }) => (
-    <div className="border-b-2 border-gray-200 pb-6 last:border-0 last:pb-0">
-      <h3 className="mb-4 text-base font-bold text-[#01153D]">{name}</h3>
-      <div className="grid gap-4 md:grid-cols-2">
-        {fields.map(field => (
-          <InputField key={field} label={field} />
-        ))}
+  const AccountSection = ({ name, fields, sectionKey }: { name: string; fields: string[]; sectionKey: string }) => {
+    const sectionName = sectionKey.toLowerCase().replace(/\s+/g, '-')
+    const accountName = name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+    
+    return (
+      <div className="border-b-2 border-gray-200 pb-6 last:border-0 last:pb-0">
+        <h3 className="mb-4 text-base font-bold text-[#01153D]">{name}</h3>
+        <div className="grid gap-4 md:grid-cols-2">
+          {fields.map(field => {
+            const fieldName = field.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+            const inputName = `${sectionName}.${accountName}.${fieldName}`
+            return <InputField key={field} label={field} name={inputName} />
+          })}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 
   return (
     <div className="min-h-screen bg-[#FAF9F7]">
@@ -191,13 +251,14 @@ export default function BusinessIntakePage() {
       <section className="bg-[#FAF9F7]">
         <div className="container max-w-5xl mx-auto px-6 py-16 lg:py-24">
           <form 
-            onSubmit={(e) => {
-              e.preventDefault()
-              setIsSubmitted(true)
-              window.scrollTo(0, 0)
-            }}
+            onSubmit={handleSubmit}
             className="space-y-6"
           >
+            {error && (
+              <div className="rounded-lg border-l-4 border-red-500 bg-red-50 p-4 text-sm text-red-800">
+                {error}
+              </div>
+            )}
             {/* 1. Social Media Accounts */}
             <div className="rounded-lg bg-white overflow-hidden shadow-sm">
               <SectionHeader title="1. Social Media Accounts" section="socialMedia" icon={Globe} />
@@ -205,31 +266,38 @@ export default function BusinessIntakePage() {
                 <div className="p-6 space-y-6">
                   <AccountSection 
                     name="Facebook Business Page" 
-                    fields={['Page Name', 'Page URL', 'Username/Email', 'Admin Access', 'Notes']} 
+                    fields={['Page Name', 'Page URL', 'Username/Email', 'Admin Access', 'Notes']}
+                    sectionKey="socialMedia"
                   />
                   <AccountSection 
                     name="Instagram Business" 
-                    fields={['Username', 'Profile URL', 'Email', 'Admin Access', 'Notes']} 
+                    fields={['Username', 'Profile URL', 'Email', 'Admin Access', 'Notes']}
+                    sectionKey="socialMedia"
                   />
                   <AccountSection 
                     name="LinkedIn Company Page" 
-                    fields={['Company Page URL', 'Primary Admin Profile', 'Email', 'Admin Access', 'Notes']} 
+                    fields={['Company Page URL', 'Primary Admin Profile', 'Email', 'Admin Access', 'Notes']}
+                    sectionKey="socialMedia"
                   />
                   <AccountSection 
                     name="Twitter/X" 
-                    fields={['Username', 'Profile URL', 'Email', 'Notes']} 
+                    fields={['Username', 'Profile URL', 'Email', 'Notes']}
+                    sectionKey="socialMedia"
                   />
                   <AccountSection 
                     name="YouTube Channel" 
-                    fields={['Channel Name', 'Channel URL', 'Email', 'Notes']} 
+                    fields={['Channel Name', 'Channel URL', 'Email', 'Notes']}
+                    sectionKey="socialMedia"
                   />
                   <AccountSection 
                     name="TikTok" 
-                    fields={['Username', 'Profile URL', 'Email', 'Notes']} 
+                    fields={['Username', 'Profile URL', 'Email', 'Notes']}
+                    sectionKey="socialMedia"
                   />
                   <AccountSection 
                     name="Other Social Platforms" 
-                    fields={['Platform Name', 'Username/URL', 'Email', 'Notes']} 
+                    fields={['Platform Name', 'Username/URL', 'Email', 'Notes']}
+                    sectionKey="socialMedia"
                   />
                 </div>
               )}
@@ -242,35 +310,41 @@ export default function BusinessIntakePage() {
                 <div className="p-6 space-y-6">
                   <AccountSection 
                     name="Google Business Profile" 
-                    fields={['Business Name', 'Profile URL', 'Google Account Email', 'Number of Locations', 'Notes']} 
+                    fields={['Business Name', 'Profile URL', 'Google Account Email', 'Number of Locations', 'Notes']}
+                    sectionKey="google"
                   />
                   <div className="border-b-2 border-gray-200 pb-6">
                     <h3 className="mb-4 font-bold text-[#01153D]">Verification Status</h3>
                     <div className="flex gap-6">
-                      <CheckboxField label="Verified" />
-                      <CheckboxField label="Unverified" />
-                      <CheckboxField label="Pending" />
+                      <CheckboxField label="Verified" name="google.verification-status" value="verified" />
+                      <CheckboxField label="Unverified" name="google.verification-status" value="unverified" />
+                      <CheckboxField label="Pending" name="google.verification-status" value="pending" />
                     </div>
                   </div>
                   <AccountSection 
                     name="Google Ads Account" 
-                    fields={['Account ID', 'Account Email', 'Billing Contact', 'Monthly Budget', 'Active Campaigns', 'Notes']} 
+                    fields={['Account ID', 'Account Email', 'Billing Contact', 'Monthly Budget', 'Active Campaigns', 'Notes']}
+                    sectionKey="google"
                   />
                   <AccountSection 
                     name="Google Analytics" 
-                    fields={['Account Email', 'Property ID', 'Website URL Tracked', 'Notes']} 
+                    fields={['Account Email', 'Property ID', 'Website URL Tracked', 'Notes']}
+                    sectionKey="google"
                   />
                   <AccountSection 
                     name="Google Search Console" 
-                    fields={['Account Email', 'Property URL', 'Notes']} 
+                    fields={['Account Email', 'Property URL', 'Notes']}
+                    sectionKey="google"
                   />
                   <AccountSection 
                     name="Google Tag Manager" 
-                    fields={['Account Email', 'Container ID', 'Notes']} 
+                    fields={['Account Email', 'Container ID', 'Notes']}
+                    sectionKey="google"
                   />
                   <AccountSection 
                     name="Google Workspace (G Suite)" 
-                    fields={['Admin Email', 'Domain', 'Number of Users', 'Notes']} 
+                    fields={['Admin Email', 'Domain', 'Number of Users', 'Notes']}
+                    sectionKey="google"
                   />
                 </div>
               )}
@@ -283,37 +357,40 @@ export default function BusinessIntakePage() {
                 <div className="p-6 space-y-6">
                   <AccountSection 
                     name="Primary Website" 
-                    fields={['Domain Name', 'Registrar', 'Registrar Account Email', 'Hosting Provider', 'Hosting Account Email', 'Notes']} 
+                    fields={['Domain Name', 'Registrar', 'Registrar Account Email', 'Hosting Provider', 'Hosting Account Email', 'Notes']}
+                    sectionKey="websites"
                   />
                   <div className="border-b-2 border-gray-200 pb-6">
                     <h3 className="mb-4 font-bold text-[#01153D]">CMS Platform</h3>
                     <div className="flex flex-wrap gap-4">
-                      <CheckboxField label="WordPress" />
-                      <CheckboxField label="Webflow" />
-                      <CheckboxField label="Next.js" />
-                      <CheckboxField label="Squarespace" />
-                      <CheckboxField label="Wix" />
-                      <CheckboxField label="Other" />
+                      <CheckboxField label="WordPress" name="websites.cms-platform" value="wordpress" />
+                      <CheckboxField label="Webflow" name="websites.cms-platform" value="webflow" />
+                      <CheckboxField label="Next.js" name="websites.cms-platform" value="nextjs" />
+                      <CheckboxField label="Squarespace" name="websites.cms-platform" value="squarespace" />
+                      <CheckboxField label="Wix" name="websites.cms-platform" value="wix" />
+                      <CheckboxField label="Other" name="websites.cms-platform" value="other" />
                     </div>
                     <div className="mt-4">
-                      <InputField label="CMS Admin Email" />
+                      <InputField label="CMS Admin Email" name="websites.cms-admin-email" type="email" />
                     </div>
                   </div>
                   <div className="border-b-2 border-gray-200 pb-6">
                     <h3 className="mb-4 font-bold text-[#01153D]">SSL Certificate</h3>
                     <div className="flex gap-6">
-                      <CheckboxField label="Active" />
-                      <CheckboxField label="Expired" />
-                      <CheckboxField label="Unknown" />
+                      <CheckboxField label="Active" name="websites.ssl-certificate" value="active" />
+                      <CheckboxField label="Expired" name="websites.ssl-certificate" value="expired" />
+                      <CheckboxField label="Unknown" name="websites.ssl-certificate" value="unknown" />
                     </div>
                   </div>
                   <AccountSection 
                     name="Additional Domains" 
-                    fields={['Domain', 'Purpose', 'Registrar', 'Account Email', 'Notes']} 
+                    fields={['Domain', 'Purpose', 'Registrar', 'Account Email', 'Notes']}
+                    sectionKey="websites"
                   />
                   <AccountSection 
                     name="Subdomains" 
-                    fields={['Subdomain', 'Purpose', 'Notes']} 
+                    fields={['Subdomain', 'Purpose', 'Notes']}
+                    sectionKey="websites"
                   />
                 </div>
               )}
@@ -326,39 +403,48 @@ export default function BusinessIntakePage() {
                 <div className="p-6 space-y-6">
                   <AccountSection 
                     name="Psychology Today" 
-                    fields={['Profile URL', 'Username/Email', 'Notes']} 
+                    fields={['Profile URL', 'Username/Email', 'Notes']}
+                    sectionKey="advertising"
                   />
                   <AccountSection 
                     name="TherapyDen" 
-                    fields={['Profile URL', 'Username/Email', 'Notes']} 
+                    fields={['Profile URL', 'Username/Email', 'Notes']}
+                    sectionKey="advertising"
                   />
                   <AccountSection 
                     name="GoodTherapy" 
-                    fields={['Profile URL', 'Username/Email', 'Notes']} 
+                    fields={['Profile URL', 'Username/Email', 'Notes']}
+                    sectionKey="advertising"
                   />
                   <AccountSection 
                     name="Zocdoc" 
-                    fields={['Profile URL', 'Username/Email', 'Notes']} 
+                    fields={['Profile URL', 'Username/Email', 'Notes']}
+                    sectionKey="advertising"
                   />
                   <AccountSection 
                     name="Healthgrades" 
-                    fields={['Profile URL', 'Username/Email', 'Notes']} 
+                    fields={['Profile URL', 'Username/Email', 'Notes']}
+                    sectionKey="advertising"
                   />
                   <AccountSection 
                     name="Vitals" 
-                    fields={['Profile URL', 'Username/Email', 'Notes']} 
+                    fields={['Profile URL', 'Username/Email', 'Notes']}
+                    sectionKey="advertising"
                   />
                   <AccountSection 
                     name="WebMD" 
-                    fields={['Profile URL', 'Username/Email', 'Notes']} 
+                    fields={['Profile URL', 'Username/Email', 'Notes']}
+                    sectionKey="advertising"
                   />
                   <AccountSection 
                     name="RateMDs" 
-                    fields={['Profile URL', 'Username/Email', 'Notes']} 
+                    fields={['Profile URL', 'Username/Email', 'Notes']}
+                    sectionKey="advertising"
                   />
                   <AccountSection 
                     name="Other Healthcare Directories" 
-                    fields={['Directory Name', 'Profile URL', 'Username/Email', 'Notes']} 
+                    fields={['Directory Name', 'Profile URL', 'Username/Email', 'Notes']}
+                    sectionKey="advertising"
                   />
                 </div>
               )}
@@ -371,31 +457,38 @@ export default function BusinessIntakePage() {
                 <div className="p-6 space-y-6">
                   <AccountSection 
                     name="Yelp" 
-                    fields={['Business URL', 'Account Email', 'Number of Reviews', 'Notes']} 
+                    fields={['Business URL', 'Account Email', 'Number of Reviews', 'Notes']}
+                    sectionKey="businessDirectories"
                   />
                   <AccountSection 
                     name="Yellow Pages" 
-                    fields={['Listing URL', 'Account Email', 'Notes']} 
+                    fields={['Listing URL', 'Account Email', 'Notes']}
+                    sectionKey="businessDirectories"
                   />
                   <AccountSection 
                     name="Better Business Bureau (BBB)" 
-                    fields={['Profile URL', 'Account Email', 'Rating', 'Notes']} 
+                    fields={['Profile URL', 'Account Email', 'Rating', 'Notes']}
+                    sectionKey="businessDirectories"
                   />
                   <AccountSection 
                     name="Angi (formerly Angie's List)" 
-                    fields={['Profile URL', 'Account Email', 'Notes']} 
+                    fields={['Profile URL', 'Account Email', 'Notes']}
+                    sectionKey="businessDirectories"
                   />
                   <AccountSection 
                     name="Thumbtack" 
-                    fields={['Profile URL', 'Account Email', 'Notes']} 
+                    fields={['Profile URL', 'Account Email', 'Notes']}
+                    sectionKey="businessDirectories"
                   />
                   <AccountSection 
                     name="Nextdoor Business" 
-                    fields={['Page URL', 'Account Email', 'Notes']} 
+                    fields={['Page URL', 'Account Email', 'Notes']}
+                    sectionKey="businessDirectories"
                   />
                   <AccountSection 
                     name="Local Chamber of Commerce" 
-                    fields={['Organization', 'Contact', 'Notes']} 
+                    fields={['Organization', 'Contact', 'Notes']}
+                    sectionKey="businessDirectories"
                   />
                 </div>
               )}
@@ -408,23 +501,28 @@ export default function BusinessIntakePage() {
                 <div className="p-6 space-y-6">
                   <AccountSection 
                     name="Spafinder" 
-                    fields={['Listing URL', 'Account Email', 'Notes']} 
+                    fields={['Listing URL', 'Account Email', 'Notes']}
+                    sectionKey="wellnessDirectories"
                   />
                   <AccountSection 
                     name="Wellness.com" 
-                    fields={['Listing URL', 'Account Email', 'Notes']} 
+                    fields={['Listing URL', 'Account Email', 'Notes']}
+                    sectionKey="wellnessDirectories"
                   />
                   <AccountSection 
                     name="MindBody" 
-                    fields={['Business URL', 'Account Email', 'Notes']} 
+                    fields={['Business URL', 'Account Email', 'Notes']}
+                    sectionKey="wellnessDirectories"
                   />
                   <AccountSection 
                     name="ClassPass" 
-                    fields={['Listing URL', 'Account Email', 'Notes']} 
+                    fields={['Listing URL', 'Account Email', 'Notes']}
+                    sectionKey="wellnessDirectories"
                   />
                   <AccountSection 
                     name="Other Wellness Directories" 
-                    fields={['Directory Name', 'Listing URL', 'Account Email', 'Notes']} 
+                    fields={['Directory Name', 'Listing URL', 'Account Email', 'Notes']}
+                    sectionKey="wellnessDirectories"
                   />
                 </div>
               )}
@@ -438,41 +536,41 @@ export default function BusinessIntakePage() {
                   <div className="border-b-2 border-gray-200 pb-6">
                     <h3 className="mb-4 font-bold text-[#01153D]">Google Reviews</h3>
                     <div className="grid gap-4 md:grid-cols-2">
-                      <InputField label="Number of Reviews" />
-                      <InputField label="Average Rating" />
+                      <InputField label="Number of Reviews" name="reviews.google.number-of-reviews" />
+                      <InputField label="Average Rating" name="reviews.google.average-rating" />
                     </div>
                     <div className="mt-4">
-                      <CheckboxField label="Management Access" />
+                      <CheckboxField label="Management Access" name="reviews.google.management-access" />
                     </div>
                   </div>
                   <div className="border-b-2 border-gray-200 pb-6">
                     <h3 className="mb-4 font-bold text-[#01153D]">Facebook Reviews</h3>
                     <div className="grid gap-4 md:grid-cols-2">
-                      <InputField label="Number of Reviews" />
-                      <InputField label="Average Rating" />
+                      <InputField label="Number of Reviews" name="reviews.facebook.number-of-reviews" />
+                      <InputField label="Average Rating" name="reviews.facebook.average-rating" />
                     </div>
                     <div className="mt-4">
-                      <CheckboxField label="Management Access" />
+                      <CheckboxField label="Management Access" name="reviews.facebook.management-access" />
                     </div>
                   </div>
                   <div className="border-b-2 border-gray-200 pb-6">
                     <h3 className="mb-4 font-bold text-[#01153D]">Yelp Reviews</h3>
                     <div className="grid gap-4 md:grid-cols-2">
-                      <InputField label="Number of Reviews" />
-                      <InputField label="Average Rating" />
+                      <InputField label="Number of Reviews" name="reviews.yelp.number-of-reviews" />
+                      <InputField label="Average Rating" name="reviews.yelp.average-rating" />
                     </div>
                     <div className="mt-4">
-                      <CheckboxField label="Management Access" />
+                      <CheckboxField label="Management Access" name="reviews.yelp.management-access" />
                     </div>
                   </div>
                   <div className="border-b-2 border-gray-200 pb-6 last:border-0 last:pb-0">
                     <h3 className="mb-4 font-bold text-[#01153D]">Healthgrades Reviews</h3>
                     <div className="grid gap-4 md:grid-cols-2">
-                      <InputField label="Number of Reviews" />
-                      <InputField label="Average Rating" />
+                      <InputField label="Number of Reviews" name="reviews.healthgrades.number-of-reviews" />
+                      <InputField label="Average Rating" name="reviews.healthgrades.average-rating" />
                     </div>
                     <div className="mt-4">
-                      <CheckboxField label="Management Access" />
+                      <CheckboxField label="Management Access" name="reviews.healthgrades.management-access" />
                     </div>
                   </div>
                 </div>
@@ -486,23 +584,28 @@ export default function BusinessIntakePage() {
                 <div className="p-6 space-y-6">
                   <AccountSection 
                     name="Mailchimp" 
-                    fields={['Account Email', 'List Size', 'Notes']} 
+                    fields={['Account Email', 'List Size', 'Notes']}
+                    sectionKey="emailCrm"
                   />
                   <AccountSection 
                     name="Constant Contact" 
-                    fields={['Account Email', 'List Size', 'Notes']} 
+                    fields={['Account Email', 'List Size', 'Notes']}
+                    sectionKey="emailCrm"
                   />
                   <AccountSection 
                     name="HubSpot" 
-                    fields={['Account Email', 'Plan Type', 'Notes']} 
+                    fields={['Account Email', 'Plan Type', 'Notes']}
+                    sectionKey="emailCrm"
                   />
                   <AccountSection 
                     name="Salesforce" 
-                    fields={['Account Email', 'Plan Type', 'Notes']} 
+                    fields={['Account Email', 'Plan Type', 'Notes']}
+                    sectionKey="emailCrm"
                   />
                   <AccountSection 
                     name="Other CRM/Email Platforms" 
-                    fields={['Platform Name', 'Account Email', 'Notes']} 
+                    fields={['Platform Name', 'Account Email', 'Notes']}
+                    sectionKey="emailCrm"
                   />
                 </div>
               )}
@@ -515,23 +618,28 @@ export default function BusinessIntakePage() {
                 <div className="p-6 space-y-6">
                   <AccountSection 
                     name="Jane App (EHR)" 
-                    fields={['Account Email', 'Account Type', 'Notes']} 
+                    fields={['Account Email', 'Account Type', 'Notes']}
+                    sectionKey="booking"
                   />
                   <AccountSection 
                     name="SimplePractice" 
-                    fields={['Account Email', 'Notes']} 
+                    fields={['Account Email', 'Notes']}
+                    sectionKey="booking"
                   />
                   <AccountSection 
                     name="Acuity Scheduling" 
-                    fields={['Account Email', 'Notes']} 
+                    fields={['Account Email', 'Notes']}
+                    sectionKey="booking"
                   />
                   <AccountSection 
                     name="Calendly" 
-                    fields={['Account Email', 'Notes']} 
+                    fields={['Account Email', 'Notes']}
+                    sectionKey="booking"
                   />
                   <AccountSection 
                     name="Other Booking Systems" 
-                    fields={['Platform Name', 'Account Email', 'Notes']} 
+                    fields={['Platform Name', 'Account Email', 'Notes']}
+                    sectionKey="booking"
                   />
                 </div>
               )}
@@ -544,27 +652,33 @@ export default function BusinessIntakePage() {
                 <div className="p-6 space-y-6">
                   <AccountSection 
                     name="Stripe" 
-                    fields={['Account Email', 'Notes']} 
+                    fields={['Account Email', 'Notes']}
+                    sectionKey="payments"
                   />
                   <AccountSection 
                     name="Square" 
-                    fields={['Account Email', 'Notes']} 
+                    fields={['Account Email', 'Notes']}
+                    sectionKey="payments"
                   />
                   <AccountSection 
                     name="PayPal Business" 
-                    fields={['Account Email', 'Notes']} 
+                    fields={['Account Email', 'Notes']}
+                    sectionKey="payments"
                   />
                   <AccountSection 
                     name="IvyPay" 
-                    fields={['Account Email', 'Notes']} 
+                    fields={['Account Email', 'Notes']}
+                    sectionKey="payments"
                   />
                   <AccountSection 
                     name="Cherry Financing" 
-                    fields={['Account Email', 'Notes']} 
+                    fields={['Account Email', 'Notes']}
+                    sectionKey="payments"
                   />
                   <AccountSection 
                     name="Other Payment Processors" 
-                    fields={['Platform Name', 'Account Email', 'Notes']} 
+                    fields={['Platform Name', 'Account Email', 'Notes']}
+                    sectionKey="payments"
                   />
                 </div>
               )}
@@ -577,23 +691,28 @@ export default function BusinessIntakePage() {
                 <div className="p-6 space-y-6">
                   <AccountSection 
                     name="Facebook Ads Manager" 
-                    fields={['Account Email', 'Ad Account ID', 'Monthly Budget', 'Notes']} 
+                    fields={['Account Email', 'Ad Account ID', 'Monthly Budget', 'Notes']}
+                    sectionKey="advertising"
                   />
                   <AccountSection 
                     name="Instagram Ads" 
-                    fields={['Account Email', 'Notes']} 
+                    fields={['Account Email', 'Notes']}
+                    sectionKey="advertising"
                   />
                   <AccountSection 
                     name="LinkedIn Ads" 
-                    fields={['Account Email', 'Notes']} 
+                    fields={['Account Email', 'Notes']}
+                    sectionKey="advertising"
                   />
                   <AccountSection 
                     name="Microsoft Advertising (Bing Ads)" 
-                    fields={['Account Email', 'Notes']} 
+                    fields={['Account Email', 'Notes']}
+                    sectionKey="advertising"
                   />
                   <AccountSection 
                     name="Other Advertising Platforms" 
-                    fields={['Platform Name', 'Account Email', 'Notes']} 
+                    fields={['Platform Name', 'Account Email', 'Notes']}
+                    sectionKey="advertising"
                   />
                 </div>
               )}
@@ -606,19 +725,23 @@ export default function BusinessIntakePage() {
                 <div className="p-6 space-y-6">
                   <AccountSection 
                     name="Medium" 
-                    fields={['Publication URL', 'Account Email', 'Notes']} 
+                    fields={['Publication URL', 'Account Email', 'Notes']}
+                    sectionKey="content"
                   />
                   <AccountSection 
                     name="WordPress.com" 
-                    fields={['Blog URL', 'Account Email', 'Notes']} 
+                    fields={['Blog URL', 'Account Email', 'Notes']}
+                    sectionKey="content"
                   />
                   <AccountSection 
                     name="Substack" 
-                    fields={['Newsletter URL', 'Account Email', 'Notes']} 
+                    fields={['Newsletter URL', 'Account Email', 'Notes']}
+                    sectionKey="content"
                   />
                   <AccountSection 
                     name="Other Content Platforms" 
-                    fields={['Platform Name', 'URL', 'Account Email', 'Notes']} 
+                    fields={['Platform Name', 'URL', 'Account Email', 'Notes']}
+                    sectionKey="content"
                   />
                 </div>
               )}
@@ -631,15 +754,18 @@ export default function BusinessIntakePage() {
                 <div className="p-6 space-y-6">
                   <AccountSection 
                     name="Vimeo" 
-                    fields={['Account URL', 'Account Email', 'Notes']} 
+                    fields={['Account URL', 'Account Email', 'Notes']}
+                    sectionKey="video"
                   />
                   <AccountSection 
                     name="Wistia" 
-                    fields={['Account Email', 'Notes']} 
+                    fields={['Account Email', 'Notes']}
+                    sectionKey="video"
                   />
                   <AccountSection 
                     name="Other Video Platforms" 
-                    fields={['Platform Name', 'Account Email', 'Notes']} 
+                    fields={['Platform Name', 'Account Email', 'Notes']}
+                    sectionKey="video"
                   />
                 </div>
               )}
@@ -652,11 +778,13 @@ export default function BusinessIntakePage() {
                 <div className="p-6 space-y-6">
                   <AccountSection 
                     name="Professional Association Memberships" 
-                    fields={['Association Name', 'Member Profile URL', 'Account Email', 'Notes']} 
+                    fields={['Association Name', 'Member Profile URL', 'Account Email', 'Notes']}
+                    sectionKey="professional"
                   />
                   <AccountSection 
                     name="Industry Forums" 
-                    fields={['Forum Name', 'Profile URL', 'Username', 'Notes']} 
+                    fields={['Forum Name', 'Profile URL', 'Username', 'Notes']}
+                    sectionKey="professional"
                   />
                 </div>
               )}
@@ -670,32 +798,32 @@ export default function BusinessIntakePage() {
                   <div className="border-b-2 border-gray-200 pb-6">
                     <h3 className="mb-4 font-bold text-[#01153D]">Cloud Storage</h3>
                     <div className="flex flex-wrap gap-4 mb-4">
-                      <CheckboxField label="Dropbox" />
-                      <CheckboxField label="Google Drive" />
-                      <CheckboxField label="OneDrive" />
-                      <CheckboxField label="Other" />
+                      <CheckboxField label="Dropbox" name="additional.cloud-storage" value="dropbox" />
+                      <CheckboxField label="Google Drive" name="additional.cloud-storage" value="google-drive" />
+                      <CheckboxField label="OneDrive" name="additional.cloud-storage" value="onedrive" />
+                      <CheckboxField label="Other" name="additional.cloud-storage" value="other" />
                     </div>
-                    <InputField label="Account Email" />
+                    <InputField label="Account Email" name="additional.cloud-storage-email" type="email" />
                   </div>
                   <div className="border-b-2 border-gray-200 pb-6">
                     <h3 className="mb-4 font-bold text-[#01153D]">Design Tools</h3>
                     <div className="flex flex-wrap gap-4 mb-4">
-                      <CheckboxField label="Canva" />
-                      <CheckboxField label="Adobe Creative Cloud" />
-                      <CheckboxField label="Figma" />
-                      <CheckboxField label="Other" />
+                      <CheckboxField label="Canva" name="additional.design-tools" value="canva" />
+                      <CheckboxField label="Adobe Creative Cloud" name="additional.design-tools" value="adobe" />
+                      <CheckboxField label="Figma" name="additional.design-tools" value="figma" />
+                      <CheckboxField label="Other" name="additional.design-tools" value="other" />
                     </div>
-                    <InputField label="Account Email" />
+                    <InputField label="Account Email" name="additional.design-tools-email" type="email" />
                   </div>
                   <div className="border-b-2 border-gray-200 pb-6 last:border-0 last:pb-0">
                     <h3 className="mb-4 font-bold text-[#01153D]">Project Management</h3>
                     <div className="flex flex-wrap gap-4 mb-4">
-                      <CheckboxField label="Asana" />
-                      <CheckboxField label="Trello" />
-                      <CheckboxField label="Monday.com" />
-                      <CheckboxField label="Other" />
+                      <CheckboxField label="Asana" name="additional.project-management" value="asana" />
+                      <CheckboxField label="Trello" name="additional.project-management" value="trello" />
+                      <CheckboxField label="Monday.com" name="additional.project-management" value="monday" />
+                      <CheckboxField label="Other" name="additional.project-management" value="other" />
                     </div>
-                    <InputField label="Account Email" />
+                    <InputField label="Account Email" name="additional.project-management-email" type="email" />
                   </div>
                 </div>
               )}
@@ -710,32 +838,32 @@ export default function BusinessIntakePage() {
                     <h3 className="mb-4 font-bold text-[#01153D]">Two Factor Authentication (2FA)</h3>
                     <p className="text-sm text-gray-700 mb-4">Please list accounts with 2FA enabled:</p>
                     <div className="space-y-3">
-                      <InputField label="Account 1" />
-                      <InputField label="Account 2" />
-                      <InputField label="Account 3" />
+                      <InputField label="Account 1" name="security.2fa.account-1" />
+                      <InputField label="Account 2" name="security.2fa.account-2" />
+                      <InputField label="Account 3" name="security.2fa.account-3" />
                     </div>
                   </div>
                   <div className="border-b-2 border-gray-200 pb-6">
                     <h3 className="mb-4 font-bold text-[#01153D]">Recovery Emails</h3>
                     <div className="space-y-3">
-                      <InputField label="Recovery Email 1" type="email" />
-                      <InputField label="Recovery Email 2" type="email" />
+                      <InputField label="Recovery Email 1" name="security.recovery-email-1" type="email" />
+                      <InputField label="Recovery Email 2" name="security.recovery-email-2" type="email" />
                     </div>
                   </div>
                   <div className="border-b-2 border-gray-200 pb-6">
                     <h3 className="mb-4 font-bold text-[#01153D]">Password Manager</h3>
                     <div className="mb-4">
-                      <CheckboxField label="Using password manager" />
+                      <CheckboxField label="Using password manager" name="security.password-manager.using" />
                     </div>
-                    <InputField label="Service Name" />
+                    <InputField label="Service Name" name="security.password-manager.service-name" />
                   </div>
                   <div className="border-b-2 border-gray-200 pb-6 last:border-0 last:pb-0">
                     <h3 className="mb-4 font-bold text-[#01153D]">Shared Access</h3>
                     <p className="text-sm text-gray-700 mb-4">List any accounts shared with team members or third parties:</p>
                     <div className="grid gap-4 md:grid-cols-3">
-                      <InputField label="Account" />
-                      <InputField label="Shared With" />
-                      <InputField label="Access Level" />
+                      <InputField label="Account" name="security.shared-access.account" />
+                      <InputField label="Shared With" name="security.shared-access.shared-with" />
+                      <InputField label="Access Level" name="security.shared-access.access-level" />
                     </div>
                   </div>
                 </div>
@@ -749,6 +877,7 @@ export default function BusinessIntakePage() {
               <div>
                 <label className="mb-2 block text-sm font-semibold text-[#01153D]">Known Issues or Concerns</label>
                 <textarea
+                  name="knownIssues"
                   rows={3}
                   placeholder="List any problems, outdated information, or concerns about existing accounts..."
                   className="w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-[#72A23B] focus:outline-none focus:ring-2 focus:ring-[#72A23B]/20"
@@ -758,6 +887,7 @@ export default function BusinessIntakePage() {
               <div>
                 <label className="mb-2 block text-sm font-semibold text-[#01153D]">Accounts to Create</label>
                 <textarea
+                  name="accountsToCreate"
                   rows={3}
                   placeholder="List any accounts or profiles you would like us to create..."
                   className="w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-[#72A23B] focus:outline-none focus:ring-2 focus:ring-[#72A23B]/20"
@@ -767,6 +897,7 @@ export default function BusinessIntakePage() {
               <div>
                 <label className="mb-2 block text-sm font-semibold text-[#01153D]">Priority Accounts</label>
                 <textarea
+                  name="priorityAccounts"
                   rows={3}
                   placeholder="Indicate which accounts are most important for your business..."
                   className="w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-[#72A23B] focus:outline-none focus:ring-2 focus:ring-[#72A23B]/20"
@@ -776,6 +907,7 @@ export default function BusinessIntakePage() {
               <div>
                 <label className="mb-2 block text-sm font-semibold text-[#01153D]">Additional Notes</label>
                 <textarea
+                  name="additionalNotes"
                   rows={3}
                   placeholder="Any additional information that would be helpful..."
                   className="w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-[#72A23B] focus:outline-none focus:ring-2 focus:ring-[#72A23B]/20"
@@ -798,10 +930,11 @@ export default function BusinessIntakePage() {
 
             <button 
               type="submit" 
-              className="w-full flex items-center justify-center gap-2 bg-[#72A23B] text-white px-8 py-4 rounded-full font-bold hover:bg-[#5a8a2e] transition-colors text-lg shadow-lg"
+              disabled={isSubmitting}
+              className="w-full flex items-center justify-center gap-2 bg-[#72A23B] text-white px-8 py-4 rounded-full font-bold hover:bg-[#5a8a2e] transition-colors text-lg shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span>Submit Inventory</span>
-              <ArrowRight className="h-5 w-5" />
+              <span>{isSubmitting ? 'Submitting...' : 'Submit Inventory'}</span>
+              {!isSubmitting && <ArrowRight className="h-5 w-5" />}
             </button>
           </form>
         </div>

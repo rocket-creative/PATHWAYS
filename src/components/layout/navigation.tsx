@@ -64,6 +64,11 @@ export function Navigation() {
   const pathname = usePathname()
   const dropdownRef = useRef<HTMLDivElement>(null)
 
+  // Hide navigation on CRM and other admin pages
+  if (pathname.startsWith('/crm') || pathname.startsWith('/business-intake') || pathname.startsWith('/client-intake')) {
+    return null
+  }
+
   useEffect(() => setIsOpen(false), [pathname])
 
   useEffect(() => {

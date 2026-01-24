@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Raleway, Lora } from 'next/font/google'
 import '@/styles/globals.css'
-import { Navigation, Footer, CrisisBanner, CookieConsent } from '@/components/layout'
+import { AppWrapper } from '@/components/layout'
 import { getOrganizationSchema, getWebsiteSchema } from '@/lib/structured-data'
 import { SITE_URL } from '@/lib/site-config'
 
@@ -97,20 +97,11 @@ export default function RootLayout({
         
         {/* Site wrapper - ALL content within 1440px canvas */}
         <div className="site-wrapper min-h-screen">
-          {/* Crisis Banner */}
-          <CrisisBanner />
-          
-          {/* Navigation */}
-          <Navigation />
-          
-          {/* Main Content */}
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          
-          {/* Footer */}
-          <Footer />
-          <CookieConsent />
+          <AppWrapper>
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+          </AppWrapper>
         </div>
       </body>
     </html>

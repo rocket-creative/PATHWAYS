@@ -15,11 +15,11 @@ interface PageHeroProps {
   ctaHref?: string
 }
 
-export function PageHero({ 
-  eyebrow, 
-  headline, 
+export function PageHero({
+  eyebrow,
+  headline,
   subheadline,
-  body, 
+  body,
   image,
   imageAlt = 'Pathways Within',
   ctaText,
@@ -56,30 +56,30 @@ export function PageHero({
           <div className="rounded-lg bg-white/50 p-8 shadow-2xl backdrop-blur-xl lg:p-12">
             {/* Logo */}
             <Link href="/" className="mb-8 block lg:mb-10">
-              <Image 
-                src="/logo.png" 
-                alt="Pathways Within - Home" 
+              <Image
+                src="/logo.png"
+                alt="Pathways Within - Home"
                 width={280}
                 height={100}
                 className="w-[180px] transition-opacity hover:opacity-80 lg:w-[240px]"
               />
             </Link>
-            
+
             {/* Eyebrow */}
             {eyebrow && (
-              <p 
+              <p
                 className="mb-4 text-xs uppercase tracking-[0.2em] text-[rgb(var(--color-green))]"
                 style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 600 }}
               >
                 {eyebrow}
               </p>
             )}
-            
+
             {/* Headline */}
             <h1 className="mb-4 text-[rgb(var(--color-navy))]" style={{ fontWeight: 300 }}>
               {headline}
             </h1>
-            
+
             {/* Subheadline */}
             {subheadline && (
               <p
@@ -89,17 +89,17 @@ export function PageHero({
                 {subheadline}
               </p>
             )}
-            
+
             {/* Body */}
             {body && (
               <p
-                className="mb-8 max-w-md text-lg text-[rgb(var(--color-text-light))]" 
-                style={{ lineHeight: 1.7, letter-spacing: '-0.01em' }}
+                className="mb-8 max-w-md text-lg text-[rgb(var(--color-text-light))]"
+                style={{ lineHeight: 1.7, letterSpacing: '-0.01em' }}
               >
                 {body}
               </p>
             )}
-            
+
             {/* CTA Button */}
             {ctaText && ctaHref && (
               <div>
@@ -112,9 +112,9 @@ export function PageHero({
           </div>
         </div>
       </div>
-      
+
       {/* Scroll indicator - centered */}
-      <button 
+      <button
         onClick={scrollToContent}
         className="scroll-indicator absolute bottom-8 left-1/2 hidden -translate-x-1/2 lg:flex"
         aria-label="Scroll to content"

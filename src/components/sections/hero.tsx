@@ -23,10 +23,10 @@ export function HeroSection({
   return (
     <section className="relative min-h-[85vh]">
       {/* Content with Image - positioned on the right */}
-      <div className="container-site relative flex min-h-[85vh] items-center">
-        <div className="grid w-full gap-8 lg:grid-cols-12 lg:gap-12">
+      <div className="container-site relative min-h-[85vh]">
+        <div className="grid h-full min-h-[85vh] w-full gap-8 lg:grid-cols-12 lg:gap-12">
           {/* Content - positioned on the left */}
-          <div className="w-full px-6 py-12 sm:px-8 lg:col-span-6 lg:px-0">
+          <div className="flex w-full items-center px-6 py-12 sm:px-8 lg:col-span-6 lg:px-0 lg:py-0">
             {/* Content box with glass effect */}
             <div className="rounded-lg bg-white/50 p-8 shadow-2xl backdrop-blur-xl lg:p-12">
               <Link href="/" className="mb-8 block lg:mb-10">
@@ -67,14 +67,14 @@ export function HeroSection({
             </div>
           </div>
           
-          {/* Hero Image - Right Justified, Not Full Bleed */}
-          <div className="relative hidden aspect-[3/4] overflow-hidden rounded-2xl lg:col-span-6 lg:block">
+          {/* Hero Image - Full Height, Right Justified */}
+          <div className="relative hidden h-full min-h-[85vh] overflow-hidden rounded-2xl lg:col-span-6 lg:block">
             <Image
               src={image}
               alt={imageAlt}
               fill
               priority
-              className="object-cover object-center"
+              className="object-cover object-right"
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>

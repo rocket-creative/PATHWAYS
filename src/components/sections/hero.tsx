@@ -22,61 +22,58 @@ export function HeroSection({
 
   return (
     <section className="relative min-h-[85vh]">
-      {/* Content with Image - positioned on the right */}
-      <div className="container-site relative min-h-[85vh]">
-        <div className="grid h-full min-h-[85vh] w-full gap-8 lg:grid-cols-12 lg:gap-12">
-          {/* Content - positioned on the left */}
-          <div className="flex w-full items-center px-6 py-12 sm:px-8 lg:col-span-6 lg:px-0 lg:py-0">
-            {/* Content box with glass effect */}
-            <div className="rounded-lg bg-white/50 p-8 shadow-2xl backdrop-blur-xl lg:p-12">
-              <Link href="/" className="mb-8 block lg:mb-10">
-                <Image 
-                  src="/logo.png" 
-                  alt="Pathways Within - Home" 
-                  width={280}
-                  height={100}
-                  className="w-[180px] transition-opacity hover:opacity-80 lg:w-[240px]"
-                />
+      {/* Full-bleed Background Image - Right Justified */}
+      <div className="absolute inset-0">
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          priority
+          className="object-cover object-right"
+          sizes="100vw"
+        />
+      </div>
+
+      {/* Content Overlay - positioned on the left */}
+      <div className="container-site relative flex min-h-[85vh] items-center">
+        <div className="w-full px-6 py-12 sm:px-8 lg:max-w-[58%] lg:px-12 xl:px-16">
+          {/* Content box with glass effect */}
+          <div className="rounded-lg bg-white/50 p-8 shadow-2xl backdrop-blur-xl lg:p-12">
+            <Link href="/" className="mb-8 block lg:mb-10">
+              <Image 
+                src="/logo.png" 
+                alt="Pathways Within - Home" 
+                width={280}
+                height={100}
+                className="w-[180px] transition-opacity hover:opacity-80 lg:w-[240px]"
+              />
+            </Link>
+            
+            <h1 className="mb-6 text-[rgb(var(--color-navy))]" style={{ lineHeight: 1.1, fontWeight: 300 }}>
+              Discover<br />
+              your path<br />
+              to wellness
+            </h1>
+            
+            <p 
+              className="mb-8 max-w-md text-lg text-[rgb(var(--color-text-light))]" 
+              style={{ lineHeight: 1.7 }}
+            >
+              Since 2018, Pathways Within has offered integrated therapy and 
+              wellness services across Long Island. Mind, body, and spirit — 
+              we believe true healing honors the whole person.
+            </p>
+            
+            <div className="flex flex-wrap items-center gap-4">
+              <Link href="/wisdom/services" className="btn-pill btn-pill-primary">
+                <span className="btn-text">Explore therapy</span>
+                <span className="btn-arrow"><ArrowRight aria-hidden="true" /></span>
               </Link>
-              
-              <h1 className="mb-6 text-[rgb(var(--color-navy))]" style={{ lineHeight: 1.1, fontWeight: 300 }}>
-                Discover<br />
-                your path<br />
-                to wellness
-              </h1>
-              
-              <p 
-                className="mb-8 max-w-md text-lg text-[rgb(var(--color-text-light))]" 
-                style={{ lineHeight: 1.7 }}
-              >
-                Since 2018, Pathways Within has offered integrated therapy and 
-                wellness services across Long Island. Mind, body, and spirit — 
-                we believe true healing honors the whole person.
-              </p>
-              
-              <div className="flex flex-wrap items-center gap-4">
-                <Link href="/wisdom/services" className="btn-pill btn-pill-primary">
-                  <span className="btn-text">Explore therapy</span>
-                  <span className="btn-arrow"><ArrowRight aria-hidden="true" /></span>
-                </Link>
-                <Link href="/wellness/services" className="btn-pill btn-pill-secondary">
-                  <span className="btn-text">Explore wellness</span>
-                  <span className="btn-arrow"><ArrowRight aria-hidden="true" /></span>
-                </Link>
-              </div>
+              <Link href="/wellness/services" className="btn-pill btn-pill-secondary">
+                <span className="btn-text">Explore wellness</span>
+                <span className="btn-arrow"><ArrowRight aria-hidden="true" /></span>
+              </Link>
             </div>
-          </div>
-          
-          {/* Hero Image - Full Height, Right Justified */}
-          <div className="relative hidden h-full min-h-[85vh] overflow-hidden rounded-2xl lg:col-span-6 lg:block">
-            <Image
-              src={image}
-              alt={imageAlt}
-              fill
-              priority
-              className="object-cover object-right"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
           </div>
         </div>
       </div>

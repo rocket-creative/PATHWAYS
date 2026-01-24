@@ -37,81 +37,78 @@ export function PageHero({
 
   return (
     <section className="relative min-h-[85vh]">
-      {/* Content with Image - positioned on the right */}
-      <div className="container-site relative min-h-[85vh]">
-        <div className="grid h-full min-h-[85vh] w-full gap-8 lg:grid-cols-12 lg:gap-12">
-          {/* Content - positioned on the left */}
-          <div className="flex w-full items-center px-6 py-12 sm:px-8 lg:col-span-6 lg:px-0 lg:py-0">
-            {/* Content box with glass effect */}
-            <div className="rounded-lg bg-white/50 p-8 shadow-2xl backdrop-blur-xl lg:p-12">
-              {/* Logo */}
-              <Link href="/" className="mb-8 block lg:mb-10">
-                <Image 
-                  src="/logo.png" 
-                  alt="Pathways Within - Home" 
-                  width={280}
-                  height={100}
-                  className="w-[180px] transition-opacity hover:opacity-80 lg:w-[240px]"
-                />
-              </Link>
-              
-              {/* Eyebrow */}
-              {eyebrow && (
-                <p 
+      {/* Full-bleed Background Image - Right Justified */}
+      <div className="absolute inset-0">
+        <Image
+          src={image}
+          alt={imageAlt}
+          fill
+          priority
+          className="object-cover object-right"
+          sizes="100vw"
+        />
+      </div>
+
+      {/* Content Overlay - positioned on the left */}
+      <div className="container-site relative flex min-h-[85vh] items-center">
+        <div className="w-full px-6 py-12 sm:px-8 lg:max-w-[58%] lg:px-12 xl:px-16">
+          {/* Content box with glass effect */}
+          <div className="rounded-lg bg-white/50 p-8 shadow-2xl backdrop-blur-xl lg:p-12">
+            {/* Logo */}
+            <Link href="/" className="mb-8 block lg:mb-10">
+              <Image 
+                src="/logo.png" 
+                alt="Pathways Within - Home" 
+                width={280}
+                height={100}
+                className="w-[180px] transition-opacity hover:opacity-80 lg:w-[240px]"
+              />
+            </Link>
+            
+            {/* Eyebrow */}
+            {eyebrow && (
+              <p 
                 className="mb-4 text-xs uppercase tracking-[0.2em] text-[rgb(var(--color-green))]"
-                  style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 600 }}
-                >
-                  {eyebrow}
-                </p>
-              )}
-              
-              {/* Headline */}
-              <h1 className="mb-4 text-[rgb(var(--color-navy))]" style={{ fontWeight: 300 }}>
-                {headline}
-              </h1>
-              
-              {/* Subheadline */}
-              {subheadline && (
-                <p
+                style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 600 }}
+              >
+                {eyebrow}
+              </p>
+            )}
+            
+            {/* Headline */}
+            <h1 className="mb-4 text-[rgb(var(--color-navy))]" style={{ fontWeight: 300 }}>
+              {headline}
+            </h1>
+            
+            {/* Subheadline */}
+            {subheadline && (
+              <p
                 className="mb-6 text-xl text-[rgb(var(--color-green))] lg:text-2xl"
-                  style={{ fontFamily: 'var(--font-clarendon), serif', fontWeight: 600, lineHeight: 1.3 }}
-                >
-                  {subheadline}
-                </p>
-              )}
-              
-              {/* Body */}
-              {body && (
-                <p
+                style={{ fontFamily: 'var(--font-clarendon), serif', fontWeight: 600, lineHeight: 1.3 }}
+              >
+                {subheadline}
+              </p>
+            )}
+            
+            {/* Body */}
+            {body && (
+              <p
                 className="mb-8 max-w-md text-lg text-[rgb(var(--color-text-light))]" 
-                style={{ lineHeight: 1.7, letterSpacing: '-0.01em' }}
+                style={{ lineHeight: 1.7, letter-spacing: '-0.01em' }}
               >
                 {body}
               </p>
-              )}
-              
-              {/* CTA Button */}
-              {ctaText && ctaHref && (
-                <div>
-                  <Link href={ctaHref} className="btn-pill btn-pill-primary">
-                    <span className="btn-text">{ctaText}</span>
-                    <span className="btn-arrow"><ArrowRight /></span>
-                  </Link>
-                </div>
-              )}
-            </div>
-          </div>
-          
-          {/* Hero Image - Full Height, Right Justified */}
-          <div className="relative hidden h-full min-h-[85vh] overflow-hidden rounded-2xl lg:col-span-6 lg:block">
-            <Image
-              src={image}
-              alt={imageAlt}
-              fill
-              priority
-              className="object-cover object-right"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
+            )}
+            
+            {/* CTA Button */}
+            {ctaText && ctaHref && (
+              <div>
+                <Link href={ctaHref} className="btn-pill btn-pill-primary">
+                  <span className="btn-text">{ctaText}</span>
+                  <span className="btn-arrow"><ArrowRight /></span>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

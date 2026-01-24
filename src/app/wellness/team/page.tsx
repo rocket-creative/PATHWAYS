@@ -4,12 +4,28 @@ import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { SITE_URL } from '@/lib/site-config'
+import { 
+  createOpenGraph, 
+  createTwitterCard, 
+  standardRobots,
+  createBreadcrumbSchema,
+  createPersonSchema,
+} from '@/lib/structured-data'
 
 export const metadata: Metadata = {
-  title: 'Wellness Team',
+  title: 'Wellness Providers on Long Island | Pathways Within',
   description: 'Meet our wellness team at Pathways Within. Certified massage therapists, licensed estheticians, nurses, and energy work practitioners on Long Island.',
   alternates: { canonical: `${SITE_URL}/wellness/team` },
-  openGraph: { title: 'Wellness Team | Pathways Within', url: `${SITE_URL}/wellness/team` },
+  openGraph: createOpenGraph({
+    title: 'Wellness Providers on Long Island | Pathways Within',
+    description: 'Meet our wellness team at Pathways Within. Certified massage therapists, licensed estheticians, nurses, and energy work practitioners on Long Island.',
+    url: `${SITE_URL}/wellness/team`,
+  }),
+  twitter: createTwitterCard({
+    title: 'Wellness Providers on Long Island | Pathways Within',
+    description: 'Meet our wellness team at Pathways Within. Certified massage therapists, licensed estheticians, nurses, and more.',
+  }),
+  robots: standardRobots,
 }
 
 const wellnessTeam = [
@@ -52,8 +68,34 @@ const wellnessTeam = [
 ]
 
 export default function WellnessTeamPage() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'Wellness', url: `${SITE_URL}/wellness` },
+    { name: 'Team', url: `${SITE_URL}/wellness/team` },
+  ])
+  
+  const personSchemas = wellnessTeam
+    .filter(m => m.image)
+    .map(member => createPersonSchema({
+      name: member.name,
+      title: member.title,
+      description: member.bio,
+      image: member.image || undefined,
+    }))
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {personSchemas.map((schema, idx) => (
+        <script
+          key={idx}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
       <PageHero
         eyebrow="Our Team"
         headline="Meet our wellness providers"
@@ -75,6 +117,8 @@ export default function WellnessTeamPage() {
                       alt={member.name}
                       fill
                       className="object-cover"
+                      quality={100}
+                      unoptimized
                     />
                   )}
                 </div>

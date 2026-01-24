@@ -4,17 +4,41 @@ import { ArrowRight } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { therapyServicesList } from '@/data/therapy-services'
 import { SITE_URL } from '@/lib/site-config'
+import { 
+  createOpenGraph, 
+  createTwitterCard, 
+  standardRobots,
+  createBreadcrumbSchema,
+} from '@/lib/structured-data'
 
 export const metadata: Metadata = {
-  title: 'Therapy',
-  description: 'Discover therapy services at Pathways Within. Individual, couples, child, teen, trauma, and EMDR therapy with licensed clinicians on Long Island.',
+  title: 'Therapy Services on Long Island | Pathways Within',
+  description: 'Therapy services at Pathways Within. Individual, couples, child, teen, trauma, and EMDR therapy with licensed clinicians on Long Island. Insurance accepted.',
   alternates: { canonical: `${SITE_URL}/wisdom` },
-  openGraph: { title: 'Therapy | Pathways Within', url: `${SITE_URL}/wisdom` },
+  openGraph: createOpenGraph({
+    title: 'Therapy Services on Long Island | Pathways Within',
+    description: 'Therapy services at Pathways Within. Individual, couples, child, teen, trauma, and EMDR therapy with licensed clinicians on Long Island. Insurance accepted.',
+    url: `${SITE_URL}/wisdom`,
+  }),
+  twitter: createTwitterCard({
+    title: 'Therapy Services on Long Island | Pathways Within',
+    description: 'Therapy services at Pathways Within. Individual, couples, child, teen, trauma, and EMDR therapy. Insurance accepted.',
+  }),
+  robots: standardRobots,
 }
 
 export default function WisdomHomePage() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'Therapy', url: `${SITE_URL}/wisdom` },
+  ])
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <PageHero
         eyebrow="Therapy"
         headline="Mental health therapy"

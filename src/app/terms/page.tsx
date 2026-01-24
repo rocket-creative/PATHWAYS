@@ -2,17 +2,51 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { SITE_URL } from '@/lib/site-config'
 import { PageHero } from '@/components/sections/page-hero'
+import { 
+  createOpenGraph, 
+  createTwitterCard, 
+  standardRobots,
+  createBreadcrumbSchema,
+  createWebPageSchema,
+} from '@/lib/structured-data'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service',
-  description: 'Pathways Within terms of service. Use of our website and services.',
+  title: 'Terms of Service | Pathways Within',
+  description: 'Pathways Within terms of service. Terms governing use of our website, services, and policies for therapy and wellness clients.',
   alternates: { canonical: `${SITE_URL}/terms` },
-  robots: { index: true, follow: true },
+  openGraph: createOpenGraph({
+    title: 'Terms of Service | Pathways Within',
+    description: 'Pathways Within terms of service. Terms governing use of our website, services, and policies for therapy and wellness clients.',
+    url: `${SITE_URL}/terms`,
+  }),
+  twitter: createTwitterCard({
+    title: 'Terms of Service | Pathways Within',
+    description: 'Pathways Within terms of service. Terms governing use of our website and services.',
+  }),
+  robots: standardRobots,
 }
 
 export default function TermsPage() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'Terms of Service', url: `${SITE_URL}/terms` },
+  ])
+  const webPageSchema = createWebPageSchema({
+    name: 'Terms of Service',
+    description: 'Pathways Within terms of service.',
+    url: `${SITE_URL}/terms`,
+  })
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
       <PageHero
         eyebrow="Legal"
         headline="Terms of service"

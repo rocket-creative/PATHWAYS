@@ -4,17 +4,53 @@ import Image from 'next/image'
 import { ArrowRight, Heart, Users, Sparkles, Shield } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { SITE_URL } from '@/lib/site-config'
+import { 
+  createOpenGraph, 
+  createTwitterCard, 
+  standardRobots,
+  createBreadcrumbSchema,
+  createAboutPageSchema,
+  getOrganizationSchema,
+} from '@/lib/structured-data'
 
 export const metadata: Metadata = {
-  title: 'About Us',
+  title: 'About Us | Pathways Within Therapy and Wellness',
   description: 'Learn about Pathways Within, a Long Island collaborative offering integrated therapy and wellness services. Our 360 degree approach honors your whole self.',
   alternates: { canonical: `${SITE_URL}/about` },
-  openGraph: { title: 'About Us | Pathways Within', url: `${SITE_URL}/about` },
+  openGraph: createOpenGraph({
+    title: 'About Us | Pathways Within Therapy and Wellness',
+    description: 'Learn about Pathways Within, a Long Island collaborative offering integrated therapy and wellness services. Our 360 degree approach honors your whole self.',
+    url: `${SITE_URL}/about`,
+  }),
+  twitter: createTwitterCard({
+    title: 'About Us | Pathways Within Therapy and Wellness',
+    description: 'Learn about Pathways Within, a Long Island collaborative offering integrated therapy and wellness services. Our 360 degree approach honors your whole self.',
+  }),
+  robots: standardRobots,
 }
 
 export default function AboutPage() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'About', url: `${SITE_URL}/about` },
+  ])
+  const aboutPageSchema = createAboutPageSchema()
+  const organizationSchema = getOrganizationSchema()
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(aboutPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
       <PageHero
         eyebrow="About Us"
         headline="Wisdom and Wellness Collaborative"

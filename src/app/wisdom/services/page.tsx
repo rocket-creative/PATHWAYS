@@ -4,17 +4,42 @@ import { ArrowRight } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { therapyServicesList } from '@/data/therapy-services'
 import { SITE_URL } from '@/lib/site-config'
+import { 
+  createOpenGraph, 
+  createTwitterCard, 
+  standardRobots,
+  createBreadcrumbSchema,
+} from '@/lib/structured-data'
 
 export const metadata: Metadata = {
-  title: 'Therapy Services',
-  description: 'Browse all therapy services at Pathways Within. Individual, couples, child, teen, trauma, EMDR, somatic, and hypnotherapy on Long Island.',
+  title: 'All Therapy Services | Pathways Within Long Island',
+  description: 'Browse all therapy services at Pathways Within. Individual, couples, child, teen, trauma, EMDR, somatic, and hypnotherapy on Long Island. Insurance accepted.',
   alternates: { canonical: `${SITE_URL}/wisdom/services` },
-  openGraph: { title: 'Therapy Services | Pathways Within', url: `${SITE_URL}/wisdom/services` },
+  openGraph: createOpenGraph({
+    title: 'All Therapy Services | Pathways Within Long Island',
+    description: 'Browse all therapy services at Pathways Within. Individual, couples, child, teen, trauma, EMDR, somatic, and hypnotherapy on Long Island.',
+    url: `${SITE_URL}/wisdom/services`,
+  }),
+  twitter: createTwitterCard({
+    title: 'All Therapy Services | Pathways Within Long Island',
+    description: 'Browse all therapy services at Pathways Within. Individual, couples, child, teen, trauma, EMDR, and more.',
+  }),
+  robots: standardRobots,
 }
 
 export default function TherapyServicesPage() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'Therapy', url: `${SITE_URL}/wisdom` },
+    { name: 'Services', url: `${SITE_URL}/wisdom/services` },
+  ])
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <PageHero
         eyebrow="Therapy Services"
         headline="Our therapy offerings"

@@ -1,17 +1,44 @@
 import { Metadata } from 'next'
 import { HeroSection, CTASection, TestimonialSection } from '@/components/sections'
-import { SITE_URL } from '@/lib/site-config'
+import { SITE_URL, SITE_NAME } from '@/lib/site-config'
+import { 
+  getOrganizationSchema, 
+  getWebsiteSchema, 
+  createOpenGraph, 
+  createTwitterCard, 
+  standardRobots 
+} from '@/lib/structured-data'
 
 export const metadata: Metadata = {
-  title: 'Pathways Within | Therapy and Wellness on Long Island',
-  description: 'Experience integrated mental health therapy and holistic wellness services at Pathways Within. Our 360 degree approach supports your mind, body, and spirit at five Long Island locations.',
+  title: 'Therapy and Wellness on Long Island | Pathways Within',
+  description: 'Integrated mental health therapy and holistic wellness at Pathways Within. Individual, couples, and trauma therapy plus massage, acupuncture, and more at five Long Island locations.',
   alternates: { canonical: SITE_URL },
-  openGraph: { url: SITE_URL },
+  openGraph: createOpenGraph({
+    title: 'Therapy and Wellness on Long Island | Pathways Within',
+    description: 'Integrated mental health therapy and holistic wellness at Pathways Within. Individual, couples, and trauma therapy plus massage, acupuncture, and more.',
+    url: SITE_URL,
+  }),
+  twitter: createTwitterCard({
+    title: 'Therapy and Wellness on Long Island | Pathways Within',
+    description: 'Integrated mental health therapy and holistic wellness at Pathways Within. Individual, couples, and trauma therapy plus massage, acupuncture, and more.',
+  }),
+  robots: standardRobots,
 }
 
 export default function HomePage() {
+  const organizationSchema = getOrganizationSchema()
+  const websiteSchema = getWebsiteSchema()
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <HeroSection />
       <ServicesPreview />
       <ApproachSection />

@@ -2,17 +2,51 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { SITE_URL } from '@/lib/site-config'
 import { PageHero } from '@/components/sections/page-hero'
+import { 
+  createOpenGraph, 
+  createTwitterCard, 
+  standardRobots,
+  createBreadcrumbSchema,
+  createWebPageSchema,
+} from '@/lib/structured-data'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy',
-  description: 'Pathways Within privacy policy. How we collect, use, and protect your personal and health information. HIPAA and consent.',
+  title: 'Privacy Policy | Pathways Within',
+  description: 'Pathways Within privacy policy. Learn how we collect, use, and protect your personal and health information. HIPAA compliance and consent information.',
   alternates: { canonical: `${SITE_URL}/privacy` },
-  robots: { index: true, follow: true },
+  openGraph: createOpenGraph({
+    title: 'Privacy Policy | Pathways Within',
+    description: 'Pathways Within privacy policy. Learn how we collect, use, and protect your personal and health information. HIPAA compliance and consent information.',
+    url: `${SITE_URL}/privacy`,
+  }),
+  twitter: createTwitterCard({
+    title: 'Privacy Policy | Pathways Within',
+    description: 'Pathways Within privacy policy. Learn how we collect, use, and protect your personal and health information.',
+  }),
+  robots: standardRobots,
 }
 
 export default function PrivacyPage() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'Privacy Policy', url: `${SITE_URL}/privacy` },
+  ])
+  const webPageSchema = createWebPageSchema({
+    name: 'Privacy Policy',
+    description: 'Pathways Within privacy policy and HIPAA information.',
+    url: `${SITE_URL}/privacy`,
+  })
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
       <PageHero
         eyebrow="Legal"
         headline="Privacy policy"

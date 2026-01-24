@@ -2,17 +2,51 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { SITE_URL } from '@/lib/site-config'
 import { PageHero } from '@/components/sections/page-hero'
+import { 
+  createOpenGraph, 
+  createTwitterCard, 
+  standardRobots,
+  createBreadcrumbSchema,
+  createWebPageSchema,
+} from '@/lib/structured-data'
 
 export const metadata: Metadata = {
-  title: 'Accessibility',
-  description: 'Pathways Within is committed to digital accessibility. We aim for WCAG 2.1 AA and welcome feedback.',
+  title: 'Accessibility Statement | Pathways Within',
+  description: 'Pathways Within accessibility statement. We are committed to digital accessibility and aim for WCAG 2.1 AA compliance. We welcome feedback.',
   alternates: { canonical: `${SITE_URL}/accessibility` },
-  robots: { index: true, follow: true },
+  openGraph: createOpenGraph({
+    title: 'Accessibility Statement | Pathways Within',
+    description: 'Pathways Within accessibility statement. We are committed to digital accessibility and aim for WCAG 2.1 AA compliance. We welcome feedback.',
+    url: `${SITE_URL}/accessibility`,
+  }),
+  twitter: createTwitterCard({
+    title: 'Accessibility Statement | Pathways Within',
+    description: 'Pathways Within accessibility statement. We are committed to digital accessibility and WCAG 2.1 AA compliance.',
+  }),
+  robots: standardRobots,
 }
 
 export default function AccessibilityPage() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'Accessibility', url: `${SITE_URL}/accessibility` },
+  ])
+  const webPageSchema = createWebPageSchema({
+    name: 'Accessibility Statement',
+    description: 'Pathways Within accessibility statement and WCAG compliance.',
+    url: `${SITE_URL}/accessibility`,
+  })
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
       <PageHero
         eyebrow="Accessibility"
         headline="Accessibility statement"

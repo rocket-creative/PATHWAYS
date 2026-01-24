@@ -4,17 +4,42 @@ import { ArrowRight } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { conditionsList } from '@/data/conditions'
 import { SITE_URL } from '@/lib/site-config'
+import { 
+  createOpenGraph, 
+  createTwitterCard, 
+  standardRobots,
+  createBreadcrumbSchema,
+} from '@/lib/structured-data'
 
 export const metadata: Metadata = {
-  title: 'Conditions We Treat',
-  description: 'Learn about mental health conditions we treat at Pathways Within, including anxiety, depression, and trauma. Evidence-based treatment from licensed therapists.',
+  title: 'Mental Health Conditions We Treat | Pathways Within',
+  description: 'Learn about mental health conditions we treat at Pathways Within, including anxiety, depression, and trauma. Evidence based treatment from licensed therapists.',
   alternates: { canonical: `${SITE_URL}/wisdom/conditions` },
-  openGraph: { title: 'Conditions We Treat | Pathways Within', url: `${SITE_URL}/wisdom/conditions` },
+  openGraph: createOpenGraph({
+    title: 'Mental Health Conditions We Treat | Pathways Within',
+    description: 'Learn about mental health conditions we treat at Pathways Within, including anxiety, depression, and trauma. Evidence based treatment from licensed therapists.',
+    url: `${SITE_URL}/wisdom/conditions`,
+  }),
+  twitter: createTwitterCard({
+    title: 'Mental Health Conditions We Treat | Pathways Within',
+    description: 'Learn about mental health conditions we treat at Pathways Within, including anxiety, depression, and trauma.',
+  }),
+  robots: standardRobots,
 }
 
 export default function ConditionsPage() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'Therapy', url: `${SITE_URL}/wisdom` },
+    { name: 'Conditions', url: `${SITE_URL}/wisdom/conditions` },
+  ])
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <PageHero
         eyebrow="Conditions"
         headline="Conditions we treat"

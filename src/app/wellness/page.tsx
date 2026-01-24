@@ -4,17 +4,41 @@ import { ArrowRight } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { wellnessServicesList } from '@/data/wellness-services'
 import { SITE_URL } from '@/lib/site-config'
+import { 
+  createOpenGraph, 
+  createTwitterCard, 
+  standardRobots,
+  createBreadcrumbSchema,
+} from '@/lib/structured-data'
 
 export const metadata: Metadata = {
-  title: 'Wellness',
-  description: 'Discover holistic wellness services at Pathways Within. Massage, acupuncture, skincare, IV therapy, and more on Long Island.',
+  title: 'Wellness Services on Long Island | Pathways Within',
+  description: 'Holistic wellness services at Pathways Within. Massage, acupuncture, skincare, IV therapy, injectables, and more. Book your appointment on Long Island.',
   alternates: { canonical: `${SITE_URL}/wellness` },
-  openGraph: { title: 'Wellness | Pathways Within', url: `${SITE_URL}/wellness` },
+  openGraph: createOpenGraph({
+    title: 'Wellness Services on Long Island | Pathways Within',
+    description: 'Holistic wellness services at Pathways Within. Massage, acupuncture, skincare, IV therapy, injectables, and more. Book your appointment on Long Island.',
+    url: `${SITE_URL}/wellness`,
+  }),
+  twitter: createTwitterCard({
+    title: 'Wellness Services on Long Island | Pathways Within',
+    description: 'Holistic wellness services at Pathways Within. Massage, acupuncture, skincare, IV therapy, injectables, and more.',
+  }),
+  robots: standardRobots,
 }
 
 export default function WellnessHomePage() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'Wellness', url: `${SITE_URL}/wellness` },
+  ])
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <PageHero
         eyebrow="Wellness"
         headline="Whole body wellness"

@@ -1,15 +1,30 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight, MapPin, Phone, Clock, Car, Monitor } from 'lucide-react'
-import { PageHero } from '@/components/sections/page-hero'
 import { ImageCarousel } from '@/components/ui/image-carousel'
 import { SITE_URL } from '@/lib/site-config'
+import { 
+  createOpenGraph, 
+  createTwitterCard, 
+  standardRobots,
+  createBreadcrumbSchema,
+  createLocalBusinessSchema,
+} from '@/lib/structured-data'
 
 export const metadata: Metadata = {
-  title: 'Our Locations',
-  description: 'Find Pathways Within at five convenient Long Island locations. Garden City, Port Jefferson, Massapequa, Smithtown, and Rockville Centre offer both therapy and wellness services.',
+  title: 'Long Island Locations | Pathways Within Therapy and Wellness',
+  description: 'Find Pathways Within at five Long Island locations: Garden City, Port Jefferson, Massapequa, Smithtown, and Rockville Centre. Therapy and wellness services.',
   alternates: { canonical: `${SITE_URL}/locations` },
-  openGraph: { title: 'Our Locations | Pathways Within', url: `${SITE_URL}/locations` },
+  openGraph: createOpenGraph({
+    title: 'Long Island Locations | Pathways Within Therapy and Wellness',
+    description: 'Find Pathways Within at five Long Island locations: Garden City, Port Jefferson, Massapequa, Smithtown, and Rockville Centre. Therapy and wellness services.',
+    url: `${SITE_URL}/locations`,
+  }),
+  twitter: createTwitterCard({
+    title: 'Long Island Locations | Pathways Within Therapy and Wellness',
+    description: 'Find Pathways Within at five Long Island locations: Garden City, Port Jefferson, Massapequa, Smithtown, and Rockville Centre. Therapy and wellness services.',
+  }),
+  robots: standardRobots,
 }
 
 const locations = [
@@ -67,15 +82,78 @@ const locations = [
 ]
 
 export default function LocationsPage() {
+  const breadcrumbSchema = createBreadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'Locations', url: `${SITE_URL}/locations` },
+  ])
+
+  const locationSchemas = locations.map(loc => createLocalBusinessSchema({
+    name: loc.name,
+    slug: loc.slug,
+    address: loc.address,
+    city: loc.city.split(',')[0],
+    state: 'NY',
+    zip: loc.city.split(' ').pop() || '',
+    phone: loc.phone,
+  }))
+
   return (
     <>
-      <PageHero
-        eyebrow="Our Locations"
-        headline="Five locations to serve you"
-        body="We have five locations across the greater Long Island area. Each location offers both therapy and wellness services with dedicated parking for your convenience."
-        image="/images/hero/freepik__a-group-of-smiling-adults-of-various-ethnicities-i__72292.jpeg"
-        imageAlt="Pathways Within Long Island locations"
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
+      {locationSchemas.map((schema, idx) => (
+        <script
+          key={idx}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
+      {/* Map Hero Section */}
+      <section className="bg-[rgb(var(--color-cream))]">
+        <div className="container-site py-16 lg:py-24">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
+            {/* Text Content */}
+            <div>
+              <p className="eyebrow mb-4">Our Locations</p>
+              <h1 className="mb-6 text-[rgb(var(--color-navy))]">Five locations to serve you</h1>
+              <p className="text-lg text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
+                We have five locations across the greater Long Island area. Each location offers both therapy and wellness services with dedicated parking for your convenience.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                {locations.map((loc) => (
+                  <a
+                    key={loc.slug}
+                    href={`#${loc.slug}`}
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-medium text-[rgb(var(--color-navy))] shadow-sm transition-all hover:bg-[rgb(var(--color-green))] hover:text-white"
+                  >
+                    <MapPin className="h-3.5 w-3.5" />
+                    {loc.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+            
+            {/* Google Map Embed - Long Island Overview */}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-xl ring-1 ring-black/5">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387190.2799181496!2d-73.6048447!3d40.7575431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24369470a592b%3A0x4109d18b6c5c7b05!2sLong%20Island%2C%20NY!5e0!3m2!1sen!2sus!4v1706000000000!5m2!1sen!2sus"
+                width="100%"
+                height="100%"
+                style={{ border: 0, position: 'absolute', inset: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Pathways Within Long Island Locations"
+                className="grayscale-[20%] contrast-[1.1]"
+              />
+              {/* Map Overlay with Brand Touch */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgb(var(--color-navy))]/10 to-transparent" />
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Locations Grid */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
@@ -83,8 +161,9 @@ export default function LocationsPage() {
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {locations.map((location) => (
               <div 
-                key={location.name} 
-                className={`overflow-hidden rounded-lg bg-white shadow-sm ${location.featured ? 'ring-2 ring-[rgb(var(--color-green))]' : ''}`}
+                key={location.name}
+                id={location.slug}
+                className={`overflow-hidden rounded-lg bg-white shadow-sm scroll-mt-24 ${location.featured ? 'ring-2 ring-[rgb(var(--color-green))]' : ''}`}
               >
                 <ImageCarousel images={location.images} locationName={location.name} />
                 

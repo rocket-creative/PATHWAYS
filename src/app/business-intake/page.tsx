@@ -90,6 +90,14 @@ export default function BusinessIntakePage() {
         return
       }
 
+      // Check if email was sent
+      if (result.meta && !result.meta.emailSent) {
+        console.error('Email failed to send:', result.meta.emailError)
+        console.error('Debug info:', result.debug)
+        // Still show success to user, but log the error
+        // You can optionally show a warning to the user here
+      }
+
       setIsSubmitted(true)
       window.scrollTo(0, 0)
     } catch (err) {

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { Resend } from 'resend'
 
 const rateLimit = new Map<string, { count: number; resetAt: number }>()
 const RATE_LIMIT_WINDOW_MS = 60 * 1000
@@ -123,36 +124,25 @@ This is an automated message from the Pathways Within business intake form.
 
     console.log('Attempting to send email to:', recipients)
     console.log('From:', fromEmail)
+    console.log('Resend API key present:', !!resendApiKey)
 
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${resendApiKey}`,
-      },
-      body: JSON.stringify({
-        from: fromEmail,
-        to: recipients,
-        subject: 'New Business Intake: Online Presence Inventory',
-        text: emailBody,
-      }),
+    // Use Resend SDK
+    const resend = new Resend(resendApiKey)
+    
+    const result = await resend.emails.send({
+      from: fromEmail,
+      to: recipients,
+      subject: 'New Business Intake: Online Presence Inventory',
+      text: emailBody,
     })
 
-    if (!response.ok) {
-      const errorText = await response.text()
-      console.error('Resend API error:', response.status, errorText)
-      try {
-        const errorJson = JSON.parse(errorText)
-        console.error('Resend error details:', errorJson)
-      } catch {
-        // Not JSON, that's fine
-      }
-      return { success: false, error: `Failed to send email: ${response.status}` }
+    if (result.error) {
+      console.error('Resend SDK error:', result.error)
+      return { success: false, error: `Failed to send email: ${JSON.stringify(result.error)}` }
     }
 
-    const result = await response.json()
-    console.log('Email sent successfully:', result)
-    return { success: true, messageId: result.id }
+    console.log('Email sent successfully:', result.data)
+    return { success: true, messageId: result.data?.id }
   } catch (error) {
     console.error('Error sending email:', error)
     if (error instanceof Error) {
@@ -193,17 +183,38 @@ export async function POST(req: NextRequest) {
   const emailResult = await sendEmail(body as Record<string, unknown>)
 
   // Log email result for debugging
+  console.log('Email send result:', {
+    success: emailResult.success,
+    error: emailResult.error,
+    messageId: emailResult.messageId
+  })
+
   if (!emailResult.success) {
     console.error('Email sending failed:', emailResult.error)
+    // Return error details so we can debug
+    return NextResponse.json({ 
+      data: { ok: true }, 
+      meta: { 
+        message: 'Form submitted, but email failed to send. Please check server logs.',
+        emailSent: false,
+        emailError: emailResult.error
+      },
+      debug: {
+        hasResendKey: !!process.env.RESEND,
+        hasResendApiKey: !!process.env.RESEND_API_KEY,
+        recipientEmail: process.env.BUSINESS_INTAKE_EMAIL || 'georgestoff@rocketcreative.net',
+        fromEmail: process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
+      }
+    }, { status: 200 }) // Still return 200 so form shows success, but include error info
   }
 
-  // Always return success to user (even if email fails, we log it)
+  // Success - email sent
   return NextResponse.json({ 
     data: { ok: true }, 
     meta: { 
-      message: 'Thank you. Your inventory has been received.',
-      emailSent: emailResult.success,
-      emailError: emailResult.error || undefined
+      message: 'Thank you. Your inventory has been received and email notification sent.',
+      emailSent: true,
+      messageId: emailResult.messageId
     } 
   })
 }

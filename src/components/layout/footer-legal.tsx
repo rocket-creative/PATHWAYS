@@ -6,6 +6,7 @@ import { CookieSettingsTrigger } from './cookie-consent'
 const legal = [
   { href: '/privacy', label: 'Privacy policy' },
   { href: '/terms', label: 'Terms' },
+  { href: '/cookies', label: 'Cookie policy' },
   { href: '/accessibility', label: 'Accessibility' },
 ]
 

@@ -12,6 +12,7 @@ const services = [
 
 const company = [
   { href: '/start', label: 'Get Started', highlight: true },
+  { href: '/client-intake', label: 'Client intake' },
   { href: '/about', label: 'About us' },
   { href: '/wisdom/team', label: 'Therapy team' },
   { href: '/wellness/team', label: 'Wellness team' },

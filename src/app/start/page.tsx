@@ -102,7 +102,7 @@ export default function StartPage() {
             {/* Desktop Hero Image - Right Justified, Not Full Bleed */}
             <div className="relative hidden aspect-[3/4] overflow-hidden rounded-2xl lg:col-span-6 lg:block">
               <Image
-                src="/images/hero/hero-original-4-people.jpeg"
+                src="/images/hero/hero-4-people.png"
                 alt="People finding wellness at Pathways Within"
                 fill
                 className="object-cover object-center"
@@ -113,7 +113,7 @@ export default function StartPage() {
             {/* Mobile Hero Image */}
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl lg:hidden">
               <Image
-                src="/images/hero/hero-original-4-people.jpeg"
+                src="/images/hero/hero-4-people.png"
                 alt="People finding wellness at Pathways Within"
                 fill
                 className="object-cover object-center"
@@ -384,6 +384,13 @@ export default function StartPage() {
             <p className="mt-12 text-sm text-white/40">
               <Users className="mb-1 mr-2 inline h-4 w-4" />
               Join 5,000+ Long Islanders who&apos;ve found their path to wellness
+            </p>
+            <p className="mt-4 text-sm text-white/50">
+              New to Pathways? Complete our{' '}
+              <Link href="/client-intake" className="text-white underline hover:no-underline">
+                intake form
+              </Link>
+              {' '}to help us match you with the right provider.
             </p>
           </div>
         </div>

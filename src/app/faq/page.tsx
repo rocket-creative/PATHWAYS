@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { ArrowRight, ChevronDown, Phone, MessageCircle, AlertTriangle } from 'lucide-react'
+import { ArrowRight, ChevronDown, Phone, MessageCircle, AlertTriangle, PhoneCall } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
 import { faqCategories } from '@/data/faq'
 
@@ -43,7 +43,7 @@ export default function FAQPage() {
         eyebrow="FAQ"
         headline="We love answering questions"
         body="Here are some of the most common things people ask us. If you are curious about anything else, just reach out. We are always happy to help."
-        image="/images/hero/hero-original-4-people.jpeg"
+        image="/images/hero/hero-4-people.png"
         imageAlt="Friendly conversation"
       />
 
@@ -104,7 +104,7 @@ export default function FAQPage() {
             
             <h2 className="mb-6 text-[rgb(var(--color-navy))]">Need immediate help?</h2>
             <p className="mb-8 text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
-              If you are experiencing suicidal thoughts or feel at risk of harm, please seek help immediately.
+              If you are experiencing suicidal thoughts or feel at risk of harm, please seek help immediately. Do not wait for an appointment.
             </p>
             
             <div className="grid gap-4 md:grid-cols-2">
@@ -114,7 +114,7 @@ export default function FAQPage() {
                   <p className="font-semibold text-[rgb(var(--color-navy))]">988 Suicide & Crisis Lifeline</p>
                 </div>
                 <p className="text-sm text-[rgb(var(--color-text-light))]">
-                  Call, text, or chat • Veterans: Press 1
+                  Call, text, or chat • Veterans: Press 1 • Spanish: Presione 2
                 </p>
               </div>
               
@@ -127,6 +127,26 @@ export default function FAQPage() {
                   Text HOME to 741741
                 </p>
               </div>
+              
+              <div className="rounded-lg bg-white p-6">
+                <div className="mb-3 flex items-center gap-3">
+                  <PhoneCall className="h-5 w-5 text-[rgb(var(--color-green))]" />
+                  <p className="font-semibold text-[rgb(var(--color-navy))]">NYC Well</p>
+                </div>
+                <p className="text-sm text-[rgb(var(--color-text-light))]">
+                  888 NYC WELL (888 692 9355)
+                </p>
+              </div>
+              
+              <div className="rounded-lg bg-white p-6">
+                <div className="mb-3 flex items-center gap-3">
+                  <Phone className="h-5 w-5 text-[rgb(var(--color-green))]" />
+                  <p className="font-semibold text-[rgb(var(--color-navy))]">Emergency</p>
+                </div>
+                <p className="text-sm text-[rgb(var(--color-text-light))]">
+                  Call 911
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -136,24 +156,31 @@ export default function FAQPage() {
       <section className="border-t border-[rgb(var(--border))]/50 bg-gradient-navy">
         <div className="container-site py-20 lg:py-28">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="mb-6 text-white">Ready to take the next step?</h2>
+            <h2 className="mb-6 text-white">Still have questions?</h2>
             <p className="mb-10 text-lg text-white/70" style={{ lineHeight: 1.8 }}>
-              We&apos;re here to help you on your journey. Let us show you what integrated care looks like.
+              We are always happy to chat. Reach out and let us help you figure out the next step on your journey.
             </p>
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Link href="/start" className="btn-pill btn-pill-green">
-                <span className="btn-text">Get Started Today</span>
+              <Link href="/contact" className="btn-pill btn-pill-green">
+                <span className="btn-text">Contact us</span>
                 <span className="btn-arrow">
                   <ArrowRight />
                 </span>
               </Link>
-              <Link href="/contact" className="btn-pill btn-pill-white">
-                <span className="btn-text">Contact Us</span>
+              <a href="tel:+16313713825" className="btn-pill btn-pill-white">
+                <span className="btn-text">Call (631) 371-3825</span>
                 <span className="btn-arrow">
                   <ArrowRight />
                 </span>
-              </Link>
+              </a>
             </div>
+            <p className="mt-6 text-sm text-white/60">
+              New client?{' '}
+              <Link href="/client-intake" className="text-white underline hover:no-underline">
+                Complete our intake form
+              </Link>
+              .
+            </p>
           </div>
         </div>
       </section>

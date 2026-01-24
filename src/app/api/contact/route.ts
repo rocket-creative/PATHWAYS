@@ -27,7 +27,10 @@ function validateContactBody(body: unknown): ValidationResult {
   const phone = typeof o.phone === 'string' ? o.phone.slice(0, 20) : undefined
   const interest = typeof o.interest === 'string' ? o.interest.slice(0, 200) : undefined
   const location = typeof o.location === 'string' ? o.location.slice(0, 100) : undefined
+  const hearAbout = typeof o.hearAbout === 'string' ? o.hearAbout.slice(0, 100) : undefined
   const message = typeof o.message === 'string' ? o.message.slice(0, 2000) : undefined
+  const smsConsent = o.smsConsent === true
+  const emailMarketingConsent = o.emailMarketingConsent === true
 
   return {
     ok: true,
@@ -38,8 +41,11 @@ function validateContactBody(body: unknown): ValidationResult {
       phone: phone?.trim(),
       interest: interest?.trim(),
       location: location?.trim(),
+      hearAbout: hearAbout?.trim(),
       message: message?.trim(),
       privacyConsent: true,
+      smsConsent,
+      emailMarketingConsent,
     },
   }
 }

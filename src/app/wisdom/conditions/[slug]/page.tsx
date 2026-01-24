@@ -55,7 +55,7 @@ export default async function ConditionPage({ params }: PageProps) {
         headline={condition.name}
         subheadline={condition.headline}
         body={condition.overview}
-        image="/images/hero/hero-original-4-people.jpeg"
+        image="/images/hero/hero-4-people.png"
         imageAlt={`${condition.name} treatment at Pathways Within`}
         ctaText="Get help today"
         ctaHref="/contact"

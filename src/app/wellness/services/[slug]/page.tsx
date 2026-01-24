@@ -61,7 +61,7 @@ export default async function WellnessServicePage({ params }: PageProps) {
         headline={service.name}
         subheadline={service.headline}
         body={service.description}
-        image="/images/hero/hero-original-4-people.jpeg"
+        image="/images/hero/hero-4-people.png"
         imageAlt={`${service.name} at Pathways Within`}
         ctaText="Book appointment"
         ctaHref="/contact"

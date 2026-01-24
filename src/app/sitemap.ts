@@ -19,6 +19,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/privacy',
     '/terms',
     '/accessibility',
+    '/good-faith-estimate',
+    '/cookies',
     '/wellness',
     '/wellness/services',
     '/wellness/team',

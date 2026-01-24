@@ -21,8 +21,11 @@ export default function ContactPage() {
     phone: '',
     interest: '',
     location: '',
+    hearAbout: '',
     message: '',
     privacyConsent: false,
+    smsConsent: false,
+    emailMarketingConsent: false,
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -67,7 +70,7 @@ export default function ContactPage() {
         eyebrow="Contact"
         headline="Let's talk"
         body="Fill out the form below and someone from our team will be in touch. Or contact us directly by phone or email."
-        image="/images/hero/hero-original-4-people.jpeg"
+        image="/images/hero/hero-4-people.png"
         imageAlt="Warm and welcoming reception area at Pathways Within"
       />
 
@@ -95,6 +98,13 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  <p className="text-sm text-[rgb(var(--color-text-light))]">
+                    New client? Complete our{' '}
+                    <Link href="/client-intake" className="text-[rgb(var(--color-green))] underline hover:no-underline">
+                      intake form
+                    </Link>
+                    {' '}to help us match you with the right provider.
+                  </p>
                   {error && (
                     <div
                       className="rounded-lg border-l-4 border-[rgb(var(--color-green))] bg-[rgb(var(--color-linen))] p-4 text-sm text-[rgb(var(--color-navy))]"
@@ -202,8 +212,30 @@ export default function ContactPage() {
                         <option value="smithtown">Smithtown</option>
                         <option value="rockville-centre">Rockville Centre</option>
                         <option value="virtual">Virtual/Telehealth</option>
+                        <option value="not-sure">Not sure yet</option>
                       </select>
                     </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="hearAbout" className="mb-2 block text-sm font-semibold text-[rgb(var(--color-navy))]">
+                      How did you hear about us?
+                    </label>
+                    <select
+                      id="hearAbout"
+                      name="hearAbout"
+                      value={formData.hearAbout}
+                      onChange={handleChange}
+                      className="w-full rounded-lg border border-[rgb(var(--border))]/50 bg-white px-4 py-3 text-[rgb(var(--color-navy))] focus:border-[rgb(var(--color-green))] focus:outline-none focus:ring-1 focus:ring-[rgb(var(--color-green))]"
+                    >
+                      <option value="">Select an option</option>
+                      <option value="google">Google search</option>
+                      <option value="social">Social media</option>
+                      <option value="referral">Friend or family referral</option>
+                      <option value="provider">Healthcare provider referral</option>
+                      <option value="insurance">Insurance provider</option>
+                      <option value="other">Other</option>
+                    </select>
                   </div>
 
                   <div>
@@ -221,7 +253,7 @@ export default function ContactPage() {
                     />
                   </div>
 
-                  <div className="rounded-lg bg-[rgb(var(--color-linen))] p-6">
+                  <div className="rounded-lg bg-[rgb(var(--color-linen))] p-6 space-y-4">
                     <label className="flex cursor-pointer items-start gap-3">
                       <input
                         type="checkbox"
@@ -235,7 +267,38 @@ export default function ContactPage() {
                         I agree to the <Link href="/privacy" className="text-[rgb(var(--color-green))] underline">Privacy Policy</Link> and <Link href="/terms" className="text-[rgb(var(--color-green))] underline">Terms of Service</Link> <span className="text-[rgb(var(--color-green))]">*</span>
                       </span>
                     </label>
+                    <label className="flex cursor-pointer items-start gap-3">
+                      <input
+                        type="checkbox"
+                        name="smsConsent"
+                        checked={formData.smsConsent}
+                        onChange={handleChange}
+                        className="mt-1 h-4 w-4 rounded border-[rgb(var(--border))] text-[rgb(var(--color-green))] focus:ring-[rgb(var(--color-green))]"
+                      />
+                      <span className="text-sm text-[rgb(var(--color-text-light))]">
+                        I consent to receive appointment reminders and updates via automated SMS to the phone number provided. Message and data rates may apply. Message frequency varies. Reply STOP to opt out at any time. Consent is not a condition of service.
+                      </span>
+                    </label>
+                    <label className="flex cursor-pointer items-start gap-3">
+                      <input
+                        type="checkbox"
+                        name="emailMarketingConsent"
+                        checked={formData.emailMarketingConsent}
+                        onChange={handleChange}
+                        className="mt-1 h-4 w-4 rounded border-[rgb(var(--border))] text-[rgb(var(--color-green))] focus:ring-[rgb(var(--color-green))]"
+                      />
+                      <span className="text-sm text-[rgb(var(--color-text-light))]">
+                        I would like to receive wellness tips, resources, and special offers via email. You can unsubscribe anytime.
+                      </span>
+                    </label>
                   </div>
+
+                  <p className="text-sm text-[rgb(var(--color-text-light))]">
+                    You have the right to receive a Good Faith Estimate of the total expected cost of your care.{' '}
+                    <Link href="/good-faith-estimate" className="text-[rgb(var(--color-green))] underline hover:no-underline">
+                      Learn more
+                    </Link>
+                  </p>
 
                   <button
                     type="submit"
@@ -323,6 +386,28 @@ export default function ContactPage() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* What happens next */}
+      <section className="border-t border-[rgb(var(--border))]/50 bg-white">
+        <div className="container-site py-20 lg:py-28">
+          <div className="mx-auto max-w-3xl">
+            <p className="eyebrow mb-4">Next steps</p>
+            <h2 className="mb-6 text-[rgb(var(--color-navy))]">What happens next?</h2>
+            <p className="mb-8 text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
+              After you reach out, a member of our team will contact you within one business day to discuss your needs and answer any questions. We will help you:
+            </p>
+            <ol className="mb-8 list-decimal list-inside space-y-3 text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
+              <li>Understand your options for therapy and wellness services</li>
+              <li>Verify your insurance benefits (if applicable)</li>
+              <li>Find the right provider for your needs</li>
+              <li>Schedule your first appointment</li>
+            </ol>
+            <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
+              There is no pressure and no obligation. This is simply a conversation to help you decide if Pathways Within is right for you.
+            </p>
           </div>
         </div>
       </section>

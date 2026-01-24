@@ -84,13 +84,23 @@ export function Navigation() {
   return (
     <header className="border-b border-[rgb(var(--border))] bg-white">
       <nav className="flex h-14 items-center justify-between px-6 lg:h-16 lg:px-12">
-        {/* Admin Intake Button - Top Left */}
-        <Link 
-          href="/business-intake"
-          className="rounded bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700 transition-colors"
-        >
-          Intake
-        </Link>
+        {/* Admin Buttons - Top Left */}
+        <div className="flex items-center gap-2">
+          <Link 
+            href="/business-intake"
+            className="rounded bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700 transition-colors"
+          >
+            Intake
+          </Link>
+          <a 
+            href="https://crm-sooty-one.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded bg-[rgb(var(--color-navy))] px-3 py-1.5 text-xs font-medium text-white hover:bg-[rgb(var(--color-navy))]/80 transition-colors"
+          >
+            CRM
+          </a>
+        </div>
 
         {/* Desktop Navigation */}
         <div ref={dropdownRef} className="hidden items-center gap-6 lg:flex xl:gap-8">
@@ -133,12 +143,22 @@ export function Navigation() {
         }`}
       >
         <div className="flex h-14 items-center justify-between px-6">
-          <Link 
-            href="/business-intake"
-            className="rounded bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700 transition-colors"
-          >
-            Intake
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link 
+              href="/business-intake"
+              className="rounded bg-red-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-700 transition-colors"
+            >
+              Intake
+            </Link>
+            <a 
+              href="https://crm-sooty-one.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded bg-white/20 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/30 transition-colors"
+            >
+              CRM
+            </a>
+          </div>
           <button onClick={() => setIsOpen(false)} className="p-2 text-white" aria-label="Close menu">
             <X className="h-6 w-6" />
           </button>

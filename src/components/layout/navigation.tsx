@@ -92,14 +92,12 @@ export function Navigation() {
           >
             Intake
           </Link>
-          <a 
-            href="https://crm-sooty-one.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link 
+            href="/crm"
             className="rounded bg-[rgb(var(--color-navy))] px-3 py-1.5 text-xs font-medium text-white hover:bg-[rgb(var(--color-navy))]/80 transition-colors"
           >
             CRM
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Navigation */}
@@ -150,14 +148,12 @@ export function Navigation() {
             >
               Intake
             </Link>
-            <a 
-              href="https://crm-sooty-one.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link 
+              href="/crm"
               className="rounded bg-white/20 px-3 py-1.5 text-xs font-medium text-white hover:bg-white/30 transition-colors"
             >
               CRM
-            </a>
+            </Link>
           </div>
           <button onClick={() => setIsOpen(false)} className="p-2 text-white" aria-label="Close menu">
             <X className="h-6 w-6" />

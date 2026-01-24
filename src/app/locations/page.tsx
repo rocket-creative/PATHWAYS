@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, MapPin, Phone, Clock, Car, Monitor } from 'lucide-react'
 import { ImageCarousel } from '@/components/ui/image-carousel'
 import { SITE_URL } from '@/lib/site-config'
@@ -135,21 +136,16 @@ export default function LocationsPage() {
               </div>
             </div>
             
-            {/* Google Map Embed - Long Island Overview */}
+            {/* Hero Map Image */}
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-xl ring-1 ring-black/5">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387190.2799181496!2d-73.6048447!3d40.7575431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24369470a592b%3A0x4109d18b6c5c7b05!2sLong%20Island%2C%20NY!5e0!3m2!1sen!2sus!4v1706000000000!5m2!1sen!2sus"
-                width="100%"
-                height="100%"
-                style={{ border: 0, position: 'absolute', inset: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Pathways Within Long Island Locations"
-                className="grayscale-[20%] contrast-[1.1]"
+              <Image
+                src="/images/hero/locations-map.png"
+                alt="Map of Long Island area"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                priority
               />
-              {/* Map Overlay with Brand Touch */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[rgb(var(--color-navy))]/10 to-transparent" />
             </div>
           </div>
         </div>

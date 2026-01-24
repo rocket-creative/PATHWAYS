@@ -11,7 +11,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ 
   image = '/images/hero/hero-main.png',
-  imageAlt = 'Diverse group of smiling people'
+  imageAlt = 'Smiling couple'
 }: HeroSectionProps) {
   const scrollToNext = () => {
     const sections = document.querySelectorAll('section')

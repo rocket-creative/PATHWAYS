@@ -63,9 +63,6 @@ export default function StartPage() {
               className="object-cover object-center"
               priority
             />
-            {/* Gradient overlay to blend with left side */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[rgb(var(--color-navy))] via-[rgb(var(--color-navy))]/80 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[rgb(var(--color-navy))]/50 to-transparent" />
           </div>
         </div>
 
@@ -123,7 +120,6 @@ export default function StartPage() {
                 fill
                 className="object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[rgb(var(--color-navy))]/30 to-transparent" />
             </div>
           </div>
         </div>

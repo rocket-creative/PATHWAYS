@@ -25,9 +25,22 @@ const config: Config = {
         // Brand Colors
         white: '#FDFDFD',
         cream: '#FAF9F7',
-        linen: '#F5F4F2',
+        linen: {
+          DEFAULT: '#F5F4F2',
+          50: '#FAFAF9',
+          100: '#F5F4F2',
+          200: '#ECEAE6',
+          300: '#E0DDD8',
+        },
         placeholder: '#DCDAD7',
-        breezy: '#86A8E1',
+        breezy: {
+          DEFAULT: '#86A8E1',
+          100: '#E8EFF9',
+          200: '#C5D7F2',
+          300: '#A3C0EB',
+          400: '#86A8E1',
+          500: '#6490D7',
+        },
         navy: {
           DEFAULT: '#01153D',
           50: '#E8EBF2',

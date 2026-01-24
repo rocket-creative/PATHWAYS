@@ -29,40 +29,41 @@ export function HeroSection({
           <div className="w-full px-6 py-12 sm:px-8 lg:col-span-6 lg:px-0">
             {/* Content box with glass effect */}
             <div className="rounded-lg bg-white/50 p-8 shadow-2xl backdrop-blur-xl lg:p-12">
-            <Link href="/" className="mb-8 block lg:mb-10">
-              <Image 
-                src="/logo.png" 
-                alt="Pathways Within - Home" 
-                width={280}
-                height={100}
-                className="w-[180px] transition-opacity hover:opacity-80 lg:w-[240px]"
-              />
-            </Link>
-            
-            <h1 className="mb-6 text-[rgb(var(--color-navy))]" style={{ lineHeight: 1.1, fontWeight: 300 }}>
-              Discover<br />
-              your path<br />
-              to wellness
-            </h1>
-            
-            <p 
-              className="mb-8 max-w-md text-lg text-[rgb(var(--color-text-light))]" 
-              style={{ lineHeight: 1.7 }}
-            >
-              Since 2018, Pathways Within has offered integrated therapy and 
-              wellness services across Long Island. Mind, body, and spirit — 
-              we believe true healing honors the whole person.
-            </p>
-            
-            <div className="flex flex-wrap items-center gap-4">
-              <Link href="/wisdom/services" className="btn-pill btn-pill-primary">
-                <span className="btn-text">Explore therapy</span>
-                <span className="btn-arrow"><ArrowRight aria-hidden="true" /></span>
+              <Link href="/" className="mb-8 block lg:mb-10">
+                <Image 
+                  src="/logo.png" 
+                  alt="Pathways Within - Home" 
+                  width={280}
+                  height={100}
+                  className="w-[180px] transition-opacity hover:opacity-80 lg:w-[240px]"
+                />
               </Link>
-              <Link href="/wellness/services" className="btn-pill btn-pill-secondary">
-                <span className="btn-text">Explore wellness</span>
-                <span className="btn-arrow"><ArrowRight aria-hidden="true" /></span>
-              </Link>
+              
+              <h1 className="mb-6 text-[rgb(var(--color-navy))]" style={{ lineHeight: 1.1, fontWeight: 300 }}>
+                Discover<br />
+                your path<br />
+                to wellness
+              </h1>
+              
+              <p 
+                className="mb-8 max-w-md text-lg text-[rgb(var(--color-text-light))]" 
+                style={{ lineHeight: 1.7 }}
+              >
+                Since 2018, Pathways Within has offered integrated therapy and 
+                wellness services across Long Island. Mind, body, and spirit — 
+                we believe true healing honors the whole person.
+              </p>
+              
+              <div className="flex flex-wrap items-center gap-4">
+                <Link href="/wisdom/services" className="btn-pill btn-pill-primary">
+                  <span className="btn-text">Explore therapy</span>
+                  <span className="btn-arrow"><ArrowRight aria-hidden="true" /></span>
+                </Link>
+                <Link href="/wellness/services" className="btn-pill btn-pill-secondary">
+                  <span className="btn-text">Explore wellness</span>
+                  <span className="btn-arrow"><ArrowRight aria-hidden="true" /></span>
+                </Link>
+              </div>
             </div>
           </div>
           

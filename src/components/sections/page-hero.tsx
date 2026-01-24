@@ -53,14 +53,14 @@ export function PageHero({
       <div className="relative flex min-h-[85vh]">
         {/* Left - Content with white background (~40%) */}
         <div className="flex w-full flex-col justify-center bg-white px-6 py-12 sm:px-8 lg:w-[40%] lg:px-12 xl:px-16">
-          {/* Logo */}
+          {/* Logo - Fixed size across all heroes */}
           <Link href="/" className="mb-10 block lg:mb-14">
             <Image 
               src="/logo.png" 
               alt="Pathways Within - Home" 
-              width={220}
-              height={80}
-              className="w-[180px] transition-opacity hover:opacity-80 lg:w-[220px]"
+              width={280}
+              height={100}
+              className="w-[200px] transition-opacity hover:opacity-80 lg:w-[280px]"
             />
           </Link>
           

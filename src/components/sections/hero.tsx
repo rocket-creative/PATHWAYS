@@ -75,17 +75,36 @@ export function HeroSection({
           </div>
         </div>
         
-        {/* Right - Empty spacer to show background image (~60%) */}
-        <div className="hidden lg:block lg:w-[60%]" aria-hidden="true" />
+        {/* Right - Image area with overlapping content block (~60%) */}
+        <div className="relative hidden lg:block lg:w-[60%]">
+          {/* Overlapping content block - sits on image */}
+          <div className="absolute bottom-24 left-0 w-96 bg-gradient-navy p-10 transition-transform duration-300 ease-out hover:-translate-y-2">
+            <h3 className="mb-4 text-white" style={{ fontWeight: 400 }}>
+              Therapy & Wellness
+            </h3>
+            <p className="mb-6 text-sm text-white/70" style={{ lineHeight: 1.7 }}>
+              Individual therapy, couples counseling, massage, 
+              acupuncture, skincare, and more — all under one roof.
+            </p>
+            <Link 
+              href="/wisdom/services" 
+              className="group inline-flex items-center gap-2 text-sm uppercase tracking-widest text-white transition-all hover:gap-3"
+              style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}
+            >
+              Learn more
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
       </div>
       
-      {/* Scroll indicator */}
+      {/* Scroll indicator - centered */}
       <button 
         onClick={scrollToNext}
-        className="absolute bottom-6 left-[20%] hidden -translate-x-1/2 flex-col items-center gap-2 text-sm text-[rgb(var(--color-text-light))] transition-colors hover:text-[rgb(var(--color-navy))] lg:flex"
+        className="scroll-indicator absolute bottom-8 left-1/2 hidden -translate-x-1/2 lg:flex"
         aria-label="Scroll to next section"
       >
-        <span className="text-xs uppercase tracking-wider">View more</span>
+        <span>View more</span>
         <ArrowDown className="h-4 w-4 animate-bounce" aria-hidden="true" />
       </button>
     </section>

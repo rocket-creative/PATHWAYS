@@ -114,13 +114,13 @@ export function PageHero({
         <div className="hidden lg:block lg:w-[60%]" aria-hidden="true" />
       </div>
       
-      {/* Scroll indicator */}
+      {/* Scroll indicator - centered */}
       <button 
         onClick={scrollToContent}
-        className="absolute bottom-6 left-[20%] hidden -translate-x-1/2 flex-col items-center gap-2 text-sm text-[rgb(var(--color-text-light))] transition-colors hover:text-[rgb(var(--color-navy))] lg:flex"
+        className="scroll-indicator absolute bottom-8 left-1/2 hidden -translate-x-1/2 lg:flex"
         aria-label="Scroll to content"
       >
-        <span className="text-xs uppercase tracking-wider">Explore</span>
+        <span>Explore</span>
         <ArrowDown className="h-4 w-4 animate-bounce" aria-hidden="true" />
       </button>
     </section>

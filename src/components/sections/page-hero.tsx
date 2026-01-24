@@ -13,6 +13,11 @@ interface PageHeroProps {
   imageAlt?: string
   ctaText?: string
   ctaHref?: string
+  // Optional overlay box on image
+  overlayTitle?: string
+  overlayText?: string
+  overlayLinkText?: string
+  overlayLinkHref?: string
 }
 
 export function PageHero({ 
@@ -23,8 +28,13 @@ export function PageHero({
   image,
   imageAlt = 'Pathways Within',
   ctaText,
-  ctaHref
+  ctaHref,
+  overlayTitle,
+  overlayText,
+  overlayLinkText,
+  overlayLinkHref
 }: PageHeroProps) {
+  const showOverlay = overlayTitle || overlayText
   const scrollToContent = () => {
     const main = document.querySelector('main')
     if (main) {
@@ -37,14 +47,14 @@ export function PageHero({
 
   return (
     <section className="relative min-h-[85vh]">
-      {/* Background Image */}
+      {/* Background Image - right justified */}
       <div className="absolute inset-0">
         <Image
           src={image}
           alt={imageAlt}
           fill
           priority
-          className="object-cover"
+          className="object-cover object-right"
           sizes="100vw"
         />
       </div>
@@ -110,8 +120,34 @@ export function PageHero({
           )}
         </div>
         
-        {/* Right - Empty spacer */}
-        <div className="hidden lg:block lg:w-[60%]" aria-hidden="true" />
+        {/* Right - Image area with optional overlay (~60%) */}
+        <div className="relative hidden lg:block lg:w-[60%]">
+          {/* Overlapping content block - sits on image */}
+          {showOverlay && (
+            <div className="absolute bottom-24 left-0 w-96 bg-gradient-navy p-10 transition-transform duration-300 ease-out hover:-translate-y-2">
+              {overlayTitle && (
+                <h3 className="mb-4 text-white" style={{ fontWeight: 400 }}>
+                  {overlayTitle}
+                </h3>
+              )}
+              {overlayText && (
+                <p className="mb-6 text-sm text-white/70" style={{ lineHeight: 1.7 }}>
+                  {overlayText}
+                </p>
+              )}
+              {overlayLinkText && overlayLinkHref && (
+                <Link 
+                  href={overlayLinkHref} 
+                  className="group inline-flex items-center gap-2 text-sm uppercase tracking-widest text-white transition-all hover:gap-3"
+                  style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}
+                >
+                  {overlayLinkText}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              )}
+            </div>
+          )}
+        </div>
       </div>
       
       {/* Scroll indicator - centered */}

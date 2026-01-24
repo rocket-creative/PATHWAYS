@@ -77,7 +77,7 @@ export function Navigation() {
 
   return (
     <header className="border-b border-[rgb(var(--border))] bg-white">
-      <nav className="flex h-14 items-center justify-center px-6 lg:h-16 lg:px-12">
+      <nav className="flex h-14 items-center justify-end px-6 lg:h-16 lg:px-12">
         {/* Desktop Navigation */}
         <div ref={dropdownRef} className="hidden items-center gap-6 lg:flex xl:gap-8">
           {navLinks.map((link) => (

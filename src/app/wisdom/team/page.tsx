@@ -232,7 +232,7 @@ export default function TherapyTeamPage() {
         eyebrow="Our Team"
         headline="Meet our therapists"
         body="Our clinical team includes licensed clinical social workers, licensed mental health counselors, and licensed marriage and family therapists. Each clinician works with special populations based on their expertise and passions."
-        image="/images/hero/freepik__a-diverse-group-of-smiling-adults-east-asian-femal__72299.jpeg"
+        image="/images/hero/freepik__ecommerce-catalog-photo-of-a-group-of-4-happy-dive__69753.jpeg"
         imageAlt="Therapy team at Pathways Within"
       />
 

@@ -10,7 +10,7 @@ interface HeroSectionProps {
 }
 
 export function HeroSection({ 
-  image = '/images/hero/hero-main.jpg',
+  image = '/images/hero/freepik__4-diverse-happy-people-standing-together-on-right-__69755.jpeg',
   imageAlt = 'Diverse group of smiling people'
 }: HeroSectionProps) {
   const scrollToNext = () => {
@@ -22,14 +22,14 @@ export function HeroSection({
 
   return (
     <section className="relative min-h-[85vh]">
-      {/* Background Image */}
+      {/* Background Image - right justified */}
       <div className="absolute inset-0">
         <Image
           src={image}
           alt={imageAlt}
           fill
           priority
-          className="object-cover"
+          className="object-cover object-right"
           sizes="100vw"
         />
       </div>

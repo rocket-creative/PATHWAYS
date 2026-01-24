@@ -102,8 +102,8 @@ export default function StartPage() {
             {/* Desktop Hero Image - Right Justified, Not Full Bleed */}
             <div className="relative hidden aspect-[3/4] overflow-hidden rounded-2xl lg:col-span-6 lg:block">
               <Image
-                src="/images/hero/hero-4-people.png"
-                alt="People finding wellness at Pathways Within"
+                src="/images/hero/hero-couple.png"
+                alt="Happy couple finding wellness at Pathways Within"
                 fill
                 className="object-cover object-center"
                 priority
@@ -113,8 +113,8 @@ export default function StartPage() {
             {/* Mobile Hero Image */}
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl lg:hidden">
               <Image
-                src="/images/hero/hero-4-people.png"
-                alt="People finding wellness at Pathways Within"
+                src="/images/hero/hero-couple.png"
+                alt="Happy couple finding wellness at Pathways Within"
                 fill
                 className="object-cover object-center"
               />

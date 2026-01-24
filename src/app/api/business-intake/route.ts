@@ -92,6 +92,11 @@ function formatFormData(data: Record<string, unknown>): string {
   // Format all data
   formatNested(unflattened)
 
+  // If no data was formatted, add a note
+  if (formatted.split('\n').length <= 4) {
+    formatted += '\nNote: Form was submitted but no data was provided.\n'
+  }
+
   return formatted
 }
 
@@ -179,8 +184,23 @@ export async function POST(req: NextRequest) {
     )
   }
 
+  const formData = body as Record<string, unknown>
+  
+  // Log received data for debugging
+  console.log('Received form data:', JSON.stringify(formData, null, 2))
+  console.log('Number of fields received:', Object.keys(formData).length)
+
+  // Check if we have any data
+  if (Object.keys(formData).length === 0) {
+    console.error('No form data received')
+    return NextResponse.json(
+      { error: { code: 'EMPTY_FORM', message: 'No form data provided.' } },
+      { status: 400 }
+    )
+  }
+
   // Try to send email
-  const emailResult = await sendEmail(body as Record<string, unknown>)
+  const emailResult = await sendEmail(formData)
 
   // Log email result for debugging
   console.log('Email send result:', {

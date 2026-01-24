@@ -62,6 +62,10 @@ export default function BusinessIntakePage() {
 
       // Convert FormData to object
       for (const [key, value] of formData.entries()) {
+        // Skip empty values
+        if (!value || (typeof value === 'string' && value.trim() === '')) {
+          continue
+        }
         // Handle checkboxes - if multiple values, create array
         if (data[key]) {
           if (Array.isArray(data[key])) {
@@ -72,6 +76,17 @@ export default function BusinessIntakePage() {
         } else {
           data[key] = value
         }
+      }
+
+      // Log what we're sending for debugging
+      console.log('Form data being sent:', data)
+      console.log('Number of fields:', Object.keys(data).length)
+
+      // Check if we have any data
+      if (Object.keys(data).length === 0) {
+        setError('Please fill out at least one field before submitting.')
+        setIsSubmitting(false)
+        return
       }
 
       // Send to API
@@ -876,6 +891,15 @@ export default function BusinessIntakePage() {
                   </div>
                 </div>
               )}
+            </div>
+
+            {/* Contact Information */}
+            <div className="rounded-lg bg-white overflow-hidden shadow-sm p-6 space-y-6">
+              <h2 className="text-xl font-bold text-[#01153D] mb-4">Contact Information</h2>
+              <div className="grid gap-4 md:grid-cols-2">
+                <InputField label="Your Name" name="contact.name" placeholder="Enter your name" />
+                <InputField label="Your Email" name="contact.email" type="email" placeholder="your@email.com" />
+              </div>
             </div>
 
             {/* Additional Information */}

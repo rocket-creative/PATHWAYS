@@ -5,7 +5,5 @@
   "name": "pathways-main",
   "git": {
     "deploymentEnabled": true
-  },
-  "cnam": null,
-  "alias": ["pathways.within"]
+  }
 }

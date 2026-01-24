@@ -52,17 +52,17 @@ export default function BusinessIntakePage() {
     return (
       <div className="min-h-screen bg-[#FAF9F7] flex items-center justify-center">
         <div className="container max-w-2xl mx-auto px-6 py-20">
-          <div className="rounded-2xl bg-[#72A23B]/10 p-12 text-center">
+          <div className="rounded-2xl bg-green-50 border-2 border-green-200 p-12 text-center">
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-[#72A23B]">
               <Check className="h-8 w-8 text-white" />
             </div>
-            <h2 className="mb-4 text-2xl font-semibold text-[#01153D]">Thank you for completing the inventory</h2>
-            <p className="mb-8 text-[#01153D]/70" style={{ lineHeight: 1.8 }}>
+            <h2 className="mb-4 text-2xl font-bold text-[#01153D]">Thank you for completing the inventory</h2>
+            <p className="mb-8 text-gray-700" style={{ lineHeight: 1.8 }}>
               We've received your online presence information. Our team will review this and reach out if we need any additional details. Please remember to share passwords through a secure method.
             </p>
             <Link 
               href="/" 
-              className="inline-flex items-center gap-2 bg-[#72A23B] text-white px-6 py-3 rounded-full font-medium hover:bg-[#72A23B]/90 transition-colors"
+              className="inline-flex items-center gap-2 bg-[#72A23B] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#5a8a2e] transition-colors"
             >
               <span>Return home</span>
               <ArrowRight className="h-4 w-4" />
@@ -77,29 +77,29 @@ export default function BusinessIntakePage() {
     <button
       type="button"
       onClick={() => toggleSection(section)}
-      className="w-full flex items-center justify-between p-6 bg-white rounded-t-lg border-b border-[#F5F4F2] hover:bg-[#FAF9F7]/50 transition-colors"
+      className="w-full flex items-center justify-between p-6 bg-gray-50 rounded-t-lg border-b-2 border-gray-200 hover:bg-gray-100 transition-colors"
     >
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#72A23B]/10">
-          <Icon className="h-5 w-5 text-[#72A23B]" />
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#72A23B]">
+          <Icon className="h-5 w-5 text-white" />
         </div>
-        <h2 className="text-lg font-semibold text-[#01153D]">{title}</h2>
+        <h2 className="text-lg font-bold text-[#01153D]">{title}</h2>
       </div>
       {expandedSections[section] ? (
-        <ChevronUp className="h-5 w-5 text-[#01153D]/50" />
+        <ChevronUp className="h-6 w-6 text-[#01153D]" />
       ) : (
-        <ChevronDown className="h-5 w-5 text-[#01153D]/50" />
+        <ChevronDown className="h-6 w-6 text-[#01153D]" />
       )}
     </button>
   )
 
   const InputField = ({ label, placeholder, type = 'text' }: { label: string; placeholder?: string; type?: string }) => (
     <div>
-      <label className="mb-2 block text-sm font-medium text-[#01153D]">{label}</label>
+      <label className="mb-2 block text-sm font-semibold text-[#01153D]">{label}</label>
       <input
         type={type}
         placeholder={placeholder}
-        className="w-full rounded-lg border border-[#F5F4F2] px-4 py-3 focus:border-[#72A23B] focus:outline-none focus:ring-1 focus:ring-[#72A23B] text-[#01153D]"
+        className="w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-[#72A23B] focus:outline-none focus:ring-2 focus:ring-[#72A23B]/20"
       />
     </div>
   )
@@ -108,15 +108,15 @@ export default function BusinessIntakePage() {
     <label className="flex items-center gap-3 cursor-pointer">
       <input 
         type="checkbox" 
-        className="h-4 w-4 rounded border-[#F5F4F2] text-[#72A23B] focus:ring-[#72A23B]" 
+        className="h-5 w-5 rounded border-2 border-gray-400 text-[#72A23B] focus:ring-[#72A23B] focus:ring-2" 
       />
-      <span className="text-sm text-[#01153D]">{label}</span>
+      <span className="text-sm font-medium text-gray-800">{label}</span>
     </label>
   )
 
   const AccountSection = ({ name, fields }: { name: string; fields: string[] }) => (
-    <div className="border-b border-[#F5F4F2] pb-6 last:border-0 last:pb-0">
-      <h3 className="mb-4 font-medium text-[#01153D]">{name}</h3>
+    <div className="border-b-2 border-gray-200 pb-6 last:border-0 last:pb-0">
+      <h3 className="mb-4 text-base font-bold text-[#01153D]">{name}</h3>
       <div className="grid gap-4 md:grid-cols-2">
         {fields.map(field => (
           <InputField key={field} label={field} />
@@ -153,34 +153,34 @@ export default function BusinessIntakePage() {
       </section>
 
       {/* Info Cards */}
-      <section className="border-b border-[#F5F4F2] bg-white">
+      <section className="border-b-2 border-gray-200 bg-white">
         <div className="container max-w-5xl mx-auto px-6 py-12">
           <div className="grid gap-6 md:grid-cols-3">
-            <div className="flex items-start gap-4 rounded-lg border border-[#F5F4F2] p-6">
-              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#72A23B]/10">
-                <Building2 className="h-5 w-5 text-[#72A23B]" />
+            <div className="flex items-start gap-4 rounded-lg border-2 border-gray-200 bg-gray-50 p-6">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#72A23B]">
+                <Building2 className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h3 className="mb-1 text-sm font-medium text-[#01153D]">Comprehensive</h3>
-                <p className="text-sm text-[#01153D]/60">Covers all major platforms and services</p>
+                <h3 className="mb-1 text-sm font-bold text-[#01153D]">Comprehensive</h3>
+                <p className="text-sm text-gray-700">Covers all major platforms and services</p>
               </div>
             </div>
-            <div className="flex items-start gap-4 rounded-lg border border-[#F5F4F2] p-6">
-              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#72A23B]/10">
-                <Shield className="h-5 w-5 text-[#72A23B]" />
+            <div className="flex items-start gap-4 rounded-lg border-2 border-gray-200 bg-gray-50 p-6">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#72A23B]">
+                <Shield className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h3 className="mb-1 text-sm font-medium text-[#01153D]">Secure</h3>
-                <p className="text-sm text-[#01153D]/60">Share passwords through a separate secure channel</p>
+                <h3 className="mb-1 text-sm font-bold text-[#01153D]">Secure</h3>
+                <p className="text-sm text-gray-700">Share passwords through a separate secure channel</p>
               </div>
             </div>
-            <div className="flex items-start gap-4 rounded-lg border border-[#F5F4F2] p-6">
-              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#72A23B]/10">
-                <Globe className="h-5 w-5 text-[#72A23B]" />
+            <div className="flex items-start gap-4 rounded-lg border-2 border-gray-200 bg-gray-50 p-6">
+              <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[#72A23B]">
+                <Globe className="h-5 w-5 text-white" />
               </div>
               <div>
-                <h3 className="mb-1 text-sm font-medium text-[#01153D]">Complete Picture</h3>
-                <p className="text-sm text-[#01153D]/60">Helps us manage your entire digital footprint</p>
+                <h3 className="mb-1 text-sm font-bold text-[#01153D]">Complete Picture</h3>
+                <p className="text-sm text-gray-700">Helps us manage your entire digital footprint</p>
               </div>
             </div>
           </div>
@@ -244,8 +244,8 @@ export default function BusinessIntakePage() {
                     name="Google Business Profile" 
                     fields={['Business Name', 'Profile URL', 'Google Account Email', 'Number of Locations', 'Notes']} 
                   />
-                  <div className="border-b border-[#F5F4F2] pb-6">
-                    <h3 className="mb-4 font-medium text-[#01153D]">Verification Status</h3>
+                  <div className="border-b-2 border-gray-200 pb-6">
+                    <h3 className="mb-4 font-bold text-[#01153D]">Verification Status</h3>
                     <div className="flex gap-6">
                       <CheckboxField label="Verified" />
                       <CheckboxField label="Unverified" />
@@ -285,8 +285,8 @@ export default function BusinessIntakePage() {
                     name="Primary Website" 
                     fields={['Domain Name', 'Registrar', 'Registrar Account Email', 'Hosting Provider', 'Hosting Account Email', 'Notes']} 
                   />
-                  <div className="border-b border-[#F5F4F2] pb-6">
-                    <h3 className="mb-4 font-medium text-[#01153D]">CMS Platform</h3>
+                  <div className="border-b-2 border-gray-200 pb-6">
+                    <h3 className="mb-4 font-bold text-[#01153D]">CMS Platform</h3>
                     <div className="flex flex-wrap gap-4">
                       <CheckboxField label="WordPress" />
                       <CheckboxField label="Webflow" />
@@ -299,8 +299,8 @@ export default function BusinessIntakePage() {
                       <InputField label="CMS Admin Email" />
                     </div>
                   </div>
-                  <div className="border-b border-[#F5F4F2] pb-6">
-                    <h3 className="mb-4 font-medium text-[#01153D]">SSL Certificate</h3>
+                  <div className="border-b-2 border-gray-200 pb-6">
+                    <h3 className="mb-4 font-bold text-[#01153D]">SSL Certificate</h3>
                     <div className="flex gap-6">
                       <CheckboxField label="Active" />
                       <CheckboxField label="Expired" />
@@ -435,8 +435,8 @@ export default function BusinessIntakePage() {
               <SectionHeader title="7. Review Platforms" section="reviews" icon={Globe} />
               {expandedSections.reviews && (
                 <div className="p-6 space-y-6">
-                  <div className="border-b border-[#F5F4F2] pb-6">
-                    <h3 className="mb-4 font-medium text-[#01153D]">Google Reviews</h3>
+                  <div className="border-b-2 border-gray-200 pb-6">
+                    <h3 className="mb-4 font-bold text-[#01153D]">Google Reviews</h3>
                     <div className="grid gap-4 md:grid-cols-2">
                       <InputField label="Number of Reviews" />
                       <InputField label="Average Rating" />
@@ -445,8 +445,8 @@ export default function BusinessIntakePage() {
                       <CheckboxField label="Management Access" />
                     </div>
                   </div>
-                  <div className="border-b border-[#F5F4F2] pb-6">
-                    <h3 className="mb-4 font-medium text-[#01153D]">Facebook Reviews</h3>
+                  <div className="border-b-2 border-gray-200 pb-6">
+                    <h3 className="mb-4 font-bold text-[#01153D]">Facebook Reviews</h3>
                     <div className="grid gap-4 md:grid-cols-2">
                       <InputField label="Number of Reviews" />
                       <InputField label="Average Rating" />
@@ -455,8 +455,8 @@ export default function BusinessIntakePage() {
                       <CheckboxField label="Management Access" />
                     </div>
                   </div>
-                  <div className="border-b border-[#F5F4F2] pb-6">
-                    <h3 className="mb-4 font-medium text-[#01153D]">Yelp Reviews</h3>
+                  <div className="border-b-2 border-gray-200 pb-6">
+                    <h3 className="mb-4 font-bold text-[#01153D]">Yelp Reviews</h3>
                     <div className="grid gap-4 md:grid-cols-2">
                       <InputField label="Number of Reviews" />
                       <InputField label="Average Rating" />
@@ -465,8 +465,8 @@ export default function BusinessIntakePage() {
                       <CheckboxField label="Management Access" />
                     </div>
                   </div>
-                  <div className="border-b border-[#F5F4F2] pb-6 last:border-0 last:pb-0">
-                    <h3 className="mb-4 font-medium text-[#01153D]">Healthgrades Reviews</h3>
+                  <div className="border-b-2 border-gray-200 pb-6 last:border-0 last:pb-0">
+                    <h3 className="mb-4 font-bold text-[#01153D]">Healthgrades Reviews</h3>
                     <div className="grid gap-4 md:grid-cols-2">
                       <InputField label="Number of Reviews" />
                       <InputField label="Average Rating" />
@@ -667,8 +667,8 @@ export default function BusinessIntakePage() {
               <SectionHeader title="15. Additional Accounts & Services" section="additional" icon={Globe} />
               {expandedSections.additional && (
                 <div className="p-6 space-y-6">
-                  <div className="border-b border-[#F5F4F2] pb-6">
-                    <h3 className="mb-4 font-medium text-[#01153D]">Cloud Storage</h3>
+                  <div className="border-b-2 border-gray-200 pb-6">
+                    <h3 className="mb-4 font-bold text-[#01153D]">Cloud Storage</h3>
                     <div className="flex flex-wrap gap-4 mb-4">
                       <CheckboxField label="Dropbox" />
                       <CheckboxField label="Google Drive" />
@@ -677,8 +677,8 @@ export default function BusinessIntakePage() {
                     </div>
                     <InputField label="Account Email" />
                   </div>
-                  <div className="border-b border-[#F5F4F2] pb-6">
-                    <h3 className="mb-4 font-medium text-[#01153D]">Design Tools</h3>
+                  <div className="border-b-2 border-gray-200 pb-6">
+                    <h3 className="mb-4 font-bold text-[#01153D]">Design Tools</h3>
                     <div className="flex flex-wrap gap-4 mb-4">
                       <CheckboxField label="Canva" />
                       <CheckboxField label="Adobe Creative Cloud" />
@@ -687,8 +687,8 @@ export default function BusinessIntakePage() {
                     </div>
                     <InputField label="Account Email" />
                   </div>
-                  <div className="border-b border-[#F5F4F2] pb-6 last:border-0 last:pb-0">
-                    <h3 className="mb-4 font-medium text-[#01153D]">Project Management</h3>
+                  <div className="border-b-2 border-gray-200 pb-6 last:border-0 last:pb-0">
+                    <h3 className="mb-4 font-bold text-[#01153D]">Project Management</h3>
                     <div className="flex flex-wrap gap-4 mb-4">
                       <CheckboxField label="Asana" />
                       <CheckboxField label="Trello" />
@@ -706,32 +706,32 @@ export default function BusinessIntakePage() {
               <SectionHeader title="16. Security & Access Notes" section="security" icon={Shield} />
               {expandedSections.security && (
                 <div className="p-6 space-y-6">
-                  <div className="border-b border-[#F5F4F2] pb-6">
-                    <h3 className="mb-4 font-medium text-[#01153D]">Two Factor Authentication (2FA)</h3>
-                    <p className="text-sm text-[#01153D]/60 mb-4">Please list accounts with 2FA enabled:</p>
+                  <div className="border-b-2 border-gray-200 pb-6">
+                    <h3 className="mb-4 font-bold text-[#01153D]">Two Factor Authentication (2FA)</h3>
+                    <p className="text-sm text-gray-700 mb-4">Please list accounts with 2FA enabled:</p>
                     <div className="space-y-3">
                       <InputField label="Account 1" />
                       <InputField label="Account 2" />
                       <InputField label="Account 3" />
                     </div>
                   </div>
-                  <div className="border-b border-[#F5F4F2] pb-6">
-                    <h3 className="mb-4 font-medium text-[#01153D]">Recovery Emails</h3>
+                  <div className="border-b-2 border-gray-200 pb-6">
+                    <h3 className="mb-4 font-bold text-[#01153D]">Recovery Emails</h3>
                     <div className="space-y-3">
                       <InputField label="Recovery Email 1" type="email" />
                       <InputField label="Recovery Email 2" type="email" />
                     </div>
                   </div>
-                  <div className="border-b border-[#F5F4F2] pb-6">
-                    <h3 className="mb-4 font-medium text-[#01153D]">Password Manager</h3>
+                  <div className="border-b-2 border-gray-200 pb-6">
+                    <h3 className="mb-4 font-bold text-[#01153D]">Password Manager</h3>
                     <div className="mb-4">
                       <CheckboxField label="Using password manager" />
                     </div>
                     <InputField label="Service Name" />
                   </div>
-                  <div className="border-b border-[#F5F4F2] pb-6 last:border-0 last:pb-0">
-                    <h3 className="mb-4 font-medium text-[#01153D]">Shared Access</h3>
-                    <p className="text-sm text-[#01153D]/60 mb-4">List any accounts shared with team members or third parties:</p>
+                  <div className="border-b-2 border-gray-200 pb-6 last:border-0 last:pb-0">
+                    <h3 className="mb-4 font-bold text-[#01153D]">Shared Access</h3>
+                    <p className="text-sm text-gray-700 mb-4">List any accounts shared with team members or third parties:</p>
                     <div className="grid gap-4 md:grid-cols-3">
                       <InputField label="Account" />
                       <InputField label="Shared With" />
@@ -744,52 +744,52 @@ export default function BusinessIntakePage() {
 
             {/* Additional Information */}
             <div className="rounded-lg bg-white overflow-hidden shadow-sm p-6 space-y-6">
-              <h2 className="text-lg font-semibold text-[#01153D]">Additional Information</h2>
+              <h2 className="text-xl font-bold text-[#01153D]">Additional Information</h2>
               
               <div>
-                <label className="mb-2 block text-sm font-medium text-[#01153D]">Known Issues or Concerns</label>
+                <label className="mb-2 block text-sm font-semibold text-[#01153D]">Known Issues or Concerns</label>
                 <textarea
                   rows={3}
                   placeholder="List any problems, outdated information, or concerns about existing accounts..."
-                  className="w-full rounded-lg border border-[#F5F4F2] px-4 py-3 focus:border-[#72A23B] focus:outline-none focus:ring-1 focus:ring-[#72A23B] text-[#01153D]"
+                  className="w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-[#72A23B] focus:outline-none focus:ring-2 focus:ring-[#72A23B]/20"
                 />
               </div>
               
               <div>
-                <label className="mb-2 block text-sm font-medium text-[#01153D]">Accounts to Create</label>
+                <label className="mb-2 block text-sm font-semibold text-[#01153D]">Accounts to Create</label>
                 <textarea
                   rows={3}
                   placeholder="List any accounts or profiles you would like us to create..."
-                  className="w-full rounded-lg border border-[#F5F4F2] px-4 py-3 focus:border-[#72A23B] focus:outline-none focus:ring-1 focus:ring-[#72A23B] text-[#01153D]"
+                  className="w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-[#72A23B] focus:outline-none focus:ring-2 focus:ring-[#72A23B]/20"
                 />
               </div>
               
               <div>
-                <label className="mb-2 block text-sm font-medium text-[#01153D]">Priority Accounts</label>
+                <label className="mb-2 block text-sm font-semibold text-[#01153D]">Priority Accounts</label>
                 <textarea
                   rows={3}
                   placeholder="Indicate which accounts are most important for your business..."
-                  className="w-full rounded-lg border border-[#F5F4F2] px-4 py-3 focus:border-[#72A23B] focus:outline-none focus:ring-1 focus:ring-[#72A23B] text-[#01153D]"
+                  className="w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-[#72A23B] focus:outline-none focus:ring-2 focus:ring-[#72A23B]/20"
                 />
               </div>
               
               <div>
-                <label className="mb-2 block text-sm font-medium text-[#01153D]">Additional Notes</label>
+                <label className="mb-2 block text-sm font-semibold text-[#01153D]">Additional Notes</label>
                 <textarea
                   rows={3}
                   placeholder="Any additional information that would be helpful..."
-                  className="w-full rounded-lg border border-[#F5F4F2] px-4 py-3 focus:border-[#72A23B] focus:outline-none focus:ring-1 focus:ring-[#72A23B] text-[#01153D]"
+                  className="w-full rounded-lg border-2 border-gray-300 bg-white px-4 py-3 text-gray-900 placeholder:text-gray-400 focus:border-[#72A23B] focus:outline-none focus:ring-2 focus:ring-[#72A23B]/20"
                 />
               </div>
             </div>
 
             {/* Security Reminder */}
-            <div className="rounded-lg bg-[#86A8E1]/10 p-6">
+            <div className="rounded-lg bg-blue-50 border-2 border-blue-200 p-6">
               <div className="flex items-start gap-4">
-                <Shield className="h-6 w-6 text-[#86A8E1] flex-shrink-0 mt-0.5" />
+                <Shield className="h-6 w-6 text-blue-600 flex-shrink-0 mt-0.5" />
                 <div>
-                  <h3 className="font-medium text-[#01153D] mb-2">Important Security Note</h3>
-                  <p className="text-sm text-[#01153D]/70">
+                  <h3 className="font-bold text-[#01153D] mb-2">Important Security Note</h3>
+                  <p className="text-sm text-gray-800">
                     Please do not include sensitive passwords in this form. After submitting, share credentials through a separate, secure channel such as a password manager share link, encrypted email, or secure messaging.
                   </p>
                 </div>
@@ -798,7 +798,7 @@ export default function BusinessIntakePage() {
 
             <button 
               type="submit" 
-              className="w-full flex items-center justify-center gap-2 bg-[#72A23B] text-white px-8 py-4 rounded-full font-medium hover:bg-[#72A23B]/90 transition-colors text-lg"
+              className="w-full flex items-center justify-center gap-2 bg-[#72A23B] text-white px-8 py-4 rounded-full font-bold hover:bg-[#5a8a2e] transition-colors text-lg shadow-lg"
             >
               <span>Submit Inventory</span>
               <ArrowRight className="h-5 w-5" />

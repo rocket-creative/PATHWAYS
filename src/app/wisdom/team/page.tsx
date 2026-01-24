@@ -241,29 +241,27 @@ export default function TherapyTeamPage() {
         <div className="container-site section">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {therapyTeam.map((member) => (
-              <div key={member.name} className="rounded-lg border border-[rgb(var(--border))]/50 p-6">
-                <div className="mb-4 flex items-start gap-4">
-                  <div className="relative aspect-square w-20 flex-shrink-0 overflow-hidden rounded-full bg-[rgb(var(--color-linen))]">
-                    {member.image && (
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        fill
-                        className="object-cover"
-                      />
-                    )}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-[rgb(var(--color-navy))]">
-                      {member.name}
-                    </h3>
-                    <p className="text-sm text-[rgb(var(--color-green))]">{member.title}</p>
-                  </div>
+              <div key={member.name} className="overflow-hidden rounded-lg border border-[rgb(var(--border))]/50">
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-[rgb(var(--color-linen))]">
+                  {member.image && (
+                    <Image
+                      src={member.image}
+                      alt={member.name}
+                      fill
+                      className="object-cover"
+                    />
+                  )}
                 </div>
-                <p className="mb-3 text-sm text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.7 }}>{member.bio}</p>
-                <p className="text-xs text-[rgb(var(--color-navy))]/60">
-                  <span className="font-medium">Specializes in:</span> {member.specializes}
-                </p>
+                <div className="p-5">
+                  <h3 className="font-semibold text-[rgb(var(--color-navy))]">
+                    {member.name}
+                  </h3>
+                  <p className="mb-3 text-sm text-[rgb(var(--color-green))]">{member.title}</p>
+                  <p className="mb-3 text-sm text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.7 }}>{member.bio}</p>
+                  <p className="text-xs text-[rgb(var(--color-navy))]/60">
+                    <span className="font-medium">Specializes in:</span> {member.specializes}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -277,8 +275,8 @@ export default function TherapyTeamPage() {
             <p className="eyebrow mb-4">Admin Team</p>
             <h2 className="mb-8 text-[rgb(var(--color-navy))]">Here to help you every step of the way</h2>
             <div className="flex justify-center">
-              <div className="text-center">
-                <div className="relative mx-auto mb-4 aspect-square w-32 overflow-hidden rounded-full bg-[rgb(var(--color-linen))]">
+              <div className="mx-auto max-w-xs overflow-hidden rounded-lg border border-[rgb(var(--border))]/50">
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-[rgb(var(--color-linen))]">
                   <Image
                     src="/images/team/gloria-saladino.jpg"
                     alt="Gloria Saladino"
@@ -286,11 +284,13 @@ export default function TherapyTeamPage() {
                     className="object-cover"
                   />
                 </div>
-                <h3 className="font-semibold text-[rgb(var(--color-navy))]">Gloria Saladino</h3>
-                <p className="mb-2 text-sm text-[rgb(var(--color-green))]">Front Desk Manager</p>
-                <p className="mx-auto max-w-sm text-sm text-[rgb(var(--color-text-light))]">
-                  Here to ensure every client&apos;s experience is welcoming, seamless and supportive.
-                </p>
+                <div className="p-5 text-center">
+                  <h3 className="font-semibold text-[rgb(var(--color-navy))]">Gloria Saladino</h3>
+                  <p className="mb-2 text-sm text-[rgb(var(--color-green))]">Front Desk Manager</p>
+                  <p className="text-sm text-[rgb(var(--color-text-light))]">
+                    Here to ensure every client&apos;s experience is welcoming, seamless and supportive.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

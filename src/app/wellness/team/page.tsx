@@ -67,8 +67,8 @@ export default function WellnessTeamPage() {
         <div className="container-site section">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {wellnessTeam.map((member) => (
-              <div key={member.name} className="text-center">
-                <div className="relative mx-auto mb-4 aspect-square w-40 overflow-hidden rounded-full bg-[rgb(var(--color-linen))]">
+              <div key={member.name} className="overflow-hidden rounded-lg border border-[rgb(var(--border))]/50">
+                <div className="relative aspect-[3/4] w-full overflow-hidden bg-[rgb(var(--color-linen))]">
                   {member.image && (
                     <Image
                       src={member.image}
@@ -78,11 +78,13 @@ export default function WellnessTeamPage() {
                     />
                   )}
                 </div>
-                <h3 className="mb-1 text-[rgb(var(--color-navy))]" style={{ fontWeight: 600 }}>
-                  {member.name}
-                </h3>
-                <p className="mb-3 text-sm text-[rgb(var(--color-green))]">{member.title}</p>
-                <p className="text-sm text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.7 }}>{member.bio}</p>
+                <div className="p-5 text-center">
+                  <h3 className="mb-1 text-[rgb(var(--color-navy))]" style={{ fontWeight: 600 }}>
+                    {member.name}
+                  </h3>
+                  <p className="mb-3 text-sm text-[rgb(var(--color-green))]">{member.title}</p>
+                  <p className="text-sm text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.7 }}>{member.bio}</p>
+                </div>
               </div>
             ))}
           </div>

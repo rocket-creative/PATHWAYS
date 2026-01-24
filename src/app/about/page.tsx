@@ -54,7 +54,7 @@ export default function AboutPage() {
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             {/* Image */}
             <div className="lg:col-span-5">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-lg">
+              <div className="relative aspect-[3/4] overflow-hidden rounded-lg">
                 <Image
                   src="/images/team/rachel-lessard.jpeg"
                   alt="Rachel Lessard, Founder of Pathways Within"

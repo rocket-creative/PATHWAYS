@@ -1,0 +1,15 @@
+# observability.mdc
+## Observability & Logging
+
+### REQUIRED
+- Log errors with enough context to debug (without logging sensitive data).
+- Provide a single, consistent logging approach.
+- Use error boundaries in UI where applicable.
+
+### PRIVACY-AWARE
+- Do not log PII unless explicitly required and justified.
+- Analytics events (if any) must be consent-gated.
+
+### FORBIDDEN
+- Console logging as a production observability strategy
+- Logging secrets, tokens, or full request bodies containing sensitive data

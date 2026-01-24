@@ -1,0 +1,34 @@
+# privacy-compliance.mdc
+## Consent-First Privacy & Compliance Baseline
+
+This repo must be **consent-first**. Tracking is denied by default.
+
+### REQUIRED (High Level)
+- No analytics, ads, pixels, or non-essential tracking until the user gives explicit consent.
+- Consent must be granular by category at minimum:
+  - Necessary (always on)
+  - Preferences
+  - Analytics
+  - Marketing
+- Provide a preference center and allow changes at any time.
+- Provide an always-accessible "Cookie Settings" control.
+- Honor Global Privacy Control (GPC) by treating it as an opt-out signal.
+- Do not use dark patterns:
+  - No pre-checked boxes
+  - No disguised buttons
+  - No unequal prominence (Accept vs Reject must be equal prominence)
+  - No forced consent walls unless explicitly allowed by jurisdiction/business rules
+
+### REQUIRED (Operational)
+- Store consent choices (with versioning) and apply them consistently.
+- Consent renewal window: 12–13 months (or per applicable rule); re-prompt when required.
+- If a tag manager is present, it must be category-gated.
+
+### REQUIRED (Documentation)
+- Maintain a cookie registry / declaration mechanism (even if initially empty).
+- Maintain privacy policy and cookie policy links in the footer.
+
+### FORBIDDEN
+- Loading non-essential scripts prior to consent
+- "Implied consent" patterns
+- Bundling marketing with analytics without separate control

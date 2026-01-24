@@ -1,0 +1,15 @@
+# DECISION_LOG.mdc
+## Architectural & Behavioral Decisions
+
+This file records durable decisions so they are not re-litigated.
+
+The assistant should reference this file before proposing alternatives.
+
+Each new entry MUST include:
+
+- Date
+- Decision
+- Context
+- Options considered
+- Why this option was chosen
+- Consequences

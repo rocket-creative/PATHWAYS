@@ -1,0 +1,21 @@
+# core-stack.mdc
+## Standard Stack (Default)
+
+### REQUIRED DEFAULTS
+- Framework: **Next.js (App Router)**
+- Language: **TypeScript**
+- Rendering: Prefer server components where appropriate; use client components only when needed.
+- State: Keep local by default; introduce global state only with clear justification.
+- Styling: Choose ONE approach per repo (e.g., Tailwind OR CSS modules). Be consistent.
+
+### FALLBACK
+- Angular is permitted ONLY if Next.js is not viable due to explicit constraints.
+- If Angular is used, parity is required for:
+  - Consent gating
+  - Accessibility
+  - Security headers / CSP strategy (app + hosting)
+  - Testing and release gates
+
+### FORBIDDEN
+- Silent framework switching
+- Mixing multiple UI frameworks without justification

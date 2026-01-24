@@ -37,8 +37,8 @@ export function HeroSection({
       {/* Content Overlay - positioned on the left */}
       <div className="relative flex min-h-[85vh] items-center">
         <div className="w-full px-6 py-12 sm:px-8 lg:max-w-[50%] lg:px-12 xl:px-16">
-          {/* Content box with semi-transparent background */}
-          <div className="rounded-lg bg-white/95 p-8 shadow-2xl backdrop-blur-sm lg:p-12">
+          {/* Content box with glass effect */}
+          <div className="rounded-lg bg-white/70 p-8 shadow-2xl backdrop-blur-xl lg:p-12">
             <Link href="/" className="mb-8 block lg:mb-10">
               <Image 
                 src="/logo.png" 
@@ -49,7 +49,7 @@ export function HeroSection({
               />
             </Link>
             
-            <h1 className="mb-6 text-[rgb(var(--color-navy))]" style={{ lineHeight: 1.1 }}>
+            <h1 className="mb-6 text-[rgb(var(--color-navy))]" style={{ lineHeight: 1.1, fontWeight: 300 }}>
               Discover<br />
               your path<br />
               to wellness

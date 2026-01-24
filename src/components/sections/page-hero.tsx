@@ -37,23 +37,13 @@ export function PageHero({
 
   return (
     <section className="relative min-h-[85vh]">
-      {/* Full-bleed Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src={image}
-          alt={imageAlt}
-          fill
-          priority
-          className="object-cover object-right"
-          sizes="100vw"
-        />
-      </div>
-
-      {/* Content Overlay - positioned on the left */}
-      <div className="relative flex min-h-[85vh] items-center">
-        <div className="w-full px-6 py-12 sm:px-8 lg:max-w-[58%] lg:px-12 xl:px-16">
-          {/* Content box with glass effect */}
-          <div className="rounded-lg bg-white/50 p-8 shadow-2xl backdrop-blur-xl lg:p-12">
+      {/* Content with Image - positioned on the right */}
+      <div className="container-site relative flex min-h-[85vh] items-center">
+        <div className="grid w-full gap-8 lg:grid-cols-12 lg:gap-12">
+          {/* Content - positioned on the left */}
+          <div className="w-full px-6 py-12 sm:px-8 lg:col-span-6 lg:px-0">
+            {/* Content box with glass effect */}
+            <div className="rounded-lg bg-white/50 p-8 shadow-2xl backdrop-blur-xl lg:p-12">
             {/* Logo */}
             <Link href="/" className="mb-8 block lg:mb-10">
               <Image 
@@ -109,6 +99,19 @@ export function PageHero({
                 </Link>
               </div>
             )}
+            </div>
+          </div>
+          
+          {/* Hero Image - Right Justified, Not Full Bleed */}
+          <div className="relative hidden aspect-[3/4] overflow-hidden rounded-2xl lg:col-span-6 lg:block">
+            <Image
+              src={image}
+              alt={imageAlt}
+              fill
+              priority
+              className="object-cover object-center"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
           </div>
         </div>
       </div>

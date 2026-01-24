@@ -18,15 +18,28 @@ const THERAPY_SERVICES = [
   { slug: 'teen-therapy', label: 'Teen Therapy' },
   { slug: 'trauma-therapy', label: 'Trauma Therapy' },
   { slug: 'emdr-therapy', label: 'EMDR Therapy' },
+  { slug: 'somatic-therapy', label: 'Somatic Therapy' },
+  { slug: 'hypnotherapy', label: 'Hypnotherapy' },
+  { slug: 'veterans-first-responders', label: 'Veterans & First Responders' },
+  { slug: 'weight-loss-surgery-support', label: 'Weight Loss Surgery Support' },
 ]
 
 const WELLNESS_SERVICES = [
   { slug: 'massage', label: 'Massage Therapy' },
   { slug: 'acupuncture', label: 'Acupuncture' },
-  { slug: 'skincare', label: 'Skincare' },
-  { slug: 'hydrafacial', label: 'HydraFacial' },
-  { slug: 'injectables', label: 'Injectables' },
+  { slug: 'energy-work', label: 'Energy Work' },
+  { slug: 'pain-management', label: 'Pain Management' },
   { slug: 'iv-vitamin-infusion', label: 'IV Vitamin Infusion' },
+  { slug: 'injectables', label: 'Injectables' },
+  { slug: 'skincare', label: 'Skincare & Facials' },
+  { slug: 'hydrafacial', label: 'HydraFacial' },
+  { slug: 'prp-vampire-facial', label: 'PRP Vampire Facial' },
+  { slug: 'keralase-hair-restoration', label: 'KeraLase Hair Restoration' },
+  { slug: 'laser-hair-removal', label: 'Laser Hair Removal' },
+  { slug: 'cryotherapy', label: 'Cryotherapy' },
+  { slug: 'laser-lipo', label: 'Laser Lipo' },
+  { slug: 'teeth-whitening', label: 'Teeth Whitening' },
+  { slug: 'permanent-makeup', label: 'Permanent Makeup' },
 ]
 
 const navLinks: NavLink[] = [

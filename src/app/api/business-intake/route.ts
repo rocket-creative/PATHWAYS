@@ -95,12 +95,14 @@ function formatFormData(data: Record<string, unknown>): string {
 }
 
 async function sendEmail(data: Record<string, unknown>) {
-  const resendApiKey = process.env.RESEND_API_KEY
+  const resendApiKey = process.env.RESEND || process.env.RESEND_API_KEY
   const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
-  const recipientEmail = process.env.BUSINESS_INTAKE_EMAIL || process.env.CLIENT_INTAKE_EMAIL_RECIPIENTS?.split(',')[0] || 'Welcome@pathwayswithin.com'
+  // Business intake emails go to georgestoff@rocketcreative.net
+  const recipientEmail = process.env.BUSINESS_INTAKE_EMAIL || 'georgestoff@rocketcreative.net'
 
   if (!resendApiKey) {
-    console.warn('RESEND_API_KEY not configured. Email will not be sent.')
+    console.error('RESEND not configured. Email will not be sent.')
+    console.error('Please set RESEND in your environment variables.')
     return { success: false, error: 'Email service not configured' }
   }
 
@@ -116,6 +118,12 @@ ${formattedData}
 This is an automated message from the Pathways Within business intake form.
     `.trim()
 
+    // Support multiple recipients (comma-separated)
+    const recipients = recipientEmail.split(',').map((e: string) => e.trim())
+
+    console.log('Attempting to send email to:', recipients)
+    console.log('From:', fromEmail)
+
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
@@ -124,22 +132,34 @@ This is an automated message from the Pathways Within business intake form.
       },
       body: JSON.stringify({
         from: fromEmail,
-        to: recipientEmail.split(',').map((e: string) => e.trim()),
+        to: recipients,
         subject: 'New Business Intake: Online Presence Inventory',
         text: emailBody,
       }),
     })
 
     if (!response.ok) {
-      const error = await response.text()
-      console.error('Resend API error:', error)
-      return { success: false, error: 'Failed to send email' }
+      const errorText = await response.text()
+      console.error('Resend API error:', response.status, errorText)
+      try {
+        const errorJson = JSON.parse(errorText)
+        console.error('Resend error details:', errorJson)
+      } catch {
+        // Not JSON, that's fine
+      }
+      return { success: false, error: `Failed to send email: ${response.status}` }
     }
 
-    return { success: true }
+    const result = await response.json()
+    console.log('Email sent successfully:', result)
+    return { success: true, messageId: result.id }
   } catch (error) {
     console.error('Error sending email:', error)
-    return { success: false, error: 'Failed to send email' }
+    if (error instanceof Error) {
+      console.error('Error message:', error.message)
+      console.error('Error stack:', error.stack)
+    }
+    return { success: false, error: `Failed to send email: ${error instanceof Error ? error.message : 'Unknown error'}` }
   }
 }
 
@@ -172,12 +192,18 @@ export async function POST(req: NextRequest) {
   // Try to send email
   const emailResult = await sendEmail(body as Record<string, unknown>)
 
+  // Log email result for debugging
+  if (!emailResult.success) {
+    console.error('Email sending failed:', emailResult.error)
+  }
+
   // Always return success to user (even if email fails, we log it)
   return NextResponse.json({ 
     data: { ok: true }, 
     meta: { 
       message: 'Thank you. Your inventory has been received.',
-      emailSent: emailResult.success
+      emailSent: emailResult.success,
+      emailError: emailResult.error || undefined
     } 
   })
 }

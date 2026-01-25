@@ -112,14 +112,17 @@ async function sendEmail(data: Record<string, unknown>) {
   console.log('Resend-related environment variables:', JSON.stringify(resendEnvVars, null, 2))
   console.log('All env vars with RESEND:', Object.keys(process.env).filter(k => k.toUpperCase().includes('RESEND')))
 
-  const resendApiKey = process.env.RESEND || process.env.RESEND_API_KEY
-  const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
+  // Check for resend in all case variations
+  const resendApiKey = process.env.RESEND || process.env.resend || process.env.RESEND_API_KEY || process.env.resend_api_key
+  const fromEmail = process.env.RESEND_FROM_EMAIL || process.env.resend_from_email || 'onboarding@resend.dev'
   // Business intake emails go to georgestoff@rocketcreative.net
-  const recipientEmail = process.env.BUSINESS_INTAKE_EMAIL || 'georgestoff@rocketcreative.net'
+  const recipientEmail = process.env.BUSINESS_INTAKE_EMAIL || process.env.business_intake_email || 'georgestoff@rocketcreative.net'
 
   console.log('Resend API key check:', {
     hasRESEND: !!process.env.RESEND,
+    hasresend: !!process.env.resend,
     hasRESEND_API_KEY: !!process.env.RESEND_API_KEY,
+    hasresend_api_key: !!process.env.resend_api_key,
     resendApiKeyFound: !!resendApiKey,
     resendApiKeyLength: resendApiKey?.length || 0
   })
@@ -268,11 +271,14 @@ export async function POST(req: NextRequest) {
         emailError: emailResult.error
       },
       debug: {
-        hasResendKey: !!process.env.RESEND,
-        hasResendApiKey: !!process.env.RESEND_API_KEY,
-        resendKeyLength: process.env.RESEND?.length || process.env.RESEND_API_KEY?.length || 0,
-        recipientEmail: process.env.BUSINESS_INTAKE_EMAIL || 'georgestoff@rocketcreative.net',
-        fromEmail: process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev',
+        hasRESEND: !!process.env.RESEND,
+        hasresend: !!process.env.resend,
+        hasRESEND_API_KEY: !!process.env.RESEND_API_KEY,
+        hasresend_api_key: !!process.env.resend_api_key,
+        resendKeyFound: !!(process.env.RESEND || process.env.resend || process.env.RESEND_API_KEY || process.env.resend_api_key),
+        resendKeyLength: (process.env.RESEND || process.env.resend || process.env.RESEND_API_KEY || process.env.resend_api_key)?.length || 0,
+        recipientEmail: process.env.BUSINESS_INTAKE_EMAIL || process.env.business_intake_email || 'georgestoff@rocketcreative.net',
+        fromEmail: process.env.RESEND_FROM_EMAIL || process.env.resend_from_email || 'onboarding@resend.dev',
         errorDetails: emailResult.error
       }
     }, { status: 200 }) // Still return 200 so form shows success, but include error info

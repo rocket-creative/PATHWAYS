@@ -2,14 +2,18 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
 export async function GET(req: NextRequest) {
-  const resendApiKey = process.env.RESEND || process.env.RESEND_API_KEY
-  const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
-  const recipientEmail = process.env.BUSINESS_INTAKE_EMAIL || 'georgestoff@rocketcreative.net'
+  // Check for resend in all case variations
+  const resendApiKey = process.env.RESEND || process.env.resend || process.env.RESEND_API_KEY || process.env.resend_api_key
+  const fromEmail = process.env.RESEND_FROM_EMAIL || process.env.resend_from_email || 'onboarding@resend.dev'
+  const recipientEmail = process.env.BUSINESS_INTAKE_EMAIL || process.env.business_intake_email || 'georgestoff@rocketcreative.net'
 
   // Check configuration
   const config = {
-    hasResendKey: !!process.env.RESEND,
-    hasResendApiKey: !!process.env.RESEND_API_KEY,
+    hasRESEND: !!process.env.RESEND,
+    hasresend: !!process.env.resend,
+    hasRESEND_API_KEY: !!process.env.RESEND_API_KEY,
+    hasresend_api_key: !!process.env.resend_api_key,
+    resendKeyFound: !!resendApiKey,
     resendKeyLength: resendApiKey ? resendApiKey.length : 0,
     fromEmail,
     recipientEmail,

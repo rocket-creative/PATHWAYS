@@ -38,3 +38,17 @@ yarn-error.log*
 /new/
 new/
 .ai-errors.log
+
+# Source Images (keep out of git)
+/assets/
+/AI PEOPLE/
+/EDITED HEADSHOTS/
+/HERO SHOTS/
+/OFFICES/
+/white/
+/new hero img/
+*.zip
+
+# Documentation files (keep in docs/)
+/*.pdf
+/*.docx

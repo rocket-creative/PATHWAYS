@@ -77,7 +77,7 @@ Each project deploys from **BOTH** branches automatically:
 - 🧹 Old branches cleaned up
 
 ### Vercel:
-- ⚠️ Only 1 project visible: `pathways-8h3u`
+- ✅ Main project renamed: `pathways-main`
 - ❌ Need to create 3 more projects:
   - pathways-wisdom
   - pathways-wellness
@@ -129,7 +129,7 @@ For **ALL 4 projects**, set:
    - Deploy Branch: `dev`
 
 2. **Settings** → **Environment Variables**
-   - Copy from pathways-8h3u (if it exists)
+   - Copy from pathways-main
    - Or add:
      - `RESEND` = your_key
      - `BUSINESS_INTAKE_EMAIL` = georgestoff@rocketcreative.net

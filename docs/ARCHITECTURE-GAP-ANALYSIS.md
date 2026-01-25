@@ -135,7 +135,7 @@ Looking at git history and `/old` directory:
 - Same codebase deployed to 3+ Vercel projects:
   1. **wisdom-eight-topaz.vercel.app** → Configured to serve `/wisdom/*` routes
   2. **crm-sooty-one.vercel.app** → Configured to serve `/crm/*` routes  
-  3. **pathways-8h3u.vercel.app** → Main site (root + other routes)
+  3. **pathways-main.vercel.app** → Main site (root + other routes)
   4. Possibly wellness deployment too
 
 **This works via:**

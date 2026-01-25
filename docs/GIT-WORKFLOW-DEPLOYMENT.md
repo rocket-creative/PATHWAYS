@@ -13,7 +13,7 @@ You have **one Next.js app** deployed to multiple Vercel projects:
 | **Wisdom** | wisdom-eight-topaz.vercel.app | Therapy services |
 | **Wellness** | wellness-phi-three.vercel.app | Wellness services |
 | **CRM** | crm-sooty-one.vercel.app | Internal dashboard |
-| **Main** | pathways-8h3u.vercel.app | Landing/marketing site |
+| **Main** | pathways-main.vercel.app | Landing/marketing site |
 
 ---
 
@@ -170,7 +170,7 @@ git push origin dev
 - Wisdom: wisdom-eight-topaz.vercel.app
 - Wellness: wellness-phi-three.vercel.app
 - CRM: crm-sooty-one.vercel.app
-- Main: pathways-8h3u.vercel.app
+- Main: pathways-main.vercel.app
 
 ### New (Staging from `dev`)
 After setup, you'll automatically get:

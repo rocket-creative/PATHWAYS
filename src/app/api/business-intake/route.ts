@@ -101,14 +101,33 @@ function formatFormData(data: Record<string, unknown>): string {
 }
 
 async function sendEmail(data: Record<string, unknown>) {
+  // Log all environment variables that start with RESEND for debugging
+  const resendEnvVars = Object.keys(process.env)
+    .filter(key => key.toUpperCase().includes('RESEND'))
+    .reduce((acc, key) => {
+      acc[key] = process.env[key] ? `${process.env[key]?.substring(0, 10)}... (${process.env[key]?.length} chars)` : 'NOT SET'
+      return acc
+    }, {} as Record<string, string>)
+  
+  console.log('Resend-related environment variables:', JSON.stringify(resendEnvVars, null, 2))
+  console.log('All env vars with RESEND:', Object.keys(process.env).filter(k => k.toUpperCase().includes('RESEND')))
+
   const resendApiKey = process.env.RESEND || process.env.RESEND_API_KEY
   const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
   // Business intake emails go to georgestoff@rocketcreative.net
   const recipientEmail = process.env.BUSINESS_INTAKE_EMAIL || 'georgestoff@rocketcreative.net'
 
+  console.log('Resend API key check:', {
+    hasRESEND: !!process.env.RESEND,
+    hasRESEND_API_KEY: !!process.env.RESEND_API_KEY,
+    resendApiKeyFound: !!resendApiKey,
+    resendApiKeyLength: resendApiKey?.length || 0
+  })
+
   if (!resendApiKey) {
     console.error('RESEND not configured. Email will not be sent.')
     console.error('Please set RESEND in your environment variables.')
+    console.error('Available env vars:', Object.keys(process.env).filter(k => k.includes('RESEND') || k.includes('resend')))
     return { success: false, error: 'Email service not configured' }
   }
 

@@ -1,24 +1,26 @@
-# Pathways Within - Monorepo
+# Pathways Within - Multi-Site Application
 
-A monorepo containing three connected websites for Pathways Within:
+One Next.js application deployed to four Vercel projects:
 
-1. **Main Site** (`apps/main`) - Unified entry point at pathwayswithin.com
-2. **Wisdom Site** (`apps/wisdom`) - Therapy services (NY State compliant separate URL)
-3. **Wellness Site** (`apps/wellness`) - Wellness services (NY State compliant separate URL)
+1. **Main Site** (`pathways-main`) - Unified entry point at pathwayswithin.com
+2. **Wisdom Site** (`pathways-wisdom`) - Therapy services (NY State compliant separate URL)
+3. **Wellness Site** (`pathways-wellness`) - Wellness services (NY State compliant separate URL)
+4. **CRM** (`pathways-crm`) - Internal staff dashboard
 
 ## Architecture
 
 ```
 pathways-within/
-├── apps/
-│   ├── main/          # pathwayswithin.com - port 3000
-│   ├── wisdom/        # wisdom.pathwayswithin.com - port 3001
-│   └── wellness/      # wellness.pathwayswithin.com - port 3002
-├── packages/
-│   ├── ui/            # Shared React components
-│   └── config/        # Shared Tailwind, styles, TypeScript config
-├── public/            # Shared public assets (fonts, images)
-└── content/           # Content markdown files
+├── src/app/
+│   ├── (root)/        # Main site routes (/, /about, /contact, etc.)
+│   ├── wisdom/        # Therapy routes (deployed to pathways-wisdom)
+│   ├── wellness/      # Wellness routes (deployed to pathways-wellness)
+│   └── crm/           # CRM routes (deployed to pathways-crm)
+├── public/            # Public assets (fonts, images)
+├── vercel.json        # Main site config
+├── vercel.wisdom.json # Wisdom site config with rewrites
+├── vercel.wellness.json # Wellness site config with rewrites
+└── vercel.crm.json    # CRM config with rewrites
 ```
 
 ## Getting Started
@@ -101,15 +103,16 @@ Contains shared configuration:
 
 ## Deployment
 
-Each app can be deployed independently to different domains:
-- Main → pathwayswithin.com
-- Wisdom → wisdom.pathwayswithin.com (or pathways-wisdom.com)
-- Wellness → wellness.pathwayswithin.com (or pathways-wellness.com)
+One repository deployed to 4 Vercel projects:
 
-Recommended deployment platforms:
-- Vercel (supports monorepos natively)
-- Netlify
-- Cloudflare Pages
+| Project | Domain (Future) | Current URL |
+|---------|-----------------|-------------|
+| pathways-main | pathwayswithin.com | pathways-main.vercel.app |
+| pathways-wisdom | wisdom.pathwayswithin.com | pathways-wisdom.vercel.app |
+| pathways-wellness | wellness.pathwayswithin.com | pathways-wellness.vercel.app |
+| pathways-crm | crm.pathwayswithin.com | pathways-crm.vercel.app |
+
+Each project uses rewrites to show only relevant routes (configured in vercel.*.json files).
 
 ## NY State Compliance Note
 

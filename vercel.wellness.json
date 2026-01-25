@@ -1,0 +1,30 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "git": {
+    "deploymentEnabled": true
+  },
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/wellness"
+    },
+    {
+      "source": "/services",
+      "destination": "/wellness/services"
+    },
+    {
+      "source": "/services/:slug",
+      "destination": "/wellness/services/:slug"
+    },
+    {
+      "source": "/team",
+      "destination": "/wellness/team"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/:path*"
+    }
+  ]
+}

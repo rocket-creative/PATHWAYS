@@ -1,0 +1,38 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "framework": "nextjs",
+  "git": {
+    "deploymentEnabled": true
+  },
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/wisdom"
+    },
+    {
+      "source": "/services",
+      "destination": "/wisdom/services"
+    },
+    {
+      "source": "/services/:slug",
+      "destination": "/wisdom/services/:slug"
+    },
+    {
+      "source": "/conditions",
+      "destination": "/wisdom/conditions"
+    },
+    {
+      "source": "/conditions/:slug",
+      "destination": "/wisdom/conditions/:slug"
+    },
+    {
+      "source": "/team",
+      "destination": "/wisdom/team"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/:path*"
+    }
+  ]
+}

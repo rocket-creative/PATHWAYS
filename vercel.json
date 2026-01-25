@@ -2,7 +2,6 @@
   "buildCommand": "npm run build",
   "outputDirectory": ".next",
   "framework": "nextjs",
-  "name": "pathways-main",
   "git": {
     "deploymentEnabled": true
   }

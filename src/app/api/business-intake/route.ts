@@ -161,9 +161,10 @@ This is an automated message from the Pathways Within business intake form.
 
     if (result.error) {
       console.error('Resend SDK error:', JSON.stringify(result.error, null, 2))
-      const errorMessage = typeof result.error === 'object' 
-        ? JSON.stringify(result.error) 
-        : String(result.error)
+      const error = result.error
+      const errorMessage = typeof error === 'object' 
+        ? JSON.stringify(error) 
+        : String(error)
       return { success: false, error: `Failed to send email: ${errorMessage}` }
     }
 

@@ -37,3 +37,4 @@ yarn-error.log*
 /old/
 /new/
 new/
+.ai-errors.log

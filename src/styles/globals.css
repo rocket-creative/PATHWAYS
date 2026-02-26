@@ -57,7 +57,7 @@
   }
 
   body {
-    background: rgb(210 205 200);
+    background: rgb(var(--color-white));
     color: rgb(var(--color-text));
     font-family: var(--font-clarendon), Georgia, serif;
     font-size: 1.0625rem;
@@ -75,19 +75,20 @@
   }
 
   h1 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-size: clamp(2.5rem, 5.5vw, 6.5rem);
     font-weight: 400;
     letter-spacing: -0.03em;
-    line-height: 1.05;
+    line-height: 1.0;
   }
 
   h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(1.875rem, 3.5vw, 3.75rem);
     font-weight: 400;
+    letter-spacing: -0.025em;
   }
 
   h3 {
-    font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
     font-weight: 600;
   }
 
@@ -118,29 +119,21 @@
 }
 
 @layer components {
-  /* Site wrapper - ALL content constrained to 1440px */
+  /* Site wrapper — full viewport width, no cap */
   .site-wrapper {
-    margin-left: auto;
-    margin-right: auto;
     width: 100%;
-    max-width: 1440px;
     background: rgb(var(--color-white));
   }
 
-  @media (min-width: 1480px) {
-    .site-wrapper {
-      box-shadow: 0 0 80px rgb(0 0 0 / 0.06);
-    }
+  /* Content container — horizontal padding only, no max-width */
+  .container-site {
+    width: 100%;
+    padding-left: clamp(1.5rem, 5vw, 7rem);
+    padding-right: clamp(1.5rem, 5vw, 7rem);
   }
 
-  .container-site {
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    max-width: 1440px;
-    padding-left: clamp(1.5rem, 5vw, 4rem);
-    padding-right: clamp(1.5rem, 5vw, 4rem);
-  }
+  /* Constrain readable prose columns internally — applied per element, not globally */
+  .prose-col { max-width: 64ch; }
 
   /* Section spacing */
   .section {
@@ -182,6 +175,12 @@
       radial-gradient(ellipse at 80% 20%, rgb(60 100 180 / 0.5) 0%, transparent 50%),
       radial-gradient(ellipse at 20% 80%, rgb(45 85 160 / 0.4) 0%, transparent 40%),
       linear-gradient(160deg, rgb(0 8 25) 0%, rgb(var(--color-navy)) 35%, rgb(25 60 120) 65%, rgb(5 15 40) 100%);
+    color: rgb(var(--color-white));
+  }
+
+  /* ── Hero gradient (static, no animation) ─────────────────────────── */
+  .hero-animated {
+    background: linear-gradient(160deg, rgb(0 8 25) 0%, rgb(var(--color-navy)) 35%, rgb(25 60 120) 65%, rgb(5 15 40) 100%);
     color: rgb(var(--color-white));
   }
 
@@ -256,6 +255,8 @@
   .btn-pill .btn-text {
     position: relative;
     z-index: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
   .btn-pill .btn-arrow {
@@ -371,48 +372,116 @@
   }
 
   /* ==========================================
-   * SCROLL ANIMATIONS
+   * SCROLL ANIMATIONS (CSS-only, no JS)
    * ========================================== */
   
-  .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  .animate-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+  @keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-32px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(32px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .animate-on-scroll {
+    animation: fadeInUp 0.65s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
 
   .animate-stagger > * {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    animation: fadeInUp 0.55s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
 
-  .animate-stagger.is-visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
-  .animate-stagger.is-visible > *:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: translateY(0); }
-  .animate-stagger.is-visible > *:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: translateY(0); }
-  .animate-stagger.is-visible > *:nth-child(4) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }
-  .animate-stagger.is-visible > *:nth-child(5) { transition-delay: 400ms; opacity: 1; transform: translateY(0); }
+  .animate-stagger > *:nth-child(1) { animation-delay: 0ms; }
+  .animate-stagger > *:nth-child(2) { animation-delay: 80ms; }
+  .animate-stagger > *:nth-child(3) { animation-delay: 160ms; }
+  .animate-stagger > *:nth-child(4) { animation-delay: 240ms; }
+  .animate-stagger > *:nth-child(5) { animation-delay: 320ms; }
+  .animate-stagger > *:nth-child(6) { animation-delay: 400ms; }
 
   .animate-fade-left {
-    opacity: 0;
-    transform: translateX(-30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    animation: fadeInLeft 0.65s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
 
   .animate-fade-right {
-    opacity: 0;
-    transform: translateX(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    animation: fadeInRight 0.65s cubic-bezier(0.4, 0, 0.2, 1) both;
   }
 
-  .animate-fade-left.is-visible,
-  .animate-fade-right.is-visible {
-    opacity: 1;
-    transform: translateX(0);
+  @media (prefers-reduced-motion: reduce) {
+    .animate-on-scroll,
+    .animate-fade-left,
+    .animate-fade-right {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    .animate-stagger > * {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* Hero entrance — CSS keyframe, runs once on load */
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate-hero-eyebrow { animation: heroFadeUp 0.7s cubic-bezier(0.4,0,0.2,1) 0.05s both; }
+  .animate-hero-headline { animation: heroFadeUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.2s both; }
+  .animate-hero-body     { animation: heroFadeUp 0.7s cubic-bezier(0.4,0,0.2,1) 0.38s both; }
+  .animate-hero-cta      { animation: heroFadeUp 0.6s cubic-bezier(0.4,0,0.2,1) 0.52s both; }
+
+  /* Image placeholder */
+  .img-placeholder-box {
+    position: relative;
+    overflow: hidden;
+    background: rgb(var(--color-placeholder));
+  }
+
+  .img-placeholder-box::after {
+    content: 'PHOTO — 3 / 8';
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.875rem;
+    font-family: var(--font-raleway), system-ui, sans-serif;
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgb(var(--color-navy) / 0.28);
+  }
+
+  /* On dark backgrounds the placeholder is lighter */
+  .bg-navy .img-placeholder-box,
+  .bg-hero-gradient .img-placeholder-box,
+  .bg-hero-gradient-radial .img-placeholder-box {
+    background: rgb(255 255 255 / 0.1);
+  }
+
+  .bg-navy .img-placeholder-box::after,
+  .bg-hero-gradient .img-placeholder-box::after {
+    color: rgb(255 255 255 / 0.25);
+  }
+
+  /* Hover lift for interactive cards */
+  .card-hover {
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.25s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgb(0 0 0 / 0.08);
   }
 
   /* ==========================================

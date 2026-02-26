@@ -1,3 +1,19 @@
+export type ServiceCategory = 'Mental Health' | 'Wellness' | 'Medication Management'
+
+export const SERVICE_LOCATIONS = [
+  'Garden City — Wisdom',
+  'Garden City — Wellness',
+  'Port Jefferson',
+  'Massapequa',
+  'Smithtown',
+  'Rockville Centre',
+] as const
+
+export interface TherapyServiceFAQ {
+  q: string
+  a: string
+}
+
 export interface TherapyService {
   slug: string
   name: string
@@ -8,6 +24,10 @@ export interface TherapyService {
   whatToExpect: string[]
   duration: string
   relatedServices: string[]
+  category: ServiceCategory
+  locations: readonly string[]
+  specializations: readonly string[]
+  faqs?: TherapyServiceFAQ[]
 }
 
 export const therapyServices: Record<string, TherapyService> = {
@@ -33,6 +53,9 @@ export const therapyServices: Record<string, TherapyService> = {
     ],
     duration: '60 minutes',
     relatedServices: ['trauma-therapy', 'emdr-therapy', 'somatic-therapy'],
+    category: 'Mental Health',
+    locations: ['Garden City — Wisdom', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Anxiety', 'Depression', 'Life Transitions'],
   },
   'trauma-therapy': {
     slug: 'trauma-therapy',
@@ -56,6 +79,9 @@ export const therapyServices: Record<string, TherapyService> = {
     ],
     duration: '60 minutes',
     relatedServices: ['emdr-therapy', 'somatic-therapy', 'individual-therapy'],
+    category: 'Mental Health',
+    locations: ['Garden City — Wisdom', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Trauma & PTSD', 'Anxiety', 'Depression'],
   },
   'emdr-therapy': {
     slug: 'emdr-therapy',
@@ -79,6 +105,14 @@ export const therapyServices: Record<string, TherapyService> = {
     ],
     duration: '60 to 90 minutes',
     relatedServices: ['trauma-therapy', 'individual-therapy', 'somatic-therapy'],
+    category: 'Mental Health',
+    locations: ['Garden City — Wisdom', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['EMDR Therapy', 'Trauma & PTSD', 'Anxiety'],
+    faqs: [
+      { q: 'What is EMDR and how does it work?', a: 'EMDR (Eye Movement Desensitization and Reprocessing) is an evidence-based therapy that uses bilateral stimulation (eye movements, taps, or sounds) to help your brain process traumatic memories. It works by activating the brain\'s natural healing process, similar to REM sleep, so that distressing memories lose their emotional charge over time.' },
+      { q: 'Do I have to talk in detail about my trauma?', a: 'No. One of the benefits of EMDR is that you do not need to describe your trauma in detail. You and your therapist will identify the memory and its associated beliefs and sensations, but the processing happens largely without extensive verbal disclosure. Many clients find this less overwhelming than traditional talk therapy.' },
+      { q: 'How many EMDR sessions will I need?', a: 'The number of sessions varies based on your history and goals. Some clients experience significant relief in a few sessions; others with more complex trauma may need a longer course. Your therapist will discuss a treatment plan with you after the initial assessment.' },
+    ],
   },
   'couples-therapy': {
     slug: 'couples-therapy',
@@ -102,6 +136,9 @@ export const therapyServices: Record<string, TherapyService> = {
     ],
     duration: '60 minutes',
     relatedServices: ['individual-therapy'],
+    category: 'Mental Health',
+    locations: ['Garden City — Wisdom', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Couples Therapy', 'Relationship Issues'],
   },
   'child-therapy': {
     slug: 'child-therapy',
@@ -125,6 +162,9 @@ export const therapyServices: Record<string, TherapyService> = {
     ],
     duration: '45 to 60 minutes',
     relatedServices: ['teen-therapy', 'individual-therapy'],
+    category: 'Mental Health',
+    locations: ['Garden City — Wisdom', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Child Therapy', 'Children & Teens', 'Play Therapy'],
   },
   'teen-therapy': {
     slug: 'teen-therapy',
@@ -148,6 +188,9 @@ export const therapyServices: Record<string, TherapyService> = {
     ],
     duration: '60 minutes',
     relatedServices: ['child-therapy', 'individual-therapy'],
+    category: 'Mental Health',
+    locations: ['Garden City — Wisdom', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Teen Therapy', 'Children & Teens', 'Anxiety', 'Depression'],
   },
   'somatic-therapy': {
     slug: 'somatic-therapy',
@@ -171,6 +214,9 @@ export const therapyServices: Record<string, TherapyService> = {
     ],
     duration: '60 minutes',
     relatedServices: ['trauma-therapy', 'emdr-therapy', 'individual-therapy'],
+    category: 'Mental Health',
+    locations: ['Garden City — Wisdom', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Somatic Therapy', 'Trauma & PTSD', 'Chronic Pain'],
   },
   'hypnotherapy': {
     slug: 'hypnotherapy',
@@ -194,6 +240,9 @@ export const therapyServices: Record<string, TherapyService> = {
     ],
     duration: '60 to 90 minutes',
     relatedServices: ['individual-therapy', 'trauma-therapy'],
+    category: 'Mental Health',
+    locations: ['Garden City — Wisdom', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Anxiety', 'Habits', 'Sleep'],
   },
   'veterans-first-responders': {
     slug: 'veterans-first-responders',
@@ -217,6 +266,9 @@ export const therapyServices: Record<string, TherapyService> = {
     ],
     duration: '60 minutes',
     relatedServices: ['trauma-therapy', 'emdr-therapy', 'individual-therapy'],
+    category: 'Mental Health',
+    locations: ['Garden City — Wisdom', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Veterans & First Responders', 'Trauma & PTSD', 'EMDR Therapy'],
   },
   'weight-loss-surgery-support': {
     slug: 'weight-loss-surgery-support',
@@ -240,6 +292,9 @@ export const therapyServices: Record<string, TherapyService> = {
     ],
     duration: '90 minutes for evaluation',
     relatedServices: ['individual-therapy'],
+    category: 'Mental Health',
+    locations: ['Garden City — Wisdom', 'Smithtown'],
+    specializations: ['Weight Loss Surgery Support', 'Body Image', 'Life Transitions'],
   },
 }
 

@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from 'next'
 import { Raleway, Lora } from 'next/font/google'
 import '@/styles/globals.css'
-import { Navigation, Footer, CrisisBanner } from '@/components/layout'
-import { organizationSchema, websiteSchema } from '@/lib/structured-data'
+import { Navigation, Footer, CrisisBanner, CookieConsent, AnimationInit } from '@/components/layout'
+import { getOrganizationSchema, getWebsiteSchema } from '@/lib/structured-data'
+import { SITE_URL } from '@/lib/site-config'
 
 // Raleway - Headings (only 400 and 600 weights per design rules)
 const raleway = Raleway({
@@ -21,12 +22,12 @@ const lora = Lora({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Pathways Within | Therapy and Wellness on Long Island',
+    default: 'Pathways Within | A 360° Approach to Holistic Care on Long Island',
     template: '%s | Pathways Within',
   },
-  description: 'Experience integrated mental health therapy and holistic wellness services at Pathways Within. Our 360 degree approach supports your mind, body, and spirit at five Long Island locations.',
+  description: 'Pathways Within - Wisdom and Wellness Collaborative offers integrated mental health therapy, holistic wellness, and medication management at six Long Island locations.',
   authors: [{ name: 'Pathways Within' }],
   creator: 'Pathways Within',
   publisher: 'Pathways Within',
@@ -78,11 +79,11 @@ export default function RootLayout({
         {/* JSON-LD Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(getOrganizationSchema()) }}
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(getWebsiteSchema()) }}
         />
       </head>
       <body className="min-h-screen font-sans antialiased">
@@ -109,6 +110,8 @@ export default function RootLayout({
           
           {/* Footer */}
           <Footer />
+          <CookieConsent />
+          <AnimationInit />
         </div>
       </body>
     </html>

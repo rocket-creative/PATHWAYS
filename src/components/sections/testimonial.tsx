@@ -1,6 +1,5 @@
 'use client'
 
-import { useScrollAnimation } from '@/lib/use-scroll-animation'
 import { Quote } from 'lucide-react'
 
 interface TestimonialSectionProps {
@@ -14,19 +13,10 @@ export function TestimonialSection({
   author = "Sarah M.",
   role = "Client since 2022"
 }: TestimonialSectionProps) {
-  const { ref, isVisible } = useScrollAnimation()
-
   return (
     <section className="bg-hero-gradient">
-      <div ref={ref} className="container-site section">
-        <div 
-          className="mx-auto max-w-3xl text-center"
-          style={{ 
-            transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(30px)'
-          }}
-        >
+      <div className="container-site section">
+        <div className="animate-on-scroll mx-auto max-w-3xl text-center">
           <Quote className="mx-auto mb-8 h-12 w-12 text-white/30" />
           
           <blockquote 

@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
-import { useScrollAnimation } from '@/lib/use-scroll-animation'
 
 interface Service {
   slug: string
@@ -29,37 +28,22 @@ export function ServicesGrid({
   viewAllText = 'View all services',
   viewAllHref
 }: ServicesGridProps) {
-  const { ref, isVisible } = useScrollAnimation()
-
   return (
     <section className="bg-white">
-      <div ref={ref} className="container-site section">
+      <div className="container-site section">
         {/* Header */}
-        <div 
-          className="mb-12 text-center"
-          style={{ 
-            transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(30px)'
-          }}
-        >
+        <div className="animate-on-scroll mb-12 text-center">
           {eyebrow && <p className="eyebrow mb-4">{eyebrow}</p>}
           <h2>{headline}</h2>
         </div>
 
         {/* Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
+        <div className="animate-stagger grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service) => (
             <Link
               key={service.slug}
               href={`${baseUrl}/${service.slug}`}
               className="group rounded-lg border border-[rgb(var(--border))] bg-white p-6 transition-all hover:border-[rgb(var(--color-green))] hover:shadow-lg"
-              style={{ 
-                transition: 'opacity 0.5s ease-out, transform 0.5s ease-out',
-                transitionDelay: `${index * 50}ms`,
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(20px)'
-              }}
             >
               {service.image && (
                 <div className="relative mb-4 aspect-[16/9] w-full overflow-hidden rounded-md bg-[rgb(var(--color-placeholder))]">

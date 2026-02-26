@@ -2,22 +2,26 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { ResourcesSection } from '@/components/sections/resources-section'
 import { conditionsList } from '@/data/conditions'
+import { SITE_URL } from '@/lib/site-config'
 
 export const metadata: Metadata = {
   title: 'Conditions We Treat',
   description: 'Learn about mental health conditions we treat at Pathways Within, including anxiety, depression, and trauma. Evidence-based treatment from licensed therapists.',
+  alternates: { canonical: `${SITE_URL}/wisdom/conditions` },
+  openGraph: { title: 'Conditions We Treat | Pathways Within', url: `${SITE_URL}/wisdom/conditions` },
 }
 
 export default function ConditionsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Conditions"
-        headline="Conditions we treat"
+        eyebrow="Conditions We Treat"
+        headline="Conditions We Treat"
         body="We provide expert, compassionate care for a range of mental health conditions. Learn about symptoms, causes, and evidence-based treatments available at Pathways Within."
-        image="/images/hero/conditions-hero.jpg"
-        imageAlt="Mental health support at Pathways Within"
+        ctaText="GET STARTED"
+        ctaHref="/client-intake"
       />
 
       {/* Conditions Grid */}
@@ -49,18 +53,26 @@ export default function ConditionsPage() {
         </div>
       </section>
 
+      <ResourcesSection />
+
       {/* CTA */}
-      <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
+      <section className="border-t border-[rgb(var(--border))]/50 bg-gradient-navy">
         <div className="container-site section">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="mb-6 text-[rgb(var(--color-navy))]">Struggling with something not listed?</h2>
-            <p className="mb-8 text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
+            <h2 className="mb-6 text-white">Struggling with something not listed?</h2>
+            <p className="mb-8 text-white/70" style={{ lineHeight: 1.8 }}>
               We treat many conditions beyond those listed here. Contact us to discuss your specific situation and how we can help.
             </p>
-            <Link href="/contact" className="btn-pill btn-pill-primary">
-              <span className="btn-text">Get in touch</span>
-              <span className="btn-arrow"><ArrowRight /></span>
-            </Link>
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+              <Link href="/client-intake" className="btn-pill btn-pill-green">
+                <span className="btn-text">GET STARTED</span>
+                <span className="btn-arrow"><ArrowRight /></span>
+              </Link>
+              <Link href="/contact" className="btn-pill btn-pill-white">
+                <span className="btn-text">CONTACT US</span>
+                <span className="btn-arrow"><ArrowRight /></span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

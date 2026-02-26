@@ -21,9 +21,12 @@
     "next": "14.2.35",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "tailwind-merge": "^2.6.0"
+    "tailwind-merge": "^2.6.0",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@types/estree": "^1.0.8",
+    "@types/json-schema": "^7.0.15",
     "@types/node": "^20.17.0",
     "@types/react": "^18.3.17",
     "@types/react-dom": "^18.3.5",

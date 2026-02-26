@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight, Check, Star, Shield, Clock, Heart, Brain, Leaf, Phone, Users, MapPin } from 'lucide-react'
+import { ResourcesSection } from '@/components/sections/resources-section'
 
 const benefits = [
   { icon: Brain, title: 'Expert Therapists', description: 'Licensed clinicians with specialized training in trauma, anxiety, relationships, and more' },
@@ -55,14 +55,11 @@ export default function StartPage() {
       <section className="relative overflow-hidden bg-hero-gradient">
         <div className="container-site py-12 lg:py-20">
           <div className="mb-8 lg:mb-10">
-            <Link href="/">
-              <Image 
-                src="/logo.png" 
-                alt="Pathways Within - Home" 
-                width={280}
-                height={280}
+            <Link href="/" className="inline-block">
+              <img
+                src="/logo.png"
+                alt="Pathways Within - Home"
                 className="w-[200px] brightness-0 invert transition-opacity hover:opacity-80 lg:w-[260px]"
-                priority
               />
             </Link>
           </div>
@@ -127,9 +124,7 @@ export default function StartPage() {
               Finally, care that actually works
             </h2>
             <p className="mx-auto max-w-2xl text-lg text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
-              We&apos;re not just another therapy office. We&apos;re Long Island&apos;s only 
-              integrated mental health and wellness center—where your mind and body 
-              get the attention they deserve.
+              Pathways Within - Wisdom and Wellness Collaborative is not just another therapy office. We are Long Island&apos;s only integrated mental health and wellness center — where your mind and body get the attention they deserve.
             </p>
           </div>
           
@@ -299,6 +294,9 @@ export default function StartPage() {
           </div>
         </div>
       </section>
+
+      {/* Resources */}
+      <ResourcesSection />
 
       {/* Process */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">

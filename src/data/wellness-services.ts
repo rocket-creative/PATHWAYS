@@ -1,3 +1,19 @@
+export type ServiceCategory = 'Mental Health' | 'Wellness' | 'Medication Management'
+
+export const WELLNESS_LOCATIONS = [
+  'Garden City — Wisdom',
+  'Garden City — Wellness',
+  'Port Jefferson',
+  'Massapequa',
+  'Smithtown',
+  'Rockville Centre',
+] as const
+
+export interface WellnessServiceFAQ {
+  q: string
+  a: string
+}
+
 export interface WellnessService {
   slug: string
   name: string
@@ -8,6 +24,10 @@ export interface WellnessService {
   whatToExpect: string[]
   duration: string
   relatedServices: string[]
+  category: ServiceCategory
+  locations: readonly string[]
+  specializations: readonly string[]
+  faqs?: WellnessServiceFAQ[]
 }
 
 export const wellnessServices: Record<string, WellnessService> = {
@@ -33,6 +53,14 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '60 to 90 minutes',
     relatedServices: ['acupuncture', 'cryotherapy', 'pain-management'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Stress Relief', 'Pain Relief', 'Relaxation'],
+    faqs: [
+      { q: 'What types of massage do you offer?', a: 'We offer Swedish, deep tissue, sports, hot stone, and pregnancy massage. Your therapist will customize the pressure and technique based on your needs and preferences. Let us know about any areas of tension or injury so we can tailor the session.' },
+      { q: 'Do I need to undress completely?', a: 'You undress to your comfort level. Most clients undress fully and are draped with a sheet; only the area being worked on is exposed at any time. Your privacy and comfort are our priority. If you prefer to keep some clothing on, that is fine too.' },
+      { q: 'Can I combine massage with therapy?', a: 'Yes. Because we are part of the Collaborative, your massage therapist can coordinate with your mental health provider when it supports your care. Many clients find that massage complements therapy by reducing physical tension that holds stress and trauma.' },
+    ],
   },
   'acupuncture': {
     slug: 'acupuncture',
@@ -56,6 +84,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '60 minutes',
     relatedServices: ['massage', 'energy-work', 'pain-management'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Stress Relief', 'Energy Balance', 'Emotional Healing'],
   },
   'energy-work': {
     slug: 'energy-work',
@@ -79,6 +110,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '60 minutes',
     relatedServices: ['massage', 'acupuncture'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Stress Relief', 'Energy Balance', 'Emotional Healing'],
   },
   'pain-management': {
     slug: 'pain-management',
@@ -102,6 +136,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '30 to 60 minutes',
     relatedServices: ['massage', 'acupuncture', 'cryotherapy'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Pain Relief', 'Chronic Pain', 'Injury Recovery'],
   },
   'iv-vitamin-infusion': {
     slug: 'iv-vitamin-infusion',
@@ -125,6 +162,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '30 to 60 minutes',
     relatedServices: ['cryotherapy'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Energy Boost', 'Immunity', 'Recovery', 'Hydration'],
   },
   'injectables': {
     slug: 'injectables',
@@ -148,6 +188,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '15 to 45 minutes',
     relatedServices: ['skincare', 'hydrafacial', 'prp-vampire-facial'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Aesthetics', 'Anti-Aging', 'Facial Enhancement'],
   },
   'skincare': {
     slug: 'skincare',
@@ -171,6 +214,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '60 to 90 minutes',
     relatedServices: ['hydrafacial', 'prp-vampire-facial', 'injectables'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Skin Health', 'Anti-Aging', 'Acne', 'Skin Texture'],
   },
   'hydrafacial': {
     slug: 'hydrafacial',
@@ -194,6 +240,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '45 to 60 minutes',
     relatedServices: ['skincare', 'prp-vampire-facial', 'injectables'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Skin Rejuvenation', 'Anti-Aging', 'Hydration'],
   },
   'keralase-hair-restoration': {
     slug: 'keralase-hair-restoration',
@@ -217,6 +266,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '30 to 45 minutes',
     relatedServices: ['prp-vampire-facial'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Hair Restoration', 'Hair Growth', 'Hair Density'],
   },
   'laser-hair-removal': {
     slug: 'laser-hair-removal',
@@ -240,6 +292,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '15 to 60 minutes depending on area',
     relatedServices: ['skincare'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Hair Removal', 'Smooth Skin'],
   },
   'prp-vampire-facial': {
     slug: 'prp-vampire-facial',
@@ -263,6 +318,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '60 to 90 minutes',
     relatedServices: ['hydrafacial', 'skincare', 'injectables'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Skin Rejuvenation', 'Anti-Aging', 'Collagen'],
   },
   'cryotherapy': {
     slug: 'cryotherapy',
@@ -286,6 +344,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '3 to 5 minutes in chamber',
     relatedServices: ['massage', 'iv-vitamin-infusion'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Recovery', 'Inflammation', 'Energy', 'Wellness'],
   },
   'laser-lipo': {
     slug: 'laser-lipo',
@@ -309,6 +370,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '30 to 45 minutes',
     relatedServices: ['cryotherapy'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Body Sculpting', 'Fat Reduction', 'Body Contouring'],
   },
   'teeth-whitening': {
     slug: 'teeth-whitening',
@@ -332,6 +396,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '60 to 90 minutes',
     relatedServices: ['skincare'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Teeth Whitening', 'Smile Enhancement'],
   },
   'permanent-makeup': {
     slug: 'permanent-makeup',
@@ -355,6 +422,9 @@ export const wellnessServices: Record<string, WellnessService> = {
     ],
     duration: '2 to 3 hours',
     relatedServices: ['skincare', 'injectables'],
+    category: 'Wellness',
+    locations: ['Garden City — Wellness', 'Port Jefferson', 'Massapequa', 'Smithtown', 'Rockville Centre'],
+    specializations: ['Microblading', 'Cosmetic Enhancement', 'Permanent Makeup'],
   },
 }
 

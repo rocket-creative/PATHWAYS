@@ -3,7 +3,11 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft, Check, Clock, MapPin } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { ResourcesSection } from '@/components/sections/resources-section'
+import { FAQSection } from '@/components/sections/faq-section'
 import { therapyServices } from '@/data/therapy-services'
+import { createBreadcrumbSchema, createMedicalTherapySchema } from '@/lib/structured-data'
+import { SITE_URL } from '@/lib/site-config'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -16,12 +20,17 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const service = therapyServices[slug]
-  
   if (!service) return { title: 'Service not found' }
-  
+  const url = `${SITE_URL}/wisdom/services/${slug}`
   return {
     title: service.name,
     description: service.metaDescription,
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${service.name} | Pathways Within Therapy`,
+      description: service.metaDescription,
+      url,
+    },
   }
 }
 
@@ -31,24 +40,39 @@ export default async function TherapyServicePage({ params }: PageProps) {
   
   if (!service) notFound()
 
+  const serviceUrl = `${SITE_URL}/wisdom/services/${slug}`
+  const breadcrumb = createBreadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'Therapy', url: `${SITE_URL}/wisdom` },
+    { name: 'Therapy Services', url: `${SITE_URL}/wisdom/services` },
+    { name: service.name, url: serviceUrl },
+  ])
+  const therapySchema = createMedicalTherapySchema({
+    name: service.name,
+    description: service.description,
+    url: serviceUrl,
+  })
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(therapySchema) }} />
       <PageHero
-        eyebrow="Therapy Services"
+        eyebrow="Mental Health Services"
         headline={service.name}
         subheadline={service.headline}
         body={service.description}
-        image="/images/hero/therapy-service-hero.jpg"
-        imageAlt={`${service.name} at Pathways Within`}
-        ctaText="Schedule consultation"
-        ctaHref="/contact"
+        ctaText="GET STARTED"
+        ctaHref="/client-intake"
+        ctaSecondaryText="FIND A PROVIDER"
+        ctaSecondaryHref="/providers"
       />
 
       {/* Benefits */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">
         <div className="container-site section">
           <div className="grid gap-16 lg:grid-cols-2">
-            <div>
+            <div className="animate-fade-left">
               <p className="eyebrow mb-4">Benefits</p>
               <h2 className="mb-8">How this service helps</h2>
               <ul className="space-y-4">
@@ -74,18 +98,27 @@ export default async function TherapyServicePage({ params }: PageProps) {
             <p className="eyebrow mb-4">What to expect</p>
             <h2>Your journey with us</h2>
           </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="animate-stagger grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {service.whatToExpect.map((step, index) => (
-              <div key={step} className="rounded-lg bg-white p-6">
-                <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-[rgb(var(--color-green))]/10 text-sm text-[rgb(var(--color-green))]" style={{ fontWeight: 500 }}>
+              <div key={step} className="animate-on-scroll rounded-lg bg-white p-6">
+                <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-[rgb(var(--color-green))]/10 text-sm font-semibold text-[rgb(var(--color-green))]">
                   {index + 1}
                 </span>
-                <p className="text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>{step}</p>
+                <p className="font-semibold text-[rgb(var(--color-navy))]">{step}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Per-page FAQs */}
+      {service.faqs && service.faqs.length > 0 && (
+        <FAQSection
+          title={`${service.name} FAQs`}
+          eyebrow="Questions"
+          faqs={service.faqs}
+        />
+      )}
 
       {/* Session Info */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">
@@ -95,7 +128,7 @@ export default async function TherapyServicePage({ params }: PageProps) {
               <Clock className="h-5 w-5 text-[rgb(var(--color-green))]" />
               <div>
                 <p className="text-sm text-[rgb(var(--color-text-light))]">Session length</p>
-                <p className="text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>{service.duration}</p>
+                <p className="font-semibold text-[rgb(var(--color-navy))]">{service.duration}</p>
               </div>
             </div>
             <div className="hidden h-8 w-px bg-[rgb(var(--border))] sm:block" />
@@ -103,7 +136,7 @@ export default async function TherapyServicePage({ params }: PageProps) {
               <MapPin className="h-5 w-5 text-[rgb(var(--color-green))]" />
               <div>
                 <p className="text-sm text-[rgb(var(--color-text-light))]">Available at</p>
-                <p className="text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>All 5 locations + telehealth</p>
+                <p className="font-semibold text-[rgb(var(--color-navy))]">All 5 locations + telehealth</p>
               </div>
             </div>
           </div>
@@ -125,7 +158,7 @@ export default async function TherapyServicePage({ params }: PageProps) {
                     href={`/wisdom/services/${relatedSlug}`}
                     className="group rounded-lg bg-white p-6 transition-all hover:shadow-md"
                   >
-                    <h3 className="mb-2 text-[rgb(var(--color-navy))] transition-colors group-hover:text-[rgb(var(--color-green))]" style={{ fontWeight: 500 }}>
+                    <h3 className="mb-2 font-semibold text-[rgb(var(--color-navy))] transition-colors group-hover:text-[rgb(var(--color-green))]">
                       {related.name}
                     </h3>
                     <p className="mb-4 text-sm text-[rgb(var(--color-text-light))]">{related.headline}</p>
@@ -139,6 +172,8 @@ export default async function TherapyServicePage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      <ResourcesSection />
 
       {/* CTA */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-gradient-navy">

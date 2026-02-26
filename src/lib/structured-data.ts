@@ -1,80 +1,51 @@
 // JSON-LD Structured Data for SEO
 // Per RULES_2026/seo-ai-readability.mdc
 
-export const organizationSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'MedicalBusiness',
-  '@id': 'https://pathwayswithin.com/#organization',
-  name: 'Pathways Within',
-  description: 'Integrated mental health therapy and holistic wellness services on Long Island. Our 360 degree approach supports your mind, body, and spirit.',
-  url: 'https://pathwayswithin.com',
-  telephone: '(631) 371-3825',
-  email: 'info@pathwayswithin.com',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Garden City',
-    addressRegion: 'NY',
-    addressCountry: 'US',
-  },
-  medicalSpecialty: ['Psychiatry', 'Psychology', 'Physical Therapy'],
-  availableService: [
-    {
-      '@type': 'MedicalTherapy',
-      name: 'Individual Therapy',
-      description: 'One on one therapy sessions with licensed clinicians',
+import { SITE_URL } from './site-config'
+
+export function getOrganizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalBusiness' as const,
+    '@id': `${SITE_URL}/#organization`,
+    name: 'Pathways Within',
+    description: 'Integrated mental health therapy and holistic wellness services on Long Island. Our 360 degree approach supports your mind, body, and spirit.',
+    url: SITE_URL,
+    telephone: '(631) 371-3825',
+    email: 'info@pathwayswithin.com',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Garden City',
+      addressRegion: 'NY',
+      addressCountry: 'US',
     },
-    {
-      '@type': 'MedicalTherapy',
-      name: 'Couples Therapy',
-      description: 'Relationship counseling and couples therapy',
-    },
-    {
-      '@type': 'MedicalTherapy',
-      name: 'EMDR Therapy',
-      description: 'Eye Movement Desensitization and Reprocessing for trauma',
-    },
-    {
-      '@type': 'Service',
-      name: 'Massage Therapy',
-      description: 'Therapeutic massage for relaxation and pain relief',
-    },
-    {
-      '@type': 'Service',
-      name: 'Acupuncture',
-      description: 'Traditional acupuncture for pain management and wellness',
-    },
-  ],
-  sameAs: [
-    'https://www.facebook.com/pathwayswithin',
-    'https://www.instagram.com/pathwayswithin',
-  ],
-  priceRange: '$$',
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      opens: '09:00',
-      closes: '18:00',
-    },
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: ['Saturday'],
-      opens: '09:00',
-      closes: '14:00',
-    },
-  ],
+    medicalSpecialty: ['Psychiatry', 'Psychology', 'Physical Therapy'],
+    availableService: [
+      { '@type': 'MedicalTherapy', name: 'Individual Therapy', description: 'One on one therapy sessions with licensed clinicians' },
+      { '@type': 'MedicalTherapy', name: 'Couples Therapy', description: 'Relationship counseling and couples therapy' },
+      { '@type': 'MedicalTherapy', name: 'EMDR Therapy', description: 'Eye Movement Desensitization and Reprocessing for trauma' },
+      { '@type': 'Service', name: 'Massage Therapy', description: 'Therapeutic massage for relaxation and pain relief' },
+      { '@type': 'Service', name: 'Acupuncture', description: 'Traditional acupuncture for pain management and wellness' },
+    ],
+    sameAs: ['https://www.facebook.com/pathwayswithin', 'https://www.instagram.com/pathwayswithin'],
+    priceRange: '$$',
+    openingHoursSpecification: [
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '18:00' },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday'], opens: '09:00', closes: '14:00' },
+    ],
+  }
 }
 
-export const websiteSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  '@id': 'https://pathwayswithin.com/#website',
-  url: 'https://pathwayswithin.com',
-  name: 'Pathways Within',
-  description: 'Integrated mental health therapy and holistic wellness services on Long Island',
-  publisher: {
-    '@id': 'https://pathwayswithin.com/#organization',
-  },
+export function getWebsiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite' as const,
+    '@id': `${SITE_URL}/#website`,
+    url: SITE_URL,
+    name: 'Pathways Within',
+    description: 'Integrated mental health therapy and holistic wellness services on Long Island',
+    publisher: { '@id': `${SITE_URL}/#organization` },
+  }
 }
 
 export const locationSchemas = [
@@ -205,17 +176,14 @@ export function createServiceSchema(service: {
   name: string
   description: string
   url: string
-  provider?: string
 }) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Service',
+    '@type': 'Service' as const,
     name: service.name,
     description: service.description,
     url: service.url,
-    provider: {
-      '@id': 'https://pathwayswithin.com/#organization',
-    },
+    provider: { '@id': `${SITE_URL}/#organization` },
   }
 }
 
@@ -227,12 +195,10 @@ export function createMedicalTherapySchema(therapy: {
 }) {
   return {
     '@context': 'https://schema.org',
-    '@type': 'MedicalTherapy',
+    '@type': 'MedicalTherapy' as const,
     name: therapy.name,
     description: therapy.description,
     url: therapy.url,
-    provider: {
-      '@id': 'https://pathwayswithin.com/#organization',
-    },
+    provider: { '@id': `${SITE_URL}/#organization` },
   }
 }

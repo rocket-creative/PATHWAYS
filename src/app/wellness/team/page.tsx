@@ -2,10 +2,14 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { ResourcesSection } from '@/components/sections/resources-section'
+import { SITE_URL } from '@/lib/site-config'
 
 export const metadata: Metadata = {
   title: 'Wellness Team',
   description: 'Meet our wellness team at Pathways Within. Certified massage therapists, licensed estheticians, nurses, and energy work practitioners on Long Island.',
+  alternates: { canonical: `${SITE_URL}/wellness/team` },
+  openGraph: { title: 'Wellness Team | Pathways Within', url: `${SITE_URL}/wellness/team` },
 }
 
 const wellnessTeam = [
@@ -36,10 +40,10 @@ export default function WellnessTeamPage() {
     <>
       <PageHero
         eyebrow="Our Team"
-        headline="Meet our wellness providers"
+        headline="Meet Our Wellness Providers"
         body="Our wellness team includes certified massage therapists, licensed estheticians, registered nurses, and energy work practitioners. Each provider brings specialized training and a commitment to your wellbeing."
-        image="/images/hero/wellness-team-hero.jpg"
-        imageAlt="Wellness team at Pathways Within"
+        ctaText="VIEW ALL PROVIDERS"
+        ctaHref="/providers"
       />
 
       {/* Team Grid */}
@@ -89,6 +93,16 @@ export default function WellnessTeamPage() {
           </div>
         </div>
       </section>
+
+      <ResourcesSection
+        title="Wellness Resources"
+        resources={[
+          { title: 'Our Wellness Services', description: 'Browse the full range of wellness offerings at Pathways Within.', type: 'article', href: '/wellness/services' },
+          { title: 'The 360° Approach', description: 'How wellness and mental health work together at Pathways Within.', type: 'article', href: '/about' },
+          { title: 'Find a Provider', description: 'Browse all providers and filter by specialty, location, or service.', type: 'article', href: '/providers' },
+          { title: 'Get Started', description: 'Complete the intake form and our team will match you with the right provider.', type: 'download', href: '/client-intake' },
+        ]}
+      />
 
       {/* CTA */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-gradient-navy">

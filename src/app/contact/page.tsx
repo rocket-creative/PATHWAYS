@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowRight, Mail, Phone, Clock, MapPin, AlertTriangle, MessageCircle, Check } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { ResourcesSection } from '@/components/sections/resources-section'
 
 const locations = [
   { name: 'Garden City', address: '520 Franklin Ave, Suite L1', city: 'Garden City, NY 11530' },
@@ -26,13 +27,30 @@ export default function ContactPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setError(null)
     setIsSubmitting(true)
-    await new Promise(resolve => setTimeout(resolve, 1500))
-    setIsSubmitting(false)
-    setIsSubmitted(true)
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) {
+        const msg = (data?.error as { message?: string })?.message ?? 'Something went wrong. Please try again.'
+        setError(msg)
+        return
+      }
+      setIsSubmitted(true)
+    } catch {
+      setError('Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -48,10 +66,8 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
-        headline="Let's talk"
+        headline="Let's Talk"
         body="Fill out the form below and someone from our team will be in touch. Or contact us directly by phone or email."
-        image="/images/hero/contact-hero.jpg"
-        imageAlt="Warm and welcoming reception area at Pathways Within"
       />
 
       {/* Contact Form Section */}
@@ -78,9 +94,17 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {error && (
+                    <div
+                      className="rounded-lg border-l-4 border-[rgb(var(--color-green))] bg-[rgb(var(--color-linen))] p-4 text-sm text-[rgb(var(--color-navy))]"
+                      role="alert"
+                    >
+                      {error}
+                    </div>
+                  )}
                   <div className="grid gap-6 md:grid-cols-2">
                     <div>
-                      <label htmlFor="firstName" className="mb-2 block text-sm font-medium text-[rgb(var(--color-navy))]">
+                      <label htmlFor="firstName" className="mb-2 block text-sm font-semibold text-[rgb(var(--color-navy))]">
                         First name <span className="text-[rgb(var(--color-green))]">*</span>
                       </label>
                       <input
@@ -94,7 +118,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div>
-                      <label htmlFor="lastName" className="mb-2 block text-sm font-medium text-[rgb(var(--color-navy))]">
+                      <label htmlFor="lastName" className="mb-2 block text-sm font-semibold text-[rgb(var(--color-navy))]">
                         Last name <span className="text-[rgb(var(--color-green))]">*</span>
                       </label>
                       <input
@@ -111,7 +135,7 @@ export default function ContactPage() {
 
                   <div className="grid gap-6 md:grid-cols-2">
                     <div>
-                      <label htmlFor="email" className="mb-2 block text-sm font-medium text-[rgb(var(--color-navy))]">
+                      <label htmlFor="email" className="mb-2 block text-sm font-semibold text-[rgb(var(--color-navy))]">
                         Email <span className="text-[rgb(var(--color-green))]">*</span>
                       </label>
                       <input
@@ -125,7 +149,7 @@ export default function ContactPage() {
                       />
                     </div>
                     <div>
-                      <label htmlFor="phone" className="mb-2 block text-sm font-medium text-[rgb(var(--color-navy))]">
+                      <label htmlFor="phone" className="mb-2 block text-sm font-semibold text-[rgb(var(--color-navy))]">
                         Phone <span className="text-[rgb(var(--color-green))]">*</span>
                       </label>
                       <input
@@ -142,7 +166,7 @@ export default function ContactPage() {
 
                   <div className="grid gap-6 md:grid-cols-2">
                     <div>
-                      <label htmlFor="interest" className="mb-2 block text-sm font-medium text-[rgb(var(--color-navy))]">
+                      <label htmlFor="interest" className="mb-2 block text-sm font-semibold text-[rgb(var(--color-navy))]">
                         How can we help you?
                       </label>
                       <select
@@ -160,7 +184,7 @@ export default function ContactPage() {
                       </select>
                     </div>
                     <div>
-                      <label htmlFor="location" className="mb-2 block text-sm font-medium text-[rgb(var(--color-navy))]">
+                      <label htmlFor="location" className="mb-2 block text-sm font-semibold text-[rgb(var(--color-navy))]">
                         Preferred location
                       </label>
                       <select
@@ -182,7 +206,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="mb-2 block text-sm font-medium text-[rgb(var(--color-navy))]">
+                    <label htmlFor="message" className="mb-2 block text-sm font-semibold text-[rgb(var(--color-navy))]">
                       Message (optional)
                     </label>
                     <textarea
@@ -302,6 +326,8 @@ export default function ContactPage() {
         </div>
       </section>
 
+      <ResourcesSection />
+
       {/* Crisis Resources */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-linen))]">
         <div className="container-site py-20 lg:py-28">
@@ -336,6 +362,28 @@ export default function ContactPage() {
                   Text HOME to 741741
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="border-t border-[rgb(var(--border))]/50 bg-gradient-navy">
+        <div className="container-site py-20 lg:py-28">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="mb-6 text-white">Ready to get started?</h2>
+            <p className="mb-10 text-lg text-white/70" style={{ lineHeight: 1.8 }}>
+              Complete the intake form and our team will reach out within one business day.
+            </p>
+            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+              <Link href="/client-intake" className="btn-pill btn-pill-green">
+                <span className="btn-text">COMPLETE INTAKE FORM</span>
+                <span className="btn-arrow"><ArrowRight /></span>
+              </Link>
+              <Link href="/providers" className="btn-pill btn-pill-white">
+                <span className="btn-text">BROWSE PROVIDERS</span>
+                <span className="btn-arrow"><ArrowRight /></span>
+              </Link>
             </div>
           </div>
         </div>

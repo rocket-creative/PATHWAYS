@@ -1,9 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
-import { useScrollAnimation } from '@/lib/use-scroll-animation'
 
 interface CTASectionProps {
   eyebrow?: string
@@ -11,8 +9,6 @@ interface CTASectionProps {
   body?: string
   ctaText?: string
   ctaHref?: string
-  image?: string
-  imageAlt?: string
 }
 
 export function CTASection({
@@ -21,25 +17,14 @@ export function CTASection({
   body = "Whether you're seeking therapy, wellness services, or both, we're here to help you find your path. Your first conversation is about understanding what you need.",
   ctaText = 'Schedule a session',
   ctaHref = '/contact',
-  image = '/images/cta/cta-woman.jpg',
-  imageAlt = 'Woman finding peace and wellness'
 }: CTASectionProps) {
-  const { ref, isVisible } = useScrollAnimation()
-  
   return (
     <section className="border-t border-[rgb(var(--border))]/50 bg-cream">
-      <div ref={ref} className="container-site section-lg">
+      <div className="container-site section-lg">
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-0">
           
-          {/* Left - Content */}
-          <div 
-            className="lg:col-span-5"
-            style={{ 
-              transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateX(0)' : 'translateX(-30px)'
-            }}
-          >
+          {/* Left — Content */}
+          <div className="animate-fade-left lg:col-span-5">
             <p className="eyebrow mb-4">{eyebrow}</p>
             
             <h2 className="mb-6" style={{ lineHeight: 1.15 }}>
@@ -70,24 +55,14 @@ export function CTASection({
             </div>
           </div>
           
-          {/* Right - Image */}
-          <div 
-            className="relative lg:col-span-6 lg:col-start-7"
-            style={{ 
-              transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
-              transitionDelay: '200ms',
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateX(0)' : 'translateX(30px)'
-            }}
-          >
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg bg-[rgb(var(--color-placeholder))]">
-              <Image
-                src={image}
-                alt={imageAlt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
+          {/* Right — Photo placeholder (landscape, 4:3, models from 3/8 shoot) */}
+          <div className="animate-fade-right relative lg:col-span-6 lg:col-start-7" style={{ animationDelay: '180ms' }}>
+            <div className="aspect-[4/3] w-full border border-[rgb(var(--border))]/60 bg-[rgb(var(--color-placeholder))] flex items-center justify-center">
+              <svg viewBox="0 0 48 48" className="h-10 w-10 text-[rgb(var(--color-text-light))]/30" fill="none" stroke="currentColor" strokeWidth="1">
+                <rect x="4" y="4" width="40" height="40" rx="2" />
+                <circle cx="18" cy="18" r="5" />
+                <path d="M4 34l10-10 8 8 6-6 16 16" />
+              </svg>
             </div>
           </div>
         </div>

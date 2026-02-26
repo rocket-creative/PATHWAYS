@@ -3,7 +3,11 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft, Check, Clock, MapPin } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { ResourcesSection } from '@/components/sections/resources-section'
+import { FAQSection } from '@/components/sections/faq-section'
 import { wellnessServices } from '@/data/wellness-services'
+import { createBreadcrumbSchema, createServiceSchema } from '@/lib/structured-data'
+import { SITE_URL } from '@/lib/site-config'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -16,15 +20,16 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const service = wellnessServices[slug]
-  
   if (!service) return { title: 'Service not found' }
-  
+  const url = `${SITE_URL}/wellness/services/${slug}`
   return {
     title: service.name,
     description: service.metaDescription,
+    alternates: { canonical: url },
     openGraph: {
       title: `${service.name} | Pathways Within Wellness`,
       description: service.metaDescription,
+      url,
     },
   }
 }
@@ -35,17 +40,32 @@ export default async function WellnessServicePage({ params }: PageProps) {
   
   if (!service) notFound()
 
+  const serviceUrl = `${SITE_URL}/wellness/services/${slug}`
+  const breadcrumb = createBreadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'Wellness', url: `${SITE_URL}/wellness` },
+    { name: 'Wellness Services', url: `${SITE_URL}/wellness/services` },
+    { name: service.name, url: serviceUrl },
+  ])
+  const serviceSchema = createServiceSchema({
+    name: service.name,
+    description: service.description,
+    url: serviceUrl,
+  })
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
       <PageHero
         eyebrow="Wellness Services"
         headline={service.name}
         subheadline={service.headline}
         body={service.description}
-        image="/images/hero/wellness-service-hero.jpg"
-        imageAlt={`${service.name} at Pathways Within`}
-        ctaText="Book appointment"
-        ctaHref="/contact"
+        ctaText="GET STARTED"
+        ctaHref="/client-intake"
+        ctaSecondaryText="FIND A PROVIDER"
+        ctaSecondaryHref="/providers"
       />
 
       {/* Benefits */}
@@ -81,15 +101,24 @@ export default async function WellnessServicePage({ params }: PageProps) {
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {service.whatToExpect.map((step, index) => (
               <div key={step} className="rounded-lg bg-white p-6">
-                <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-[rgb(var(--color-green))]/10 text-sm text-[rgb(var(--color-green))]" style={{ fontWeight: 500 }}>
+                <span className="mb-3 flex h-8 w-8 items-center justify-center rounded-full bg-[rgb(var(--color-green))]/10 text-sm font-semibold text-[rgb(var(--color-green))]">
                   {index + 1}
                 </span>
-                <p className="text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>{step}</p>
+                <p className="font-semibold text-[rgb(var(--color-navy))]">{step}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      {/* Per-page FAQs */}
+      {service.faqs && service.faqs.length > 0 && (
+        <FAQSection
+          title={`${service.name} FAQs`}
+          eyebrow="Questions"
+          faqs={service.faqs}
+        />
+      )}
 
       {/* Session Info */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">
@@ -99,7 +128,7 @@ export default async function WellnessServicePage({ params }: PageProps) {
               <Clock className="h-5 w-5 text-[rgb(var(--color-green))]" />
               <div>
                 <p className="text-sm text-[rgb(var(--color-text-light))]">Treatment time</p>
-                <p className="text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>{service.duration}</p>
+                <p className="font-semibold text-[rgb(var(--color-navy))]">{service.duration}</p>
               </div>
             </div>
             <div className="hidden h-8 w-px bg-[rgb(var(--border))] sm:block" />
@@ -107,7 +136,7 @@ export default async function WellnessServicePage({ params }: PageProps) {
               <MapPin className="h-5 w-5 text-[rgb(var(--color-green))]" />
               <div>
                 <p className="text-sm text-[rgb(var(--color-text-light))]">Available at</p>
-                <p className="text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>Select locations</p>
+                <p className="font-semibold text-[rgb(var(--color-navy))]">Select locations</p>
               </div>
             </div>
           </div>
@@ -129,7 +158,7 @@ export default async function WellnessServicePage({ params }: PageProps) {
                     href={`/wellness/services/${relatedSlug}`}
                     className="group rounded-lg bg-white p-6 transition-all hover:shadow-md"
                   >
-                    <h3 className="mb-2 text-[rgb(var(--color-navy))] transition-colors group-hover:text-[rgb(var(--color-green))]" style={{ fontWeight: 500 }}>
+                    <h3 className="mb-2 font-semibold text-[rgb(var(--color-navy))] transition-colors group-hover:text-[rgb(var(--color-green))]">
                       {related.name}
                     </h3>
                     <p className="mb-4 text-sm text-[rgb(var(--color-text-light))]">{related.headline}</p>
@@ -143,6 +172,16 @@ export default async function WellnessServicePage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      <ResourcesSection
+        title="Wellness Resources"
+        resources={[
+          { title: 'How Wellness Complements Mental Health', description: 'Understanding the connection between physical wellness and emotional wellbeing.', type: 'article', href: '/wellness' },
+          { title: 'Our Wellness Services', description: 'Browse the full range of wellness offerings at Pathways Within.', type: 'article', href: '/wellness/services' },
+          { title: 'Meet Our Wellness Providers', description: 'Learn about the certified practitioners on our wellness team.', type: 'article', href: '/providers' },
+          { title: 'Get Started', description: 'Complete the intake form and our team will match you with the right provider.', type: 'download', href: '/client-intake' },
+        ]}
+      />
 
       {/* CTA */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-gradient-navy">

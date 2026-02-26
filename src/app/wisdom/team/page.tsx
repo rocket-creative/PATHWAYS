@@ -2,10 +2,14 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { ResourcesSection } from '@/components/sections/resources-section'
+import { SITE_URL } from '@/lib/site-config'
 
 export const metadata: Metadata = {
   title: 'Therapy Team',
   description: 'Meet our therapy team at Pathways Within. Licensed clinical social workers, mental health counselors, and marriage and family therapists on Long Island.',
+  alternates: { canonical: `${SITE_URL}/wisdom/team` },
+  openGraph: { title: 'Therapy Team | Pathways Within', url: `${SITE_URL}/wisdom/team` },
 }
 
 const therapyTeam = [
@@ -40,22 +44,22 @@ export default function TherapyTeamPage() {
     <>
       <PageHero
         eyebrow="Our Team"
-        headline="Meet our therapists"
+        headline="Meet Our Therapists"
         body="Our clinical team includes licensed clinical social workers, licensed mental health counselors, and licensed marriage and family therapists. Each clinician works with special populations based on their expertise and passions."
-        image="/images/hero/therapy-team-hero.jpg"
-        imageAlt="Therapy team at Pathways Within"
+        ctaText="VIEW ALL PROVIDERS"
+        ctaHref="/providers"
       />
 
       {/* Team Grid */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">
         <div className="container-site section">
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="animate-stagger grid gap-8 md:grid-cols-2">
             {therapyTeam.map((member) => (
-              <div key={member.name} className="rounded-lg border border-[rgb(var(--border))]/50 p-8">
+              <div key={member.name} className="animate-on-scroll rounded-lg border border-[rgb(var(--border))]/50 p-8">
                 <div className="mb-6 flex items-start gap-6">
                   <div className="aspect-square w-24 flex-shrink-0 overflow-hidden rounded-full bg-[rgb(var(--color-placeholder))]" />
                   <div>
-                    <h3 className="text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>
+                    <h3 className="font-semibold text-[rgb(var(--color-navy))]">
                       {member.name}
                     </h3>
                     <p className="text-sm text-[rgb(var(--color-green))]">{member.title}</p>
@@ -86,19 +90,19 @@ export default function TherapyTeamPage() {
             <h2 className="mb-8 text-[rgb(var(--color-navy))]">Expert care you can trust</h2>
             <div className="grid gap-8 md:grid-cols-3">
               <div>
-                <h3 className="mb-3 text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>Licensed & Experienced</h3>
+                <h3 className="mb-3 font-semibold text-[rgb(var(--color-navy))]">Licensed & Experienced</h3>
                 <p className="text-sm text-[rgb(var(--color-text-light))]">
                   All our therapists are fully licensed and have years of clinical experience.
                 </p>
               </div>
               <div>
-                <h3 className="mb-3 text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>Specialized Training</h3>
+                <h3 className="mb-3 font-semibold text-[rgb(var(--color-navy))]">Specialized Training</h3>
                 <p className="text-sm text-[rgb(var(--color-text-light))]">
                   Our team holds certifications in EMDR, trauma therapy, play therapy, and more.
                 </p>
               </div>
               <div>
-                <h3 className="mb-3 text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>Collaborative Approach</h3>
+                <h3 className="mb-3 font-semibold text-[rgb(var(--color-navy))]">Collaborative Approach</h3>
                 <p className="text-sm text-[rgb(var(--color-text-light))]">
                   We work together with our wellness team to provide integrated care.
                 </p>
@@ -124,6 +128,8 @@ export default function TherapyTeamPage() {
           </div>
         </div>
       </section>
+
+      <ResourcesSection />
 
       {/* CTA */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-gradient-navy">

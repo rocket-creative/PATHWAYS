@@ -1,136 +1,116 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight, MapPin, Phone, Clock, Car, Monitor } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { ResourcesSection } from '@/components/sections/resources-section'
+import { locationsList } from '@/data/locations'
+import { SITE_URL } from '@/lib/site-config'
 
 export const metadata: Metadata = {
-  title: 'Our Locations',
-  description: 'Find Pathways Within at five convenient Long Island locations. Garden City, Port Jefferson, Massapequa, Smithtown, and Rockville Centre offer both therapy and wellness services.',
-  alternates: {
-    canonical: '/locations',
-  },
+  title: 'Our Locations | Pathways Within',
+  description: 'Find Pathways Within - Wisdom and Wellness Collaborative at six convenient Long Island locations. Garden City (Wisdom & Wellness), Port Jefferson, Massapequa, Smithtown, and Rockville Centre.',
+  alternates: { canonical: `${SITE_URL}/locations` },
+  openGraph: { title: 'Our Locations | Pathways Within', url: `${SITE_URL}/locations` },
 }
-
-const locations = [
-  {
-    name: 'Garden City',
-    address: '520 Franklin Ave, Suite L1',
-    city: 'Garden City, NY 11530',
-    phone: '(631) 371-3825',
-    services: ['Individual, couples, and family therapy', 'Child and teen therapy', 'Trauma and EMDR therapy', 'Wellness services (contact for availability)'],
-    mapsUrl: 'https://maps.google.com/?q=520+Franklin+Ave+Suite+L1+Garden+City+NY+11530',
-  },
-  {
-    name: 'Port Jefferson',
-    address: '1227 Main Street, Suite 101',
-    city: 'Port Jefferson, NY 11777',
-    phone: '(631) 371-3825',
-    services: ['Individual, couples, and family therapy', 'Child and teen therapy', 'Trauma and EMDR therapy', 'Wellness services (contact for availability)'],
-    mapsUrl: 'https://maps.google.com/?q=1227+Main+Street+Suite+101+Port+Jefferson+NY+11777',
-  },
-  {
-    name: 'Massapequa',
-    address: '4160 Merrick Rd, Suite 5 & Suite 7',
-    city: 'Massapequa, NY 11758',
-    phone: '(631) 371-3825',
-    services: ['Individual, couples, and family therapy', 'Child and teen therapy', 'Trauma and EMDR therapy', 'Full wellness services including massage, facials, injectables, and more'],
-    featured: true,
-    mapsUrl: 'https://maps.google.com/?q=4160+Merrick+Rd+Massapequa+NY+11758',
-  },
-  {
-    name: 'Smithtown',
-    address: '496 Smithtown Bypass, Suite 203 & Suite 204',
-    city: 'Smithtown, NY 11787',
-    phone: '(631) 371-3825',
-    services: ['Individual, couples, and family therapy', 'Child and teen therapy', 'Trauma and EMDR therapy', 'Wellness services (contact for availability)'],
-    mapsUrl: 'https://maps.google.com/?q=496+Smithtown+Bypass+Smithtown+NY+11787',
-  },
-  {
-    name: 'Rockville Centre',
-    address: '53 N Park Ave, Suite 203',
-    city: 'Rockville Centre, NY 11570',
-    phone: '(631) 371-3825',
-    services: ['Individual, couples, and family therapy', 'Child and teen therapy', 'Trauma and EMDR therapy', 'Wellness services (contact for availability)'],
-    mapsUrl: 'https://maps.google.com/?q=53+N+Park+Ave+Suite+203+Rockville+Centre+NY+11570',
-  },
-]
 
 export default function LocationsPage() {
   return (
     <>
       <PageHero
         eyebrow="Our Locations"
-        headline="Five locations to serve you"
-        body="We have five locations across the greater Long Island area. Each location offers both therapy and wellness services with dedicated parking for your convenience."
-        image="/images/hero/locations-hero.jpg"
-        imageAlt="Pathways Within Long Island locations"
+        headline="Find Us Near You"
+        body="Pathways Within - Wisdom and Wellness Collaborative serves the greater Long Island area with six locations offering integrated mental health therapy and holistic wellness services."
+        ctaText="GET STARTED"
+        ctaHref="/client-intake"
       />
 
       {/* Locations Grid */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-cream))]">
         <div className="container-site py-20 lg:py-28">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {locations.map((location) => (
-              <div 
-                key={location.name} 
-                className={`overflow-hidden bg-white ${location.featured ? 'ring-2 ring-[rgb(var(--color-green))]' : ''}`}
+          <div className="animate-stagger grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {locationsList.map((location) => (
+              <div
+                key={location.id}
+                className="animate-on-scroll bg-white"
               >
-                <div className="relative aspect-[3/2] w-full overflow-hidden bg-[rgb(var(--color-placeholder))]">
-                  <div className="absolute inset-0 flex items-center justify-center text-white/50">
-                    <MapPin className="h-12 w-12" />
-                  </div>
-                </div>
-                
+                {/* Color block header instead of image */}
+                <div
+                  className={`h-3 w-full ${
+                    location.type === 'Wisdom'
+                      ? 'bg-[rgb(var(--color-navy))]'
+                      : location.type === 'Wellness'
+                      ? 'bg-[rgb(var(--color-green))]'
+                      : 'bg-gradient-to-r from-[rgb(var(--color-navy))] to-[rgb(var(--color-green))]'
+                  }`}
+                />
+
                 <div className="p-8">
-                  {location.featured && (
-                    <p className="eyebrow mb-4">Full Wellness Services</p>
-                  )}
-                  
-                  <h3 className="mb-4 text-[rgb(var(--color-navy))]">{location.name}</h3>
-                  
+                  <div className="mb-2 flex items-center gap-2">
+                    <span
+                      className={`rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider ${
+                        location.type === 'Wisdom'
+                          ? 'bg-[rgb(var(--color-navy))]/10 text-[rgb(var(--color-navy))]'
+                          : location.type === 'Wellness'
+                          ? 'bg-[rgb(var(--color-green))]/10 text-[rgb(var(--color-green))]'
+                          : 'bg-[rgb(var(--color-linen))] text-[rgb(var(--color-navy))]'
+                      }`}
+                      style={{ fontFamily: 'var(--font-raleway)' }}
+                    >
+                      {location.type === 'Both' ? 'Wisdom & Wellness' : location.type}
+                    </span>
+                  </div>
+
+                  <h3 className="mb-5 text-[rgb(var(--color-navy))]" style={{ fontFamily: 'var(--font-raleway)', fontWeight: 600 }}>
+                    {location.displayName}
+                  </h3>
+
                   <div className="mb-6 space-y-3">
                     <div className="flex items-start gap-3">
                       <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-[rgb(var(--color-green))]" />
                       <div className="text-sm text-[rgb(var(--color-text-light))]">
                         <p>{location.address}</p>
-                        <p>{location.city}</p>
+                        <p>{location.city} {location.zip}</p>
                       </div>
                     </div>
-                    
+
                     <div className="flex items-center gap-3">
                       <Phone className="h-4 w-4 flex-shrink-0 text-[rgb(var(--color-green))]" />
-                      <a 
+                      <a
                         href={`tel:+1${location.phone.replace(/\D/g, '')}`}
                         className="text-sm text-[rgb(var(--color-text-light))] transition-colors hover:text-[rgb(var(--color-navy))]"
                       >
                         {location.phone}
                       </a>
                     </div>
-                    
+
                     <div className="flex items-center gap-3">
                       <Car className="h-4 w-4 flex-shrink-0 text-[rgb(var(--color-green))]" />
                       <p className="text-sm text-[rgb(var(--color-text-light))]">Dedicated parking available</p>
                     </div>
                   </div>
-                  
+
                   <div className="mb-6">
-                    <p className="mb-2 text-xs font-medium uppercase tracking-wider text-[rgb(var(--color-navy))]">Services available:</p>
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-[rgb(var(--color-navy))]" style={{ fontFamily: 'var(--font-raleway)' }}>
+                      Services Available
+                    </p>
                     <ul className="space-y-1">
                       {location.services.map((service, idx) => (
-                        <li key={idx} className="text-sm text-[rgb(var(--color-text-light))]">• {service}</li>
+                        <li key={idx} className="flex items-start gap-2 text-sm text-[rgb(var(--color-text-light))]">
+                          <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-[rgb(var(--color-green))]" />
+                          {service}
+                        </li>
                       ))}
                     </ul>
                   </div>
-                  
-                  <a 
+
+                  <a
                     href={location.mapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group inline-flex items-center gap-2 text-sm text-[rgb(var(--color-navy))] transition-colors hover:text-[rgb(var(--color-green))]"
-                    style={{ fontFamily: 'var(--font-raleway), system-ui, sans-serif', fontWeight: 500 }}
+                    style={{ fontFamily: 'var(--font-raleway)', fontWeight: 500 }}
                   >
-                    Get directions
+                    Get Directions
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </a>
                 </div>
@@ -144,32 +124,40 @@ export default function LocationsPage() {
       <section className="border-t border-[rgb(var(--border))]/50 bg-white">
         <div className="container-site py-20 lg:py-28">
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-            <div>
+            <div className="animate-fade-left">
               <div className="mb-4 flex items-center gap-3">
                 <Monitor className="h-6 w-6 text-[rgb(var(--color-green))]" />
                 <p className="eyebrow">Virtual Services</p>
               </div>
-              <h2 className="mb-6 text-[rgb(var(--color-navy))]">Can't make it in person?</h2>
-              <div className="space-y-6">
+              <h2 className="mb-6 text-[rgb(var(--color-navy))]">Can&apos;t Make It In Person?</h2>
+              <div className="space-y-5">
                 <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
-                  We offer virtual therapy appointments through SimplePractice, our HIPAA compliant telehealth platform. Virtual sessions are available for clients in New York, New Jersey, North Carolina, and Florida.
+                  We offer virtual therapy appointments through SimplePractice, our HIPAA-compliant telehealth platform. Virtual sessions are available for clients in New York, New Jersey, North Carolina, and Florida.
                 </p>
                 <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
-                  Before your first virtual visit, we will send you a link to get set up. During this onboarding process, you will have the chance to get familiar with our platform.
+                  Before your first virtual visit, we will send you a link to get set up. During onboarding, you will have the chance to get familiar with the platform in a no-pressure environment.
                 </p>
+                <Link href="/client-intake" className="btn-pill btn-pill-primary">
+                  <span className="btn-text">GET STARTED VIRTUALLY</span>
+                  <span className="btn-arrow"><ArrowRight /></span>
+                </Link>
               </div>
             </div>
-            <div className="flex items-center">
-              <div className="rounded-lg bg-[rgb(var(--color-linen))] p-8">
-                <h3 className="mb-4 text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>Is virtual therapy private?</h3>
+            <div className="animate-fade-right flex items-center">
+              <div className="w-full bg-[rgb(var(--color-linen))] p-8">
+                <h3 className="mb-4 text-[rgb(var(--color-navy))]" style={{ fontFamily: 'var(--font-raleway)', fontWeight: 600 }}>
+                  Is Virtual Therapy Private?
+                </h3>
                 <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
-                  Absolutely. SimplePractice is both HIPAA compliant and VeriSign security sealed. Your privacy is crucial to us, and we take every step to ensure confidentiality in every format.
+                  Absolutely. SimplePractice is both HIPAA-compliant and VeriSign security sealed. Your privacy is crucial to us, and we take every step to ensure confidentiality — in person and virtually.
                 </p>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      <ResourcesSection />
 
       {/* Hours */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-[rgb(var(--color-linen))]">
@@ -179,25 +167,25 @@ export default function LocationsPage() {
               <Clock className="h-6 w-6 text-[rgb(var(--color-green))]" />
               <p className="eyebrow">Hours</p>
             </div>
-            <h2 className="mb-8 text-[rgb(var(--color-navy))]">When we are available</h2>
-            
+            <h2 className="mb-8 text-[rgb(var(--color-navy))]">When We Are Available</h2>
+
             <div className="mb-8 grid gap-4 text-center md:grid-cols-3">
-              <div className="rounded-lg bg-white p-6">
-                <p className="mb-1 text-sm font-medium text-[rgb(var(--color-navy))]">Monday – Friday</p>
-                <p className="text-[rgb(var(--color-text-light))]">9am – 6pm</p>
-              </div>
-              <div className="rounded-lg bg-white p-6">
-                <p className="mb-1 text-sm font-medium text-[rgb(var(--color-navy))]">Saturday</p>
-                <p className="text-[rgb(var(--color-text-light))]">10am – 4pm</p>
-              </div>
-              <div className="rounded-lg bg-white p-6">
-                <p className="mb-1 text-sm font-medium text-[rgb(var(--color-navy))]">Sunday</p>
-                <p className="text-[rgb(var(--color-text-light))]">Closed</p>
-              </div>
+              {[
+                { day: 'Monday – Friday', hours: '9am – 6pm' },
+                { day: 'Saturday', hours: '10am – 4pm' },
+                { day: 'Sunday', hours: 'Closed' },
+              ].map((item) => (
+                <div key={item.day} className="bg-white p-6">
+                  <p className="mb-1 text-sm font-semibold text-[rgb(var(--color-navy))]" style={{ fontFamily: 'var(--font-raleway)' }}>
+                    {item.day}
+                  </p>
+                  <p className="text-[rgb(var(--color-text-light))]">{item.hours}</p>
+                </div>
+              ))}
             </div>
-            
+
             <p className="text-[rgb(var(--color-text-light))]" style={{ lineHeight: 1.8 }}>
-              <strong className="text-[rgb(var(--color-navy))]">Extended hours available:</strong> We offer appointments outside regular business hours with advance scheduling. Appointments can be offered up to 11pm with select clinicians.
+              <strong className="text-[rgb(var(--color-navy))]">Extended hours available:</strong> Appointments can be offered up to 11pm with select clinicians. Contact us to discuss flexible scheduling options.
             </p>
           </div>
         </div>
@@ -207,22 +195,18 @@ export default function LocationsPage() {
       <section className="border-t border-[rgb(var(--border))]/50 bg-gradient-navy">
         <div className="container-site py-20 lg:py-28">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="mb-6 text-white">Ready to visit us?</h2>
+            <h2 className="mb-6 text-white">Ready to Visit Us?</h2>
             <p className="mb-10 text-lg text-white/70" style={{ lineHeight: 1.8 }}>
-              Schedule your first appointment at any of our five locations or start with a virtual session.
+              Schedule your first appointment at any of our six locations or start with a virtual session.
             </p>
             <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Link href="/start" className="btn-pill btn-pill-green">
-                <span className="btn-text">Get Started Today</span>
-                <span className="btn-arrow">
-                  <ArrowRight />
-                </span>
+              <Link href="/client-intake" className="btn-pill btn-pill-green">
+                <span className="btn-text">GET STARTED</span>
+                <span className="btn-arrow"><ArrowRight /></span>
               </Link>
               <Link href="/contact" className="btn-pill btn-pill-white">
-                <span className="btn-text">Contact Us</span>
-                <span className="btn-arrow">
-                  <ArrowRight />
-                </span>
+                <span className="btn-text">CONTACT US</span>
+                <span className="btn-arrow"><ArrowRight /></span>
               </Link>
             </div>
           </div>

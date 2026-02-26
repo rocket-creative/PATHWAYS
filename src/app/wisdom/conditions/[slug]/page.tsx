@@ -3,7 +3,10 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowRight, Check, AlertCircle } from 'lucide-react'
 import { PageHero } from '@/components/sections/page-hero'
+import { ResourcesSection } from '@/components/sections/resources-section'
 import { conditions } from '@/data/conditions'
+import { createBreadcrumbSchema } from '@/lib/structured-data'
+import { SITE_URL } from '@/lib/site-config'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -16,12 +19,17 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
   const condition = conditions[slug]
-  
   if (!condition) return { title: 'Condition not found' }
-  
+  const url = `${SITE_URL}/wisdom/conditions/${slug}`
   return {
     title: condition.name,
     description: condition.metaDescription,
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${condition.name} | Pathways Within`,
+      description: condition.metaDescription,
+      url,
+    },
   }
 }
 
@@ -31,17 +39,26 @@ export default async function ConditionPage({ params }: PageProps) {
   
   if (!condition) notFound()
 
+  const conditionUrl = `${SITE_URL}/wisdom/conditions/${slug}`
+  const breadcrumb = createBreadcrumbSchema([
+    { name: 'Home', url: SITE_URL },
+    { name: 'Therapy', url: `${SITE_URL}/wisdom` },
+    { name: 'Conditions We Treat', url: `${SITE_URL}/wisdom/conditions` },
+    { name: condition.name, url: conditionUrl },
+  ])
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <PageHero
         eyebrow="Conditions We Treat"
         headline={condition.name}
         subheadline={condition.headline}
         body={condition.overview}
-        image="/images/hero/condition-hero.jpg"
-        imageAlt={`${condition.name} treatment at Pathways Within`}
-        ctaText="Get help today"
-        ctaHref="/contact"
+        ctaText="GET STARTED"
+        ctaHref="/client-intake"
+        ctaSecondaryText="FIND A PROVIDER"
+        ctaSecondaryHref="/providers"
       />
 
       {/* Symptoms */}
@@ -54,7 +71,7 @@ export default async function ConditionPage({ params }: PageProps) {
           <div className="grid gap-6 md:grid-cols-2">
             {condition.symptoms.map((symptom) => (
               <div key={symptom.name} className="rounded-lg border border-[rgb(var(--border))]/50 p-6">
-                <h3 className="mb-2 text-[rgb(var(--color-navy))]" style={{ fontWeight: 500 }}>{symptom.name}</h3>
+                <h3 className="mb-2 font-semibold text-[rgb(var(--color-navy))]">{symptom.name}</h3>
                 <p className="text-sm text-[rgb(var(--color-text-light))]">{symptom.description}</p>
               </div>
             ))}
@@ -102,7 +119,7 @@ export default async function ConditionPage({ params }: PageProps) {
                 href={treatment.link}
                 className="group rounded-lg border border-[rgb(var(--border))]/50 bg-white p-6 transition-all hover:border-[rgb(var(--color-green))] hover:shadow-lg"
               >
-                <h3 className="mb-2 text-[rgb(var(--color-navy))] transition-colors group-hover:text-[rgb(var(--color-green))]" style={{ fontWeight: 500 }}>
+                <h3 className="mb-2 font-semibold text-[rgb(var(--color-navy))] transition-colors group-hover:text-[rgb(var(--color-green))]">
                   {treatment.name}
                 </h3>
                 <p className="mb-4 text-sm text-[rgb(var(--color-text-light))]">{treatment.description}</p>
@@ -146,6 +163,8 @@ export default async function ConditionPage({ params }: PageProps) {
           </div>
         </div>
       </section>
+
+      <ResourcesSection />
 
       {/* CTA */}
       <section className="border-t border-[rgb(var(--border))]/50 bg-gradient-navy">

@@ -2,24 +2,31 @@ import { MetadataRoute } from 'next'
 import { wellnessServicesList } from '@/data/wellness-services'
 import { therapyServicesList } from '@/data/therapy-services'
 import { conditionsList } from '@/data/conditions'
+import { SITE_URL } from '@/lib/site-config'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://pathwayswithin.com'
+  const baseUrl = SITE_URL
   
   // Static pages
   const staticPages = [
     '',
     '/about',
+    '/providers',
+    '/careers',
     '/locations',
     '/start',
     '/contact',
     '/faq',
     '/client-intake',
+    '/privacy',
+    '/terms',
+    '/accessibility',
     '/wellness',
     '/wellness/services',
     '/wellness/team',
     '/wisdom',
     '/wisdom/services',
+    '/wisdom/services/medication-management',
     '/wisdom/conditions',
     '/wisdom/team',
   ].map(route => ({
